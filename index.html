@@ -1262,6 +1262,19 @@
     };
     const STATUS_ORDER = ['todo', 'done', 'waiting', 'stage', 'refused'];
 
+    // ─── STATE (localStorage) ────────────────────────────────────────
+    function ls(key, def = null) {
+      try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch (e) { return def; }
+    }
+    function lsSet(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { } }
+
+    const statuses = ls('stage_statuses_v3', {});
+    const cardNotes = ls('stage_card_notes_v3', {});
+    const checks = ls('stage_checks_v3', {});
+    ETABLISSEMENTS.forEach(e => { if (!statuses[e.id]) statuses[e.id] = 'todo'; });
+
+    let curFilter = 'all';
+
     // ─── HELPERS ─────────────────────────────────────────────────────
     function stars(n) { if (!n) return ''; const f = Math.round(n); return '★'.repeat(f) + '☆'.repeat(5 - f); }
 
