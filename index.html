@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Stage — Valenciennes</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display:ital@0;1&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --noir: #0d0d0d;
+      --creme: #f0ebe0;
+      --or: #c9a84c;
+      --or-light: #e8c96a;
+      --vert: #27ae60;
+      --bleu: #2980b9;
+      --violet: #8e44ad;
+      --rouge: #c0392b;
+      --gris: #5a5a5a;
+      --card-bg: #161616;
+      --card-hover: #1e1e1e;
+      --border: #252525;
+      --border-light: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--noir);
+      color: var(--creme);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* TOAST */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1e1e1e;
+      border: 1px solid var(--border-light);
+      color: var(--creme);
+      font-size: 13px;
+      padding: 11px 22px;
+      border-radius: 40px;
+      z-index: 9999;
+      transition: transform 0.3s cubic-bezier(.4, 0, .2, 1), opacity 0.3s;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* HEADER */
+    header {
+      position: relative;
+      padding: 70px 48px 52px;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.09) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      color: var(--or);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 40px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 9vw, 112px);
+      line-height: 0.88;
+      letter-spacing: 3px;
+      margin-bottom: 4px;
+    }
+
+    h1 .gold {
+      color: var(--or);
+    }
+
+    h1 .dim {
+      color: rgba(240, 235, 224, 0.22);
+    }
+
+    .subtitle {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--gris);
+      margin-top: 18px;
+      margin-bottom: 36px;
+    }
+
+    /* STATS */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 760px;
+    }
+
+    .stat {
+      flex: 1;
+      min-width: 90px;
+      padding: 15px 18px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .c-or {
+      color: var(--or);
+    }
+
+    .c-vert {
+      color: var(--vert);
+    }
+
+    .c-bleu {
+      color: var(--bleu);
+    }
+
+    .c-violet {
+      color: var(--violet);
+    }
+
+    .c-rouge {
+      color: var(--rouge);
+    }
+
+    .c-gris {
+      color: var(--gris);
+    }
+
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gris);
+    }
+
+    /* NAV */
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      background: rgba(13, 13, 13, 0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      z-index: 200;
+    }
+
+    .nav-tabs {
+      display: flex;
+      padding: 0 48px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--gris);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 18px 20px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+      position: relative;
+      bottom: -1px;
+    }
+
+    .tab-btn:hover {
+      color: var(--creme);
+    }
+
+    .tab-btn.active {
+      color: var(--or);
+      border-bottom-color: var(--or);
+    }
+
+    /* SECTIONS */
+    .section {
+      display: none;
+      padding: 44px 48px;
+      max-width: 1160px;
+      margin: 0 auto;
+      animation: fadeUp 0.35s ease;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-header {
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 38px;
+      letter-spacing: 1.5px;
+    }
+
+    .section-title span {
+      color: var(--or);
+    }
+
+    .section-desc {
+      color: var(--gris);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--gris);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: all 0.18s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .filter-btn .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--border-light);
+      color: var(--creme);
+    }
+
+    .filter-btn.f-all.active {
+      background: rgba(201, 168, 76, 0.13);
+      color: var(--or);
+      border-color: rgba(201, 168, 76, 0.4);
+      font-weight: 600;
+    }
+
+    .filter-btn.f-todo.active {
+      background: rgba(201, 168, 76, 0.13);
+      color: var(--or);
+      border-color: rgba(201, 168, 76, 0.4);
+      font-weight: 600;
+    }
+
+    .filter-btn.f-done.active {
+      background: rgba(39, 174, 96, 0.11);
+      color: var(--vert);
+      border-color: rgba(39, 174, 96, 0.4);
+      font-weight: 600;
+    }
+
+    .filter-btn.f-waiting.active {
+      background: rgba(41, 128, 185, 0.11);
+      color: var(--bleu);
+      border-color: rgba(41, 128, 185, 0.4);
+      font-weight: 600;
+    }
+
+    .filter-btn.f-stage.active {
+      background: rgba(142, 68, 173, 0.11);
+      color: var(--violet);
+      border-color: rgba(142, 68, 173, 0.4);
+      font-weight: 600;
+    }
+
+    .filter-btn.f-refused.active {
+      background: rgba(192, 57, 43, 0.11);
+      color: var(--rouge);
+      border-color: rgba(192, 57, 43, 0.4);
+      font-weight: 600;
+    }
+
+    .filter-sep {
+      width: 1px;
+      height: 24px;
+      background: var(--border);
+      margin: 0 4px;
+    }
+
+    .search-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-ico {
+      position: absolute;
+      left: 11px;
+      font-size: 12px;
+      pointer-events: none;
+    }
+
+    .search-input {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--creme);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      padding: 8px 12px 8px 32px;
+      outline: none;
+      transition: border-color 0.2s;
+      min-width: 170px;
+    }
+
+    .search-input:focus {
+      border-color: rgba(201, 168, 76, 0.4);
+    }
+
+    /* CARDS */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--border-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .card[data-status="todo"] {
+      border-left: 3px solid var(--or);
+    }
+
+    .card[data-status="done"] {
+      border-left: 3px solid var(--vert);
+    }
+
+    .card[data-status="waiting"] {
+      border-left: 3px solid var(--bleu);
+    }
+
+    .card[data-status="stage"] {
+      border-left: 3px solid var(--violet);
+    }
+
+    .card[data-status="refused"] {
+      border-left: 3px solid var(--rouge);
+      opacity: 0.6;
+    }
+
+    .card-body {
+      padding: 22px 22px 14px;
+      flex: 1;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .card-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 17px;
+      line-height: 1.25;
+      flex: 1;
+    }
+
+    .card-badge {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .badge-todo {
+      background: rgba(201, 168, 76, 0.14);
+      color: var(--or);
+    }
+
+    .badge-done {
+      background: rgba(39, 174, 96, 0.12);
+      color: var(--vert);
+    }
+
+    .badge-waiting {
+      background: rgba(41, 128, 185, 0.12);
+      color: var(--bleu);
+    }
+
+    .badge-stage {
+      background: rgba(142, 68, 173, 0.12);
+      color: var(--violet);
+    }
+
+    .badge-refused {
+      background: rgba(192, 57, 43, 0.12);
+      color: var(--rouge);
+    }
+
+    .card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 13px;
+      color: rgba(240, 235, 224, 0.58);
+      line-height: 1.4;
+    }
+
+    .info-row .ico {
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .info-row a {
+      color: var(--or);
+      text-decoration: none;
+    }
+
+    .info-row a:hover {
+      text-decoration: underline;
+    }
+
+    .card-type-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 10px;
+      color: var(--gris);
+      padding: 2px 8px;
+      margin-top: 3px;
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 3px;
+    }
+
+    .stars {
+      color: var(--or);
+      font-size: 11px;
+    }
+
+    .rating-num {
+      font-size: 11px;
+      color: var(--gris);
+    }
+
+    /* HORAIRES */
+    .horaires-section {
+      padding: 11px 22px 13px;
+      border-top: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .horaires-label {
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-bottom: 8px;
+    }
+
+    .horaires-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+
+    .h-day {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .h-day-name {
+      font-size: 8.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--gris);
+    }
+
+    .h-day-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .h-day-dot.open {
+      background: var(--vert);
+      box-shadow: 0 0 5px rgba(39, 174, 96, 0.5);
+    }
+
+    .h-day-dot.closed {
+      background: rgba(90, 90, 90, 0.4);
+    }
+
+    .h-day-time {
+      font-size: 8px;
+      color: rgba(240, 235, 224, 0.3);
+      text-align: center;
+      line-height: 1.25;
+      word-break: break-all;
+    }
+
+    /* ACTION BUTTONS */
+    .card-actions {
+      padding: 10px 14px 10px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
+      border-top: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .action-btn {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--gris);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      padding: 7px 4px;
+      cursor: pointer;
+      transition: all 0.18s;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      line-height: 1.2;
+    }
+
+    .action-btn .btn-ico {
+      font-size: 14px;
+    }
+
+    .action-btn:hover {
+      border-color: var(--border-light);
+      color: var(--creme);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .action-btn.active-btn {
+      font-weight: 700;
+      transform: scale(1.03);
+    }
+
+    .btn-todo.active-btn,
+    .btn-todo:hover {
+      background: rgba(201, 168, 76, 0.16);
+      color: var(--or);
+      border-color: rgba(201, 168, 76, 0.5);
+    }
+
+    .btn-done.active-btn,
+    .btn-done:hover {
+      background: rgba(39, 174, 96, 0.14);
+      color: var(--vert);
+      border-color: rgba(39, 174, 96, 0.5);
+    }
+
+    .btn-waiting.active-btn,
+    .btn-waiting:hover {
+      background: rgba(41, 128, 185, 0.14);
+      color: var(--bleu);
+      border-color: rgba(41, 128, 185, 0.5);
+    }
+
+    .btn-stage.active-btn,
+    .btn-stage:hover {
+      background: rgba(142, 68, 173, 0.14);
+      color: var(--violet);
+      border-color: rgba(142, 68, 173, 0.5);
+    }
+
+    .btn-refused.active-btn,
+    .btn-refused:hover {
+      background: rgba(192, 57, 43, 0.14);
+      color: var(--rouge);
+      border-color: rgba(192, 57, 43, 0.5);
+    }
+
+    /* CARD NOTE */
+    .card-note-wrap {
+      padding: 0 14px 14px;
+    }
+
+    .card-note-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: rgba(240, 235, 224, 0.65);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11.5px;
+      padding: 8px 10px;
+      resize: none;
+      outline: none;
+      height: 44px;
+      transition: border-color 0.2s;
+    }
+
+    .card-note-input:focus {
+      border-color: rgba(201, 168, 76, 0.3);
+      color: var(--creme);
+    }
+
+    .card-note-input::placeholder {
+      color: rgba(90, 90, 90, 0.7);
+      font-style: italic;
+    }
+
+    /* EMPTY STATE */
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 70px 20px;
+      color: var(--gris);
+    }
+
+    .empty-state .big {
+      font-size: 52px;
+      margin-bottom: 14px;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+    }
+
+    /* PROGRESS */
+    .progress-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+    }
+
+    .progress-title {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-bottom: 14px;
+    }
+
+    .progress-bar-wrap {
+      background: var(--border);
+      border-radius: 4px;
+      height: 5px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--or), var(--or-light));
+      transition: width 0.7s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--gris);
+    }
+
+    /* CHECKLIST */
+    .checklist-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px 20px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
+
+    .checklist-item:hover {
+      opacity: 0.8;
+    }
+
+    .check-box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-light);
+      border-radius: 5px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      transition: all 0.18s;
+    }
+
+    .check-box.checked {
+      background: var(--or);
+      border-color: var(--or);
+      color: var(--noir);
+    }
+
+    .check-label {
+      font-size: 13.5px;
+      flex: 1;
+    }
+
+    .check-label.done {
+      text-decoration: line-through;
+      color: var(--gris);
+    }
+
+    /* KANBAN */
+    .kanban {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+      gap: 14px;
+    }
+
+    .kanban-col {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 15px;
+      min-height: 90px;
+    }
+
+    .kanban-col-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .k-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .k-count {
+      margin-left: auto;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .kanban-item {
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 12px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .kanban-item:hover {
+      border-color: var(--border-light);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .kanban-empty {
+      font-size: 12px;
+      color: var(--gris);
+      font-style: italic;
+    }
+
+    /* NOTES */
+    .info-box {
+      background: rgba(201, 168, 76, 0.05);
+      border: 1px solid rgba(201, 168, 76, 0.16);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: rgba(240, 235, 224, 0.5);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+
+    .info-box .i-ico {
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .info-box strong {
+      color: var(--or);
+    }
+
+    .notes-area {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      color: var(--creme);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      resize: vertical;
+      min-height: 220px;
+      outline: none;
+      transition: border-color 0.2s;
+      line-height: 1.7;
+    }
+
+    .notes-area:focus {
+      border-color: rgba(201, 168, 76, 0.38);
+    }
+
+    .notes-area::placeholder {
+      color: var(--gris);
+    }
+
+    .save-ind {
+      font-size: 11px;
+      color: var(--vert);
+      margin-top: 8px;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .save-ind.show {
+      opacity: 1;
+    }
+
+    /* CONSEILS */
+    .conseils-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
+    }
+
+    .conseil-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px 24px;
+    }
+
+    .conseil-ico {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .conseil-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .conseil-body {
+      font-size: 13px;
+      color: rgba(240, 235, 224, 0.52);
+      line-height: 1.7;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:700px) {
+      header {
+        padding: 44px 22px 34px;
+      }
+
+      .section {
+        padding: 30px 22px;
+      }
+
+      .nav-tabs {
+        padding: 0 18px;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-actions {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .horaires-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .stats-row {
+        flex-wrap: wrap;
+      }
+
+      .stat {
+        min-width: 80px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="toast"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="badge">📋 Journal de recherche de stage</div>
+    <h1>MON STAGE<br><span class="gold">VALEN</span><span class="dim">CIENNES</span></h1>
+    <p class="subtitle">Restaurants & Bars · Suivi en temps réel · Sauvegarde automatique</p>
+    <div class="stats-row">
+      <div class="stat"><span class="stat-num c-or" id="s-total">14</span><span class="stat-label">Total</span></div>
+      <div class="stat"><span class="stat-num c-or" id="s-todo">14</span><span class="stat-label">À contacter</span>
+      </div>
+      <div class="stat"><span class="stat-num c-vert" id="s-done">0</span><span class="stat-label">Contactés</span>
+      </div>
+      <div class="stat"><span class="stat-num c-bleu" id="s-waiting">0</span><span class="stat-label">En attente</span>
+      </div>
+      <div class="stat"><span class="stat-num c-violet" id="s-stage">0</span><span class="stat-label">En stage</span>
+      </div>
+      <div class="stat"><span class="stat-num c-rouge" id="s-refused">0</span><span class="stat-label">Refusés</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <div class="nav-wrap">
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="showTab('liste',this)">🍽️ Établissements</button>
+      <button class="tab-btn" onclick="showTab('kanban',this)">📌 Kanban</button>
+      <button class="tab-btn" onclick="showTab('suivi',this)">✅ Checklist</button>
+      <button class="tab-btn" onclick="showTab('notes',this)">📝 Notes</button>
+      <button class="tab-btn" onclick="showTab('conseils',this)">💡 Conseils</button>
+    </div>
+  </div>
+
+  <!-- TAB LISTE -->
+  <div id="tab-liste" class="section active">
+    <div class="section-header">
+      <div class="section-title">Tous les <span>Établissements</span></div>
+      <p class="section-desc">Clique sur les boutons colorés pour mettre à jour ton statut · Tout est sauvegardé
+        automatiquement</p>
+    </div>
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <span class="search-ico">🔍</span>
+        <input class="search-input" id="searchInput" type="text" placeholder="Rechercher…" oninput="renderCards()">
+      </div>
+      <div class="filter-sep"></div>
+      <button class="filter-btn f-all active" onclick="setFilter('all',this)"><span class="dot"
+          style="background:var(--or)"></span>Tous</button>
+      <button class="filter-btn f-todo" onclick="setFilter('todo',this)"><span class="dot"
+          style="background:var(--or)"></span>À contacter</button>
+      <button class="filter-btn f-done" onclick="setFilter('done',this)"><span class="dot"
+          style="background:var(--vert)"></span>Contactés</button>
+      <button class="filter-btn f-waiting" onclick="setFilter('waiting',this)"><span class="dot"
+          style="background:var(--bleu)"></span>En attente</button>
+      <button class="filter-btn f-stage" onclick="setFilter('stage',this)"><span class="dot"
+          style="background:var(--violet)"></span>En stage</button>
+      <button class="filter-btn f-refused" onclick="setFilter('refused',this)"><span class="dot"
+          style="background:var(--rouge)"></span>Refusés</button>
+    </div>
+    <div class="cards-grid" id="cards-container"></div>
+  </div>
+
+  <!-- TAB KANBAN -->
+  <div id="tab-kanban" class="section">
+    <div class="section-header">
+      <div class="section-title">Vue <span>Kanban</span></div>
+      <p class="section-desc">Aperçu visuel de tes candidatures par statut</p>
+    </div>
+    <div class="kanban" id="kanban-container"></div>
+  </div>
+
+  <!-- TAB CHECKLIST -->
+  <div id="tab-suivi" class="section">
+    <div class="section-header">
+      <div class="section-title">Ma <span>Checklist</span></div>
+      <p class="section-desc">Toutes les étapes pour décrocher ton stage · Sauvegardé automatiquement</p>
+    </div>
+    <div class="progress-section">
+      <div class="progress-title">Progression globale</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <div class="progress-info">
+        <span id="progress-text">0 étapes complétées</span>
+        <span id="progress-pct">0%</span>
+      </div>
+    </div>
+    <div class="checklist-wrap" id="checklist-container"></div>
+  </div>
+
+  <!-- TAB NOTES -->
+  <div id="tab-notes" class="section">
+    <div class="section-header">
+      <div class="section-title">Mes <span>Notes</span></div>
+      <p class="section-desc">Impressions, noms des responsables, dates de rappel…</p>
+    </div>
+    <div class="info-box">
+      <span class="i-ico">💾</span>
+      <div>Tes notes sont <strong>sauvegardées automatiquement</strong> dans ton navigateur. Elles seront toujours là à
+        ton prochain passage sur cette page.</div>
+    </div>
+    <textarea class="notes-area" id="notesArea"
+      placeholder="Ex :&#10;Les Canonniers — Demander M. Martin, rappeler jeudi matin 10h&#10;Ô Saveurs — Stage juillet possible, préfèrent CV papier&#10;Le Beaulieu — RDV vendredi 14h avec le chef&#10;..."></textarea>
+    <div class="save-ind" id="saveInd">✓ Sauvegardé</div>
+  </div>
+
+  <!-- TAB CONSEILS -->
+  <div id="tab-conseils" class="section">
+    <div class="section-header">
+      <div class="section-title">Conseils <span>Stage</span></div>
+      <p class="section-desc">Astuces pour maximiser tes chances d'obtenir un stage</p>
+    </div>
+    <div class="conseils-grid">
+      <div class="conseil-card" style="border-left:3px solid var(--or)">
+        <div class="conseil-ico">📄</div>
+        <div class="conseil-title">Prépare ton CV</div>
+        <div class="conseil-body">Photo pro obligatoire. Mets en avant tes formations culinaires et toute expérience en
+          restauration. Une page max. Imprime en couleur sur du beau papier épais.</div>
+      </div>
+      <div class="conseil-card" style="border-left:3px solid var(--vert)">
+        <div class="conseil-ico">🚶</div>
+        <div class="conseil-title">Se présenter en personne</div>
+        <div class="conseil-body">Passe directement au restaurant hors service : 14h30–17h est idéal. Demande le chef ou
+          le responsable. Sois souriant, propre, professionnel. Un vrai avantage sur un email.</div>
+      </div>
+      <div class="conseil-card" style="border-left:3px solid var(--bleu)">
+        <div class="conseil-ico">📞</div>
+        <div class="conseil-title">La relance (J+5)</div>
+        <div class="conseil-body">Pas de réponse après 5–7 jours ? Rappelle ! Dis : "Bonjour, je suis [Prénom], j'ai
+          déposé mon CV pour un stage, je voulais savoir si vous avez pu le consulter." Simple et efficace.</div>
+      </div>
+      <div class="conseil-card" style="border-left:3px solid var(--violet)">
+        <div class="conseil-ico">✉️</div>
+        <div class="conseil-title">Lettre de motivation</div>
+        <div class="conseil-body">Personnalise pour chaque lieu. Cite le nom de l'établissement. Explique pourquoi CE
+          restaurant t'attire. Montre ta motivation et ce que tu veux apprendre concrètement.</div>
+      </div>
+      <div class="conseil-card" style="border-left:3px solid var(--rouge)">
+        <div class="conseil-ico">⏰</div>
+        <div class="conseil-title">Meilleur timing</div>
+        <div class="conseil-body">Évite les services : 12h–14h et 19h–22h. Idéal pour passer ou appeler : 10h–11h30 ou
+          15h–17h. Jamais un samedi soir ou un dimanche en cuisine !</div>
+      </div>
+      <div class="conseil-card" style="border-left:3px solid var(--or)">
+        <div class="conseil-ico">🤝</div>
+        <div class="conseil-title">L'entretien</div>
+        <div class="conseil-body">Prépare 3 questions : "Quelle brigade ? Quels postes ? Quel rythme ?" Connais
+          l'établissement avant d'arriver. Arrive 5 min en avance. Montre ton envie d'apprendre.</div>
+      </div>
+      <div class="conseil-card" style="border-left:3px solid var(--vert)">
+        <div class="conseil-ico">📋</div>
+        <div class="conseil-title">Convention de stage</div>
+        <div class="conseil-body">N'oublie pas de faire signer ta convention par ton école AVANT de commencer. Vérifie
+          les dates, le nom du tuteur et le poste mentionné. Garde une copie pour toi.</div>
+      </div>
+      <div class="conseil-card" style="border-left:3px solid var(--bleu)">
+        <div class="conseil-ico">🌟</div>
+        <div class="conseil-title">Pendant le stage</div>
+        <div class="conseil-body">Arrive toujours en avance, pose des questions, montre de l'initiative. Un bon
+          comportement pendant le stage peut déboucher sur un emploi ou un recommandation précieuse.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ─── DATA ────────────────────────────────────────────────────────
+    const ETABLISSEMENTS = [
+      {
+        id: 1, nom: "Les Canonniers", adresse: "12 Pl. d'Armes, 59300 Valenciennes", tel: "06 51 63 32 32", type: "Restaurant", note: 4.9,
+        horaires: [{ j: "Lun", h: "Fermé" }, { j: "Mar", h: "11h45–14h15" }, { j: "Mer", h: "11h45–14h15" }, { j: "Jeu", h: "11h45–14h / 19h–22h30" }, { j: "Ven", h: "11h45–14h / 19h–22h30" }, { j: "Sam", h: "11h45–14h / 19h–22h30" }, { j: "Dim", h: "Fermé" }],
+        maps: "https://maps.google.com/?q=12+Pl.+d%27Armes+59300+Valenciennes"
+      },
+      {
+        id: 2, nom: "Ô Saveurs", adresse: "3 Rue Henri Lemaire, 59300 Valenciennes", tel: "03 27 30 53 86", type: "Restaurant Traditionnel", note: 4.8,
+        horaires: [{ j: "Lun", h: "12h–14h30 / 19h–22h30" }, { j: "Mar", h: "Fermé" }, { j: "Mer", h: "12h–14h30 / 19h–22h30" }, { j: "Jeu", h: "12h–14h30 / 19h–22h30" }, { j: "Ven", h: "12h–14h30 / 19h–22h30" }, { j: "Sam", h: "12h–14h30 / 19h–22h30" }, { j: "Dim", h: "12h–15h30" }],
+        maps: "https://maps.google.com/?q=3+Rue+Henri+Lemaire+59300+Valenciennes"
+      },
+      { id: 3, nom: "Café Brasserie L'Univers", adresse: "88 Rue de Villars, 59220 Denain", tel: "03 27 32 07 94", type: "Brasserie", note: null, horaires: [], maps: "https://maps.google.com/?q=88+Rue+de+Villars+59220+Denain" },
+      { id: 4, nom: "Le 8 Restaurant Denain", adresse: "68 Rue Emile Zola (1er ét.), Centre NaturéO, Denain", tel: "03 27 19 03 75", type: "Restaurant", note: null, horaires: [], maps: "https://maps.google.com/?q=68+Rue+Emile+Zola+59220+Denain" },
+      { id: 5, nom: "Chez Nous", adresse: "50 Rue Saint-Géry, 59300 Valenciennes", tel: "07 62 74 40 17", type: "Restaurant", note: null, horaires: [], maps: "https://maps.google.com/?q=50+Rue+Saint-Géry+59300+Valenciennes" },
+      {
+        id: 6, nom: "Le Beaulieu", adresse: "177 Rue de Famars, 59300 Valenciennes", tel: "03 27 22 28 72", type: "Restaurant / Bar", note: 4.7,
+        horaires: [{ j: "Lun", h: "10h–15h" }, { j: "Mar", h: "10h–15h" }, { j: "Mer", h: "10h–15h" }, { j: "Jeu", h: "10h–15h" }, { j: "Ven", h: "10h–15h / 18h30–22h" }, { j: "Sam", h: "10h–15h / 18h30–22h" }, { j: "Dim", h: "Fermé" }],
+        maps: "https://maps.google.com/?q=177+Rue+de+Famars+59300+Valenciennes"
+      },
+      {
+        id: 7, nom: "Les Trois Gourmets", adresse: "53 Rue de Famars, 59300 Valenciennes", tel: "03 27 42 74 37", type: "Restaurant", note: 4.8,
+        horaires: [{ j: "Lun", h: "Fermé" }, { j: "Mar", h: "12h–14h" }, { j: "Mer", h: "12h–14h / 19h–22h" }, { j: "Jeu", h: "12h–14h / 19h–22h" }, { j: "Ven", h: "12h–14h / 19h–22h" }, { j: "Sam", h: "12h–14h / 19h–22h" }, { j: "Dim", h: "12h–14h30" }],
+        maps: "https://maps.google.com/?q=53+Rue+de+Famars+59300+Valenciennes"
+      },
+      {
+        id: 8, nom: "L'Un des Sens", adresse: "16 Av. Albert 1er, 59300 Valenciennes", tel: "09 50 92 09 39", type: "Restaurant", note: 4.6,
+        horaires: [{ j: "Lun", h: "Fermé" }, { j: "Mar", h: "11h45–14h30 / 18h–21h30" }, { j: "Mer", h: "11h45–14h30" }, { j: "Jeu", h: "11h45–14h30 / 18h45–21h30" }, { j: "Ven", h: "11h45–14h30 / 18h45–22h30" }, { j: "Sam", h: "11h45–14h30 / 18h45–22h30" }, { j: "Dim", h: "Fermé" }],
+        maps: "https://maps.google.com/?q=16+Av.+Albert+1er+59300+Valenciennes"
+      },
+      {
+        id: 9, nom: "L'Instant Gourmand", adresse: "111 Rue du Quesnoy, 59300 Valenciennes", tel: "03 27 41 01 96", type: "Restaurant", note: 4.8,
+        horaires: [{ j: "Lun", h: "Fermé" }, { j: "Mar", h: "12h–14h / 19h–21h30" }, { j: "Mer", h: "12h–14h" }, { j: "Jeu", h: "12h–14h / 19h–21h30" }, { j: "Ven", h: "12h–14h / 19h–21h30" }, { j: "Sam", h: "19h–21h30" }, { j: "Dim", h: "Fermé" }],
+        maps: "https://maps.google.com/?q=111+Rue+du+Quesnoy+59300+Valenciennes"
+      },
+      {
+        id: 10, nom: "La Bande à Nana", adresse: "42 Ter Rue de Paris, 59300 Valenciennes", tel: "03 27 44 08 66", type: "Restaurant / Bar", note: 4.8,
+        horaires: [{ j: "Lun", h: "10h–16h30" }, { j: "Mar", h: "10h–16h30" }, { j: "Mer", h: "10h–16h30" }, { j: "Jeu", h: "10h–16h30" }, { j: "Ven", h: "10h–16h30" }, { j: "Sam", h: "10h–16h30" }, { j: "Dim", h: "Fermé" }],
+        maps: "https://maps.google.com/?q=42+Ter+Rue+de+Paris+59300+Valenciennes"
+      },
+      {
+        id: 11, nom: "O Divine' Bar", adresse: "56 Av. du Sénateur Girard, 59300 Valenciennes", tel: "03 27 44 94 70", type: "Bar / Restaurant", note: 4.6,
+        horaires: [{ j: "Lun", h: "11h–14h15" }, { j: "Mar", h: "10h–21h15" }, { j: "Mer", h: "10h–21h15" }, { j: "Jeu", h: "10h–21h15" }, { j: "Ven", h: "10h–22h15" }, { j: "Sam", h: "11h–14h / 18h30–22h15" }, { j: "Dim", h: "Fermé" }],
+        maps: "https://maps.google.com/?q=56+Av.+du+Sénateur+Girard+59300+Valenciennes"
+      },
+      {
+        id: 12, nom: "Brasserie Le Président", adresse: "30 Pl. d'Armes, 59300 Valenciennes", tel: "03 27 46 26 01", type: "Brasserie / Bar", note: 3.9,
+        horaires: [{ j: "Lun", h: "8h30–00h" }, { j: "Mar", h: "8h30–00h" }, { j: "Mer", h: "8h30–00h" }, { j: "Jeu", h: "8h30–00h" }, { j: "Ven", h: "8h30–00h" }, { j: "Sam", h: "8h30–00h" }, { j: "Dim", h: "8h30–00h" }],
+        maps: "https://maps.google.com/?q=30+Pl.+d%27Armes+59300+Valenciennes"
+      },
+      {
+        id: 13, nom: "La Galerie — Royal Hainaut", adresse: "6 Pl. de l'Hôpital Général, 59300 Valenciennes", tel: "03 27 35 15 15", type: "Restaurant Gastronomique", note: 4.2,
+        horaires: [{ j: "Lun", h: "12h–14h / 19h–21h30" }, { j: "Mar", h: "12h–14h / 19h–21h30" }, { j: "Mer", h: "12h–14h / 19h–21h30" }, { j: "Jeu", h: "12h–14h / 19h–21h30" }, { j: "Ven", h: "12h–14h / 19h–22h" }, { j: "Sam", h: "12h–14h / 19h–22h" }, { j: "Dim", h: "12h–13h30 / 19h–21h30" }],
+        maps: "https://maps.google.com/?q=6+Pl.+de+l%27Hôpital+Général+59300+Valenciennes"
+      },
+      {
+        id: 14, nom: "Le Bistrot D'en Face", adresse: "5 Av. d'Amsterdam, 59300 Valenciennes", tel: "06 83 06 93 08", type: "Restaurant / Brasserie", note: 4.4,
+        horaires: [{ j: "Lun", h: "12h–14h / 19h–22h" }, { j: "Mar", h: "12h–14h / 19h–22h" }, { j: "Mer", h: "12h–14h / 19h–22h" }, { j: "Jeu", h: "12h–14h / 19h–22h" }, { j: "Ven", h: "12h–14h30 / 19h–22h30" }, { j: "Sam", h: "12h–14h30 / 19h–22h30" }, { j: "Dim", h: "12h–14h30 / 19h–22h" }],
+        maps: "https://maps.google.com/?q=5+Av.+d%27Amsterdam+59300+Valenciennes"
+      },
+    ];
+
+    const STATUS_DEF = {
+      todo: { label: "À contacter", badge: "badge-todo", btn: "btn-todo", emoji: "📋", color: "var(--or)" },
+      done: { label: "Contacté", badge: "badge-done", btn: "btn-done", emoji: "✅", color: "var(--vert)" },
+      waiting: { label: "En attente", badge: "badge-waiting", btn: "btn-waiting", emoji: "⏳", color: "var(--bleu)" },
+      stage: { label: "En stage", badge: "badge-stage", btn: "btn-stage", emoji: "🏆", color: "var(--violet)" },
+      refused: { label: "Refusé", badge: "badge-refused", btn: "btn-refused", emoji: "❌", color: "var(--rouge)" },
+    };
+    const STATUS_ORDER = ['todo', 'done', 'waiting', 'stage', 'refused'];
+
+    // ─── HELPERS ─────────────────────────────────────────────────────
+    function stars(n) { if (!n) return ''; const f = Math.round(n); return '★'.repeat(f) + '☆'.repeat(5 - f); }
+
+    function toast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      clearTimeout(t._t);
+      t._t = setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    // ─── CARDS ───────────────────────────────────────────────────────
+    function renderCards() {
+      const q = (document.getElementById('searchInput').value || '').toLowerCase();
+      let list = ETABLISSEMENTS;
+      if (curFilter !== 'all') list = list.filter(e => statuses[e.id] === curFilter);
+      if (q) list = list.filter(e => e.nom.toLowerCase().includes(q) || e.adresse.toLowerCase().includes(q) || e.type.toLowerCase().includes(q));
+
+      const c = document.getElementById('cards-container');
+      if (!list.length) {
+        c.innerHTML = `<div class="empty-state"><div class="big">🔍</div><p>Aucun établissement trouvé</p></div>`;
+        updateStats(); return;
+      }
+
+      c.innerHTML = list.map(e => {
+        const st = statuses[e.id], def = STATUS_DEF[st], note = cardNotes[e.id] || '';
+
+        let hoH = '';
+        if (e.horaires.length) {
+          const days = e.horaires.map(h => {
+            const cl = h.h === 'Fermé';
+            return `<div class="h-day">
+          <div class="h-day-name">${h.j}</div>
+          <div class="h-day-dot ${cl ? 'closed' : 'open'}"></div>
+          <div class="h-day-time">${cl ? '–' : h.h.replace(/\//g, '<br>')}</div>
+        </div>`;
+          }).join('');
+          hoH = `<div class="horaires-section"><div class="horaires-label">Horaires d'ouverture</div><div class="horaires-grid">${days}</div></div>`;
+        }
+
+        const btns = STATUS_ORDER.map(s => {
+          const d = STATUS_DEF[s];
+          return `<button class="action-btn ${d.btn}${st === s ? ' active-btn' : ''}" onclick="setStatus(${e.id},'${s}',event)">
+        <span class="btn-ico">${d.emoji}</span>${d.label}
+      </button>`;
+        }).join('');
+
+        return `<div class="card" data-status="${st}" id="card-${e.id}">
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-name">${e.nom}</div>
+          <span class="card-badge ${def.badge}">${def.emoji} ${def.label}</span>
+        </div>
+        <div class="card-info">
+          <div class="info-row"><span class="ico">📍</span><span>${e.adresse}</span></div>
+          <div class="info-row"><span class="ico">📞</span><a href="tel:+33${e.tel.replace(/\s/g, '').slice(1)}" onclick="event.stopPropagation()">${e.tel}</a></div>
+          ${e.note ? `<div class="rating-row"><span class="stars">${stars(e.note)}</span><span class="rating-num">${e.note}/5</span></div>` : ''}
+          <div><span class="card-type-tag">🏷️ ${e.type}</span></div>
+          <div class="info-row"><span class="ico">🗺️</span><a href="${e.maps}" target="_blank" onclick="event.stopPropagation()">Voir sur Maps →</a></div>
+        </div>
+      </div>
+      ${hoH}
+      <div class="card-actions">${btns}</div>
+      <div class="card-note-wrap">
+        <textarea class="card-note-input" placeholder="💬 Notes perso (responsable, impression, rappel…)" oninput="saveCardNote(${e.id},this.value)">${note}</textarea>
+      </div>
+    </div>`;
+      }).join('');
+      updateStats();
+    }
+
+    function setStatus(id, s, ev) {
+      if (ev) ev.stopPropagation();
+      statuses[id] = s; lsSet('stage_statuses_v3', statuses);
+      renderCards(); renderKanban();
+      toast(`${STATUS_DEF[s].emoji} ${ETABLISSEMENTS.find(e => e.id === id).nom} → ${STATUS_DEF[s].label}`);
+    }
+    function saveCardNote(id, val) {
+      cardNotes[id] = val; lsSet('stage_card_notes_v3', cardNotes);
+    }
+    function setFilter(f, btn) {
+      curFilter = f;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active'); renderCards();
+    }
+    function updateStats() {
+      document.getElementById('s-total').textContent = ETABLISSEMENTS.length;
+      document.getElementById('s-todo').textContent = Object.values(statuses).filter(s => s === 'todo').length;
+      document.getElementById('s-done').textContent = Object.values(statuses).filter(s => s === 'done').length;
+      document.getElementById('s-waiting').textContent = Object.values(statuses).filter(s => s === 'waiting').length;
+      document.getElementById('s-stage').textContent = Object.values(statuses).filter(s => s === 'stage').length;
+      document.getElementById('s-refused').textContent = Object.values(statuses).filter(s => s === 'refused').length;
+    }
+
+    // ─── KANBAN ──────────────────────────────────────────────────────
+    function renderKanban() {
+      document.getElementById('kanban-container').innerHTML = STATUS_ORDER.map(s => {
+        const def = STATUS_DEF[s];
+        const items = ETABLISSEMENTS.filter(e => statuses[e.id] === s);
+        return `<div class="kanban-col">
+      <div class="kanban-col-title">
+        <div class="k-dot" style="background:${def.color}"></div>
+        ${def.emoji} ${def.label}
+        <span class="k-count" style="color:${def.color}">${items.length}</span>
+      </div>
+      ${items.length ? items.map(e => `<div class="kanban-item" onclick="gotoCard(${e.id})">${e.nom}</div>`).join('') : '<div class="kanban-empty">Aucun</div>'}
+    </div>`;
+      }).join('');
+    }
+
+    function gotoCard(id) {
+      showTab('liste', document.querySelector('.tab-btn'));
+      setTimeout(() => {
+        const el = document.getElementById('card-' + id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 120);
+    }
+
+    // ─── CHECKLIST ───────────────────────────────────────────────────
+    const STEPS = [
+      "Préparer mon CV (photo, formation, expériences)",
+      "Rédiger ma lettre de motivation personnalisée",
+      "Imprimer 15 exemplaires CV + lettre en couleur",
+      "Définir mes dates de stage souhaitées",
+      "Visiter Les Canonniers (14h30–17h, hors service)",
+      "Visiter Ô Saveurs en personne",
+      "Visiter Le Beaulieu en personne",
+      "Visiter Les Trois Gourmets en personne",
+      "Visiter L'Instant Gourmand en personne",
+      "Contacter Café Brasserie L'Univers (Denain)",
+      "Contacter Le 8 Restaurant (Denain)",
+      "Contacter La Bande à Nana",
+      "Contacter O Divine' Bar",
+      "Contacter La Galerie / Royal Hainaut",
+      "Contacter Le Bistrot D'en Face",
+      "Contacter Chez Nous",
+      "Faire les relances téléphoniques à J+5",
+      "Préparer mes questions pour l'entretien",
+      "Confirmer convention de stage avec mon école",
+      "Confirmer dates et poste définitif",
+    ];
+    STEPS.forEach((_, i) => { if (checks[i] === undefined) checks[i] = false; });
+
+    function renderChecklist() {
+      document.getElementById('checklist-container').innerHTML = STEPS.map((s, i) => `
+    <div class="checklist-item" onclick="toggleCheck(${i})">
+      <div class="check-box ${checks[i] ? 'checked' : ''}">${checks[i] ? '✓' : ''}</div>
+      <span class="check-label ${checks[i] ? 'done' : ''}">${s}</span>
+    </div>`).join('');
+      const total = STEPS.length, done = Object.values(checks).filter(Boolean).length, pct = Math.round(done / total * 100);
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('progress-text').textContent = `${done} / ${total} étapes complétées`;
+      document.getElementById('progress-pct').textContent = pct + '%';
+    }
+    function toggleCheck(i) {
+      checks[i] = !checks[i]; lsSet('stage_checks_v3', checks);
+      renderChecklist();
+      toast(checks[i] ? '✅ Étape validée !' : '↩️ Étape décochée');
+    }
+
+    // ─── NOTES ───────────────────────────────────────────────────────
+    const notesArea = document.getElementById('notesArea');
+    const saveInd = document.getElementById('saveInd');
+    const mainNotes = ls('stage_main_notes_v3', {});
+    notesArea.value = mainNotes.text || '';
+    let saveT;
+    notesArea.addEventListener('input', () => {
+      clearTimeout(saveT); saveInd.classList.remove('show');
+      saveT = setTimeout(() => {
+        lsSet('stage_main_notes_v3', { text: notesArea.value });
+        saveInd.classList.add('show');
+        setTimeout(() => saveInd.classList.remove('show'), 2500);
+      }, 600);
+    });
+
+    // ─── TABS ────────────────────────────────────────────────────────
+    function showTab(tab, btn) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      if (btn) btn.classList.add('active');
+      if (tab === 'kanban') renderKanban();
+    }
+
+    // ─── BOOT ────────────────────────────────────────────────────────
+    renderCards();
+    renderChecklist();
+  </script>
+</body>
+
+</html>
