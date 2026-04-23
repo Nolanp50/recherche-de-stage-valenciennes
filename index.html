@@ -4,30 +4,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎓 Recherche de Stage — Valenciennes</title>
+  <title>Stage Valenciennes</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
     rel="stylesheet">
   <style>
     :root {
-      --bg: #07080d;
-      --bg2: #0d0f18;
-      --bg3: #141720;
-      --border: #1e2130;
-      --border2: #252840;
-      --gold: #e8b84b;
-      --gold2: #f5d07a;
-      --gold-dim: rgba(232, 184, 75, .12);
-      --green: #34d399;
-      --blue: #60a5fa;
-      --violet: #a78bfa;
-      --red: #f87171;
-      --orange: #fb923c;
-      --txt: #eef0f8;
-      --txt2: #6b7194;
-      --txt3: #9ca3c4;
-      --card: #0f111a;
-      --shadow: 0 20px 60px rgba(0, 0, 0, .6);
+      --bg: #0a0b0f;
+      --bg2: #111318;
+      --bg3: #181b22;
+      --border: #1f2230;
+      --border2: #2a2f42;
+      --accent: #ff6b35;
+      --accent2: #ff9a70;
+      --accent-dim: rgba(255, 107, 53, .1);
+      --green: #22c55e;
+      --blue: #3b82f6;
+      --violet: #8b5cf6;
+      --red: #ef4444;
+      --orange: #f97316;
+      --gold: #eab308;
+      --txt: #f0f2ff;
+      --txt2: #5a6080;
+      --txt3: #8890b0;
+      --card: #0e1018;
+      --nav-h: 64px;
+      --mob-nav: 68px;
     }
 
     *,
@@ -35,164 +37,119 @@
     *::after {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
     }
 
     body {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       background: var(--bg);
       color: var(--txt);
       min-height: 100vh;
       overflow-x: hidden;
+      padding-bottom: calc(var(--mob-nav) + 12px)
     }
 
-    /* BG AMBIENT */
+    /* BG */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background:
-        radial-gradient(ellipse 70% 50% at 15% -10%, rgba(232, 184, 75, .08) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 40% at 85% 90%, rgba(167, 139, 250, .06) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 30% at 50% 50%, rgba(96, 165, 250, .03) 0%, transparent 60%);
+      background: radial-gradient(ellipse 60% 40% at 20% 0%, rgba(255, 107, 53, .07) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 80% 100%, rgba(139, 92, 246, .05) 0%, transparent 55%);
       pointer-events: none;
-      z-index: 0;
+      z-index: 0
     }
 
-    /* ── HEADER ── */
-    .header {
+    /* ── TOP BAR ── */
+    .topbar {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(7, 8, 13, .92);
+      background: rgba(10, 11, 15, .95);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
-      padding: 0 28px;
-      height: 64px;
+      height: var(--nav-h);
       display: flex;
       align-items: center;
-      gap: 20px;
+      padding: 0 24px;
+      gap: 16px
     }
 
-    .logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-
-    .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      border-radius: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 0 20px rgba(232, 184, 75, .3);
-      flex-shrink: 0;
-    }
-
-    .logo-text {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 17px;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      white-space: nowrap;
-    }
-
-    .logo-sub {
-      font-size: 11px;
-      color: var(--txt2);
-      font-family: 'JetBrains Mono', monospace;
-      margin-top: 1px;
-    }
-
-    .header-center {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-    }
-
-    /* NAV PILLS */
-    .nav-pills {
-      display: flex;
-      gap: 2px;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 3px;
-    }
-
-    .nav-pill {
-      padding: 7px 16px;
-      border-radius: 9px;
-      border: none;
-      background: transparent;
-      color: var(--txt2);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all .2s;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .nav-pill:hover {
-      color: var(--txt);
-    }
-
-    .nav-pill.active {
-      background: linear-gradient(135deg, rgba(232, 184, 75, .18), rgba(232, 184, 75, .08));
-      color: var(--gold);
-      border: 1px solid rgba(232, 184, 75, .25);
-    }
-
-    .header-right {
+    .logo {
       display: flex;
       align-items: center;
       gap: 10px;
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
-    /* FB STATUS */
-    .fb-pill {
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--accent);
+      border-radius: 10px;
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      box-shadow: 0 0 20px rgba(255, 107, 53, .3)
+    }
+
+    .logo-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: .05em;
+      color: var(--txt);
+      line-height: 1
+    }
+
+    .logo-sub {
+      font-size: 10px;
+      color: var(--txt2);
+      font-family: 'DM Mono', monospace;
+      margin-top: 1px
+    }
+
+    .topbar-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .fb-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
       border-radius: 20px;
       border: 1px solid var(--border2);
       background: var(--bg3);
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'DM Mono', monospace;
       font-size: 11px;
       color: var(--txt2);
-      transition: all .3s;
+      transition: all .3s
     }
 
-    .fb-pill.synced {
+    .fb-badge.ok {
       color: var(--green);
-      border-color: rgba(52, 211, 153, .25);
-      background: rgba(52, 211, 153, .06);
+      border-color: rgba(34, 197, 94, .2);
+      background: rgba(34, 197, 94, .05)
     }
 
-    .fb-pill.syncing {
-      color: var(--gold);
-      border-color: rgba(232, 184, 75, .25);
-      background: rgba(232, 184, 75, .06);
+    .fb-badge.sync {
+      color: var(--orange);
+      border-color: rgba(249, 115, 22, .2);
+      background: rgba(249, 115, 22, .05)
     }
 
-    .fb-pill.error {
+    .fb-badge.err {
       color: var(--red);
-      border-color: rgba(248, 113, 113, .25);
-      background: rgba(248, 113, 113, .06);
+      border-color: rgba(239, 68, 68, .2);
+      background: rgba(239, 68, 68, .05)
     }
 
     .fb-dot {
@@ -200,18 +157,18 @@
       height: 6px;
       border-radius: 50%;
       background: currentColor;
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
-    .fb-pill.synced .fb-dot {
-      box-shadow: 0 0 5px currentColor;
+    .fb-badge.ok .fb-dot {
+      box-shadow: 0 0 4px currentColor
     }
 
-    .fb-pill.syncing .fb-dot {
-      animation: pulse-dot 1s infinite;
+    .fb-badge.sync .fb-dot {
+      animation: blink 1s infinite
     }
 
-    @keyframes pulse-dot {
+    @keyframes blink {
 
       0%,
       100% {
@@ -219,7 +176,7 @@
       }
 
       50% {
-        opacity: .4
+        opacity: .3
       }
     }
 
@@ -227,108 +184,124 @@
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 9px 18px;
-      border-radius: 10px;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 9px;
       border: none;
       cursor: pointer;
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       font-size: 13px;
       font-weight: 600;
       transition: all .2s;
       text-decoration: none;
+      white-space: nowrap
     }
 
-    .btn-gold {
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      color: #000;
-      box-shadow: 0 4px 16px rgba(232, 184, 75, .25);
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(255, 107, 53, .25)
     }
 
-    .btn-gold:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(232, 184, 75, .4);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--txt2);
-      border: 1px solid var(--border2);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+    .btn-accent:hover {
+      background: var(--accent2);
+      transform: translateY(-1px)
     }
 
     .btn-ghost {
       background: rgba(255, 255, 255, .04);
       color: var(--txt2);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border)
     }
 
     .btn-ghost:hover {
       color: var(--txt);
-      border-color: var(--border2);
+      border-color: var(--border2)
     }
 
-    .btn-sync {
-      background: linear-gradient(135deg, #f5820d, #ffa726);
-      color: #fff;
-      font-weight: 700;
-      box-shadow: 0 4px 16px rgba(245, 130, 13, .3);
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 7px
     }
 
-    .btn-sync:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(245, 130, 13, .45);
+    /* ── MOBILE BOTTOM NAV ── */
+    .mob-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: var(--mob-nav);
+      background: rgba(14, 16, 24, .98);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      z-index: 200;
+      display: flex;
+      align-items: stretch
     }
 
-    .btn-sync.spinning .sync-ico {
-      animation: spin .8s linear infinite;
-      display: inline-block;
-    }
-
-    .btn-admin {
-      background: transparent;
+    .mob-nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all .2s;
+      border: none;
+      background: none;
       color: var(--txt2);
-      border: 1px solid var(--border2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 8px 4px;
+      position: relative
     }
 
-    .btn-admin:hover {
-      border-color: var(--violet);
-      color: var(--violet);
+    .mob-nav-item .nav-ico {
+      font-size: 20px;
+      line-height: 1;
+      transition: transform .2s
     }
 
-    .btn-admin.active {
-      color: var(--green);
-      border-color: rgba(52, 211, 153, .35);
-      background: rgba(52, 211, 153, .07);
+    .mob-nav-item.active {
+      color: var(--accent)
     }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg)
-      }
+    .mob-nav-item.active .nav-ico {
+      transform: scale(1.15)
+    }
+
+    .mob-nav-item.active::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 0 0 4px 4px
     }
 
     /* ── PAGES ── */
     .page {
       display: none;
-      padding: 28px;
+      padding: 20px;
       position: relative;
       z-index: 1;
+      animation: fadeUp .3s ease
     }
 
     .page.active {
-      display: block;
-      animation: fadeSlide .3s ease;
+      display: block
     }
 
-    @keyframes fadeSlide {
+    @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(10px)
+        transform: translateY(12px)
       }
 
       to {
@@ -337,722 +310,689 @@
       }
     }
 
-    /* ── HERO SECTION (Établissements) ── */
-    .hero-banner {
-      background: linear-gradient(135deg, rgba(232, 184, 75, .1) 0%, rgba(167, 139, 250, .06) 50%, transparent 100%);
-      border: 1px solid rgba(232, 184, 75, .15);
-      border-radius: 20px;
-      padding: 32px 36px;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-banner::before {
-      content: '';
-      position: absolute;
-      top: -40px;
-      right: -40px;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(232, 184, 75, .12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-emoji {
-      font-size: 52px;
-      filter: drop-shadow(0 0 20px rgba(232, 184, 75, .4));
-      flex-shrink: 0;
-    }
-
-    .hero-text h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: 28px;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    /* ── SECTION TITLE ── */
+    .sec-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: .04em;
+      color: var(--txt);
       margin-bottom: 6px;
+      line-height: 1
     }
 
-    .hero-text p {
+    .sec-sub {
+      font-size: 13px;
       color: var(--txt2);
-      font-size: 14px;
+      margin-bottom: 20px
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, rgba(255, 107, 53, .12) 0%, rgba(255, 107, 53, .04) 40%, transparent 100%);
+      border: 1px solid rgba(255, 107, 53, .2);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .hero::after {
+      content: '🍽️';
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 52px;
+      opacity: .3
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 5vw, 42px);
+      letter-spacing: .04em;
+      color: var(--txt);
+      line-height: 1;
+      margin-bottom: 6px
+    }
+
+    .hero p {
+      font-size: 13px;
+      color: var(--txt3);
       line-height: 1.6;
+      max-width: 380px
     }
 
-    /* STATS STRIP */
-    .stats-strip {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 20px
     }
 
-    .stat-chip {
-      flex: 1;
-      min-width: 100px;
+    @media(max-width:480px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    .stat {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-      transition: border-color .2s, transform .2s;
+      border-radius: 13px;
+      padding: 14px;
+      transition: transform .2s, border-color .2s
     }
 
-    .stat-chip:hover {
-      border-color: var(--border2);
+    .stat:hover {
       transform: translateY(-2px);
+      border-color: var(--border2)
     }
 
-    .stat-chip-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 26px;
-      font-weight: 800;
-      line-height: 1;
+    .stat-n {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30px;
+      line-height: 1
     }
 
-    .stat-chip-label {
-      font-size: 11px;
+    .stat-l {
+      font-size: 10px;
       color: var(--txt2);
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: .06em;
-      font-weight: 600;
+      margin-top: 2px
     }
 
-    /* FILTERS */
-    .filter-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .filter-tab {
-      padding: 7px 16px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--txt2);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all .2s;
-    }
-
-    .filter-tab:hover {
-      border-color: var(--border2);
-      color: var(--txt);
-    }
-
-    .filter-tab.active {
-      background: var(--gold-dim);
-      color: var(--gold);
-      border-color: rgba(232, 184, 75, .3);
-    }
-
-    .search-box {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 8px 14px;
-      flex: 0 0 220px;
-      transition: border-color .2s;
-    }
-
-    .search-box:focus-within {
-      border-color: rgba(232, 184, 75, .35);
-    }
-
-    .search-box input {
-      background: none;
-      border: none;
-      outline: none;
-      color: var(--txt);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      width: 100%;
-    }
-
-    .search-box input::placeholder {
-      color: var(--txt2);
-    }
-
-    .cat-row {
+    /* ── FILTERS ── */
+    .filters {
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
-      margin-bottom: 22px;
+      margin-bottom: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px
     }
 
-    .cat-chip {
-      padding: 5px 13px;
-      border-radius: 20px;
+    .filters::-webkit-scrollbar {
+      display: none
+    }
+
+    .ftab {
+      padding: 6px 14px;
+      border-radius: 8px;
       border: 1px solid var(--border);
       background: transparent;
       color: var(--txt2);
+      font-family: 'DM Sans', sans-serif;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       transition: all .2s;
-      font-family: 'Space Grotesk', sans-serif;
+      white-space: nowrap;
+      flex-shrink: 0
     }
 
-    .cat-chip:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+    .ftab:hover {
+      border-color: var(--border2);
+      color: var(--txt)
     }
 
-    .cat-chip.active {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: var(--gold-dim);
+    .ftab.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-color: rgba(255, 107, 53, .3)
     }
 
-    /* STATUS SECTION */
-    .status-block {
-      margin-bottom: 32px;
+    .search-wrap {
+      margin-bottom: 16px;
+      position: relative
     }
 
-    .status-block-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-      padding: 12px 16px;
+    .search-wrap input {
+      width: 100%;
       background: var(--bg3);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 10px;
+      color: var(--txt);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 10px 14px 10px 38px;
+      outline: none;
+      transition: border-color .2s
     }
 
-    .status-dot {
-      width: 9px;
-      height: 9px;
+    .search-wrap input:focus {
+      border-color: rgba(255, 107, 53, .35)
+    }
+
+    .search-wrap::before {
+      content: '🔍';
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      pointer-events: none
+    }
+
+    /* ── STATUS SECTIONS ── */
+    .status-sec {
+      margin-bottom: 28px
+    }
+
+    .status-sec-hdr {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 11px
+    }
+
+    .s-dot {
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
+      flex-shrink: 0
     }
 
-    .status-block-title {
-      font-family: 'Syne', sans-serif;
+    .s-title {
       font-weight: 700;
       font-size: 14px;
-      flex: 1;
+      flex: 1
     }
 
-    .status-block-count {
-      padding: 3px 11px;
-      border-radius: 20px;
+    .s-count {
       font-size: 11px;
-      font-weight: 700;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'DM Mono', monospace;
+      padding: 2px 10px;
+      border-radius: 20px
     }
 
-    .collapse-btn {
+    .s-toggle {
       background: none;
       border: 1px solid var(--border2);
-      border-radius: 7px;
+      border-radius: 6px;
       color: var(--txt2);
       font-size: 11px;
-      padding: 4px 10px;
+      padding: 3px 9px;
       cursor: pointer;
-      font-family: 'Space Grotesk', sans-serif;
-      transition: all .2s;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .2s
     }
 
-    .collapse-btn:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+    .s-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent)
     }
 
-    /* CARDS GRID */
+    /* ── CARDS GRID ── */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px
     }
 
-    /* CARD */
+    @media(max-width:640px) {
+      .cards-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* ── CARD ── */
     .card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 15px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: all .25s;
+      transition: all .25s
     }
 
     .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(232, 184, 75, .25);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, .4);
+      border-color: rgba(255, 107, 53, .2);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, .4);
+      transform: translateY(-2px)
     }
 
     .card-body {
-      padding: 18px;
-      flex: 1;
+      padding: 16px;
+      flex: 1
     }
 
-    .card-header {
+    .card-hdr {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 12px
     }
 
     .card-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 16px;
       font-weight: 700;
-      line-height: 1.2;
+      font-size: 16px;
+      line-height: 1.2
     }
 
-    .card-badge {
+    .cbadge {
       font-size: 10px;
       font-weight: 700;
-      padding: 4px 10px;
+      padding: 3px 9px;
       border-radius: 20px;
       white-space: nowrap;
       flex-shrink: 0;
       text-transform: uppercase;
-      letter-spacing: .05em;
+      letter-spacing: .04em
     }
 
-    .badge-todo {
-      background: rgba(232, 184, 75, .12);
+    .b-todo {
+      background: rgba(234, 179, 8, .1);
       color: var(--gold);
-      border: 1px solid rgba(232, 184, 75, .25);
+      border: 1px solid rgba(234, 179, 8, .2)
     }
 
-    .badge-done {
-      background: rgba(52, 211, 153, .12);
+    .b-done {
+      background: rgba(34, 197, 94, .1);
       color: var(--green);
-      border: 1px solid rgba(52, 211, 153, .25);
+      border: 1px solid rgba(34, 197, 94, .2)
     }
 
-    .badge-waiting {
-      background: rgba(96, 165, 250, .12);
+    .b-waiting {
+      background: rgba(59, 130, 246, .1);
       color: var(--blue);
-      border: 1px solid rgba(96, 165, 250, .25);
+      border: 1px solid rgba(59, 130, 246, .2)
     }
 
-    .badge-rdv {
-      background: rgba(251, 146, 60, .12);
+    .b-rdv {
+      background: rgba(249, 115, 22, .1);
       color: var(--orange);
-      border: 1px solid rgba(251, 146, 60, .25);
+      border: 1px solid rgba(249, 115, 22, .2)
     }
 
-    .badge-stage {
-      background: rgba(167, 139, 250, .12);
+    .b-stage {
+      background: rgba(139, 92, 246, .1);
       color: var(--violet);
-      border: 1px solid rgba(167, 139, 250, .25);
+      border: 1px solid rgba(139, 92, 246, .2)
     }
 
-    .badge-refused {
-      background: rgba(248, 113, 113, .12);
+    .b-refused {
+      background: rgba(239, 68, 68, .1);
       color: var(--red);
-      border: 1px solid rgba(248, 113, 113, .25);
+      border: 1px solid rgba(239, 68, 68, .2)
     }
 
-    .card-info {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .info-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--txt2);
-    }
-
-    .info-row a {
-      color: var(--blue);
-      text-decoration: none;
-    }
-
-    .info-row a:hover {
-      color: var(--gold);
-    }
-
-    .card-type {
+    .prio-high {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 8px;
-      background: rgba(232, 184, 75, .08);
-      color: var(--gold);
-      border: 1px solid rgba(232, 184, 75, .15);
-      font-weight: 600;
-    }
-
-    .prio-badge {
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 8px;
+      gap: 4px;
+      font-size: 10px;
       font-weight: 700;
+      color: #ff6b35;
+      background: rgba(255, 107, 53, .1);
+      border: 1px solid rgba(255, 107, 53, .2);
+      padding: 2px 9px;
+      border-radius: 20px;
+      margin-bottom: 8px
     }
 
-    .prio-haute {
-      background: rgba(248, 113, 113, .1);
-      color: #ff7676;
-      border: 1px solid rgba(248, 113, 113, .2);
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px
     }
 
-    .prio-basse {
-      background: rgba(107, 113, 148, .1);
-      color: var(--txt2);
-      border: 1px solid rgba(107, 113, 148, .2);
+    .irow {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--txt3)
+    }
+
+    .irow a {
+      color: var(--blue);
+      text-decoration: none
+    }
+
+    .irow a:hover {
+      color: var(--accent)
+    }
+
+    .type-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 7px;
+      background: rgba(255, 107, 53, .08);
+      color: var(--accent);
+      border: 1px solid rgba(255, 107, 53, .15);
+      font-weight: 600
     }
 
     .stars {
       color: var(--gold);
-      font-size: 12px;
-    }
-
-    .rating-txt {
-      font-size: 11px;
-      color: var(--txt2);
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .cats-row {
-      display: flex;
-      gap: 5px;
-      flex-wrap: wrap;
-      margin-top: 4px;
-    }
-
-    .cat-tag {
-      font-size: 10px;
-      padding: 3px 9px;
-      border-radius: 7px;
-      font-weight: 600;
+      font-size: 12px
     }
 
     /* HORAIRES */
-    .horaires-panel {
-      padding: 12px 18px;
+    .hpanel {
+      padding: 10px 16px;
       border-top: 1px solid var(--border);
-      background: rgba(255, 255, 255, .015);
+      background: rgba(255, 255, 255, .01)
     }
 
-    .horaires-lbl {
+    .hlbl {
       font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: .08em;
+      letter-spacing: .07em;
       color: var(--txt2);
       font-weight: 700;
-      margin-bottom: 10px;
+      margin-bottom: 8px
     }
 
-    .horaires-grid {
+    .hgrid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
+      gap: 3px
     }
 
-    .h-col {
-      text-align: center;
+    .hcol {
+      text-align: center
     }
 
-    .h-day-name {
+    .hday {
       font-size: 9px;
       color: var(--txt2);
       font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 5px;
+      margin-bottom: 4px
     }
 
-    .h-dot {
-      width: 7px;
-      height: 7px;
+    .hdot {
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      margin: 0 auto 4px;
+      margin: 0 auto 3px
     }
 
-    .h-dot.open {
+    .hdot.open {
       background: var(--green);
-      box-shadow: 0 0 5px rgba(52, 211, 153, .5);
+      box-shadow: 0 0 4px rgba(34, 197, 94, .5)
     }
 
-    .h-dot.closed {
-      background: var(--border);
+    .hdot.closed {
+      background: var(--border)
     }
 
-    .h-time {
+    .htime {
       font-size: 8px;
       color: var(--txt2);
-      line-height: 1.4;
+      line-height: 1.4
     }
 
-    /* CARD ACTIONS */
-    .card-actions {
+    /* ACTIONS */
+    .card-acts {
       display: flex;
       flex-wrap: wrap;
       gap: 4px;
-      padding: 10px 18px;
-      border-top: 1px solid var(--border);
+      padding: 10px 16px;
+      border-top: 1px solid var(--border)
     }
 
-    .act-btn {
+    .abt {
       flex: 1;
-      min-width: 72px;
-      padding: 6px 8px;
-      border-radius: 8px;
+      min-width: 68px;
+      padding: 5px 6px;
+      border-radius: 7px;
       border: 1px solid var(--border);
       background: var(--bg3);
       color: var(--txt2);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
       font-weight: 600;
       cursor: pointer;
-      transition: all .2s;
+      transition: all .15s;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
+      gap: 3px
     }
 
-    .act-btn:hover {
-      transform: translateY(-1px);
+    .abt:hover {
+      transform: translateY(-1px)
     }
 
-    .act-btn.active-todo {
-      background: rgba(232, 184, 75, .15);
+    .abt.a-todo {
+      background: rgba(234, 179, 8, .1);
       color: var(--gold);
-      border-color: rgba(232, 184, 75, .35);
+      border-color: rgba(234, 179, 8, .25)
     }
 
-    .act-btn.active-done {
-      background: rgba(52, 211, 153, .15);
+    .abt.a-done {
+      background: rgba(34, 197, 94, .1);
       color: var(--green);
-      border-color: rgba(52, 211, 153, .35);
+      border-color: rgba(34, 197, 94, .25)
     }
 
-    .act-btn.active-waiting {
-      background: rgba(96, 165, 250, .15);
+    .abt.a-waiting {
+      background: rgba(59, 130, 246, .1);
       color: var(--blue);
-      border-color: rgba(96, 165, 250, .35);
+      border-color: rgba(59, 130, 246, .25)
     }
 
-    .act-btn.active-rdv {
-      background: rgba(251, 146, 60, .15);
+    .abt.a-rdv {
+      background: rgba(249, 115, 22, .1);
       color: var(--orange);
-      border-color: rgba(251, 146, 60, .35);
+      border-color: rgba(249, 115, 22, .25)
     }
 
-    .act-btn.active-stage {
-      background: rgba(167, 139, 250, .15);
+    .abt.a-stage {
+      background: rgba(139, 92, 246, .1);
       color: var(--violet);
-      border-color: rgba(167, 139, 250, .35);
+      border-color: rgba(139, 92, 246, .25)
     }
 
-    .act-btn.active-refused {
-      background: rgba(248, 113, 113, .15);
+    .abt.a-refused {
+      background: rgba(239, 68, 68, .1);
       color: var(--red);
-      border-color: rgba(248, 113, 113, .35);
+      border-color: rgba(239, 68, 68, .25)
     }
 
     /* NOTE */
     .note-wrap {
-      padding: 10px 18px 14px;
-      position: relative;
+      padding: 10px 16px 14px;
+      position: relative
     }
 
     .note-ta {
       width: 100%;
-      background: rgba(255, 255, 255, .03);
+      background: rgba(255, 255, 255, .02);
       border: 1px solid var(--border);
-      border-radius: 9px;
+      border-radius: 8px;
       color: var(--txt);
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       font-size: 12px;
-      padding: 8px 11px;
+      padding: 8px 10px;
       resize: vertical;
-      min-height: 52px;
+      min-height: 50px;
       outline: none;
-      transition: border-color .2s;
+      transition: border-color .2s
     }
 
     .note-ta:focus {
-      border-color: rgba(232, 184, 75, .35);
-    }
-
-    .note-ta.syncing {
-      border-color: rgba(232, 184, 75, .4);
-    }
-
-    .note-ta.synced {
-      border-color: rgba(52, 211, 153, .4);
+      border-color: rgba(255, 107, 53, .3)
     }
 
     .note-ind {
       position: absolute;
-      right: 24px;
+      right: 22px;
       bottom: 20px;
       font-size: 10px;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'DM Mono', monospace;
       background: var(--bg3);
       padding: 2px 7px;
-      border-radius: 6px;
+      border-radius: 5px;
       border: 1px solid var(--border);
       opacity: 0;
       transition: opacity .3s;
       pointer-events: none;
-      color: var(--txt2);
+      color: var(--txt2)
     }
 
     .note-ind.show {
-      opacity: 1;
+      opacity: 1
     }
 
     .note-ind.ok {
       color: var(--green);
-      border-color: rgba(52, 211, 153, .3);
+      border-color: rgba(34, 197, 94, .25)
     }
 
     .note-ind.saving {
-      color: var(--gold);
-      border-color: rgba(232, 184, 75, .3);
+      color: var(--orange);
+      border-color: rgba(249, 115, 22, .25)
     }
 
     /* ── KANBAN ── */
-    .kanban-board {
+    .kanban {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px
     }
 
-    .kanban-col {
+    .kcol {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
+      border-radius: 14px;
+      padding: 14px
     }
 
-    .kanban-col-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 12px;
+    .khead {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: .06em;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 8px
     }
 
-    .kanban-count {
-      background: rgba(255, 255, 255, .08);
-      padding: 2px 8px;
-      border-radius: 10px;
+    .kcnt {
+      background: rgba(255, 255, 255, .06);
+      padding: 1px 8px;
+      border-radius: 9px;
       font-size: 11px;
       color: var(--txt2);
+      font-family: 'DM Mono', monospace;
+      font-weight: 400
     }
 
-    .kanban-item {
+    .kitem {
       background: var(--bg3);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 13px;
-      margin-bottom: 8px;
+      border-radius: 9px;
+      padding: 10px 12px;
+      margin-bottom: 7px;
       cursor: pointer;
       transition: all .2s;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 600
     }
 
-    .kanban-item:hover {
-      border-color: var(--gold);
-      transform: translateX(3px);
+    .kitem:hover {
+      border-color: var(--accent);
+      transform: translateX(3px)
     }
 
-    .kanban-item-sub {
+    .kitem-sub {
       font-size: 11px;
       color: var(--txt2);
-      margin-top: 4px;
-      font-weight: 400;
+      margin-top: 3px;
+      font-weight: 400
+    }
+
+    .kempty {
+      font-size: 12px;
+      color: var(--txt2);
+      text-align: center;
+      padding: 12px
     }
 
     /* ── CHECKLIST ── */
     .checklist-wrap {
-      max-width: 680px;
+      max-width: 660px
     }
 
-    .progress-info {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 10px;
-    }
-
-    .progress-pct {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    .progress-bar-outer {
-      flex: 1;
-      height: 8px;
-      background: var(--bg3);
-      border-radius: 99px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .progress-bar-inner {
-      height: 100%;
-      background: linear-gradient(90deg, var(--gold), var(--gold2));
-      border-radius: 99px;
-      transition: width .5s cubic-bezier(.4, 0, .2, 1);
-    }
-
-    .checklist-item {
+    .prog-row {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 16px;
+      margin-bottom: 6px
+    }
+
+    .prog-pct {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500
+    }
+
+    .prog-outer {
+      flex: 1;
+      height: 7px;
+      background: var(--bg3);
+      border-radius: 99px;
+      overflow: hidden;
+      border: 1px solid var(--border)
+    }
+
+    .prog-inner {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 99px;
+      transition: width .5s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .prog-info {
+      font-size: 12px;
+      color: var(--txt2);
+      font-family: 'DM Mono', monospace
+    }
+
+    .chk-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 11px;
-      margin-bottom: 8px;
+      border-radius: 10px;
+      margin-bottom: 7px;
       cursor: pointer;
-      transition: all .2s;
+      transition: all .2s
     }
 
-    .checklist-item:hover {
-      border-color: var(--border2);
+    .chk-item:hover {
+      border-color: var(--border2)
     }
 
-    .checklist-item.done {
-      opacity: .55;
+    .chk-item.done {
+      opacity: .5
     }
 
-    .checklist-item.done .step-text {
+    .chk-item.done .chk-txt {
       text-decoration: line-through;
-      color: var(--txt2);
+      color: var(--txt2)
     }
 
-    .check-box {
+    .chk-box {
       width: 20px;
       height: 20px;
       border-radius: 6px;
@@ -1062,157 +1002,156 @@
       align-items: center;
       justify-content: center;
       font-size: 12px;
-      transition: all .2s;
+      transition: all .2s
     }
 
-    .checklist-item.done .check-box {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: #000;
+    .chk-item.done .chk-box {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff
     }
 
-    .step-text {
+    .chk-txt {
       flex: 1;
-      font-size: 14px;
+      font-size: 14px
     }
 
-    .del-step {
+    .del-chk {
       background: none;
       border: none;
       color: var(--txt2);
       cursor: pointer;
-      font-size: 14px;
+      font-size: 13px;
       opacity: .5;
-      transition: opacity .2s;
+      transition: opacity .2s
     }
 
-    .del-step:hover {
+    .del-chk:hover {
       opacity: 1;
-      color: var(--red);
+      color: var(--red)
     }
 
     /* ── OBJECTIFS ── */
     .obj-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 12px;
-      transition: border-color .2s;
+      border-radius: 13px;
+      padding: 18px;
+      margin-bottom: 10px;
+      transition: border-color .2s
     }
 
     .obj-card:hover {
-      border-color: var(--border2);
+      border-color: var(--border2)
     }
 
-    .obj-header {
+    .obj-hdr {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      gap: 10px
     }
 
     .obj-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 15px;
       font-weight: 700;
+      font-size: 15px
     }
 
     .obj-nums {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'DM Mono', monospace;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 500
     }
 
-    .obj-bar-outer {
+    .obj-bar-o {
       height: 7px;
       background: var(--bg3);
       border-radius: 99px;
       overflow: hidden;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border)
     }
 
-    .obj-bar-inner {
+    .obj-bar-i {
       height: 100%;
       border-radius: 99px;
-      transition: width .5s;
+      transition: width .5s
     }
 
     .obj-sub {
       margin-top: 6px;
       font-size: 11px;
-      color: var(--txt2);
+      color: var(--txt2)
     }
 
     /* ── RAPPELS ── */
-    .rappel-card {
+    .rp-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 14px 18px;
-      margin-bottom: 10px;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 9px;
       display: flex;
       align-items: center;
-      gap: 14px;
-      transition: border-color .2s;
+      gap: 12px;
+      transition: border-color .2s
     }
 
-    .rappel-card:hover {
-      border-color: var(--border2);
+    .rp-card:hover {
+      border-color: var(--border2)
     }
 
-    .rappel-card.fait {
-      opacity: .5;
+    .rp-card.fait {
+      opacity: .45
     }
 
-    .rappel-name {
+    .rp-name {
       font-weight: 600;
-      font-size: 14px;
+      font-size: 14px
     }
 
-    .rappel-date {
+    .rp-date {
       font-size: 12px;
       color: var(--txt2);
-      font-family: 'JetBrains Mono', monospace;
-      margin-top: 2px;
+      font-family: 'DM Mono', monospace;
+      margin-top: 2px
     }
 
     /* ── LOGS ── */
-    .log-entry {
+    .log-row {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      padding: 11px 16px;
+      gap: 10px;
+      padding: 10px 14px;
       border-bottom: 1px solid var(--border);
       font-size: 13px;
-      transition: background .15s;
+      transition: background .15s
     }
 
-    .log-entry:hover {
-      background: rgba(255, 255, 255, .02);
+    .log-row:hover {
+      background: rgba(255, 255, 255, .02)
     }
 
-    .log-time {
-      font-family: 'JetBrains Mono', monospace;
+    .log-t {
+      font-family: 'DM Mono', monospace;
       font-size: 11px;
       color: var(--txt2);
       flex-shrink: 0;
-      min-width: 135px;
+      min-width: 130px
     }
 
     .log-type {
       font-size: 10px;
-      padding: 2px 8px;
-      border-radius: 6px;
+      padding: 2px 7px;
+      border-radius: 5px;
       flex-shrink: 0;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .04em;
+      text-transform: uppercase
     }
 
     .log-msg {
       color: var(--txt);
-      line-height: 1.4;
+      line-height: 1.4
     }
 
     /* ── MODALS ── */
@@ -1221,16 +1160,16 @@
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, .85);
-      backdrop-filter: blur(8px);
-      z-index: 200;
+      backdrop-filter: blur(10px);
+      z-index: 300;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 20px
     }
 
     .overlay.open {
       display: flex;
-      animation: fadeIn .25s ease;
+      animation: fadeIn .2s ease
     }
 
     @keyframes fadeIn {
@@ -1246,19 +1185,19 @@
     .modal {
       background: var(--bg2);
       border: 1px solid var(--border2);
-      border-radius: 20px;
-      padding: 30px;
-      max-width: 580px;
+      border-radius: 18px;
+      padding: 26px;
+      max-width: 560px;
       width: 100%;
-      max-height: 88vh;
+      max-height: 90vh;
       overflow-y: auto;
       position: relative;
-      animation: modalSlide .3s cubic-bezier(.34, 1.56, .64, 1);
+      animation: slideUp .3s cubic-bezier(.34, 1.56, .64, 1)
     }
 
-    @keyframes modalSlide {
+    @keyframes slideUp {
       from {
-        transform: translateY(40px) scale(.93);
+        transform: translateY(30px) scale(.94);
         opacity: 0
       }
 
@@ -1269,395 +1208,331 @@
     }
 
     .modal-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--gold);
-      margin-bottom: 24px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: .03em;
+      color: var(--accent);
+      margin-bottom: 20px
     }
 
     .modal-close {
       position: absolute;
-      top: 18px;
-      right: 20px;
+      top: 16px;
+      right: 18px;
       background: none;
       border: none;
       color: var(--txt2);
-      font-size: 20px;
+      font-size: 18px;
       cursor: pointer;
-      transition: color .2s;
+      transition: color .2s
     }
 
     .modal-close:hover {
-      color: var(--red);
+      color: var(--red)
     }
 
-    .field-group {
-      margin-bottom: 14px;
+    .fg {
+      margin-bottom: 13px
     }
 
-    .field-label {
+    .fg label {
       display: block;
       font-size: 11px;
       font-weight: 700;
       color: var(--txt2);
       text-transform: uppercase;
-      letter-spacing: .06em;
-      margin-bottom: 7px;
+      letter-spacing: .05em;
+      margin-bottom: 6px
     }
 
-    .field-input,
-    .field-select,
-    .field-ta {
+    .fi,
+    .fs,
+    .fta {
       width: 100%;
       background: var(--bg3);
       border: 1px solid var(--border2);
-      border-radius: 10px;
+      border-radius: 9px;
       color: var(--txt);
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       font-size: 14px;
-      padding: 11px 14px;
+      padding: 10px 13px;
       outline: none;
-      transition: border-color .2s;
+      transition: border-color .2s
     }
 
-    .field-input:focus,
-    .field-select:focus,
-    .field-ta:focus {
-      border-color: rgba(232, 184, 75, .5);
+    .fi:focus,
+    .fs:focus,
+    .fta:focus {
+      border-color: rgba(255, 107, 53, .4)
     }
 
-    .field-select option {
-      background: var(--bg2);
+    .fs option {
+      background: var(--bg2)
     }
 
-    .field-ta {
+    .fta {
       resize: vertical;
-      min-height: 80px;
+      min-height: 76px
     }
 
-    .fields-row {
+    .frow {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 10px
     }
 
-    .horaires-editor {
+    @media(max-width:480px) {
+      .frow {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .hor-ed {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-      gap: 8px;
-      margin-top: 8px;
+      grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+      gap: 7px;
+      margin-top: 6px
     }
 
-    .horaire-row label {
+    .hor-row label {
       font-size: 11px;
       color: var(--txt2);
       font-weight: 700;
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 3px
     }
 
-    .horaire-row input {
+    .hor-row input {
       width: 100%;
       background: var(--bg3);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 7px;
       color: var(--txt);
       font-size: 12px;
-      padding: 6px 8px;
+      padding: 5px 8px;
       outline: none;
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color .2s
     }
 
-    .horaire-row input:focus {
-      border-color: var(--gold);
+    .hor-row input:focus {
+      border-color: var(--accent)
+    }
+
+    .modal-acts {
+      display: flex;
+      gap: 8px;
+      margin-top: 18px;
+      flex-wrap: wrap
     }
 
     /* SYNC OVERLAY */
-    .sync-overlay {
+    .sync-ov {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, .75);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, .8);
+      backdrop-filter: blur(12px);
       z-index: 500;
       align-items: center;
-      justify-content: center;
+      justify-content: center
     }
 
-    .sync-overlay.open {
+    .sync-ov.open {
       display: flex;
-      animation: fadeIn .25s;
+      animation: fadeIn .2s
     }
 
     .sync-card {
       background: var(--bg2);
       border: 1px solid var(--border2);
-      border-radius: 24px;
-      padding: 50px 58px;
+      border-radius: 22px;
+      padding: 44px 52px;
       text-align: center;
-      max-width: 440px;
+      max-width: 400px;
       width: 100%;
       box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
-      animation: modalSlide .35s cubic-bezier(.34, 1.56, .64, 1);
+      animation: slideUp .35s cubic-bezier(.34, 1.56, .64, 1)
     }
 
-    .sync-spinner {
-      width: 72px;
-      height: 72px;
-      border: 3px solid rgba(232, 184, 75, .15);
-      border-top-color: var(--gold);
+    .spin {
+      width: 64px;
+      height: 64px;
+      border: 3px solid rgba(255, 107, 53, .15);
+      border-top-color: var(--accent);
       border-radius: 50%;
-      animation: spin .9s linear infinite;
-      margin: 0 auto 24px;
+      animation: rotate .8s linear infinite;
+      margin: 0 auto 20px
     }
 
-    .sync-icon {
-      width: 72px;
-      height: 72px;
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .sync-ico {
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 24px;
-      font-size: 34px;
+      margin: 0 auto 20px;
+      font-size: 30px
     }
 
-    .sync-icon.success {
-      background: rgba(52, 211, 153, .1);
-      border: 2px solid rgba(52, 211, 153, .35);
-      animation: checkmark .5s cubic-bezier(.34, 1.56, .64, 1) forwards;
+    .sync-ico.ok {
+      background: rgba(34, 197, 94, .1);
+      border: 2px solid rgba(34, 197, 94, .3);
+      animation: pop .5s cubic-bezier(.34, 1.56, .64, 1)
     }
 
-    .sync-icon.error {
-      background: rgba(248, 113, 113, .1);
-      border: 2px solid rgba(248, 113, 113, .35);
+    .sync-ico.err {
+      background: rgba(239, 68, 68, .1);
+      border: 2px solid rgba(239, 68, 68, .3)
     }
 
-    @keyframes checkmark {
-      0% {
-        transform: scale(0)rotate(-10deg);
+    @keyframes pop {
+      from {
+        transform: scale(0);
         opacity: 0
       }
 
-      60% {
-        transform: scale(1.25)rotate(5deg)
-      }
-
-      100% {
-        transform: scale(1)rotate(0);
+      to {
+        transform: scale(1);
         opacity: 1
       }
     }
 
     .sync-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 24px;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .sync-title.loading {
-      color: var(--gold);
-    }
-
-    .sync-title.success {
-      background: linear-gradient(135deg, var(--green), #00e676);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .sync-title.error {
-      color: var(--red);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: .04em;
+      margin-bottom: 8px
     }
 
     .sync-sub {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--txt2);
-      line-height: 1.6;
-      margin-bottom: 8px;
+      line-height: 1.6
     }
 
     .sync-stats {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       justify-content: center;
-      margin-top: 18px;
+      margin-top: 16px
     }
 
-    .sync-stat {
+    .sstat {
       background: rgba(255, 255, 255, .04);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 18px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      text-align: center;
+      border-radius: 9px;
+      padding: 9px 16px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      text-align: center
     }
 
-    .sync-stat-num {
+    .sstat-n {
       font-size: 22px;
-      color: var(--gold);
+      color: var(--accent);
       font-weight: 700;
+      line-height: 1
     }
 
     .sync-close {
-      margin-top: 26px;
-      padding: 10px 32px;
-      border-radius: 10px;
+      margin-top: 22px;
+      padding: 9px 28px;
+      border-radius: 9px;
       background: var(--bg3);
       border: 1px solid var(--border2);
       color: var(--txt2);
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: all .2s;
+      transition: all .2s
     }
 
     .sync-close:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+      border-color: var(--accent);
+      color: var(--accent)
     }
 
-    .sync-contact {
-      margin-top: 20px;
-      padding: 16px;
-      background: rgba(248, 113, 113, .06);
-      border: 1px solid rgba(248, 113, 113, .18);
-      border-radius: 12px;
+    .err-contact {
+      margin-top: 16px;
+      padding: 14px;
+      background: rgba(239, 68, 68, .06);
+      border: 1px solid rgba(239, 68, 68, .15);
+      border-radius: 11px;
       font-size: 13px;
       color: var(--txt2);
-      line-height: 1.7;
+      line-height: 1.7
     }
 
-    .sync-contact a {
-      color: var(--gold);
-      text-decoration: none;
+    .err-contact a {
+      color: var(--accent);
       font-weight: 600;
-    }
-
-    /* SECTION TITLE */
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--gold);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section-title .sub {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      color: var(--txt2);
-      font-weight: 400;
+      text-decoration: none
     }
 
     /* TOAST */
     .toast {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
+      bottom: calc(var(--mob-nav) + 12px);
+      right: 16px;
       background: var(--bg2);
-      border: 1px solid var(--gold);
+      border: 1px solid var(--accent);
       color: var(--txt);
-      padding: 12px 22px;
-      border-radius: 12px;
+      padding: 11px 18px;
+      border-radius: 11px;
       font-size: 13px;
       font-weight: 600;
       z-index: 999;
-      transform: translateY(80px);
+      transform: translateY(70px);
       opacity: 0;
       transition: all .3s cubic-bezier(.4, 0, .2, 1);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, .5);
-      max-width: 290px;
+      max-width: 270px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .5)
     }
 
     .toast.show {
       transform: none;
-      opacity: 1;
+      opacity: 1
     }
 
     /* EMPTY */
     .empty {
       text-align: center;
-      padding: 60px 20px;
+      padding: 50px 20px;
       color: var(--txt2);
-      grid-column: 1/-1;
+      grid-column: 1/-1
     }
 
     .empty .big {
-      font-size: 48px;
-      margin-bottom: 14px;
+      font-size: 44px;
+      margin-bottom: 12px
     }
 
     /* SCROLLBAR */
     ::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
+      width: 4px;
+      height: 4px
     }
 
     ::-webkit-scrollbar-track {
-      background: transparent;
+      background: transparent
     }
 
     ::-webkit-scrollbar-thumb {
       background: var(--border2);
-      border-radius: 3px;
+      border-radius: 2px
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: var(--gold);
-    }
-
-    /* RESPONSIVE */
-    @media(max-width: 768px) {
-      .header {
-        padding: 0 16px;
-        gap: 12px;
-      }
-
-      .header-center {
-        display: none;
-      }
-
-      .nav-pills {
-        display: none;
-      }
-
-      .page {
-        padding: 16px;
-      }
-
-      .cards-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-banner {
-        flex-direction: column;
-        padding: 24px;
-      }
-
-      .fields-row {
-        grid-template-columns: 1fr;
-      }
-
-      .stats-strip {
-        gap: 8px;
-      }
-
-      .stat-chip {
-        min-width: 80px;
-        padding: 12px;
-      }
-    }
-
-    .fade-in {
-      animation: fadeSlide .35s ease;
+      background: var(--accent)
     }
   </style>
 </head>
@@ -1665,267 +1540,243 @@
 <body>
 
   <!-- SYNC OVERLAY -->
-  <div class="sync-overlay" id="syncOverlay">
+  <div class="sync-ov" id="syncOv">
     <div class="sync-card" id="syncCard"></div>
   </div>
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="logo-wrap">
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="logo">
       <div class="logo-icon">🎓</div>
       <div>
-        <div class="logo-text">Recherche de Stage</div>
-        <div class="logo-sub">Valenciennes · <span id="nb-etabs">14</span> étab.</div>
+        <div class="logo-name">STAGE VAL.</div>
+        <div class="logo-sub" id="nb-etabs-top">14 établissements</div>
       </div>
     </div>
-
-    <div class="header-center">
-      <div class="nav-pills">
-        <button class="nav-pill active" onclick="showTab('etablissements',this)">🏢 Établissements</button>
-        <button class="nav-pill" onclick="showTab('kanban',this)">📊 Kanban</button>
-        <button class="nav-pill" onclick="showTab('checklist',this)">✅ Checklist</button>
-        <button class="nav-pill" onclick="showTab('objectifs',this)">🎯 Objectifs</button>
-        <button class="nav-pill" onclick="showTab('rappels',this)">⏰ Rappels</button>
-        <button class="nav-pill" onclick="showTab('logs',this)">📋 Journal</button>
+    <div class="topbar-right">
+      <div class="fb-badge" id="fbBadge">
+        <div class="fb-dot"></div><span id="fbTxt">Firebase</span>
       </div>
-    </div>
-
-    <div class="header-right">
-      <div class="fb-pill" id="fbPill">
-        <div class="fb-dot"></div>
-        <span id="fbTxt">Firebase</span>
-      </div>
-      <button class="btn btn-sync" onclick="triggerSync()" id="syncBtn">
-        <span class="sync-ico" id="syncIco">🔄</span> Sync
-      </button>
-      <button class="btn btn-gold" onclick="openModal('addModal')">➕ Ajouter</button>
-      <a class="btn btn-admin" id="adminBtn" href="admin.html" target="_blank">⚙️ Admin</a>
-      <button class="btn btn-ghost" onclick="openRappelModal()">⏰</button>
+      <button class="btn btn-accent btn-sm" onclick="triggerSync()" id="syncBtn"><span id="syncIco">🔄</span>
+        Sync</button>
+      <button class="btn btn-ghost btn-sm" onclick="openModal('addModal')" style="display:none"
+        id="addBtnDesktop">➕</button>
     </div>
   </div>
 
-  <!-- ── PAGES ── -->
+  <!-- PAGES -->
 
   <!-- ÉTABLISSEMENTS -->
-  <div class="page active" id="page-etablissements">
-    <div class="hero-banner">
-      <div class="hero-emoji">🍽️</div>
-      <div class="hero-text">
-        <h1>Restaurants & Établissements</h1>
-        <p>Suivez vos démarches de recherche de stage en restauration à Valenciennes et Denain.<br>Gérez statuts, notes
-          et rappels en temps réel.</p>
-      </div>
+  <div class="page active" id="page-etab">
+    <div class="hero">
+      <h1>Restaurants<br>& Établissements</h1>
+      <p>Suivi de recherche de stage à Valenciennes et Denain. Statuts, notes et rappels en temps réel.</p>
     </div>
-
-    <div class="stats-strip">
-      <div class="stat-chip">
-        <div class="stat-chip-num" id="s-total" style="color:var(--txt)">0</div>
-        <div class="stat-chip-label">Total</div>
+    <div class="stats" id="stats-strip">
+      <div class="stat">
+        <div class="stat-n" id="s-total" style="color:var(--txt)">0</div>
+        <div class="stat-l">Total</div>
       </div>
-      <div class="stat-chip">
-        <div class="stat-chip-num" id="s-todo" style="color:var(--gold)">0</div>
-        <div class="stat-chip-label">À contacter</div>
+      <div class="stat">
+        <div class="stat-n" id="s-todo" style="color:var(--gold)">0</div>
+        <div class="stat-l">À contacter</div>
       </div>
-      <div class="stat-chip">
-        <div class="stat-chip-num" id="s-done" style="color:var(--green)">0</div>
-        <div class="stat-chip-label">Contacté</div>
+      <div class="stat">
+        <div class="stat-n" id="s-done" style="color:var(--green)">0</div>
+        <div class="stat-l">Contacté</div>
       </div>
-      <div class="stat-chip">
-        <div class="stat-chip-num" id="s-waiting" style="color:var(--blue)">0</div>
-        <div class="stat-chip-label">En attente</div>
+      <div class="stat">
+        <div class="stat-n" id="s-waiting" style="color:var(--blue)">0</div>
+        <div class="stat-l">En attente</div>
       </div>
-      <div class="stat-chip">
-        <div class="stat-chip-num" id="s-rdv" style="color:var(--orange)">0</div>
-        <div class="stat-chip-label">RDV pris</div>
+      <div class="stat">
+        <div class="stat-n" id="s-rdv" style="color:var(--orange)">0</div>
+        <div class="stat-l">RDV pris</div>
       </div>
-      <div class="stat-chip">
-        <div class="stat-chip-num" id="s-stage" style="color:var(--violet)">0</div>
-        <div class="stat-chip-label">En stage</div>
+      <div class="stat">
+        <div class="stat-n" id="s-stage" style="color:var(--violet)">0</div>
+        <div class="stat-l">En stage</div>
       </div>
-      <div class="stat-chip">
-        <div class="stat-chip-num" id="s-refused" style="color:var(--red)">0</div>
-        <div class="stat-chip-label">Refusé</div>
+      <div class="stat">
+        <div class="stat-n" id="s-refused" style="color:var(--red)">0</div>
+        <div class="stat-l">Refusé</div>
       </div>
+      <div class="stat"><button class="btn btn-accent" onclick="openModal('addModal')"
+          style="width:100%;justify-content:center">➕ Ajouter</button></div>
     </div>
-
-    <div class="filter-bar">
-      <button class="filter-tab active" onclick="setFilter('all',this)">Tous</button>
-      <button class="filter-tab" onclick="setFilter('todo',this)">📋 À contacter</button>
-      <button class="filter-tab" onclick="setFilter('done',this)">✅ Contacté</button>
-      <button class="filter-tab" onclick="setFilter('waiting',this)">⏳ En attente</button>
-      <button class="filter-tab" onclick="setFilter('rdv',this)">📅 RDV pris</button>
-      <button class="filter-tab" onclick="setFilter('stage',this)">🏆 En stage</button>
-      <button class="filter-tab" onclick="setFilter('refused',this)">❌ Refusé</button>
-      <div class="search-box" style="margin-left:auto">
-        <span style="opacity:.4">🔍</span>
-        <input type="text" id="searchInput" placeholder="Rechercher..." oninput="renderCards()">
-      </div>
+    <div class="filters" id="filter-tabs">
+      <button class="ftab active" onclick="setFilter('all',this)">Tous</button>
+      <button class="ftab" onclick="setFilter('todo',this)">📋 À contacter</button>
+      <button class="ftab" onclick="setFilter('done',this)">✅ Contacté</button>
+      <button class="ftab" onclick="setFilter('waiting',this)">⏳ En attente</button>
+      <button class="ftab" onclick="setFilter('rdv',this)">📅 RDV pris</button>
+      <button class="ftab" onclick="setFilter('stage',this)">🏆 Stage</button>
+      <button class="ftab" onclick="setFilter('refused',this)">❌ Refusé</button>
     </div>
-    <div class="cat-row" id="cat-row"></div>
-    <div id="cards-container" class="fade-in"></div>
+    <div class="search-wrap"><input type="text" id="searchInput" placeholder="Rechercher un établissement..."
+        oninput="renderCards()"></div>
+    <div id="cards-container"></div>
   </div>
 
   <!-- KANBAN -->
   <div class="page" id="page-kanban">
-    <div class="section-title">📊 Vue Kanban <span class="sub">Aperçu par statut</span></div>
-    <div class="kanban-board" id="kanban-board"></div>
+    <div class="sec-title">Kanban</div>
+    <div class="sec-sub">Vue d'ensemble par statut</div>
+    <div class="kanban" id="kanban-board"></div>
   </div>
 
   <!-- CHECKLIST -->
   <div class="page" id="page-checklist">
-    <div class="section-title">✅ Ma Checklist</div>
+    <div class="sec-title">Checklist</div>
+    <div class="sec-sub">Vos étapes de recherche de stage</div>
     <div class="checklist-wrap">
-      <div class="progress-info">
-        <div class="progress-pct" id="check-pct">0%</div>
-        <div class="progress-bar-outer">
-          <div class="progress-bar-inner" id="check-bar" style="width:0%"></div>
+      <div class="prog-row">
+        <div class="prog-pct" id="chk-pct">0%</div>
+        <div class="prog-outer">
+          <div class="prog-inner" id="chk-bar" style="width:0%"></div>
         </div>
-        <div style="font-size:12px;color:var(--txt2)" id="check-count">0/0</div>
+        <div class="prog-info" id="chk-cnt">0/0</div>
       </div>
-      <div id="checklist-list" style="margin-top:18px"></div>
-      <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn btn-gold" onclick="openModal('addStepModal')">➕ Ajouter une étape</button>
-        <button class="btn btn-outline" onclick="resetChecklist()">🔄 Réinitialiser</button>
+      <div id="chk-list" style="margin-top:16px"></div>
+      <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+        <button class="btn btn-accent" onclick="openModal('addStepModal')">➕ Ajouter étape</button>
+        <button class="btn btn-ghost" onclick="resetChecklist()">🔄 Réinitialiser</button>
       </div>
     </div>
   </div>
 
   <!-- OBJECTIFS -->
   <div class="page" id="page-objectifs">
-    <div class="section-title">🎯 Mes Objectifs</div>
-    <div id="objectifs-list"></div>
-    <button class="btn btn-gold" onclick="openModal('addObjModal')">➕ Nouvel objectif</button>
+    <div class="sec-title">Objectifs</div>
+    <div class="sec-sub">Suivez votre progression</div>
+    <div id="obj-list"></div>
+    <button class="btn btn-accent" onclick="openModal('addObjModal')">➕ Nouvel objectif</button>
   </div>
 
   <!-- RAPPELS -->
   <div class="page" id="page-rappels">
-    <div class="section-title">⏰ Mes Rappels</div>
-    <div id="rappels-list"></div>
-    <button class="btn btn-gold" onclick="openRappelModal()">➕ Nouveau rappel</button>
+    <div class="sec-title">Rappels</div>
+    <div class="sec-sub">Vos relances planifiées</div>
+    <div id="rp-list"></div>
+    <button class="btn btn-accent" onclick="openRappelModal()">➕ Nouveau rappel</button>
   </div>
 
-  <!-- JOURNAL -->
-  <div class="page" id="page-logs">
-    <div class="section-title">📋 Journal d'activité</div>
-    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
-      <button class="filter-tab active" onclick="setLogFilter('all',this)">Tous</button>
-      <button class="filter-tab" onclick="setLogFilter('statut',this)">Statuts</button>
-      <button class="filter-tab" onclick="setLogFilter('note',this)">Notes</button>
-      <button class="filter-tab" onclick="setLogFilter('etab',this)">Établissements</button>
-      <button class="btn btn-outline" style="margin-left:auto;padding:6px 14px;font-size:12px" onclick="clearLogs()">🗑️
-        Vider</button>
-    </div>
-    <div id="logs-list"
-      style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden"></div>
-  </div>
+  <!-- ── BOTTOM NAV (MOBILE & DESKTOP) ── -->
+  <nav class="mob-nav">
+    <button class="mob-nav-item active" onclick="showTab('etab',this)">
+      <span class="nav-ico">🏢</span>
+      <span>Établ.</span>
+    </button>
+    <button class="mob-nav-item" onclick="showTab('kanban',this)">
+      <span class="nav-ico">📊</span>
+      <span>Kanban</span>
+    </button>
+    <button class="mob-nav-item" onclick="showTab('checklist',this)">
+      <span class="nav-ico">✅</span>
+      <span>Checklist</span>
+    </button>
+    <button class="mob-nav-item" onclick="showTab('objectifs',this)">
+      <span class="nav-ico">🎯</span>
+      <span>Objectifs</span>
+    </button>
+    <button class="mob-nav-item" onclick="showTab('rappels',this)">
+      <span class="nav-ico">⏰</span>
+      <span>Rappels</span>
+    </button>
+    <button class="mob-nav-item" onclick="window.location.href='admin.html'">
+      <span class="nav-ico">⚙️</span>
+      <span>Admin</span>
+    </button>
+  </nav>
 
-  <!-- ══ MODALS ══ -->
+  <!-- ── MODALS ── -->
   <!-- ADD/EDIT -->
   <div class="overlay" id="addModal">
     <div class="modal">
       <button class="modal-close" onclick="closeModal('addModal')">✕</button>
-      <div class="modal-title" id="addModal-title">➕ Ajouter un établissement</div>
-      <div class="fields-row">
-        <div class="field-group"><label class="field-label">Nom *</label><input class="field-input" id="f-nom"
-            placeholder="Nom du restaurant..."></div>
-        <div class="field-group"><label class="field-label">Type *</label><input class="field-input" id="f-type"
-            placeholder="Restaurant, Brasserie..."></div>
+      <div class="modal-title" id="addModal-title">Ajouter un établissement</div>
+      <div class="frow">
+        <div class="fg"><label>Nom *</label><input class="fi" id="f-nom" placeholder="Nom du restaurant..."></div>
+        <div class="fg"><label>Type *</label><input class="fi" id="f-type" placeholder="Restaurant, Brasserie..."></div>
       </div>
-      <div class="field-group"><label class="field-label">Adresse</label><input class="field-input" id="f-adresse"
-          placeholder="Adresse complète..."></div>
-      <div class="fields-row">
-        <div class="field-group"><label class="field-label">Téléphone</label><input class="field-input" id="f-tel"
-            placeholder="03 27 ..."></div>
-        <div class="field-group"><label class="field-label">Note Google (/5)</label><input class="field-input"
-            type="number" id="f-note" min="1" max="5" step="0.1" placeholder="4.8"></div>
+      <div class="fg"><label>Adresse</label><input class="fi" id="f-adresse" placeholder="Adresse complète..."></div>
+      <div class="frow">
+        <div class="fg"><label>Téléphone</label><input class="fi" id="f-tel" placeholder="03 27 ..."></div>
+        <div class="fg"><label>Note Google (/5)</label><input class="fi" type="number" id="f-note" min="1" max="5"
+            step="0.1" placeholder="4.8"></div>
       </div>
-      <div class="fields-row">
-        <div class="field-group"><label class="field-label">Priorité</label>
-          <select class="field-select" id="f-priorite">
+      <div class="frow">
+        <div class="fg"><label>Priorité</label><select class="fs" id="f-priorite">
             <option value="haute">⚡ Haute</option>
             <option value="moyenne" selected>Moyenne</option>
             <option value="basse">Basse</option>
-          </select>
-        </div>
-        <div class="field-group"><label class="field-label">Statut</label>
-          <select class="field-select" id="f-statut">
+          </select></div>
+        <div class="fg"><label>Statut</label><select class="fs" id="f-statut">
             <option value="todo">📋 À contacter</option>
             <option value="done">✅ Contacté</option>
             <option value="waiting">⏳ En attente</option>
             <option value="rdv">📅 RDV pris</option>
             <option value="stage">🏆 En stage</option>
             <option value="refused">❌ Refusé</option>
-          </select>
-        </div>
+          </select></div>
       </div>
-      <div class="field-group"><label class="field-label">Lien Google Maps</label><input class="field-input" id="f-maps"
+      <div class="fg"><label>Lien Google Maps</label><input class="fi" id="f-maps"
           placeholder="https://maps.google.com/?q=..."></div>
-      <div class="fields-row">
-        <div class="field-group"><label class="field-label">Site web</label><input class="field-input" id="f-website"
-            placeholder="https://..."></div>
-        <div class="field-group"><label class="field-label">Réseaux sociaux</label><input class="field-input"
-            id="f-social" placeholder="https://instagram.com/..."></div>
+      <div class="frow">
+        <div class="fg"><label>Site web</label><input class="fi" id="f-website" placeholder="https://..."></div>
+        <div class="fg"><label>Réseaux sociaux</label><input class="fi" id="f-social"
+            placeholder="https://instagram.com/..."></div>
       </div>
-      <div class="field-group">
-        <label class="field-label">Catégories</label>
-        <div id="f-cats-checkboxes" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"></div>
+      <div class="fg"><label>Horaires</label>
+        <div class="hor-ed" id="f-horaires"></div>
       </div>
-      <div class="field-group">
-        <label class="field-label">Horaires</label>
-        <div class="horaires-editor" id="f-horaires"></div>
-      </div>
-      <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
-        <button class="btn btn-gold" onclick="saveEtab()">💾 Enregistrer</button>
-        <button class="btn btn-outline" onclick="closeModal('addModal')">Annuler</button>
+      <div class="modal-acts">
+        <button class="btn btn-accent" onclick="saveEtab()">💾 Enregistrer</button>
+        <button class="btn btn-ghost" onclick="closeModal('addModal')">Annuler</button>
       </div>
     </div>
   </div>
 
   <!-- RAPPEL -->
   <div class="overlay" id="rappelModal">
-    <div class="modal" style="max-width:400px">
+    <div class="modal" style="max-width:380px">
       <button class="modal-close" onclick="closeModal('rappelModal')">✕</button>
-      <div class="modal-title">⏰ Nouveau rappel</div>
-      <div class="field-group"><label class="field-label">Établissement</label>
-        <select class="field-select" id="r-etab">
+      <div class="modal-title">Nouveau Rappel</div>
+      <div class="fg"><label>Établissement</label><select class="fs" id="r-etab">
           <option value="">— Choisir —</option>
-        </select>
+        </select></div>
+      <div class="fg"><label>Date du rappel</label><input class="fi" type="date" id="r-date"></div>
+      <div class="fg"><label>Note</label><textarea class="fta" id="r-note" placeholder="Motif du rappel..."></textarea>
       </div>
-      <div class="field-group"><label class="field-label">Date du rappel</label><input class="field-input" type="date"
-          id="r-date"></div>
-      <div class="field-group"><label class="field-label">Note</label><textarea class="field-ta" id="r-note"
-          placeholder="Motif du rappel..."></textarea></div>
-      <button class="btn btn-gold" onclick="saveRappel()">💾 Enregistrer</button>
+      <button class="btn btn-accent" onclick="saveRappel()">💾 Enregistrer</button>
     </div>
   </div>
 
   <!-- ADD STEP -->
   <div class="overlay" id="addStepModal">
-    <div class="modal" style="max-width:400px">
+    <div class="modal" style="max-width:380px">
       <button class="modal-close" onclick="closeModal('addStepModal')">✕</button>
-      <div class="modal-title">➕ Nouvelle étape</div>
-      <div class="field-group"><label class="field-label">Description</label><input class="field-input"
-          id="new-step-txt" placeholder="Décrivez l'étape..."></div>
-      <button class="btn btn-gold" onclick="addStepModal()">💾 Ajouter</button>
+      <div class="modal-title">Nouvelle Étape</div>
+      <div class="fg"><label>Description</label><input class="fi" id="new-step-txt" placeholder="Décrivez l'étape...">
+      </div>
+      <button class="btn btn-accent" onclick="addStepFromModal()">💾 Ajouter</button>
     </div>
   </div>
 
   <!-- ADD OBJ -->
   <div class="overlay" id="addObjModal">
-    <div class="modal" style="max-width:400px">
+    <div class="modal" style="max-width:380px">
       <button class="modal-close" onclick="closeModal('addObjModal')">✕</button>
-      <div class="modal-title">🎯 Nouvel objectif</div>
-      <div class="field-group"><label class="field-label">Titre</label><input class="field-input" id="obj-titre"
-          placeholder="Ex: Contacter 10 restaurants"></div>
-      <div class="fields-row">
-        <div class="field-group"><label class="field-label">Cible</label><input class="field-input" type="number"
-            id="obj-cible" value="10" min="1"></div>
-        <div class="field-group"><label class="field-label">Actuel</label><input class="field-input" type="number"
-            id="obj-actuel" value="0" min="0"></div>
+      <div class="modal-title">Nouvel Objectif</div>
+      <div class="fg"><label>Titre</label><input class="fi" id="obj-titre" placeholder="Ex: Contacter 10 restaurants">
       </div>
-      <div class="field-group"><label class="field-label">Couleur</label><input class="field-input" type="color"
-          id="obj-color" value="#e8b84b" style="height:42px;padding:4px"></div>
-      <button class="btn btn-gold" onclick="saveObj()">💾 Enregistrer</button>
+      <div class="frow">
+        <div class="fg"><label>Cible</label><input class="fi" type="number" id="obj-cible" value="10" min="1"></div>
+        <div class="fg"><label>Actuel</label><input class="fi" type="number" id="obj-actuel" value="0" min="0"></div>
+      </div>
+      <div class="fg"><label>Couleur</label><input class="fi" type="color" id="obj-color" value="#ff6b35"
+          style="height:42px;padding:4px"></div>
+      <button class="btn btn-accent" onclick="saveObj()">💾 Enregistrer</button>
     </div>
   </div>
 
@@ -1935,7 +1786,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getDatabase, ref, update, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-    const firebaseConfig = {
+    const fbConfig = {
       apiKey: "AIzaSyCzlfk8_XYGSbIEHYttRLxSidS_mL_kqeI",
       authDomain: "recherche-de-stage-valencienne.firebaseapp.com",
       projectId: "recherche-de-stage-valencienne",
@@ -1944,162 +1795,148 @@
       appId: "1:916351919741:web:4d4e4233ee9b228c187314",
       databaseURL: "https://recherche-de-stage-valencienne-default-rtdb.europe-west1.firebasedatabase.app"
     };
-    const app = initializeApp(firebaseConfig);
+    const app = initializeApp(fbConfig);
     const db = getDatabase(app);
+
     const DAYS = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 
     window.ETABLISSEMENTS = [
-      { id: 1, nom: "Les Canonniers", adresse: "12 Pl. d'Armes, 59300 Valenciennes", tel: "06 51 63 32 32", type: "Restaurant", note: 4.9, priorite: "haute", categories: [], maps: "https://maps.google.com/?q=Les+Canonniers+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "Fermé" }, { j: "Mar", h: "11h45–14h15" }, { j: "Mer", h: "11h45–14h15" }, { j: "Jeu", h: "11h45–14h / 19h–22h30" }, { j: "Ven", h: "11h45–14h / 19h–22h30" }, { j: "Sam", h: "11h45–14h / 19h–22h30" }, { j: "Dim", h: "Fermé" }] },
-      { id: 2, nom: "Ô Saveurs", adresse: "3 Rue Henri Lemaire, 59300 Valenciennes", tel: "03 27 30 53 86", type: "Restaurant Traditionnel", note: 4.8, priorite: "haute", categories: [], maps: "https://maps.google.com/?q=O+Saveurs+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "12h–14h30 / 19h–22h30" }, { j: "Mar", h: "Fermé" }, { j: "Mer", h: "12h–14h30 / 19h–22h30" }, { j: "Jeu", h: "12h–14h30 / 19h–22h30" }, { j: "Ven", h: "12h–14h30 / 19h–22h30" }, { j: "Sam", h: "12h–14h30 / 19h–22h30" }, { j: "Dim", h: "12h–15h30" }] },
-      { id: 3, nom: "Café Brasserie L'Univers", adresse: "88 Rue de Villars, 59220 Denain", tel: "03 27 32 07 94", type: "Brasserie", note: null, priorite: "moyenne", categories: [], maps: "https://maps.google.com/?q=Cafe+Brasserie+Univers+Denain", website: "", social: "", horaires: [] },
-      { id: 4, nom: "Le 8 Restaurant Denain", adresse: "68 Rue Emile Zola, Centre NaturéO, Denain", tel: "03 27 19 03 75", type: "Restaurant", note: null, priorite: "moyenne", categories: [], maps: "https://maps.google.com/?q=Le+8+Restaurant+Denain", website: "", social: "", horaires: [] },
-      { id: 5, nom: "Chez Nous", adresse: "50 Rue Saint-Géry, 59300 Valenciennes", tel: "07 62 74 40 17", type: "Restaurant", note: null, priorite: "basse", categories: [], maps: "https://maps.google.com/?q=Chez+Nous+Valenciennes", website: "", social: "", horaires: [] },
-      { id: 6, nom: "Le Beaulieu", adresse: "177 Rue de Famars, 59300 Valenciennes", tel: "03 27 22 28 72", type: "Restaurant / Bar", note: 4.7, priorite: "haute", categories: [], maps: "https://maps.google.com/?q=Le+Beaulieu+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "10h–15h" }, { j: "Mar", h: "10h–15h" }, { j: "Mer", h: "10h–15h" }, { j: "Jeu", h: "10h–15h" }, { j: "Ven", h: "10h–15h / 18h30–22h" }, { j: "Sam", h: "10h–15h / 18h30–22h" }, { j: "Dim", h: "Fermé" }] },
-      { id: 7, nom: "Les Trois Gourmets", adresse: "53 Rue de Famars, 59300 Valenciennes", tel: "03 27 42 74 37", type: "Restaurant", note: 4.8, priorite: "haute", categories: [], maps: "https://maps.google.com/?q=Les+Trois+Gourmets+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "Fermé" }, { j: "Mar", h: "12h–14h" }, { j: "Mer", h: "12h–14h / 19h–22h" }, { j: "Jeu", h: "12h–14h / 19h–22h" }, { j: "Ven", h: "12h–14h / 19h–22h" }, { j: "Sam", h: "12h–14h / 19h–22h" }, { j: "Dim", h: "12h–14h30" }] },
-      { id: 8, nom: "L'Un des Sens", adresse: "16 Av. Albert 1er, 59300 Valenciennes", tel: "09 50 92 09 39", type: "Restaurant", note: 4.6, priorite: "moyenne", categories: [], maps: "https://maps.google.com/?q=Un+des+Sens+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "Fermé" }, { j: "Mar", h: "11h45–14h30 / 18h–21h30" }, { j: "Mer", h: "11h45–14h30" }, { j: "Jeu", h: "11h45–14h30 / 18h45–21h30" }, { j: "Ven", h: "11h45–14h30 / 18h45–22h30" }, { j: "Sam", h: "11h45–14h30 / 18h45–22h30" }, { j: "Dim", h: "Fermé" }] },
-      { id: 9, nom: "L'Instant Gourmand", adresse: "111 Rue du Quesnoy, 59300 Valenciennes", tel: "03 27 41 01 96", type: "Restaurant", note: 4.8, priorite: "haute", categories: [], maps: "https://maps.google.com/?q=Instant+Gourmand+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "Fermé" }, { j: "Mar", h: "12h–14h / 19h–21h30" }, { j: "Mer", h: "12h–14h" }, { j: "Jeu", h: "12h–14h / 19h–21h30" }, { j: "Ven", h: "12h–14h / 19h–21h30" }, { j: "Sam", h: "19h–21h30" }, { j: "Dim", h: "Fermé" }] },
-      { id: 10, nom: "La Bande à Nana", adresse: "42 Ter Rue de Paris, 59300 Valenciennes", tel: "03 27 44 08 66", type: "Restaurant / Bar", note: 4.8, priorite: "moyenne", categories: [], maps: "https://maps.google.com/?q=La+Bande+a+Nana+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "10h–16h30" }, { j: "Mar", h: "10h–16h30" }, { j: "Mer", h: "10h–16h30" }, { j: "Jeu", h: "10h–16h30" }, { j: "Ven", h: "10h–16h30" }, { j: "Sam", h: "10h–16h30" }, { j: "Dim", h: "Fermé" }] },
-      { id: 11, nom: "O Divine' Bar", adresse: "56 Av. du Sénateur Girard, 59300 Valenciennes", tel: "03 27 44 94 70", type: "Bar / Restaurant", note: 4.6, priorite: "moyenne", categories: [], maps: "https://maps.google.com/?q=O+Divine+Bar+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "11h–14h15" }, { j: "Mar", h: "10h–21h15" }, { j: "Mer", h: "10h–21h15" }, { j: "Jeu", h: "10h–21h15" }, { j: "Ven", h: "10h–22h15" }, { j: "Sam", h: "11h–14h / 18h30–22h15" }, { j: "Dim", h: "Fermé" }] },
-      { id: 12, nom: "Brasserie Le Président", adresse: "30 Pl. d'Armes, 59300 Valenciennes", tel: "03 27 46 26 01", type: "Brasserie / Bar", note: 3.9, priorite: "basse", categories: [], maps: "https://maps.google.com/?q=Brasserie+Le+President+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "8h30–00h" }, { j: "Mar", h: "8h30–00h" }, { j: "Mer", h: "8h30–00h" }, { j: "Jeu", h: "8h30–00h" }, { j: "Ven", h: "8h30–00h" }, { j: "Sam", h: "8h30–00h" }, { j: "Dim", h: "8h30–00h" }] },
-      { id: 13, nom: "La Galerie — Royal Hainaut", adresse: "6 Pl. de l'Hôpital Général, 59300 Valenciennes", tel: "03 27 35 15 15", type: "Restaurant Gastronomique", note: 4.2, priorite: "haute", categories: [], maps: "https://maps.google.com/?q=La+Galerie+Royal+Hainaut+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "12h–14h / 19h–21h30" }, { j: "Mar", h: "12h–14h / 19h–21h30" }, { j: "Mer", h: "12h–14h / 19h–21h30" }, { j: "Jeu", h: "12h–14h / 19h–21h30" }, { j: "Ven", h: "12h–14h / 19h–22h" }, { j: "Sam", h: "12h–14h / 19h–22h" }, { j: "Dim", h: "12h–13h30 / 19h–21h30" }] },
-      { id: 14, nom: "Le Bistrot D'en Face", adresse: "5 Av. d'Amsterdam, 59300 Valenciennes", tel: "06 83 06 93 08", type: "Restaurant / Brasserie", note: 4.4, priorite: "moyenne", categories: [], maps: "https://maps.google.com/?q=Le+Bistrot+Den+Face+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "12h–14h / 19h–22h" }, { j: "Mar", h: "12h–14h / 19h–22h" }, { j: "Mer", h: "12h–14h / 19h–22h" }, { j: "Jeu", h: "12h–14h / 19h–22h" }, { j: "Ven", h: "12h–14h30 / 19h–22h30" }, { j: "Sam", h: "12h–14h30 / 19h–22h30" }, { j: "Dim", h: "12h–14h30 / 19h–22h" }] },
+      { id: 1, nom: "Les Canonniers", adresse: "12 Pl. d'Armes, 59300 Valenciennes", tel: "06 51 63 32 32", type: "Restaurant", note: 4.9, priorite: "haute", maps: "https://maps.google.com/?q=Les+Canonniers+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "Fermé" }, { j: "Mar", h: "11h45–14h15" }, { j: "Mer", h: "11h45–14h15" }, { j: "Jeu", h: "11h45–14h / 19h–22h30" }, { j: "Ven", h: "11h45–14h / 19h–22h30" }, { j: "Sam", h: "11h45–14h / 19h–22h30" }, { j: "Dim", h: "Fermé" }] },
+      { id: 2, nom: "Ô Saveurs", adresse: "3 Rue Henri Lemaire, 59300 Valenciennes", tel: "03 27 30 53 86", type: "Restaurant Traditionnel", note: 4.8, priorite: "haute", maps: "https://maps.google.com/?q=O+Saveurs+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "12h–14h30 / 19h–22h30" }, { j: "Mar", h: "Fermé" }, { j: "Mer", h: "12h–14h30 / 19h–22h30" }, { j: "Jeu", h: "12h–14h30 / 19h–22h30" }, { j: "Ven", h: "12h–14h30 / 19h–22h30" }, { j: "Sam", h: "12h–14h30 / 19h–22h30" }, { j: "Dim", h: "12h–15h30" }] },
+      { id: 3, nom: "Café Brasserie L'Univers", adresse: "88 Rue de Villars, 59220 Denain", tel: "03 27 32 07 94", type: "Brasserie", note: null, priorite: "moyenne", maps: "https://maps.google.com/?q=Cafe+Brasserie+Univers+Denain", website: "", social: "", horaires: [] },
+      { id: 4, nom: "Le 8 Restaurant Denain", adresse: "68 Rue Emile Zola, Centre NaturéO, Denain", tel: "03 27 19 03 75", type: "Restaurant", note: null, priorite: "moyenne", maps: "https://maps.google.com/?q=Le+8+Restaurant+Denain", website: "", social: "", horaires: [] },
+      { id: 5, nom: "Chez Nous", adresse: "50 Rue Saint-Géry, 59300 Valenciennes", tel: "07 62 74 40 17", type: "Restaurant", note: null, priorite: "basse", maps: "https://maps.google.com/?q=Chez+Nous+Valenciennes", website: "", social: "", horaires: [] },
+      { id: 6, nom: "Le Beaulieu", adresse: "177 Rue de Famars, 59300 Valenciennes", tel: "03 27 22 28 72", type: "Restaurant / Bar", note: 4.7, priorite: "haute", maps: "https://maps.google.com/?q=Le+Beaulieu+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "10h–15h" }, { j: "Mar", h: "10h–15h" }, { j: "Mer", h: "10h–15h" }, { j: "Jeu", h: "10h–15h" }, { j: "Ven", h: "10h–15h / 18h30–22h" }, { j: "Sam", h: "10h–15h / 18h30–22h" }, { j: "Dim", h: "Fermé" }] },
+      { id: 7, nom: "Les Trois Gourmets", adresse: "53 Rue de Famars, 59300 Valenciennes", tel: "03 27 42 74 37", type: "Restaurant", note: 4.8, priorite: "haute", maps: "https://maps.google.com/?q=Les+Trois+Gourmets+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "Fermé" }, { j: "Mar", h: "12h–14h" }, { j: "Mer", h: "12h–14h / 19h–22h" }, { j: "Jeu", h: "12h–14h / 19h–22h" }, { j: "Ven", h: "12h–14h / 19h–22h" }, { j: "Sam", h: "12h–14h / 19h–22h" }, { j: "Dim", h: "12h–14h30" }] },
+      { id: 8, nom: "L'Un des Sens", adresse: "16 Av. Albert 1er, 59300 Valenciennes", tel: "09 50 92 09 39", type: "Restaurant", note: 4.6, priorite: "moyenne", maps: "https://maps.google.com/?q=Un+des+Sens+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "Fermé" }, { j: "Mar", h: "11h45–14h30 / 18h–21h30" }, { j: "Mer", h: "11h45–14h30" }, { j: "Jeu", h: "11h45–14h30 / 18h45–21h30" }, { j: "Ven", h: "11h45–14h30 / 18h45–22h30" }, { j: "Sam", h: "11h45–14h30 / 18h45–22h30" }, { j: "Dim", h: "Fermé" }] },
+      { id: 9, nom: "L'Instant Gourmand", adresse: "111 Rue du Quesnoy, 59300 Valenciennes", tel: "03 27 41 01 96", type: "Restaurant", note: 4.8, priorite: "haute", maps: "https://maps.google.com/?q=Instant+Gourmand+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "Fermé" }, { j: "Mar", h: "12h–14h / 19h–21h30" }, { j: "Mer", h: "12h–14h" }, { j: "Jeu", h: "12h–14h / 19h–21h30" }, { j: "Ven", h: "12h–14h / 19h–21h30" }, { j: "Sam", h: "19h–21h30" }, { j: "Dim", h: "Fermé" }] },
+      { id: 10, nom: "La Bande à Nana", adresse: "42 Ter Rue de Paris, 59300 Valenciennes", tel: "03 27 44 08 66", type: "Restaurant / Bar", note: 4.8, priorite: "moyenne", maps: "https://maps.google.com/?q=La+Bande+a+Nana+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "10h–16h30" }, { j: "Mar", h: "10h–16h30" }, { j: "Mer", h: "10h–16h30" }, { j: "Jeu", h: "10h–16h30" }, { j: "Ven", h: "10h–16h30" }, { j: "Sam", h: "10h–16h30" }, { j: "Dim", h: "Fermé" }] },
+      { id: 11, nom: "O Divine' Bar", adresse: "56 Av. du Sénateur Girard, 59300 Valenciennes", tel: "03 27 44 94 70", type: "Bar / Restaurant", note: 4.6, priorite: "moyenne", maps: "https://maps.google.com/?q=O+Divine+Bar+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "11h–14h15" }, { j: "Mar", h: "10h–21h15" }, { j: "Mer", h: "10h–21h15" }, { j: "Jeu", h: "10h–21h15" }, { j: "Ven", h: "10h–22h15" }, { j: "Sam", h: "11h–14h / 18h30–22h15" }, { j: "Dim", h: "Fermé" }] },
+      { id: 12, nom: "Brasserie Le Président", adresse: "30 Pl. d'Armes, 59300 Valenciennes", tel: "03 27 46 26 01", type: "Brasserie / Bar", note: 3.9, priorite: "basse", maps: "https://maps.google.com/?q=Brasserie+Le+President+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "8h30–00h" }, { j: "Mar", h: "8h30–00h" }, { j: "Mer", h: "8h30–00h" }, { j: "Jeu", h: "8h30–00h" }, { j: "Ven", h: "8h30–00h" }, { j: "Sam", h: "8h30–00h" }, { j: "Dim", h: "8h30–00h" }] },
+      { id: 13, nom: "La Galerie — Royal Hainaut", adresse: "6 Pl. de l'Hôpital Général, 59300 Valenciennes", tel: "03 27 35 15 15", type: "Restaurant Gastronomique", note: 4.2, priorite: "haute", maps: "https://maps.google.com/?q=La+Galerie+Royal+Hainaut+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "12h–14h / 19h–21h30" }, { j: "Mar", h: "12h–14h / 19h–21h30" }, { j: "Mer", h: "12h–14h / 19h–21h30" }, { j: "Jeu", h: "12h–14h / 19h–21h30" }, { j: "Ven", h: "12h–14h / 19h–22h" }, { j: "Sam", h: "12h–14h / 19h–22h" }, { j: "Dim", h: "12h–13h30 / 19h–21h30" }] },
+      { id: 14, nom: "Le Bistrot D'en Face", adresse: "5 Av. d'Amsterdam, 59300 Valenciennes", tel: "06 83 06 93 08", type: "Restaurant / Brasserie", note: 4.4, priorite: "moyenne", maps: "https://maps.google.com/?q=Le+Bistrot+Den+Face+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "12h–14h / 19h–22h" }, { j: "Mar", h: "12h–14h / 19h–22h" }, { j: "Mer", h: "12h–14h / 19h–22h" }, { j: "Jeu", h: "12h–14h / 19h–22h" }, { j: "Ven", h: "12h–14h30 / 19h–22h30" }, { j: "Sam", h: "12h–14h30 / 19h–22h30" }, { j: "Dim", h: "12h–14h30 / 19h–22h" }] },
     ];
 
-    const savedEtabs = ls('stage_etabs_extra', []);
-    savedEtabs.forEach(e => { if (!window.ETABLISSEMENTS.find(x => x.id === e.id)) window.ETABLISSEMENTS.push(e); });
+    // Load extra saved
+    const savedExtra = ls('stage_etabs_extra', []);
+    savedExtra.forEach(e => { if (!window.ETABLISSEMENTS.find(x => x.id === e.id)) window.ETABLISSEMENTS.push(e); });
 
-    const STATUS_DEF = {
-      todo: { label: "À contacter", badge: "badge-todo", btn: "todo", emoji: "📋", color: "var(--gold)" },
-      done: { label: "Contacté", badge: "badge-done", btn: "done", emoji: "✅", color: "var(--green)" },
-      waiting: { label: "En attente", badge: "badge-waiting", btn: "waiting", emoji: "⏳", color: "var(--blue)" },
-      rdv: { label: "RDV pris", badge: "badge-rdv", btn: "rdv", emoji: "📅", color: "var(--orange)" },
-      stage: { label: "En stage", badge: "badge-stage", btn: "stage", emoji: "🏆", color: "var(--violet)" },
-      refused: { label: "Refusé", badge: "badge-refused", btn: "refused", emoji: "❌", color: "var(--red)" },
+    const ST = {
+      todo: { label: "À contacter", badge: "b-todo", btn: "todo", emoji: "📋", color: "var(--gold)" },
+      done: { label: "Contacté", badge: "b-done", btn: "done", emoji: "✅", color: "var(--green)" },
+      waiting: { label: "En attente", badge: "b-waiting", btn: "waiting", emoji: "⏳", color: "var(--blue)" },
+      rdv: { label: "RDV pris", badge: "b-rdv", btn: "rdv", emoji: "📅", color: "var(--orange)" },
+      stage: { label: "En stage", badge: "b-stage", btn: "stage", emoji: "🏆", color: "var(--violet)" },
+      refused: { label: "Refusé", badge: "b-refused", btn: "refused", emoji: "❌", color: "var(--red)" },
     };
-    const STATUS_ORDER = ['todo', 'done', 'waiting', 'rdv', 'stage', 'refused'];
+    const ST_ORDER = ['todo', 'done', 'waiting', 'rdv', 'stage', 'refused'];
 
-    function ls(key, def = null) { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch (e) { return def; } }
-    window.lsSet = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { } };
+    function ls(k, d = null) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d } catch { return d } }
+    window.lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)) } catch { } }
 
     window.statuses = ls('stage_statuses_v5', {});
     const cardNotes = ls('stage_card_notes_v4', {});
     const checks = ls('stage_checks_v5', {});
     window.STEPS = ls('stage_steps_v4', ["Préparer mon CV (photo, formation, expériences)", "Rédiger ma lettre de motivation personnalisée", "Imprimer 15 exemplaires CV + lettre en couleur", "Définir mes dates de stage souhaitées", "Visiter Les Canonniers (14h30–17h, hors service)", "Visiter Ô Saveurs en personne", "Visiter Le Beaulieu en personne", "Visiter Les Trois Gourmets en personne", "Visiter L'Instant Gourmand en personne", "Contacter Café Brasserie L'Univers (Denain)", "Contacter Le 8 Restaurant (Denain)", "Contacter La Bande à Nana", "Contacter O Divine' Bar", "Contacter La Galerie / Royal Hainaut", "Contacter Le Bistrot D'en Face", "Contacter Chez Nous", "Faire les relances téléphoniques à J+5", "Préparer mes questions pour l'entretien", "Confirmer convention de stage avec mon école", "Confirmer dates et poste définitif"]);
-    window.CATEGORIES = ls('stage_cats_v4', [{ id: 'cat1', nom: 'Restaurant', emoji: '🍽️', couleur: '#e8b84b' }, { id: 'cat2', nom: 'Brasserie', emoji: '🍺', couleur: '#e67e22' }, { id: 'cat3', nom: 'Bar', emoji: '🍸', couleur: '#8e44ad' }, { id: 'cat4', nom: 'Gastronomique', emoji: '⭐', couleur: '#c0392b' }]);
     window.LOGS = ls('stage_logs_v5', []);
     window.RAPPELS = ls('stage_rappels_v4', []);
-    window.OBJECTIFS = ls('stage_objectifs_v4', [{ id: 'obj1', titre: 'Contacter 10 restaurants', cible: 10, actuel: 0, couleur: 'var(--gold)' }, { id: 'obj2', titre: 'Obtenir 3 réponses positives', cible: 3, actuel: 0, couleur: 'var(--green)' }, { id: 'obj3', titre: 'Décrocher un stage', cible: 1, actuel: 0, couleur: 'var(--violet)' }]);
-    window.PARAMS = ls('stage_params_v4', { tri: 'default' });
+    window.OBJECTIFS = ls('stage_objectifs_v4', [{ id: 'obj1', titre: 'Contacter 10 restaurants', cible: 10, actuel: 0, couleur: 'var(--accent)' }, { id: 'obj2', titre: 'Obtenir 3 réponses positives', cible: 3, actuel: 0, couleur: 'var(--green)' }, { id: 'obj3', titre: 'Décrocher un stage', cible: 1, actuel: 0, couleur: 'var(--violet)' }]);
 
     window.STEPS.forEach((_, i) => { if (checks[i] === undefined) checks[i] = false; });
 
-    let curFilter = 'all', curCatFilter = null, curLogFilter = 'all', editingId = null, lastSyncTime = null;
+    let curFilter = 'all', curLogFilter = 'all', editingId = null;
     const noteTimers = {};
 
-    function stars(n) { if (!n) return ''; const f = Math.round(n); return '★'.repeat(f) + '☆'.repeat(5 - f); }
+    function stars(n) { if (!n) return ''; const f = Math.round(n); return '★'.repeat(f) + '☆'.repeat(5 - f) }
+    function uid() { return 'id' + Date.now() + Math.random().toString(36).slice(2, 7) }
+    function now() { return new Date().toLocaleString('fr-FR') }
 
-    window.toast = (msg, type = '') => {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.style.borderColor = type === 'success' ? 'var(--green)' : type === 'error' ? 'var(--red)' : 'var(--gold)';
-      t.classList.add('show');
-      clearTimeout(t._t);
-      t._t = setTimeout(() => t.classList.remove('show'), 2800);
-    };
-
-    function getCatById(id) { return window.CATEGORIES.find(c => c.id === id); }
-    function uid() { return 'id' + Date.now() + Math.random().toString(36).slice(2, 7); }
-    function now() { return new Date().toLocaleString('fr-FR'); }
-
-    // FB INDICATOR
-    function setFbState(state, txt) {
-      const pill = document.getElementById('fbPill');
-      if (pill) { pill.className = 'fb-pill ' + state; }
+    // FB BADGE
+    function setFb(state, txt) {
+      const b = document.getElementById('fbBadge');
+      if (b) { b.className = 'fb-badge ' + state; }
       const el = document.getElementById('fbTxt');
       if (el) el.textContent = txt;
     }
 
     // SYNC OVERLAY
-    window.showSyncOverlay = function (state, data = {}) {
-      const overlay = document.getElementById('syncOverlay');
-      const card = document.getElementById('syncCard');
+    window.showSyncOv = (state, data = {}) => {
+      const ov = document.getElementById('syncOv'), card = document.getElementById('syncCard');
       if (state === 'loading') {
-        card.innerHTML = `<div class="sync-spinner"></div><div class="sync-title loading">Synchronisation…</div><div class="sync-sub">Connexion à Firebase en cours,<br>veuillez patienter.</div>`;
+        card.innerHTML = `<div class="spin"></div><div class="sync-title" style="color:var(--accent)">Synchronisation…</div><div class="sync-sub">Connexion à Firebase en cours,<br>veuillez patienter.</div>`;
       } else if (state === 'success') {
-        const n = data.count || window.ETABLISSEMENTS.length;
-        const notes = data.notes || Object.keys(cardNotes).filter(k => cardNotes[k]).length;
-        const t = new Date().toLocaleString('fr-FR');
-        card.innerHTML = `<div class="sync-icon success">✅</div><div class="sync-title success">Synchronisé !</div><div class="sync-sub">Toutes les données sont à jour sur Firebase.</div><div class="sync-stats"><div class="sync-stat"><div class="sync-stat-num">${n}</div><div style="font-size:11px;color:var(--txt2)">Étab.</div></div><div class="sync-stat"><div class="sync-stat-num">${notes}</div><div style="font-size:11px;color:var(--txt2)">Notes</div></div><div class="sync-stat"><div class="sync-stat-num" style="font-size:13px">${t.split(' ')[1]}</div><div style="font-size:11px;color:var(--txt2)">Heure</div></div></div><button class="sync-close" onclick="closeSyncOverlay()">Fermer</button>`;
-        lastSyncTime = t;
+        const n = data.count || window.ETABLISSEMENTS.length, notes = data.notes || 0, t = new Date().toLocaleTimeString('fr-FR');
+        card.innerHTML = `<div class="sync-ico ok">✅</div><div class="sync-title" style="color:var(--green)">Synchronisé !</div><div class="sync-sub">Toutes les données sont à jour sur Firebase.</div><div class="sync-stats"><div class="sstat"><div class="sstat-n">${n}</div>Étab.</div><div class="sstat"><div class="sstat-n">${notes}</div>Notes</div><div class="sstat"><div class="sstat-n" style="font-size:13px">${t}</div>Heure</div></div><button class="sync-close" onclick="closeSyncOv()">Fermer</button>`;
       } else if (state === 'error') {
         const msg = data.msg || 'Erreur de connexion';
-        card.innerHTML = `<div class="sync-icon error" style="font-size:34px">⚠️</div><div class="sync-title error">Erreur de Synchronisation</div><div class="sync-sub">${msg}</div><div class="sync-contact"><strong>Un problème ? Contactez Nolan :</strong><br>📞 <a href="tel:0667463553">06 67 46 35 53</a><br>✉️ <a href="mailto:peronnenolan5o@gmail.com">peronnenolan5o@gmail.com</a></div><div style="display:flex;gap:10px;justify-content:center;margin-top:20px"><button class="sync-close" onclick="triggerSync()">🔄 Réessayer</button><button class="sync-close" onclick="closeSyncOverlay()">Fermer</button></div>`;
+        card.innerHTML = `<div class="sync-ico err">⚠️</div><div class="sync-title" style="color:var(--red)">Erreur</div><div class="sync-sub">${msg}</div><div class="err-contact"><strong>Contactez Nolan :</strong><br>📞 <a href="tel:0667463553">06 67 46 35 53</a><br>✉️ <a href="mailto:peronnenolan5o@gmail.com">peronnenolan5o@gmail.com</a></div><div style="display:flex;gap:8px;justify-content:center;margin-top:16px"><button class="sync-close" onclick="triggerSync()">🔄 Réessayer</button><button class="sync-close" onclick="closeSyncOv()">Fermer</button></div>`;
       }
-      overlay.classList.add('open');
+      ov.classList.add('open');
     };
-    window.closeSyncOverlay = () => document.getElementById('syncOverlay').classList.remove('open');
+    window.closeSyncOv = () => document.getElementById('syncOv').classList.remove('open');
 
-    window.triggerSync = async function () {
-      const btn = document.getElementById('syncBtn');
-      if (btn) btn.classList.add('spinning');
-      setFbState('syncing', 'Sync...');
-      showSyncOverlay('loading');
+    window.triggerSync = async () => {
+      setFb('sync', 'Sync...');
+      window.showSyncOv('loading');
       try {
-        const promises = window.ETABLISSEMENTS.map(e => update(ref(db, 'stages/' + e.id), { nom: e.nom, adresse: e.adresse, tel: e.tel, type: e.type, statut: STATUS_DEF[window.statuses[e.id] || 'todo']?.label, notes: cardNotes[e.id] || '' }));
-        await Promise.all(promises);
-        setFbState('synced', 'Synchronisé');
-        setTimeout(() => showSyncOverlay('success', { count: window.ETABLISSEMENTS.length, notes: Object.keys(cardNotes).filter(k => cardNotes[k]).length }), 600);
+        await Promise.all(window.ETABLISSEMENTS.map(e => update(ref(db, 'stages/' + e.id), { nom: e.nom, adresse: e.adresse, tel: e.tel, type: e.type, statut: ST[window.statuses[e.id] || 'todo']?.label, notes: cardNotes[e.id] || '' })));
+        setFb('ok', 'Synchronisé');
+        setTimeout(() => window.showSyncOv('success', { count: window.ETABLISSEMENTS.length, notes: Object.keys(cardNotes).filter(k => cardNotes[k]).length }), 600);
       } catch (err) {
-        setFbState('error', 'Erreur');
-        showSyncOverlay('error', { msg: 'Impossible de joindre Firebase.<br><small>(' + (err.message || 'Erreur réseau') + ')</small>' });
-      } finally {
-        if (btn) btn.classList.remove('spinning');
+        setFb('err', 'Erreur');
+        window.showSyncOv('error', { msg: 'Impossible de joindre Firebase.<br><small>(' + (err.message || 'Erreur réseau') + ')</small>' });
       }
     };
 
-    window.fbSyncStatus = (id, status) => {
-      update(ref(db, 'stages/' + id), { statut: STATUS_DEF[status]?.label || status }).then(() => setFbState('synced', 'Synchronisé')).catch(() => setFbState('error', 'Erreur sync'));
-    };
+    window.fbSyncStatus = (id, st) => update(ref(db, 'stages/' + id), { statut: ST[st]?.label || st }).then(() => setFb('ok', 'Synchronisé')).catch(() => setFb('err', 'Erreur'));
     window.fbSyncNote = (id, val) => {
       update(ref(db, 'stages/' + id), { notes: val }).then(() => {
-        setFbState('synced', 'Note sync');
+        setFb('ok', 'Note sync');
         const ind = document.getElementById('note-ind-' + id);
         if (ind) { ind.textContent = '✓ sync'; ind.className = 'note-ind show ok'; setTimeout(() => { ind.className = 'note-ind'; }, 2000); }
         const ta = document.getElementById('note-ta-' + id);
-        if (ta) { ta.className = 'note-ta synced'; setTimeout(() => ta.className = 'note-ta', 1500); }
-      }).catch(() => setFbState('error', 'Erreur note'));
+        if (ta) { ta.style.borderColor = 'rgba(34,197,94,.3)'; setTimeout(() => ta.style.borderColor = '', 1500); }
+      }).catch(() => setFb('err', 'Erreur note'));
     };
 
-    // Real-time
-    onValue(ref(db, 'stages/'), (snapshot) => {
-      const data = snapshot.val();
+    // Real-time Firebase
+    onValue(ref(db, 'stages/'), (snap) => {
+      const data = snap.val();
       if (!data) return;
-      setFbState('synced', 'Connecté');
-      const labelToKey = { "À contacter": "todo", "Contacté": "done", "En attente": "waiting", "RDV pris": "rdv", "En stage": "stage", "Refusé": "refused" };
+      setFb('ok', 'Connecté');
+      const lbl2k = { "À contacter": "todo", "Contacté": "done", "En attente": "waiting", "RDV pris": "rdv", "En stage": "stage", "Refusé": "refused" };
       let changed = false;
       for (let id in data) {
-        const item = data[id];
-        const numId = parseInt(id);
-        if (!window.ETABLISSEMENTS.find(e => e.id === numId)) continue;
-        if (item.statut && labelToKey[item.statut]) {
-          if (window.statuses[numId] !== labelToKey[item.statut]) { window.statuses[numId] = labelToKey[item.statut]; changed = true; }
-        }
+        const item = data[id], nid = parseInt(id);
+        if (!window.ETABLISSEMENTS.find(e => e.id === nid)) continue;
+        if (item.statut && lbl2k[item.statut]) { if (window.statuses[nid] !== lbl2k[item.statut]) { window.statuses[nid] = lbl2k[item.statut]; changed = true; } }
         if (item.notes !== undefined) {
-          cardNotes[numId] = item.notes;
+          cardNotes[nid] = item.notes;
           lsSet('stage_card_notes_v4', cardNotes);
-          const ta = document.getElementById('note-ta-' + numId);
+          const ta = document.getElementById('note-ta-' + nid);
           if (ta && document.activeElement !== ta) ta.value = item.notes;
         }
       }
       if (changed) { lsSet('stage_statuses_v5', window.statuses); renderCards(); }
-    }, (error) => setFbState('error', 'Hors ligne'));
+    }, () => setFb('err', 'Hors ligne'));
 
-    window.ETABLISSEMENTS.forEach(e => update(ref(db, 'stages/' + e.id), { nom: e.nom, adresse: e.adresse, tel: e.tel, type: e.type, statut: STATUS_DEF[window.statuses[e.id] || 'todo']?.label, notes: cardNotes[e.id] || '' }));
+    // Push all to Firebase on load
+    window.ETABLISSEMENTS.forEach(e => update(ref(db, 'stages/' + e.id), { nom: e.nom, adresse: e.adresse, tel: e.tel, type: e.type, statut: ST[window.statuses[e.id] || 'todo']?.label, notes: cardNotes[e.id] || '' }));
+
+    // TOAST
+    window.toast = (msg, type = '') => {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.borderColor = type === 'success' ? 'var(--green)' : type === 'error' ? 'var(--red)' : 'var(--accent)';
+      t.classList.add('show');
+      clearTimeout(t._t);
+      t._t = setTimeout(() => t.classList.remove('show'), 2800);
+    };
 
     // TABS
     window.showTab = (tab, btn) => {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.mob-nav-item').forEach(b => b.classList.remove('active'));
       const p = document.getElementById('page-' + tab);
       if (p) p.classList.add('active');
       if (btn) btn.classList.add('active');
@@ -2110,48 +1947,32 @@
       if (tab === 'logs') renderLogs();
     };
 
-    // CAT FILTER ROW
-    function renderCatRow() {
-      const row = document.getElementById('cat-row');
-      if (!window.CATEGORIES.length) { row.innerHTML = ''; return; }
-      row.innerHTML = `<button class="cat-chip${!curCatFilter ? ' active' : ''}" onclick="setCatFilter(null)">Toutes</button>` +
-        window.CATEGORIES.map(c => `<button class="cat-chip${curCatFilter === c.id ? ' active' : ''}" onclick="setCatFilter('${c.id}')" style="${curCatFilter === c.id ? `border-color:${c.couleur};color:${c.couleur}` : ''}">${c.emoji} ${c.nom}</button>`).join('');
-    }
-    window.setCatFilter = (id) => { curCatFilter = id; renderCatRow(); renderCards(); };
-
     // RENDER CARDS
-    window.renderCards = function () {
-      renderCatRow();
-      const q = (document.getElementById('searchInput').value || '').toLowerCase();
+    window.renderCards = () => {
       window.ETABLISSEMENTS.forEach(e => { if (!window.statuses[e.id]) window.statuses[e.id] = 'todo'; });
+      const q = (document.getElementById('searchInput')?.value || '').toLowerCase();
       let list = [...window.ETABLISSEMENTS];
-      const tri = window.PARAMS?.tri || 'default';
-      if (tri === 'nom') list.sort((a, b) => a.nom.localeCompare(b.nom));
-      else if (tri === 'note') list.sort((a, b) => (b.note || 0) - (a.note || 0));
-      else if (tri === 'priorite') { const po = { haute: 0, moyenne: 1, basse: 2 }; list.sort((a, b) => (po[a.priorite] || 1) - (po[b.priorite] || 1)); }
-      if (curCatFilter) list = list.filter(e => (e.categories || []).includes(curCatFilter));
       if (q) list = list.filter(e => e.nom.toLowerCase().includes(q) || e.adresse.toLowerCase().includes(q) || e.type.toLowerCase().includes(q));
+
       const c = document.getElementById('cards-container');
       if (curFilter !== 'all') {
-        const filtered = list.filter(e => (window.statuses[e.id] || 'todo') === curFilter);
-        if (!filtered.length) { c.innerHTML = `<div class="cards-grid"><div class="empty"><div class="big">🔍</div><p>Aucun établissement dans cette catégorie</p></div></div>`; updateStats(); return; }
-        c.innerHTML = `<div class="cards-grid fade-in">${filtered.map(e => buildCard(e)).join('')}</div>`;
+        const fil = list.filter(e => (window.statuses[e.id] || 'todo') === curFilter);
+        if (!fil.length) { c.innerHTML = `<div class="cards-grid"><div class="empty"><div class="big">🔍</div><p>Aucun établissement dans cette catégorie</p></div></div>`; updateStats(); return; }
+        c.innerHTML = `<div class="cards-grid">${fil.map(e => buildCard(e)).join('')}</div>`;
         updateStats(); return;
       }
-      const groups = STATUS_ORDER.map(s => ({ status: s, items: list.filter(e => (window.statuses[e.id] || 'todo') === s) })).filter(g => g.items.length > 0);
+      const groups = ST_ORDER.map(s => ({ s, items: list.filter(e => (window.statuses[e.id] || 'todo') === s) })).filter(g => g.items.length > 0);
       if (!groups.length) { c.innerHTML = `<div class="cards-grid"><div class="empty"><div class="big">🔍</div><p>Aucun établissement trouvé</p></div></div>`; updateStats(); return; }
       c.innerHTML = groups.map(g => {
-        const def = STATUS_DEF[g.status];
-        const isMain = g.status === 'todo';
-        const collapsed = !isMain;
-        return `<div class="status-block" id="section-${g.status}">
-      <div class="status-block-header">
-        <div class="status-dot" style="background:${def.color};box-shadow:0 0 6px ${def.color}44"></div>
-        <div class="status-block-title" style="color:${def.color}">${def.emoji} ${def.label}</div>
-        <div class="status-block-count" style="background:${def.color}18;color:${def.color}">${g.items.length}</div>
-        <button class="collapse-btn" onclick="toggleSection('${g.status}',this)">${collapsed ? '▼ Afficher' : '▲ Masquer'}</button>
+        const d = ST[g.s], main = g.s === 'todo';
+        return `<div class="status-sec" id="sec-${g.s}">
+      <div class="status-sec-hdr">
+        <div class="s-dot" style="background:${d.color};box-shadow:0 0 5px ${d.color}55"></div>
+        <div class="s-title" style="color:${d.color}">${d.emoji} ${d.label}</div>
+        <div class="s-count" style="background:${d.color}18;color:${d.color}">${g.items.length}</div>
+        <button class="s-toggle" onclick="toggleSec('${g.s}',this)">${!main ? '▼ Afficher' : '▲ Masquer'}</button>
       </div>
-      <div class="cards-grid sc-${g.status}" style="${collapsed ? 'display:none' : ''}">
+      <div class="cards-grid sec-grid-${g.s}" style="${!main ? 'display:none' : ''}">
         ${g.items.map(e => buildCard(e)).join('')}
       </div>
     </div>`;
@@ -2159,48 +1980,44 @@
       updateStats();
     };
 
-    window.toggleSection = (status, btn) => {
-      const grid = document.querySelector(`.sc-${status}`);
-      if (!grid) return;
-      const hidden = grid.style.display === 'none';
-      grid.style.display = hidden ? '' : 'none';
-      btn.textContent = hidden ? '▲ Masquer' : '▼ Afficher';
-    };
+    window.toggleSec = (s, btn) => { const g = document.querySelector(`.sec-grid-${s}`); if (!g) return; const h = g.style.display === 'none'; g.style.display = h ? '' : 'none'; btn.textContent = h ? '▲ Masquer' : '▼ Afficher'; };
 
     function buildCard(e) {
-      const st = window.statuses[e.id] || 'todo', def = STATUS_DEF[st], note = cardNotes[e.id] || '';
-      const catTags = (e.categories || []).map(cid => { const cat = getCatById(cid); if (!cat) return ''; return `<span class="cat-tag" style="background:${cat.couleur}20;color:${cat.couleur}">${cat.emoji} ${cat.nom}</span>`; }).join('');
-      const prioHtml = e.priorite === 'haute' ? `<span class="prio-badge prio-haute">⚡ Haute priorité</span>` : e.priorite === 'basse' ? `<span class="prio-badge prio-basse">Basse priorité</span>` : '';
-      const rappelForEtab = window.RAPPELS.find(r => r.etabId == e.id && !r.fait);
-      const rappelHtml = rappelForEtab ? `<div class="info-row"><span>⏰</span><span style="color:var(--gold)">Rappel le ${rappelForEtab.date}</span></div>` : '';
-      let hoH = '';
+      const st = window.statuses[e.id] || 'todo', d = ST[st], note = cardNotes[e.id] || '';
+      const prioHtml = e.priorite === 'haute' ? `<div class="prio-high">⚡ Haute priorité</div>` : '';
+      const rappel = window.RAPPELS.find(r => r.etabId == e.id && !r.fait);
+      const rappelHtml = rappel ? `<div class="irow">⏰ <span style="color:var(--accent)">Rappel le ${rappel.date}</span></div>` : '';
+      let hpanel = '';
       if (e.horaires && e.horaires.length) {
-        const days = e.horaires.map(h => { const cl = h.h === 'Fermé' || h.h === '-' || !h.h; return `<div class="h-col"><div class="h-day-name">${h.j}</div><div class="h-dot ${cl ? 'closed' : 'open'}"></div><div class="h-time">${cl ? '–' : h.h.replace(/\//g, '<br>')}</div></div>`; }).join('');
-        hoH = `<div class="horaires-panel"><div class="horaires-lbl">Horaires d'ouverture</div><div class="horaires-grid">${days}</div></div>`;
+        const days = e.horaires.map(h => {
+          const cl = h.h === 'Fermé' || h.h === '-' || !h.h;
+          return `<div class="hcol"><div class="hday">${h.j}</div><div class="hdot ${cl ? 'closed' : 'open'}"></div><div class="htime">${cl ? '–' : h.h.replace(/\//g, '<br>')}</div></div>`;
+        }).join('');
+        hpanel = `<div class="hpanel"><div class="hlbl">Horaires</div><div class="hgrid">${days}</div></div>`;
       }
-      const btns = STATUS_ORDER.map(s => { const d = STATUS_DEF[s]; return `<button class="act-btn${st === s ? ' active-' + s : ''}" onclick="setStatus(${e.id},'${s}',event)">${d.emoji} ${d.label}</button>`; }).join('');
-      const extraLinks = (e.website ? `<div class="info-row"><span>🌐</span><a href="${e.website}" target="_blank">Site web →</a></div>` : '') + (e.social ? `<div class="info-row"><span>📱</span><a href="${e.social}" target="_blank">Réseaux →</a></div>` : '');
+      const btns = ST_ORDER.map(s => { const dd = ST[s]; return `<button class="abt${st === s ? ' a-' + s : ''}" onclick="setStatus(${e.id},'${s}',event)">${dd.emoji} ${dd.label}</button>`; }).join('');
+      const extraLinks = (e.website ? `<div class="irow">🌐 <a href="${e.website}" target="_blank">Site web →</a></div>` : '') +
+        (e.social ? `<div class="irow">📱 <a href="${e.social}" target="_blank">Réseaux →</a></div>` : '');
       return `<div class="card" id="card-${e.id}">
     <div class="card-body">
-      <div class="card-header">
+      <div class="card-hdr">
         <div class="card-name">${e.nom}</div>
-        <span class="card-badge ${def.badge}">${def.emoji} ${def.label}</span>
+        <span class="cbadge ${d.badge}">${d.emoji} ${d.label}</span>
       </div>
-      ${prioHtml ? `<div style="margin-bottom:10px">${prioHtml}</div>` : ''}
-      <div class="card-info">
-        <div class="info-row"><span>📍</span><span>${e.adresse}</span></div>
-        ${e.tel ? `<div class="info-row"><span>📞</span><a href="tel:${e.tel}" onclick="event.stopPropagation()">${e.tel}</a></div>` : ''}
-        ${e.note ? `<div class="info-row"><span class="stars">${stars(e.note)}</span><span class="rating-txt">${e.note}/5</span></div>` : ''}
-        <div><span class="card-type">🏷️ ${e.type}</span></div>
-        ${catTags ? `<div class="cats-row">${catTags}</div>` : ''}
-        ${e.maps ? `<div class="info-row"><span>🗺️</span><a href="${e.maps}" target="_blank" onclick="event.stopPropagation()">Voir sur Maps →</a></div>` : ''}
+      ${prioHtml}
+      <div class="info">
+        <div class="irow">📍 <span>${e.adresse}</span></div>
+        ${e.tel ? `<div class="irow">📞 <a href="tel:${e.tel}" onclick="event.stopPropagation()">${e.tel}</a></div>` : ''}
+        ${e.note ? `<div class="irow"><span class="stars">${stars(e.note)}</span><span style="font-size:11px;color:var(--txt2);font-family:'DM Mono',monospace">${e.note}/5</span></div>` : ''}
+        <div><span class="type-tag">🏷️ ${e.type}</span></div>
+        ${e.maps ? `<div class="irow">🗺️ <a href="${e.maps}" target="_blank" onclick="event.stopPropagation()">Voir sur Maps →</a></div>` : ''}
         ${extraLinks}${rappelHtml}
       </div>
     </div>
-    ${hoH}
-    <div class="card-actions">${btns}</div>
+    ${hpanel}
+    <div class="card-acts">${btns}</div>
     <div class="note-wrap">
-      <textarea class="note-ta" id="note-ta-${e.id}" placeholder="💬 Notes perso (responsable, impression, rappel…)" oninput="saveCardNote(${e.id},this.value)">${note}</textarea>
+      <textarea class="note-ta" id="note-ta-${e.id}" placeholder="💬 Notes (responsable, impression, rappel…)" oninput="saveCardNote(${e.id},this.value)">${note}</textarea>
       <div class="note-ind" id="note-ind-${e.id}">⟳ sync</div>
     </div>
   </div>`;
@@ -2213,64 +2030,58 @@
       renderCards(); renderKanban();
       window.fbSyncStatus(id, s);
       const nom = window.ETABLISSEMENTS.find(e => e.id === id)?.nom || '';
-      toast(`${STATUS_DEF[s].emoji} ${nom} → ${STATUS_DEF[s].label}`, 'success');
-      addLog('statut', `${STATUS_DEF[s].emoji} Statut "${nom}" : ${STATUS_DEF[old].label} → ${STATUS_DEF[s].label}`);
+      toast(`${ST[s].emoji} ${nom} → ${ST[s].label}`, 'success');
+      addLog('statut', `${ST[s].emoji} "${nom}" : ${ST[old].label} → ${ST[s].label}`);
       syncObjectifsAuto();
     };
 
-    window.saveCardNote = function (id, val) {
+    window.saveCardNote = (id, val) => {
       cardNotes[id] = val; lsSet('stage_card_notes_v4', cardNotes);
       const ind = document.getElementById('note-ind-' + id);
-      const ta = document.getElementById('note-ta-' + id);
       if (ind) { ind.textContent = '⟳ sync'; ind.className = 'note-ind show saving'; }
-      if (ta) ta.className = 'note-ta syncing';
-      setFbState('syncing', 'Note...');
+      setFb('sync', 'Note...');
       clearTimeout(noteTimers[id]);
       noteTimers[id] = setTimeout(() => window.fbSyncNote(id, val), 900);
     };
 
-    window.setFilter = (f, btn) => { curFilter = f; document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderCards(); };
+    window.setFilter = (f, btn) => { curFilter = f; document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderCards(); };
 
     function updateStats() {
       const all = window.ETABLISSEMENTS;
       document.getElementById('s-total').textContent = all.length;
-      document.getElementById('nb-etabs').textContent = all.length;
-      document.getElementById('s-todo').textContent = all.filter(e => (window.statuses[e.id] || 'todo') === 'todo').length;
-      document.getElementById('s-done').textContent = all.filter(e => window.statuses[e.id] === 'done').length;
-      document.getElementById('s-waiting').textContent = all.filter(e => window.statuses[e.id] === 'waiting').length;
-      document.getElementById('s-rdv').textContent = all.filter(e => window.statuses[e.id] === 'rdv').length;
-      document.getElementById('s-stage').textContent = all.filter(e => window.statuses[e.id] === 'stage').length;
-      document.getElementById('s-refused').textContent = all.filter(e => window.statuses[e.id] === 'refused').length;
+      document.getElementById('nb-etabs-top').textContent = all.length + ' établissements';
+      ['todo', 'done', 'waiting', 'rdv', 'stage', 'refused'].forEach(s => {
+        document.getElementById('s-' + s).textContent = all.filter(e => (window.statuses[e.id] || 'todo') === s).length;
+      });
     }
 
     // KANBAN
-    window.renderKanban = function () {
+    window.renderKanban = () => {
       const board = document.getElementById('kanban-board');
       if (!board) return;
-      board.innerHTML = STATUS_ORDER.map(s => {
-        const def = STATUS_DEF[s];
-        const items = window.ETABLISSEMENTS.filter(e => (window.statuses[e.id] || 'todo') === s);
-        return `<div class="kanban-col">
-      <div class="kanban-col-title" style="color:${def.color}">${def.emoji} ${def.label} <span class="kanban-count">${items.length}</span></div>
-      ${items.map(e => `<div class="kanban-item" onclick="openEditModal(${e.id})">${e.nom}<div class="kanban-item-sub">📍 ${e.adresse.split(',')[1]?.trim() || e.adresse}</div>${e.note ? `<div class="kanban-item-sub">★ ${e.note}/5</div>` : ''}</div>`).join('') || `<div style="color:var(--txt2);font-size:12px;text-align:center;padding:12px">Vide</div>`}
+      board.innerHTML = ST_ORDER.map(s => {
+        const d = ST[s], items = window.ETABLISSEMENTS.filter(e => (window.statuses[e.id] || 'todo') === s);
+        return `<div class="kcol">
+      <div class="khead" style="color:${d.color}">${d.emoji} ${d.label} <span class="kcnt">${items.length}</span></div>
+      ${items.map(e => `<div class="kitem" onclick="openEditModal(${e.id})">${e.nom}<div class="kitem-sub">📍 ${e.adresse.split(',')[1]?.trim() || e.adresse}</div>${e.note ? `<div class="kitem-sub">★ ${e.note}/5</div>` : ''}</div>`).join('') || `<div class="kempty">Vide</div>`}
     </div>`;
       }).join('');
     };
 
     // CHECKLIST
-    window.renderChecklist = function () {
-      const list = document.getElementById('checklist-list');
+    window.renderChecklist = () => {
+      const list = document.getElementById('chk-list');
       const done = window.STEPS.filter((_, i) => checks[i]).length;
       const pct = window.STEPS.length ? Math.round(done / window.STEPS.length * 100) : 0;
-      document.getElementById('check-pct').textContent = `${pct}%`;
-      document.getElementById('check-bar').style.width = pct + '%';
-      document.getElementById('check-count').textContent = `${done}/${window.STEPS.length}`;
-      list.innerHTML = window.STEPS.map((_, i) => `<div class="checklist-item${checks[i] ? ' done' : ''}" onclick="toggleCheck(${i})"><div class="check-box">${checks[i] ? '✓' : ''}</div><span class="step-text">${window.STEPS[i]}</span><button class="del-step" onclick="deleteStep(${i},event)">✕</button></div>`).join('');
+      document.getElementById('chk-pct').textContent = pct + '%';
+      document.getElementById('chk-bar').style.width = pct + '%';
+      document.getElementById('chk-cnt').textContent = `${done}/${window.STEPS.length}`;
+      list.innerHTML = window.STEPS.map((_, i) => `<div class="chk-item${checks[i] ? ' done' : ''}" onclick="toggleCheck(${i})"><div class="chk-box">${checks[i] ? '✓' : ''}</div><span class="chk-txt">${window.STEPS[i]}</span><button class="del-chk" onclick="delStep(${i},event)">✕</button></div>`).join('');
     };
-    window.toggleCheck = (i) => { checks[i] = !checks[i]; lsSet('stage_checks_v5', checks); renderChecklist(); addLog('note', `${checks[i] ? '✅' : '↩️'} Étape "${window.STEPS[i]}" ${checks[i] ? 'cochée' : 'décochée'}`); };
-    window.deleteStep = (i, ev) => { ev.stopPropagation(); window.STEPS.splice(i, 1); lsSet('stage_steps_v4', window.STEPS); renderChecklist(); };
-    window.resetChecklist = () => { Object.keys(checks).forEach(k => checks[k] = false); lsSet('stage_checks_v5', checks); renderChecklist(); toast('🔄 Checklist réinitialisée'); };
-    window.addStepModal = () => { const v = document.getElementById('new-step-txt').value.trim(); if (!v) return; window.STEPS.push(v); lsSet('stage_steps_v4', window.STEPS); document.getElementById('new-step-txt').value = ''; closeModal('addStepModal'); renderChecklist(); toast('✅ Étape ajoutée', 'success'); };
+    window.toggleCheck = (i) => { checks[i] = !checks[i]; lsSet('stage_checks_v5', checks); renderChecklist(); addLog('note', `${checks[i] ? '✅' : '↩️'} "${window.STEPS[i]}" ${checks[i] ? 'cochée' : 'décochée'}`); };
+    window.delStep = (i, ev) => { ev.stopPropagation(); window.STEPS.splice(i, 1); lsSet('stage_steps_v4', window.STEPS); renderChecklist(); };
+    window.resetChecklist = () => { Object.keys(checks).forEach(k => checks[k] = false); lsSet('stage_checks_v5', checks); renderChecklist(); toast('🔄 Réinitialisé'); };
+    window.addStepFromModal = () => { const v = document.getElementById('new-step-txt').value.trim(); if (!v) return; window.STEPS.push(v); lsSet('stage_steps_v4', window.STEPS); document.getElementById('new-step-txt').value = ''; closeModal('addStepModal'); renderChecklist(); toast('✅ Étape ajoutée', 'success'); };
 
     // OBJECTIFS
     window.syncObjectifsAuto = () => {
@@ -2281,12 +2092,11 @@
       lsSet('stage_objectifs_v4', window.OBJECTIFS);
       renderObjectifs();
     };
-    window.renderObjectifs = function () {
-      const list = document.getElementById('objectifs-list');
-      if (!list) return;
+    window.renderObjectifs = () => {
+      const list = document.getElementById('obj-list'); if (!list) return;
       list.innerHTML = window.OBJECTIFS.map(o => {
         const pct = Math.min(100, Math.round(o.actuel / o.cible * 100));
-        return `<div class="obj-card"><div class="obj-header"><div class="obj-title">${o.titre}</div><div class="obj-nums" style="color:${o.couleur}">${o.actuel}/${o.cible}</div><button onclick="deleteObj('${o.id}')" style="background:none;border:none;color:var(--txt2);cursor:pointer;font-size:14px;margin-left:8px">🗑️</button></div><div class="obj-bar-outer"><div class="obj-bar-inner" style="width:${pct}%;background:${o.couleur}"></div></div><div class="obj-sub">${pct}% complété</div></div>`;
+        return `<div class="obj-card"><div class="obj-hdr"><div class="obj-title">${o.titre}</div><div class="obj-nums" style="color:${o.couleur}">${o.actuel}/${o.cible}</div><button onclick="delObj('${o.id}')" style="background:none;border:none;color:var(--txt2);cursor:pointer;font-size:14px;margin-left:8px">🗑️</button></div><div class="obj-bar-o"><div class="obj-bar-i" style="width:${pct}%;background:${o.couleur}"></div></div><div class="obj-sub">${pct}% complété</div></div>`;
       }).join('') || '<p style="color:var(--txt2)">Aucun objectif défini.</p>';
     };
     window.saveObj = () => {
@@ -2296,78 +2106,68 @@
       const couleur = document.getElementById('obj-color').value;
       if (!titre) return;
       window.OBJECTIFS.push({ id: uid(), titre, cible, actuel, couleur }); lsSet('stage_objectifs_v4', window.OBJECTIFS);
-      closeModal('addObjModal'); renderObjectifs();
-      document.getElementById('obj-titre').value = '';
+      closeModal('addObjModal'); renderObjectifs(); document.getElementById('obj-titre').value = '';
       toast('✅ Objectif ajouté', 'success');
     };
-    window.deleteObj = (id) => { window.OBJECTIFS = window.OBJECTIFS.filter(o => o.id !== id); lsSet('stage_objectifs_v4', window.OBJECTIFS); renderObjectifs(); toast('🗑️ Objectif supprimé'); };
+    window.delObj = (id) => { window.OBJECTIFS = window.OBJECTIFS.filter(o => o.id !== id); lsSet('stage_objectifs_v4', window.OBJECTIFS); renderObjectifs(); toast('🗑️ Objectif supprimé'); };
 
     // RAPPELS
-    window.renderRappels = function () {
-      const list = document.getElementById('rappels-list');
-      if (!list) return;
+    window.renderRappels = () => {
+      const list = document.getElementById('rp-list'); if (!list) return;
       if (!window.RAPPELS.length) { list.innerHTML = '<p style="color:var(--txt2)">Aucun rappel défini.</p>'; return; }
       list.innerHTML = window.RAPPELS.map((r, i) => {
         const etab = window.ETABLISSEMENTS.find(e => e.id == r.etabId);
-        return `<div class="rappel-card${r.fait ? ' fait' : ''}"><span style="font-size:22px">${r.fait ? '✅' : '⏰'}</span><div style="flex:1"><div class="rappel-name">${etab?.nom || '?'}</div><div class="rappel-date">📅 ${r.date}${r.note ? ` — ${r.note}` : ''}</div></div><div style="display:flex;gap:6px">${!r.fait ? `<button class="btn btn-outline" style="font-size:11px;padding:5px 10px" onclick="doneRappel(${i})">✔ Fait</button>` : ''}<button class="btn btn-outline" style="font-size:11px;padding:5px 10px;color:var(--red);border-color:rgba(248,113,113,.3)" onclick="deleteRappel(${i})">🗑️</button></div></div>`;
+        return `<div class="rp-card${r.fait ? ' fait' : ''}"><span style="font-size:22px">${r.fait ? '✅' : '⏰'}</span><div style="flex:1"><div class="rp-name">${etab?.nom || '?'}</div><div class="rp-date">📅 ${r.date}${r.note ? ' — ' + r.note : ''}</div></div><div style="display:flex;gap:6px">${!r.fait ? `<button class="btn btn-ghost btn-sm" onclick="doneRappel(${i})">✔ Fait</button>` : ''}<button class="btn btn-ghost btn-sm" style="color:var(--red)" onclick="delRappel(${i})">🗑️</button></div></div>`;
       }).join('');
     };
     window.openRappelModal = () => {
       const sel = document.getElementById('r-etab');
       sel.innerHTML = '<option value="">— Choisir —</option>' + window.ETABLISSEMENTS.map(e => `<option value="${e.id}">${e.nom}</option>`).join('');
-      document.getElementById('r-date').value = '';
-      document.getElementById('r-note').value = '';
+      document.getElementById('r-date').value = ''; document.getElementById('r-note').value = '';
       openModal('rappelModal');
     };
     window.saveRappel = () => {
-      const etabId = document.getElementById('r-etab').value;
-      const date = document.getElementById('r-date').value;
-      const note = document.getElementById('r-note').value;
+      const etabId = document.getElementById('r-etab').value, date = document.getElementById('r-date').value, note = document.getElementById('r-note').value;
       if (!etabId || !date) { toast('❌ Remplissez tous les champs', 'error'); return; }
       window.RAPPELS.push({ etabId, date, note, fait: false }); lsSet('stage_rappels_v4', window.RAPPELS);
-      closeModal('rappelModal'); renderRappels(); renderCards();
-      toast('✅ Rappel enregistré', 'success');
+      closeModal('rappelModal'); renderRappels(); renderCards(); toast('✅ Rappel enregistré', 'success');
     };
     window.doneRappel = (i) => { window.RAPPELS[i].fait = true; lsSet('stage_rappels_v4', window.RAPPELS); renderRappels(); renderCards(); toast('✅ Rappel marqué fait', 'success'); };
-    window.deleteRappel = (i) => { window.RAPPELS.splice(i, 1); lsSet('stage_rappels_v4', window.RAPPELS); renderRappels(); renderCards(); toast('🗑️ Rappel supprimé'); };
+    window.delRappel = (i) => { window.RAPPELS.splice(i, 1); lsSet('stage_rappels_v4', window.RAPPELS); renderRappels(); renderCards(); toast('🗑️ Rappel supprimé'); };
 
     // LOGS
     function addLog(type, msg) { window.LOGS.unshift({ type, msg, time: now() }); if (window.LOGS.length > 200) window.LOGS.pop(); lsSet('stage_logs_v5', window.LOGS); renderLogs(); }
     window.addLog = addLog;
-    window.setLogFilter = (f, btn) => { curLogFilter = f; document.querySelectorAll('#page-logs .filter-tab').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderLogs(); };
-    window.renderLogs = function () {
-      const list = document.getElementById('logs-list');
-      if (!list) return;
+    window.setLogFilter = (f, btn) => { curLogFilter = f; document.querySelectorAll('#page-logs .ftab').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderLogs(); };
+    window.renderLogs = () => {
+      const list = document.getElementById('logs-list'); if (!list) return;
       const filtered = curLogFilter === 'all' ? window.LOGS : window.LOGS.filter(l => l.type === curLogFilter);
-      if (!filtered.length) { list.innerHTML = '<div style="padding:30px;text-align:center;color:var(--txt2)">Aucune activité</div>'; return; }
-      const colors = { statut: 'var(--gold)', note: 'var(--blue)', etab: 'var(--green)' };
-      list.innerHTML = filtered.map(l => `<div class="log-entry"><span class="log-time">${l.time}</span><span class="log-type" style="background:${colors[l.type] || 'var(--border)'}20;color:${colors[l.type] || 'var(--txt2)'}">${l.type}</span><span class="log-msg">${l.msg}</span></div>`).join('');
+      if (!filtered.length) { list.innerHTML = '<div style="padding:28px;text-align:center;color:var(--txt2)">Aucune activité</div>'; return; }
+      const colors = { statut: 'var(--accent)', note: 'var(--blue)', etab: 'var(--green)' };
+      list.innerHTML = filtered.map(l => `<div class="log-row"><span class="log-t">${l.time}</span><span class="log-type" style="background:${colors[l.type] || 'var(--border)'}20;color:${colors[l.type] || 'var(--txt2)'}">${l.type}</span><span class="log-msg">${l.msg}</span></div>`).join('');
     };
     window.clearLogs = () => { window.LOGS = []; lsSet('stage_logs_v5', window.LOGS); renderLogs(); toast('🗑️ Journal vidé'); };
 
-    // ADD / EDIT ETABLISSEMENT
-    function buildHorairesEditor(horaires) {
-      return DAYS.map(d => { const existing = horaires.find(h => h.j === d); return `<div class="horaire-row"><label>${d}</label><input type="text" placeholder="Fermé" value="${existing?.h || ''}" data-day="${d}"></div>`; }).join('');
+    // ADD / EDIT
+    function buildHorEd(horaires) {
+      return DAYS.map(d => { const ex = horaires.find(h => h.j === d); return `<div class="hor-row"><label>${d}</label><input type="text" placeholder="Fermé" value="${ex?.h || ''}" data-day="${d}"></div>`; }).join('');
     }
     window.openModal = (id) => {
       if (id === 'addModal') {
         editingId = null;
-        document.getElementById('addModal-title').textContent = '➕ Ajouter un établissement';
+        document.getElementById('addModal-title').textContent = 'Ajouter un établissement';
         ['nom', 'type', 'adresse', 'tel', 'maps', 'website', 'social'].forEach(f => { const el = document.getElementById('f-' + f); if (el) el.value = ''; });
         document.getElementById('f-note').value = '';
         document.getElementById('f-priorite').value = 'moyenne';
         document.getElementById('f-statut').value = 'todo';
-        document.getElementById('f-horaires').innerHTML = buildHorairesEditor([]);
-        renderCatCheckboxes([]);
+        document.getElementById('f-horaires').innerHTML = buildHorEd([]);
       }
       document.getElementById(id).classList.add('open');
     };
     window.closeModal = (id) => document.getElementById(id).classList.remove('open');
     window.openEditModal = (id) => {
-      editingId = id;
-      const e = window.ETABLISSEMENTS.find(x => x.id === id);
-      if (!e) return;
-      document.getElementById('addModal-title').textContent = "✏️ Modifier l'établissement";
+      editingId = id; const e = window.ETABLISSEMENTS.find(x => x.id === id); if (!e) return;
+      document.getElementById('addModal-title').textContent = "Modifier l'établissement";
       document.getElementById('f-nom').value = e.nom || '';
       document.getElementById('f-type').value = e.type || '';
       document.getElementById('f-adresse').value = e.adresse || '';
@@ -2378,36 +2178,26 @@
       document.getElementById('f-maps').value = e.maps || '';
       document.getElementById('f-website').value = e.website || '';
       document.getElementById('f-social').value = e.social || '';
-      document.getElementById('f-horaires').innerHTML = buildHorairesEditor(e.horaires || []);
-      renderCatCheckboxes(e.categories || []);
+      document.getElementById('f-horaires').innerHTML = buildHorEd(e.horaires || []);
       openModal('addModal');
     };
-    function renderCatCheckboxes(selected) {
-      const wrap = document.getElementById('f-cats-checkboxes');
-      wrap.innerHTML = window.CATEGORIES.map(c => `<label style="display:flex;align-items:center;gap:6px;cursor:pointer;background:${selected.includes(c.id) ? c.couleur + '22' : 'var(--bg3)'};border:1px solid ${selected.includes(c.id) ? c.couleur : 'var(--border2)'};padding:6px 11px;border-radius:9px;font-size:12px;font-weight:600;transition:all .15s" id="cat-lbl-${c.id}"><input type="checkbox" value="${c.id}" ${selected.includes(c.id) ? 'checked' : ''} onchange="updateCatLabel('${c.id}','${c.couleur}',this.checked)" style="display:none">${c.emoji} ${c.nom}</label>`).join('');
-    }
-    window.updateCatLabel = (id, couleur, checked) => { const lbl = document.getElementById('cat-lbl-' + id); if (lbl) { lbl.style.background = checked ? couleur + '22' : 'var(--bg3)'; lbl.style.borderColor = checked ? couleur : 'var(--border2)'; } };
     window.saveEtab = () => {
-      const nom = document.getElementById('f-nom').value.trim();
-      const type = document.getElementById('f-type').value.trim();
+      const nom = document.getElementById('f-nom').value.trim(), type = document.getElementById('f-type').value.trim();
       if (!nom || !type) { toast('❌ Nom et type requis', 'error'); return; }
       const horaires = DAYS.map(d => { const inp = document.querySelector(`#f-horaires [data-day="${d}"]`); const h = inp ? inp.value.trim() : ''; return h ? { j: d, h } : null; }).filter(Boolean);
-      const selectedCats = Array.from(document.querySelectorAll('#f-cats-checkboxes input:checked')).map(i => i.value);
-      const data = { nom, type, adresse: document.getElementById('f-adresse').value.trim(), tel: document.getElementById('f-tel').value.trim(), note: parseFloat(document.getElementById('f-note').value) || null, priorite: document.getElementById('f-priorite').value, maps: document.getElementById('f-maps').value.trim(), website: document.getElementById('f-website').value.trim(), social: document.getElementById('f-social').value.trim(), horaires, categories: selectedCats };
+      const data = { nom, type, adresse: document.getElementById('f-adresse').value.trim(), tel: document.getElementById('f-tel').value.trim(), note: parseFloat(document.getElementById('f-note').value) || null, priorite: document.getElementById('f-priorite').value, maps: document.getElementById('f-maps').value.trim(), website: document.getElementById('f-website').value.trim(), social: document.getElementById('f-social').value.trim(), horaires };
       const newStatus = document.getElementById('f-statut').value;
       if (editingId) {
         const idx = window.ETABLISSEMENTS.findIndex(e => e.id === editingId);
         if (idx > -1) window.ETABLISSEMENTS[idx] = { ...window.ETABLISSEMENTS[idx], ...data };
         window.statuses[editingId] = newStatus;
-        addLog('etab', `✏️ Établissement modifié : ${nom}`);
-        toast('✅ Établissement modifié', 'success');
+        addLog('etab', `✏️ Modifié : ${nom}`); toast('✅ Établissement modifié', 'success');
       } else {
         const newId = Date.now();
         window.ETABLISSEMENTS.push({ id: newId, ...data });
         window.statuses[newId] = newStatus;
-        update(ref(db, 'stages/' + newId), { nom, adresse: data.adresse, tel: data.tel, type: data.type, statut: STATUS_DEF[newStatus]?.label, notes: '' });
-        addLog('etab', `➕ Établissement ajouté : ${nom}`);
-        toast('✅ Établissement ajouté', 'success');
+        update(ref(db, 'stages/' + newId), { nom, adresse: data.adresse, tel: data.tel, type: data.type, statut: ST[newStatus]?.label, notes: '' });
+        addLog('etab', `➕ Ajouté : ${nom}`); toast('✅ Établissement ajouté', 'success');
       }
       lsSet('stage_statuses_v5', window.statuses);
       const extra = window.ETABLISSEMENTS.filter(e => e.id > 14);
@@ -2422,27 +2212,21 @@
       delete window.statuses[id];
       remove(ref(db, 'stages/' + id));
       const extra = window.ETABLISSEMENTS.filter(e => e.id > 14);
-      lsSet('stage_etabs_extra', extra);
-      lsSet('stage_statuses_v5', window.statuses);
-      addLog('etab', `🗑️ Établissement supprimé : ${e?.nom}`);
-      renderCards(); syncObjectifsAuto();
-      toast('🗑️ Établissement supprimé');
+      lsSet('stage_etabs_extra', extra); lsSet('stage_statuses_v5', window.statuses);
+      addLog('etab', `🗑️ Supprimé : ${e?.nom}`); renderCards(); syncObjectifsAuto(); toast('🗑️ Supprimé');
     };
 
     // INIT
     document.addEventListener('DOMContentLoaded', () => {
-      renderCards();
-      syncObjectifsAuto();
-      setFbState('syncing', 'Connexion...');
+      renderCards(); syncObjectifsAuto(); setFb('sync', 'Connexion...');
       const today = new Date().toISOString().slice(0, 10);
       const pending = window.RAPPELS.filter(r => !r.fait && r.date <= today);
       if (pending.length) toast(`⏰ ${pending.length} rappel(s) en attente !`);
     });
-
-    document.getElementById('syncOverlay').addEventListener('click', (e) => {
-      if (e.target === document.getElementById('syncOverlay')) {
+    document.getElementById('syncOv').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('syncOv')) {
         const card = document.getElementById('syncCard');
-        if (!card.innerHTML.includes('sync-spinner')) closeSyncOverlay();
+        if (!card.innerHTML.includes('spin')) closeSyncOv();
       }
     });
   </script>
