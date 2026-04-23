@@ -4,688 +4,762 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recherche de stage — Valenciennes</title>
+  <title>🎓 Recherche de Stage — Valenciennes</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display:ital@0;1&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
     rel="stylesheet">
   <style>
     :root {
-      --noir: #0d0d0d;
-      --creme: #f0ebe0;
-      --or: #c9a84c;
-      --or-light: #e8c96a;
-      --vert: #27ae60;
-      --bleu: #2980b9;
-      --violet: #8e44ad;
-      --rouge: #c0392b;
-      --orange: #e67e22;
-      --gris: #5a5a5a;
-      --card-bg: #161616;
-      --card-hover: #1e1e1e;
-      --border: #252525;
-      --border-light: #333;
+      --bg: #07080d;
+      --bg2: #0d0f18;
+      --bg3: #141720;
+      --border: #1e2130;
+      --border2: #252840;
+      --gold: #e8b84b;
+      --gold2: #f5d07a;
+      --gold-dim: rgba(232, 184, 75, .12);
+      --green: #34d399;
+      --blue: #60a5fa;
+      --violet: #a78bfa;
+      --red: #f87171;
+      --orange: #fb923c;
+      --txt: #eef0f8;
+      --txt2: #6b7194;
+      --txt3: #9ca3c4;
+      --card: #0f111a;
+      --shadow: 0 20px 60px rgba(0, 0, 0, .6);
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      background: var(--noir);
-      color: var(--creme);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--txt);
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* TOAST */
-    #toast {
+    /* BG AMBIENT */
+    body::before {
+      content: '';
       position: fixed;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: #1e1e1e;
-      border: 1px solid var(--border-light);
-      color: var(--creme);
-      font-size: 13px;
-      padding: 11px 22px;
-      border-radius: 40px;
-      z-index: 9999;
-      transition: transform .3s, opacity .3s;
-      opacity: 0;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 15% -10%, rgba(232, 184, 75, .08) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 85% 90%, rgba(167, 139, 250, .06) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 30% at 50% 50%, rgba(96, 165, 250, .03) 0%, transparent 60%);
       pointer-events: none;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, .6);
+      z-index: 0;
     }
 
-    #toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
+    /* ── HEADER ── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 8, 13, .92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 0 20px rgba(232, 184, 75, .3);
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      color: var(--txt2);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 1px;
+    }
+
+    .header-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* NAV PILLS */
+    .nav-pills {
+      display: flex;
+      gap: 2px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3px;
+    }
+
+    .nav-pill {
+      padding: 7px 16px;
+      border-radius: 9px;
+      border: none;
+      background: transparent;
+      color: var(--txt2);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-pill:hover {
+      color: var(--txt);
+    }
+
+    .nav-pill.active {
+      background: linear-gradient(135deg, rgba(232, 184, 75, .18), rgba(232, 184, 75, .08));
+      color: var(--gold);
+      border: 1px solid rgba(232, 184, 75, .25);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
     /* FB STATUS */
-    #fb-status {
-      position: fixed;
-      top: 12px;
-      right: 16px;
-      z-index: 300;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border-radius: 20px;
-      border: 1px solid;
-      transition: all .4s;
-    }
-
-    #fb-status.connecting {
-      background: rgba(201, 168, 76, .1);
-      border-color: rgba(201, 168, 76, .3);
-      color: var(--or);
-    }
-
-    #fb-status.connected {
-      background: rgba(39, 174, 96, .1);
-      border-color: rgba(39, 174, 96, .3);
-      color: var(--vert);
-    }
-
-    #fb-status.error {
-      background: rgba(192, 57, 43, .1);
-      border-color: rgba(192, 57, 43, .3);
-      color: var(--rouge);
-    }
-
-    /* HEADER */
-    header {
-      position: relative;
-      padding: 70px 48px 52px;
-      border-bottom: 1px solid var(--border);
-      overflow: hidden;
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: -80px;
-      right: -100px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(201, 168, 76, .09) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .badge {
-      display: inline-flex;
+    .fb-pill {
+      display: flex;
       align-items: center;
       gap: 6px;
-      background: rgba(201, 168, 76, .1);
-      border: 1px solid rgba(201, 168, 76, .25);
-      color: var(--or);
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border2);
+      background: var(--bg3);
+      font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 40px;
-      margin-bottom: 22px;
+      color: var(--txt2);
+      transition: all .3s;
     }
 
-    h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(42px, 7vw, 96px);
-      line-height: .88;
-      letter-spacing: 3px;
-      margin-bottom: 4px;
+    .fb-pill.synced {
+      color: var(--green);
+      border-color: rgba(52, 211, 153, .25);
+      background: rgba(52, 211, 153, .06);
     }
 
-    h1 .gold {
-      color: var(--or);
+    .fb-pill.syncing {
+      color: var(--gold);
+      border-color: rgba(232, 184, 75, .25);
+      background: rgba(232, 184, 75, .06);
     }
 
-    h1 .dim {
-      color: rgba(240, 235, 224, .22);
+    .fb-pill.error {
+      color: var(--red);
+      border-color: rgba(248, 113, 113, .25);
+      background: rgba(248, 113, 113, .06);
     }
 
-    .subtitle {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 17px;
-      color: var(--gris);
-      margin-top: 18px;
-      margin-bottom: 36px;
+    .fb-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
     }
 
-    .stats-row {
-      display: flex;
-      flex-wrap: wrap;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      max-width: 860px;
+    .fb-pill.synced .fb-dot {
+      box-shadow: 0 0 5px currentColor;
     }
 
-    .stat {
-      flex: 1;
-      min-width: 90px;
-      padding: 15px 18px;
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    .fb-pill.syncing .fb-dot {
+      animation: pulse-dot 1s infinite;
     }
 
-    .stat:last-child {
-      border-right: none;
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .4
+      }
     }
 
-    .stat-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 30px;
-      line-height: 1;
-    }
-
-    .c-or {
-      color: var(--or)
-    }
-
-    .c-vert {
-      color: var(--vert)
-    }
-
-    .c-bleu {
-      color: var(--bleu)
-    }
-
-    .c-violet {
-      color: var(--violet)
-    }
-
-    .c-rouge {
-      color: var(--rouge)
-    }
-
-    .c-gris {
-      color: var(--gris)
-    }
-
-    .c-orange {
-      color: var(--orange)
-    }
-
-    .stat-label {
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--gris);
-    }
-
-    /* secret admin hint */
-    .admin-hint {
-      position: absolute;
-      bottom: 14px;
-      right: 48px;
-      font-size: 10px;
-      color: rgba(90, 90, 90, .4);
-      letter-spacing: 1px;
-    }
-
-    /* NAV */
-    .nav-wrap {
-      position: sticky;
-      top: 0;
-      background: rgba(13, 13, 13, .96);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-      z-index: 200;
-    }
-
-    .nav-tabs {
-      display: flex;
-      padding: 0 48px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .nav-tabs::-webkit-scrollbar {
-      display: none;
-    }
-
-    .tab-btn {
-      background: none;
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 18px;
+      border-radius: 10px;
       border: none;
-      color: var(--gris);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      padding: 18px 20px;
       cursor: pointer;
-      border-bottom: 2px solid transparent;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
       transition: all .2s;
-      white-space: nowrap;
-      position: relative;
-      bottom: -1px;
+      text-decoration: none;
     }
 
-    .tab-btn:hover {
-      color: var(--creme);
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #000;
+      box-shadow: 0 4px 16px rgba(232, 184, 75, .25);
     }
 
-    .tab-btn.active {
-      color: var(--or);
-      border-bottom-color: var(--or);
+    .btn-gold:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(232, 184, 75, .4);
     }
 
-    /* SECTIONS */
-    .section {
+    .btn-outline {
+      background: transparent;
+      color: var(--txt2);
+      border: 1px solid var(--border2);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, .04);
+      color: var(--txt2);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      color: var(--txt);
+      border-color: var(--border2);
+    }
+
+    .btn-sync {
+      background: linear-gradient(135deg, #f5820d, #ffa726);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(245, 130, 13, .3);
+    }
+
+    .btn-sync:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(245, 130, 13, .45);
+    }
+
+    .btn-sync.spinning .sync-ico {
+      animation: spin .8s linear infinite;
+      display: inline-block;
+    }
+
+    .btn-admin {
+      background: transparent;
+      color: var(--txt2);
+      border: 1px solid var(--border2);
+    }
+
+    .btn-admin:hover {
+      border-color: var(--violet);
+      color: var(--violet);
+    }
+
+    .btn-admin.active {
+      color: var(--green);
+      border-color: rgba(52, 211, 153, .35);
+      background: rgba(52, 211, 153, .07);
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    /* ── PAGES ── */
+    .page {
       display: none;
-      padding: 44px 48px;
-      max-width: 1200px;
-      margin: 0 auto;
-      animation: fadeUp .35s ease;
+      padding: 28px;
+      position: relative;
+      z-index: 1;
     }
 
-    .section.active {
+    .page.active {
       display: block;
+      animation: fadeSlide .3s ease;
     }
 
-    @keyframes fadeUp {
+    @keyframes fadeSlide {
       from {
         opacity: 0;
-        transform: translateY(14px)
+        transform: translateY(10px)
       }
 
       to {
         opacity: 1;
-        transform: translateY(0)
+        transform: none
       }
     }
 
-    .section-header {
-      margin-bottom: 30px;
-    }
-
-    .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 38px;
-      letter-spacing: 1.5px;
-    }
-
-    .section-title span {
-      color: var(--or);
-    }
-
-    .section-desc {
-      color: var(--gris);
-      font-size: 13px;
-      margin-top: 6px;
-    }
-
-    /* FILTER BAR */
-    .filter-bar {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 26px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .filter-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--gris);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      padding: 8px 14px;
-      cursor: pointer;
-      transition: all .18s;
+    /* ── HERO SECTION (Établissements) ── */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(232, 184, 75, .1) 0%, rgba(167, 139, 250, .06) 50%, transparent 100%);
+      border: 1px solid rgba(232, 184, 75, .15);
+      border-radius: 20px;
+      padding: 32px 36px;
+      margin-bottom: 28px;
       display: flex;
       align-items: center;
-      gap: 5px;
-    }
-
-    .filter-btn .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-
-    .filter-btn:hover {
-      border-color: var(--border-light);
-      color: var(--creme);
-    }
-
-    .filter-btn.f-all.active {
-      background: rgba(201, 168, 76, .13);
-      color: var(--or);
-      border-color: rgba(201, 168, 76, .4);
-      font-weight: 600;
-    }
-
-    .filter-btn.f-todo.active {
-      background: rgba(201, 168, 76, .13);
-      color: var(--or);
-      border-color: rgba(201, 168, 76, .4);
-      font-weight: 600;
-    }
-
-    .filter-btn.f-done.active {
-      background: rgba(39, 174, 96, .11);
-      color: var(--vert);
-      border-color: rgba(39, 174, 96, .4);
-      font-weight: 600;
-    }
-
-    .filter-btn.f-waiting.active {
-      background: rgba(41, 128, 185, .11);
-      color: var(--bleu);
-      border-color: rgba(41, 128, 185, .4);
-      font-weight: 600;
-    }
-
-    .filter-btn.f-stage.active {
-      background: rgba(142, 68, 173, .11);
-      color: var(--violet);
-      border-color: rgba(142, 68, 173, .4);
-      font-weight: 600;
-    }
-
-    .filter-btn.f-refused.active {
-      background: rgba(192, 57, 43, .11);
-      color: var(--rouge);
-      border-color: rgba(192, 57, 43, .4);
-      font-weight: 600;
-    }
-
-    .filter-sep {
-      width: 1px;
-      height: 24px;
-      background: var(--border);
-      margin: 0 4px;
-    }
-
-    .search-wrap {
+      gap: 28px;
       position: relative;
-      display: flex;
-      align-items: center;
+      overflow: hidden;
     }
 
-    .search-ico {
+    .hero-banner::before {
+      content: '';
       position: absolute;
-      left: 11px;
-      font-size: 12px;
+      top: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(232, 184, 75, .12) 0%, transparent 70%);
       pointer-events: none;
     }
 
-    .search-input {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--creme);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      padding: 8px 12px 8px 32px;
-      outline: none;
-      transition: border-color .2s;
-      min-width: 170px;
-    }
-
-    .search-input:focus {
-      border-color: rgba(201, 168, 76, .4);
-    }
-
-    .cat-filter-row {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-
-    .cat-pill {
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      cursor: pointer;
-      transition: all .18s;
-      color: var(--gris);
-    }
-
-    .cat-pill:hover {
-      color: var(--creme);
-      border-color: var(--border-light);
-    }
-
-    .cat-pill.active {
-      font-weight: 700;
-    }
-
-    /* CARDS */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: border-color .2s, transform .2s, box-shadow .2s;
-    }
-
-    .card:hover {
-      border-color: var(--border-light);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 32px rgba(0, 0, 0, .45);
-    }
-
-    .card[data-status="todo"] {
-      border-left: 3px solid var(--or);
-    }
-
-    .card[data-status="done"] {
-      border-left: 3px solid var(--vert);
-    }
-
-    .card[data-status="waiting"] {
-      border-left: 3px solid var(--bleu);
-    }
-
-    .card[data-status="stage"] {
-      border-left: 3px solid var(--violet);
-    }
-
-    .card[data-status="refused"] {
-      border-left: 3px solid var(--rouge);
-      opacity: .6;
-    }
-
-    .card-body {
-      padding: 22px 22px 14px;
-      flex: 1;
-    }
-
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .card-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: 17px;
-      line-height: 1.25;
-      flex: 1;
-    }
-
-    .card-badge {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      padding: 3px 9px;
-      border-radius: 20px;
-      white-space: nowrap;
+    .hero-emoji {
+      font-size: 52px;
+      filter: drop-shadow(0 0 20px rgba(232, 184, 75, .4));
       flex-shrink: 0;
     }
 
+    .hero-text h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+
+    .hero-text p {
+      color: var(--txt2);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* STATS STRIP */
+    .stats-strip {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .stat-chip {
+      flex: 1;
+      min-width: 100px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .stat-chip:hover {
+      border-color: var(--border2);
+      transform: translateY(-2px);
+    }
+
+    .stat-chip-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .stat-chip-label {
+      font-size: 11px;
+      color: var(--txt2);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-weight: 600;
+    }
+
+    /* FILTERS */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .filter-tab {
+      padding: 7px 16px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--txt2);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .filter-tab:hover {
+      border-color: var(--border2);
+      color: var(--txt);
+    }
+
+    .filter-tab.active {
+      background: var(--gold-dim);
+      color: var(--gold);
+      border-color: rgba(232, 184, 75, .3);
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 14px;
+      flex: 0 0 220px;
+      transition: border-color .2s;
+    }
+
+    .search-box:focus-within {
+      border-color: rgba(232, 184, 75, .35);
+    }
+
+    .search-box input {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--txt);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      width: 100%;
+    }
+
+    .search-box input::placeholder {
+      color: var(--txt2);
+    }
+
+    .cat-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .cat-chip {
+      padding: 5px 13px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--txt2);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .cat-chip:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .cat-chip.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    /* STATUS SECTION */
+    .status-block {
+      margin-bottom: 32px;
+    }
+
+    .status-block-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      padding: 12px 16px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .status-block-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      flex: 1;
+    }
+
+    .status-block-count {
+      padding: 3px 11px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .collapse-btn {
+      background: none;
+      border: 1px solid var(--border2);
+      border-radius: 7px;
+      color: var(--txt2);
+      font-size: 11px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      transition: all .2s;
+    }
+
+    .collapse-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* CARDS GRID */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 14px;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all .25s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(232, 184, 75, .25);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .4);
+    }
+
+    .card-body {
+      padding: 18px;
+      flex: 1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .card-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
     .badge-todo {
-      background: rgba(201, 168, 76, .14);
-      color: var(--or);
+      background: rgba(232, 184, 75, .12);
+      color: var(--gold);
+      border: 1px solid rgba(232, 184, 75, .25);
     }
 
     .badge-done {
-      background: rgba(39, 174, 96, .12);
-      color: var(--vert);
+      background: rgba(52, 211, 153, .12);
+      color: var(--green);
+      border: 1px solid rgba(52, 211, 153, .25);
     }
 
     .badge-waiting {
-      background: rgba(41, 128, 185, .12);
-      color: var(--bleu);
+      background: rgba(96, 165, 250, .12);
+      color: var(--blue);
+      border: 1px solid rgba(96, 165, 250, .25);
+    }
+
+    .badge-rdv {
+      background: rgba(251, 146, 60, .12);
+      color: var(--orange);
+      border: 1px solid rgba(251, 146, 60, .25);
     }
 
     .badge-stage {
-      background: rgba(142, 68, 173, .12);
+      background: rgba(167, 139, 250, .12);
       color: var(--violet);
+      border: 1px solid rgba(167, 139, 250, .25);
     }
 
     .badge-refused {
-      background: rgba(192, 57, 43, .12);
-      color: var(--rouge);
+      background: rgba(248, 113, 113, .12);
+      color: var(--red);
+      border: 1px solid rgba(248, 113, 113, .25);
     }
 
     .card-info {
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 6px;
     }
 
     .info-row {
       display: flex;
-      align-items: flex-start;
-      gap: 9px;
+      align-items: center;
+      gap: 8px;
       font-size: 13px;
-      color: rgba(240, 235, 224, .58);
-      line-height: 1.4;
-    }
-
-    .info-row .ico {
-      font-size: 12px;
-      flex-shrink: 0;
-      margin-top: 1px;
+      color: var(--txt2);
     }
 
     .info-row a {
-      color: var(--or);
+      color: var(--blue);
       text-decoration: none;
     }
 
     .info-row a:hover {
-      text-decoration: underline;
+      color: var(--gold);
     }
 
-    .card-type-tag {
+    .card-type {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      background: rgba(255, 255, 255, .03);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      font-size: 10px;
-      color: var(--gris);
-      padding: 2px 8px;
-      margin-top: 3px;
+      gap: 5px;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 8px;
+      background: rgba(232, 184, 75, .08);
+      color: var(--gold);
+      border: 1px solid rgba(232, 184, 75, .15);
+      font-weight: 600;
     }
 
-    .card-cats {
+    .prio-badge {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .prio-haute {
+      background: rgba(248, 113, 113, .1);
+      color: #ff7676;
+      border: 1px solid rgba(248, 113, 113, .2);
+    }
+
+    .prio-basse {
+      background: rgba(107, 113, 148, .1);
+      color: var(--txt2);
+      border: 1px solid rgba(107, 113, 148, .2);
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 12px;
+    }
+
+    .rating-txt {
+      font-size: 11px;
+      color: var(--txt2);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .cats-row {
       display: flex;
-      gap: 4px;
+      gap: 5px;
       flex-wrap: wrap;
       margin-top: 4px;
     }
 
-    .card-cat-tag {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border-radius: 10px;
-    }
-
-    .rating-row {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin-top: 3px;
-    }
-
-    .stars {
-      color: var(--or);
-      font-size: 11px;
-    }
-
-    .rating-num {
-      font-size: 11px;
-      color: var(--gris);
-    }
-
-    .priority-badge {
-      font-size: 9px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 10px;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-    }
-
-    .p-haute {
-      background: rgba(192, 57, 43, .15);
-      color: var(--rouge);
-    }
-
-    .p-moyenne {
-      background: rgba(201, 168, 76, .13);
-      color: var(--or);
-    }
-
-    .p-basse {
-      background: rgba(90, 90, 90, .15);
-      color: var(--gris);
+    .cat-tag {
+      font-size: 10px;
+      padding: 3px 9px;
+      border-radius: 7px;
+      font-weight: 600;
     }
 
     /* HORAIRES */
-    .horaires-section {
-      padding: 11px 22px 13px;
+    .horaires-panel {
+      padding: 12px 18px;
       border-top: 1px solid var(--border);
-      background: rgba(0, 0, 0, .18);
+      background: rgba(255, 255, 255, .015);
     }
 
-    .horaires-label {
-      font-size: 9px;
-      letter-spacing: 1.5px;
+    .horaires-lbl {
+      font-size: 10px;
       text-transform: uppercase;
-      color: var(--gris);
-      margin-bottom: 8px;
+      letter-spacing: .08em;
+      color: var(--txt2);
+      font-weight: 700;
+      margin-bottom: 10px;
     }
 
     .horaires-grid {
@@ -694,1857 +768,1172 @@
       gap: 4px;
     }
 
-    .h-day {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
+    .h-col {
+      text-align: center;
     }
 
     .h-day-name {
-      font-size: 8.5px;
+      font-size: 9px;
+      color: var(--txt2);
       font-weight: 700;
       text-transform: uppercase;
-      color: var(--gris);
+      margin-bottom: 5px;
     }
 
-    .h-day-dot {
-      width: 8px;
-      height: 8px;
+    .h-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
+      margin: 0 auto 4px;
     }
 
-    .h-day-dot.open {
-      background: var(--vert);
-      box-shadow: 0 0 5px rgba(39, 174, 96, .5);
+    .h-dot.open {
+      background: var(--green);
+      box-shadow: 0 0 5px rgba(52, 211, 153, .5);
     }
 
-    .h-day-dot.closed {
-      background: rgba(90, 90, 90, .4);
+    .h-dot.closed {
+      background: var(--border);
     }
 
-    .h-day-time {
+    .h-time {
       font-size: 8px;
-      color: rgba(240, 235, 224, .3);
-      text-align: center;
-      line-height: 1.25;
-      word-break: break-all;
+      color: var(--txt2);
+      line-height: 1.4;
     }
 
     /* CARD ACTIONS */
     .card-actions {
-      padding: 10px 14px;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 5px;
-      border-top: 1px solid var(--border);
-      background: rgba(0, 0, 0, .1);
-    }
-
-    .action-btn {
-      background: rgba(255, 255, 255, .02);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--gris);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .3px;
-      padding: 7px 4px;
-      cursor: pointer;
-      transition: all .18s;
-      text-align: center;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      line-height: 1.2;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 10px 18px;
+      border-top: 1px solid var(--border);
     }
 
-    .action-btn .btn-ico {
-      font-size: 14px;
-    }
-
-    .action-btn:hover {
-      border-color: var(--border-light);
-      color: var(--creme);
-      background: rgba(255, 255, 255, .05);
-    }
-
-    .action-btn.active-btn {
-      font-weight: 700;
-      transform: scale(1.03);
-    }
-
-    .btn-todo.active-btn,
-    .btn-todo:hover {
-      background: rgba(201, 168, 76, .16);
-      color: var(--or);
-      border-color: rgba(201, 168, 76, .5);
-    }
-
-    .btn-done.active-btn,
-    .btn-done:hover {
-      background: rgba(39, 174, 96, .14);
-      color: var(--vert);
-      border-color: rgba(39, 174, 96, .5);
-    }
-
-    .btn-waiting.active-btn,
-    .btn-waiting:hover {
-      background: rgba(41, 128, 185, .14);
-      color: var(--bleu);
-      border-color: rgba(41, 128, 185, .5);
-    }
-
-    .btn-stage.active-btn,
-    .btn-stage:hover {
-      background: rgba(142, 68, 173, .14);
-      color: var(--violet);
-      border-color: rgba(142, 68, 173, .5);
-    }
-
-    .btn-refused.active-btn,
-    .btn-refused:hover {
-      background: rgba(192, 57, 43, .14);
-      color: var(--rouge);
-      border-color: rgba(192, 57, 43, .5);
-    }
-
-    .card-note-wrap {
-      padding: 0 14px 14px;
-    }
-
-    .card-note-input {
-      width: 100%;
-      background: rgba(255, 255, 255, .025);
+    .act-btn {
+      flex: 1;
+      min-width: 72px;
+      padding: 6px 8px;
+      border-radius: 8px;
       border: 1px solid var(--border);
-      border-radius: 6px;
-      color: rgba(240, 235, 224, .65);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11.5px;
-      padding: 8px 10px;
-      resize: none;
+      background: var(--bg3);
+      color: var(--txt2);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .act-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .act-btn.active-todo {
+      background: rgba(232, 184, 75, .15);
+      color: var(--gold);
+      border-color: rgba(232, 184, 75, .35);
+    }
+
+    .act-btn.active-done {
+      background: rgba(52, 211, 153, .15);
+      color: var(--green);
+      border-color: rgba(52, 211, 153, .35);
+    }
+
+    .act-btn.active-waiting {
+      background: rgba(96, 165, 250, .15);
+      color: var(--blue);
+      border-color: rgba(96, 165, 250, .35);
+    }
+
+    .act-btn.active-rdv {
+      background: rgba(251, 146, 60, .15);
+      color: var(--orange);
+      border-color: rgba(251, 146, 60, .35);
+    }
+
+    .act-btn.active-stage {
+      background: rgba(167, 139, 250, .15);
+      color: var(--violet);
+      border-color: rgba(167, 139, 250, .35);
+    }
+
+    .act-btn.active-refused {
+      background: rgba(248, 113, 113, .15);
+      color: var(--red);
+      border-color: rgba(248, 113, 113, .35);
+    }
+
+    /* NOTE */
+    .note-wrap {
+      padding: 10px 18px 14px;
+      position: relative;
+    }
+
+    .note-ta {
+      width: 100%;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: var(--txt);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      padding: 8px 11px;
+      resize: vertical;
+      min-height: 52px;
       outline: none;
-      height: 44px;
       transition: border-color .2s;
     }
 
-    .card-note-input:focus {
-      border-color: rgba(201, 168, 76, .3);
-      color: var(--creme);
+    .note-ta:focus {
+      border-color: rgba(232, 184, 75, .35);
     }
 
-    .card-note-input::placeholder {
-      color: rgba(90, 90, 90, .7);
-      font-style: italic;
+    .note-ta.syncing {
+      border-color: rgba(232, 184, 75, .4);
     }
 
-    .empty-state {
-      grid-column: 1/-1;
-      text-align: center;
-      padding: 70px 20px;
-      color: var(--gris);
+    .note-ta.synced {
+      border-color: rgba(52, 211, 153, .4);
     }
 
-    .empty-state .big {
-      font-size: 52px;
-      margin-bottom: 14px;
+    .note-ind {
+      position: absolute;
+      right: 24px;
+      bottom: 20px;
+      font-size: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg3);
+      padding: 2px 7px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      opacity: 0;
+      transition: opacity .3s;
+      pointer-events: none;
+      color: var(--txt2);
     }
 
-    /* PROGRESS */
-    .progress-section {
-      background: var(--card-bg);
+    .note-ind.show {
+      opacity: 1;
+    }
+
+    .note-ind.ok {
+      color: var(--green);
+      border-color: rgba(52, 211, 153, .3);
+    }
+
+    .note-ind.saving {
+      color: var(--gold);
+      border-color: rgba(232, 184, 75, .3);
+    }
+
+    /* ── KANBAN ── */
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 14px;
+    }
+
+    .kanban-col {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .kanban-col-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .kanban-count {
+      background: rgba(255, 255, 255, .08);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 11px;
+      color: var(--txt2);
+    }
+
+    .kanban-item {
+      background: var(--bg3);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 24px 28px;
-      margin-bottom: 28px;
-    }
-
-    .progress-title {
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--gris);
-      margin-bottom: 14px;
-    }
-
-    .progress-bar-wrap {
-      background: var(--border);
-      border-radius: 4px;
-      height: 5px;
+      padding: 10px 13px;
       margin-bottom: 8px;
-      overflow: hidden;
+      cursor: pointer;
+      transition: all .2s;
+      font-size: 13px;
+      font-weight: 600;
     }
 
-    .progress-bar-fill {
-      height: 100%;
-      border-radius: 4px;
-      background: linear-gradient(90deg, var(--or), var(--or-light));
-      transition: width .7s cubic-bezier(.4, 0, .2, 1);
+    .kanban-item:hover {
+      border-color: var(--gold);
+      transform: translateX(3px);
+    }
+
+    .kanban-item-sub {
+      font-size: 11px;
+      color: var(--txt2);
+      margin-top: 4px;
+      font-weight: 400;
+    }
+
+    /* ── CHECKLIST ── */
+    .checklist-wrap {
+      max-width: 680px;
     }
 
     .progress-info {
       display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--gris);
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
     }
 
-    /* CHECKLIST */
-    .checklist-wrap {
-      background: var(--card-bg);
+    .progress-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .progress-bar-outer {
+      flex: 1;
+      height: 8px;
+      background: var(--bg3);
+      border-radius: 99px;
+      overflow: hidden;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 4px 20px;
+    }
+
+    .progress-bar-inner {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      border-radius: 99px;
+      transition: width .5s cubic-bezier(.4, 0, .2, 1);
     }
 
     .checklist-item {
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 13px 0;
-      border-bottom: 1px solid var(--border);
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      margin-bottom: 8px;
       cursor: pointer;
-      transition: opacity .15s;
-    }
-
-    .checklist-item:last-child {
-      border-bottom: none;
+      transition: all .2s;
     }
 
     .checklist-item:hover {
-      opacity: .8;
+      border-color: var(--border2);
+    }
+
+    .checklist-item.done {
+      opacity: .55;
+    }
+
+    .checklist-item.done .step-text {
+      text-decoration: line-through;
+      color: var(--txt2);
     }
 
     .check-box {
-      width: 18px;
-      height: 18px;
-      border: 2px solid var(--border-light);
-      border-radius: 5px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      transition: all .18s;
-    }
-
-    .check-box.checked {
-      background: var(--or);
-      border-color: var(--or);
-      color: var(--noir);
-    }
-
-    .check-label {
-      font-size: 13.5px;
-      flex: 1;
-    }
-
-    .check-label.done {
-      text-decoration: line-through;
-      color: var(--gris);
-    }
-
-    /* KANBAN */
-    .kanban {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
-      gap: 14px;
-    }
-
-    .kanban-col {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 15px;
-      min-height: 90px;
-    }
-
-    .kanban-col-title {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .k-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .k-count {
-      margin-left: auto;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    .kanban-item {
-      background: rgba(255, 255, 255, .035);
-      border: 1px solid var(--border);
+      width: 20px;
+      height: 20px;
       border-radius: 6px;
-      padding: 8px 10px;
-      font-size: 12px;
-      margin-bottom: 6px;
-      cursor: pointer;
-      transition: border-color .15s;
-    }
-
-    .kanban-item:hover {
-      border-color: var(--border-light);
-      background: rgba(255, 255, 255, .06);
-    }
-
-    .kanban-empty {
-      font-size: 12px;
-      color: var(--gris);
-      font-style: italic;
-    }
-
-    /* MEMBRES */
-    .membres-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-    }
-
-    .membre-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 22px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-
-    .membre-avatar {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
+      border: 2px solid var(--border2);
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .membre-info {
-      flex: 1;
-    }
-
-    .membre-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: 16px;
-      margin-bottom: 3px;
-    }
-
-    .membre-role {
-      font-size: 11px;
-      color: var(--gris);
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .membre-contacts {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .membre-contact {
       font-size: 12px;
-      color: rgba(240, 235, 224, .5);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .membre-contact a {
-      color: var(--or);
-      text-decoration: none;
-    }
-
-    .membre-status-badge {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      padding: 2px 8px;
-      border-radius: 10px;
-      display: inline-block;
-      margin-top: 6px;
-    }
-
-    .ms-actif {
-      background: rgba(39, 174, 96, .12);
-      color: var(--vert);
-    }
-
-    .ms-inactif {
-      background: rgba(90, 90, 90, .12);
-      color: var(--gris);
-    }
-
-    .ms-chef {
-      background: rgba(201, 168, 76, .14);
-      color: var(--or);
-    }
-
-    /* NOTES */
-    .info-box {
-      background: rgba(201, 168, 76, .05);
-      border: 1px solid rgba(201, 168, 76, .16);
-      border-radius: 8px;
-      padding: 14px 18px;
-      margin-bottom: 20px;
-      font-size: 13px;
-      color: rgba(240, 235, 224, .5);
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      line-height: 1.5;
-    }
-
-    .info-box .i-ico {
-      font-size: 17px;
-      flex-shrink: 0;
-    }
-
-    .info-box strong {
-      color: var(--or);
-    }
-
-    .notes-area {
-      width: 100%;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 18px 20px;
-      color: var(--creme);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      resize: vertical;
-      min-height: 220px;
-      outline: none;
-      transition: border-color .2s;
-      line-height: 1.7;
-    }
-
-    .notes-area:focus {
-      border-color: rgba(201, 168, 76, .38);
-    }
-
-    .notes-area::placeholder {
-      color: var(--gris);
-    }
-
-    .save-ind {
-      font-size: 11px;
-      color: var(--vert);
-      margin-top: 8px;
-      opacity: 0;
-      transition: opacity .4s;
-    }
-
-    .save-ind.show {
-      opacity: 1;
-    }
-
-    /* CONSEILS */
-    .conseils-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 16px;
-    }
-
-    .conseil-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 22px 24px;
-    }
-
-    .conseil-ico {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .conseil-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 17px;
-      margin-bottom: 10px;
-    }
-
-    .conseil-body {
-      font-size: 13px;
-      color: rgba(240, 235, 224, .52);
-      line-height: 1.7;
-    }
-
-    /* ─── ADMIN OVERLAY ─── */
-    #admin-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 5000;
-      display: none;
-    }
-
-    #admin-overlay.open {
-      display: flex;
-    }
-
-    #admin-login {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, .95);
-      backdrop-filter: blur(20px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .login-box {
-      background: var(--card-bg);
-      border: 1px solid var(--border-light);
-      border-radius: 16px;
-      padding: 48px 56px;
-      max-width: 420px;
-      width: 90%;
-      text-align: center;
-    }
-
-    .login-logo {
-      font-size: 48px;
-      margin-bottom: 16px;
-    }
-
-    .login-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 32px;
-      letter-spacing: 2px;
-      margin-bottom: 6px;
-    }
-
-    .login-sub {
-      color: var(--gris);
-      font-size: 13px;
-      margin-bottom: 32px;
-    }
-
-    .login-field {
-      width: 100%;
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-      color: var(--creme);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      padding: 13px 16px;
-      outline: none;
-      margin-bottom: 14px;
-      transition: border-color .2s;
-      text-align: center;
-      letter-spacing: 3px;
-    }
-
-    .login-field:focus {
-      border-color: rgba(201, 168, 76, .5);
-    }
-
-    .login-btn {
-      width: 100%;
-      background: linear-gradient(135deg, var(--or), var(--or-light));
-      border: none;
-      border-radius: 8px;
-      color: var(--noir);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 14px;
-      cursor: pointer;
-      transition: opacity .2s;
-      margin-top: 6px;
-    }
-
-    .login-btn:hover {
-      opacity: .85;
-    }
-
-    .login-err {
-      color: var(--rouge);
-      font-size: 12px;
-      margin-top: 10px;
-      opacity: 0;
-      transition: opacity .3s;
-    }
-
-    .login-err.show {
-      opacity: 1;
-    }
-
-    #admin-panel {
-      position: absolute;
-      inset: 0;
-      background: var(--noir);
-      display: none;
-      flex-direction: column;
-    }
-
-    #admin-panel.open {
-      display: flex;
-    }
-
-    .admin-topbar {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 0 32px;
-      height: 64px;
-      border-bottom: 1px solid var(--border);
-      background: var(--card-bg);
-      flex-shrink: 0;
-    }
-
-    .admin-topbar-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 24px;
-      letter-spacing: 2px;
-      color: var(--or);
-      flex: 1;
-    }
-
-    .admin-topbar-close {
-      background: rgba(192, 57, 43, .14);
-      border: 1px solid rgba(192, 57, 43, .4);
-      border-radius: 8px;
-      color: var(--rouge);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 8px 18px;
-      cursor: pointer;
       transition: all .2s;
     }
 
-    .admin-topbar-close:hover {
-      background: rgba(192, 57, 43, .28);
+    .checklist-item.done .check-box {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #000;
     }
 
-    .admin-fb-sync {
-      background: rgba(39, 174, 96, .1);
-      border: 1px solid rgba(39, 174, 96, .3);
-      border-radius: 8px;
-      color: var(--vert);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 8px 18px;
-      cursor: pointer;
-      transition: all .2s;
-    }
-
-    .admin-fb-sync:hover {
-      background: rgba(39, 174, 96, .2);
-    }
-
-    .admin-body {
-      display: flex;
+    .step-text {
       flex: 1;
-      overflow: hidden;
+      font-size: 14px;
     }
 
-    .admin-sidebar {
-      width: 230px;
-      flex-shrink: 0;
-      border-right: 1px solid var(--border);
-      padding: 24px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      background: rgba(0, 0, 0, .2);
-      overflow-y: auto;
-    }
-
-    .admin-nav-btn {
+    .del-step {
       background: none;
       border: none;
-      border-radius: 8px;
-      color: var(--gris);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 10px 14px;
+      color: var(--txt2);
       cursor: pointer;
-      text-align: left;
-      transition: all .2s;
+      font-size: 14px;
+      opacity: .5;
+      transition: opacity .2s;
+    }
+
+    .del-step:hover {
+      opacity: 1;
+      color: var(--red);
+    }
+
+    /* ── OBJECTIFS ── */
+    .obj-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 12px;
+      transition: border-color .2s;
+    }
+
+    .obj-card:hover {
+      border-color: var(--border2);
+    }
+
+    .obj-header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      margin-bottom: 12px;
     }
 
-    .admin-nav-btn:hover {
-      background: rgba(255, 255, 255, .04);
-      color: var(--creme);
+    .obj-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
     }
 
-    .admin-nav-btn.active {
-      background: rgba(201, 168, 76, .12);
-      color: var(--or);
+    .obj-nums {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
       font-weight: 600;
     }
 
-    .admin-nav-sep {
-      height: 1px;
-      background: var(--border);
-      margin: 8px 0;
-    }
-
-    .admin-content {
-      flex: 1;
-      overflow-y: auto;
-      padding: 32px;
-    }
-
-    .admin-page {
-      display: none;
-    }
-
-    .admin-page.active {
-      display: block;
-    }
-
-    .admin-page-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 30px;
-      letter-spacing: 1.5px;
-      margin-bottom: 4px;
-    }
-
-    .admin-page-title span {
-      color: var(--or);
-    }
-
-    .admin-page-desc {
-      color: var(--gris);
-      font-size: 13px;
-      margin-bottom: 28px;
-    }
-
-    .admin-table-wrap {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+    .obj-bar-outer {
+      height: 7px;
+      background: var(--bg3);
+      border-radius: 99px;
       overflow: hidden;
-      margin-bottom: 24px;
+      border: 1px solid var(--border);
     }
 
-    .admin-table {
-      width: 100%;
-      border-collapse: collapse;
+    .obj-bar-inner {
+      height: 100%;
+      border-radius: 99px;
+      transition: width .5s;
     }
 
-    .admin-table th {
-      background: rgba(255, 255, 255, .03);
+    .obj-sub {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--txt2);
+    }
+
+    /* ── RAPPELS ── */
+    .rappel-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: border-color .2s;
+    }
+
+    .rappel-card:hover {
+      border-color: var(--border2);
+    }
+
+    .rappel-card.fait {
+      opacity: .5;
+    }
+
+    .rappel-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .rappel-date {
+      font-size: 12px;
+      color: var(--txt2);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 2px;
+    }
+
+    /* ── LOGS ── */
+    .log-entry {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 11px 16px;
       border-bottom: 1px solid var(--border);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--gris);
-      padding: 12px 16px;
-      text-align: left;
-    }
-
-    .admin-table td {
-      padding: 12px 16px;
       font-size: 13px;
-      border-bottom: 1px solid rgba(37, 37, 37, .6);
-      vertical-align: middle;
+      transition: background .15s;
     }
 
-    .admin-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .admin-table tr:hover td {
+    .log-entry:hover {
       background: rgba(255, 255, 255, .02);
     }
 
-    .td-nom {
-      font-family: 'DM Serif Display', serif;
-      font-size: 14px;
+    .log-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--txt2);
+      flex-shrink: 0;
+      min-width: 135px;
     }
 
-    .td-badge {
-      display: inline-flex;
-      padding: 2px 8px;
-      border-radius: 12px;
+    .log-type {
       font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-    }
-
-    .tbl-btn {
-      background: none;
-      border: 1px solid var(--border);
+      padding: 2px 8px;
       border-radius: 6px;
-      color: var(--gris);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      padding: 5px 10px;
-      cursor: pointer;
-      transition: all .18s;
-      margin-left: 4px;
-    }
-
-    .tbl-btn:hover {
-      border-color: var(--border-light);
-      color: var(--creme);
-    }
-
-    .tbl-btn.edit:hover {
-      border-color: rgba(201, 168, 76, .5);
-      color: var(--or);
-      background: rgba(201, 168, 76, .08);
-    }
-
-    .tbl-btn.del:hover {
-      border-color: rgba(192, 57, 43, .5);
-      color: var(--rouge);
-      background: rgba(192, 57, 43, .08);
-    }
-
-    .admin-form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .admin-form-full {
-      grid-column: 1/-1;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .form-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1px;
+      flex-shrink: 0;
+      font-weight: 700;
       text-transform: uppercase;
-      color: var(--gris);
+      letter-spacing: .04em;
     }
 
-    .form-input,
-    .form-select,
-    .form-textarea {
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-      color: var(--creme);
-      font-family: 'DM Sans', sans-serif;
+    .log-msg {
+      color: var(--txt);
+      line-height: 1.4;
+    }
+
+    /* ── MODALS ── */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .85);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .overlay.open {
+      display: flex;
+      animation: fadeIn .25s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    .modal {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 580px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalSlide .3s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    @keyframes modalSlide {
+      from {
+        transform: translateY(40px) scale(.93);
+        opacity: 0
+      }
+
+      to {
+        transform: none;
+        opacity: 1
+      }
+    }
+
+    .modal-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--txt2);
+      font-size: 20px;
+      cursor: pointer;
+      transition: color .2s;
+    }
+
+    .modal-close:hover {
+      color: var(--red);
+    }
+
+    .field-group {
+      margin-bottom: 14px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--txt2);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 7px;
+    }
+
+    .field-input,
+    .field-select,
+    .field-ta {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      color: var(--txt);
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 14px;
-      padding: 10px 14px;
+      padding: 11px 14px;
       outline: none;
       transition: border-color .2s;
-      width: 100%;
     }
 
-    .form-select {
-      cursor: pointer;
+    .field-input:focus,
+    .field-select:focus,
+    .field-ta:focus {
+      border-color: rgba(232, 184, 75, .5);
     }
 
-    .form-textarea {
+    .field-select option {
+      background: var(--bg2);
+    }
+
+    .field-ta {
       resize: vertical;
       min-height: 80px;
     }
 
-    .form-input:focus,
-    .form-select:focus,
-    .form-textarea:focus {
-      border-color: rgba(201, 168, 76, .5);
+    .fields-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
-    .form-input::placeholder,
-    .form-textarea::placeholder {
-      color: rgba(90, 90, 90, .8);
+    .horaires-editor {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
     }
 
-    .form-select option {
-      background: #1e1e1e;
-    }
-
-    .admin-btn-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-
-    .admin-btn {
-      border: none;
-      border-radius: 8px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
+    .horaire-row label {
+      font-size: 11px;
+      color: var(--txt2);
       font-weight: 700;
-      letter-spacing: .5px;
-      padding: 11px 24px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .horaire-row input {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--txt);
+      font-size: 12px;
+      padding: 6px 8px;
+      outline: none;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .horaire-row input:focus {
+      border-color: var(--gold);
+    }
+
+    /* SYNC OVERLAY */
+    .sync-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .75);
+      backdrop-filter: blur(10px);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sync-overlay.open {
+      display: flex;
+      animation: fadeIn .25s;
+    }
+
+    .sync-card {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 24px;
+      padding: 50px 58px;
+      text-align: center;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+      animation: modalSlide .35s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .sync-spinner {
+      width: 72px;
+      height: 72px;
+      border: 3px solid rgba(232, 184, 75, .15);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin .9s linear infinite;
+      margin: 0 auto 24px;
+    }
+
+    .sync-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 34px;
+    }
+
+    .sync-icon.success {
+      background: rgba(52, 211, 153, .1);
+      border: 2px solid rgba(52, 211, 153, .35);
+      animation: checkmark .5s cubic-bezier(.34, 1.56, .64, 1) forwards;
+    }
+
+    .sync-icon.error {
+      background: rgba(248, 113, 113, .1);
+      border: 2px solid rgba(248, 113, 113, .35);
+    }
+
+    @keyframes checkmark {
+      0% {
+        transform: scale(0)rotate(-10deg);
+        opacity: 0
+      }
+
+      60% {
+        transform: scale(1.25)rotate(5deg)
+      }
+
+      100% {
+        transform: scale(1)rotate(0);
+        opacity: 1
+      }
+    }
+
+    .sync-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .sync-title.loading {
+      color: var(--gold);
+    }
+
+    .sync-title.success {
+      background: linear-gradient(135deg, var(--green), #00e676);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .sync-title.error {
+      color: var(--red);
+    }
+
+    .sync-sub {
+      font-size: 14px;
+      color: var(--txt2);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .sync-stats {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .sync-stat {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .sync-stat-num {
+      font-size: 22px;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .sync-close {
+      margin-top: 26px;
+      padding: 10px 32px;
+      border-radius: 10px;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      color: var(--txt2);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
       cursor: pointer;
       transition: all .2s;
     }
 
-    .admin-btn-primary {
-      background: linear-gradient(135deg, var(--or), var(--or-light));
-      color: var(--noir);
+    .sync-close:hover {
+      border-color: var(--gold);
+      color: var(--gold);
     }
 
-    .admin-btn-primary:hover {
-      opacity: .85;
-    }
-
-    .admin-btn-danger {
-      background: rgba(192, 57, 43, .14);
-      border: 1px solid rgba(192, 57, 43, .4);
-      color: var(--rouge);
-    }
-
-    .admin-btn-danger:hover {
-      background: rgba(192, 57, 43, .25);
-    }
-
-    .admin-btn-ghost {
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid var(--border-light);
-      color: var(--gris);
-    }
-
-    .admin-btn-ghost:hover {
-      color: var(--creme);
-      background: rgba(255, 255, 255, .08);
-    }
-
-    .admin-form-box {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+    .sync-contact {
+      margin-top: 20px;
+      padding: 16px;
+      background: rgba(248, 113, 113, .06);
+      border: 1px solid rgba(248, 113, 113, .18);
       border-radius: 12px;
-      padding: 28px 32px;
-      margin-bottom: 24px;
-    }
-
-    .admin-form-box-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      color: var(--or);
-    }
-
-    .horaires-admin-row {
-      display: grid;
-      grid-template-columns: 60px 1fr;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .horaires-admin-day {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--gris);
-      text-transform: uppercase;
-    }
-
-    .status-select {
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--creme);
-      font-size: 12px;
-      padding: 4px 8px;
-      font-family: 'DM Sans', sans-serif;
-      cursor: pointer;
-      outline: none;
-    }
-
-    .status-select:focus {
-      border-color: rgba(201, 168, 76, .4);
-    }
-
-    .pwd-current {
       font-size: 13px;
-      color: var(--gris);
-      margin-bottom: 20px;
-      padding: 12px 16px;
-      background: rgba(255, 255, 255, .03);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      color: var(--txt2);
+      line-height: 1.7;
     }
 
-    .pwd-current strong {
-      color: var(--or);
-    }
-
-    /* LOGS */
-    .log-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .log-item {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 16px;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      font-size: 12px;
-    }
-
-    .log-item:hover {
-      border-color: var(--border-light);
-    }
-
-    .log-ico {
-      font-size: 16px;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .log-content {
-      flex: 1;
-    }
-
-    .log-msg {
-      color: var(--creme);
-      margin-bottom: 2px;
-    }
-
-    .log-meta {
-      color: var(--gris);
-      font-size: 10px;
-      letter-spacing: .5px;
-    }
-
-    .log-type-badge {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border-radius: 10px;
-      flex-shrink: 0;
-    }
-
-    .lt-connexion {
-      background: rgba(41, 128, 185, .15);
-      color: var(--bleu);
-    }
-
-    .lt-statut {
-      background: rgba(39, 174, 96, .12);
-      color: var(--vert);
-    }
-
-    .lt-admin {
-      background: rgba(201, 168, 76, .14);
-      color: var(--or);
-    }
-
-    .lt-modif {
-      background: rgba(142, 68, 173, .12);
-      color: var(--violet);
-    }
-
-    .lt-suppression {
-      background: rgba(192, 57, 43, .12);
-      color: var(--rouge);
-    }
-
-    .log-filters {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .log-filter-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--gris);
-      font-size: 10px;
+    .sync-contact a {
+      color: var(--gold);
+      text-decoration: none;
       font-weight: 600;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      padding: 6px 12px;
-      cursor: pointer;
-      transition: all .18s;
     }
 
-    .log-filter-btn:hover {
-      color: var(--creme);
-      border-color: var(--border-light);
-    }
-
-    .log-filter-btn.active {
-      background: rgba(201, 168, 76, .13);
-      color: var(--or);
-      border-color: rgba(201, 168, 76, .4);
-    }
-
-    .log-stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .log-stat-box {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 18px;
-    }
-
-    .log-stat-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      line-height: 1;
-    }
-
-    .log-stat-label {
-      font-size: 10px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--gris);
-      margin-top: 2px;
-    }
-
-    /* CATEGORIES admin */
-    .cats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .cat-admin-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 18px;
+    /* SECTION TITLE */
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .cat-admin-swatch {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      flex-shrink: 0;
+    .section-title .sub {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      color: var(--txt2);
+      font-weight: 400;
     }
 
-    .cat-admin-name {
-      flex: 1;
-      font-size: 14px;
-    }
-
-    /* MODAL */
-    #modal-overlay {
+    /* TOAST */
+    .toast {
       position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .85);
-      z-index: 6000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(10px);
+      bottom: 24px;
+      right: 24px;
+      background: var(--bg2);
+      border: 1px solid var(--gold);
+      color: var(--txt);
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 999;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all .3s cubic-bezier(.4, 0, .2, 1);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .5);
+      max-width: 290px;
     }
 
-    #modal-overlay.open {
-      display: flex;
+    .toast.show {
+      transform: none;
+      opacity: 1;
     }
 
-    #modal-box {
-      background: var(--card-bg);
-      border: 1px solid var(--border-light);
-      border-radius: 16px;
-      padding: 36px 40px;
-      max-width: 680px;
-      width: 95%;
-      max-height: 90vh;
-      overflow-y: auto;
+    /* EMPTY */
+    .empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--txt2);
+      grid-column: 1/-1;
     }
 
-    .modal-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 1.5px;
-      margin-bottom: 22px;
+    .empty .big {
+      font-size: 48px;
+      margin-bottom: 14px;
     }
 
-    .modal-title span {
-      color: var(--or);
+    /* SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
     }
 
-    /* EXPORT */
-    .export-row {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
+    ::-webkit-scrollbar-track {
+      background: transparent;
     }
 
-    @media(max-width:800px) {
+    ::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 3px;
+    }
 
-      .admin-form-grid,
-      .log-stats-row {
-        grid-template-columns: 1fr
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gold);
+    }
+
+    /* RESPONSIVE */
+    @media(max-width: 768px) {
+      .header {
+        padding: 0 16px;
+        gap: 12px;
       }
 
-      .admin-body {
-        flex-direction: column
+      .header-center {
+        display: none;
       }
 
-      .admin-sidebar {
-        width: 100%;
-        flex-direction: row;
-        flex-wrap: wrap;
-        padding: 12px
-      }
-    }
-
-    @media(max-width:700px) {
-      header {
-        padding: 44px 22px 34px
+      .nav-pills {
+        display: none;
       }
 
-      .section {
-        padding: 30px 22px
-      }
-
-      .nav-tabs {
-        padding: 0 18px
+      .page {
+        padding: 16px;
       }
 
       .cards-grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
       }
 
-      .card-actions {
-        grid-template-columns: repeat(3, 1fr)
+      .hero-banner {
+        flex-direction: column;
+        padding: 24px;
       }
 
-      .horaires-grid {
-        grid-template-columns: repeat(4, 1fr)
+      .fields-row {
+        grid-template-columns: 1fr;
       }
+
+      .stats-strip {
+        gap: 8px;
+      }
+
+      .stat-chip {
+        min-width: 80px;
+        padding: 12px;
+      }
+    }
+
+    .fade-in {
+      animation: fadeSlide .35s ease;
     }
   </style>
 </head>
 
 <body>
 
-  <div id="toast"></div>
-  <div id="fb-status" class="connecting">⚡ Connexion…</div>
+  <!-- SYNC OVERLAY -->
+  <div class="sync-overlay" id="syncOverlay">
+    <div class="sync-card" id="syncCard"></div>
+  </div>
 
-  <!-- ═══════════ MAIN SITE ═══════════ -->
-  <header>
-    <div class="badge">🍲 Recherche de stage — Valenciennes</div>
-    <h1>Recherche<br><span class="gold">DE</span> <span class="dim">Stage</span></h1>
-    <p class="subtitle">Restaurants & Bars · Valenciennes</p>
-    <div class="stats-row">
-      <div class="stat"><span class="stat-num c-or" id="s-total">0</span><span class="stat-label">Total</span></div>
-      <div class="stat"><span class="stat-num c-or" id="s-todo">0</span><span class="stat-label">À contacter</span>
-      </div>
-      <div class="stat"><span class="stat-num c-vert" id="s-done">0</span><span class="stat-label">Contactés</span>
-      </div>
-      <div class="stat"><span class="stat-num c-bleu" id="s-waiting">0</span><span class="stat-label">En attente</span>
-      </div>
-      <div class="stat"><span class="stat-num c-violet" id="s-stage">0</span><span class="stat-label">En stage</span>
-      </div>
-      <div class="stat"><span class="stat-num c-rouge" id="s-refused">0</span><span class="stat-label">Refusés</span>
-      </div>
-      <div class="stat"><span class="stat-num c-orange" id="s-membres">0</span><span class="stat-label">Membres</span>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-wrap">
+      <div class="logo-icon">🎓</div>
+      <div>
+        <div class="logo-text">Recherche de Stage</div>
+        <div class="logo-sub">Valenciennes · <span id="nb-etabs">14</span> étab.</div>
       </div>
     </div>
-    <div class="admin-hint">Admin : Ctrl + Shift + A</div>
-  </header>
 
-  <!-- NAV -->
-  <div class="nav-wrap">
-    <div class="nav-tabs">
-      <button class="tab-btn active" onclick="showTab('liste',this)">🍽️ Établissements</button>
-      <button class="tab-btn" onclick="showTab('kanban',this)">📌 Kanban</button>
-      <button class="tab-btn" onclick="showTab('membres',this)">👥 Équipe</button>
-      <button class="tab-btn" onclick="showTab('suivi',this)">✅ Checklist</button>
-      <button class="tab-btn" onclick="showTab('notes',this)">📝 Notes</button>
-      <button class="tab-btn" onclick="showTab('conseils',this)">💡 Conseils</button>
+    <div class="header-center">
+      <div class="nav-pills">
+        <button class="nav-pill active" onclick="showTab('etablissements',this)">🏢 Établissements</button>
+        <button class="nav-pill" onclick="showTab('kanban',this)">📊 Kanban</button>
+        <button class="nav-pill" onclick="showTab('checklist',this)">✅ Checklist</button>
+        <button class="nav-pill" onclick="showTab('objectifs',this)">🎯 Objectifs</button>
+        <button class="nav-pill" onclick="showTab('rappels',this)">⏰ Rappels</button>
+        <button class="nav-pill" onclick="showTab('logs',this)">📋 Journal</button>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="fb-pill" id="fbPill">
+        <div class="fb-dot"></div>
+        <span id="fbTxt">Firebase</span>
+      </div>
+      <button class="btn btn-sync" onclick="triggerSync()" id="syncBtn">
+        <span class="sync-ico" id="syncIco">🔄</span> Sync
+      </button>
+      <button class="btn btn-gold" onclick="openModal('addModal')">➕ Ajouter</button>
+      <a class="btn btn-admin" id="adminBtn" href="admin.html" target="_blank">⚙️ Admin</a>
+      <button class="btn btn-ghost" onclick="openRappelModal()">⏰</button>
     </div>
   </div>
 
-  <!-- TAB LISTE -->
-  <div id="tab-liste" class="section active">
-    <div class="section-header">
-      <div class="section-title">Tous les <span>Établissements</span></div>
-      <p class="section-desc">Clique sur les boutons colorés pour mettre à jour ton statut · Synchronisé Firebase</p>
+  <!-- ── PAGES ── -->
+
+  <!-- ÉTABLISSEMENTS -->
+  <div class="page active" id="page-etablissements">
+    <div class="hero-banner">
+      <div class="hero-emoji">🍽️</div>
+      <div class="hero-text">
+        <h1>Restaurants & Établissements</h1>
+        <p>Suivez vos démarches de recherche de stage en restauration à Valenciennes et Denain.<br>Gérez statuts, notes
+          et rappels en temps réel.</p>
+      </div>
     </div>
+
+    <div class="stats-strip">
+      <div class="stat-chip">
+        <div class="stat-chip-num" id="s-total" style="color:var(--txt)">0</div>
+        <div class="stat-chip-label">Total</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-chip-num" id="s-todo" style="color:var(--gold)">0</div>
+        <div class="stat-chip-label">À contacter</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-chip-num" id="s-done" style="color:var(--green)">0</div>
+        <div class="stat-chip-label">Contacté</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-chip-num" id="s-waiting" style="color:var(--blue)">0</div>
+        <div class="stat-chip-label">En attente</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-chip-num" id="s-rdv" style="color:var(--orange)">0</div>
+        <div class="stat-chip-label">RDV pris</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-chip-num" id="s-stage" style="color:var(--violet)">0</div>
+        <div class="stat-chip-label">En stage</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-chip-num" id="s-refused" style="color:var(--red)">0</div>
+        <div class="stat-chip-label">Refusé</div>
+      </div>
+    </div>
+
     <div class="filter-bar">
-      <div class="search-wrap">
-        <span class="search-ico">🔍</span>
-        <input class="search-input" id="searchInput" type="text" placeholder="Rechercher…" oninput="renderCards()">
+      <button class="filter-tab active" onclick="setFilter('all',this)">Tous</button>
+      <button class="filter-tab" onclick="setFilter('todo',this)">📋 À contacter</button>
+      <button class="filter-tab" onclick="setFilter('done',this)">✅ Contacté</button>
+      <button class="filter-tab" onclick="setFilter('waiting',this)">⏳ En attente</button>
+      <button class="filter-tab" onclick="setFilter('rdv',this)">📅 RDV pris</button>
+      <button class="filter-tab" onclick="setFilter('stage',this)">🏆 En stage</button>
+      <button class="filter-tab" onclick="setFilter('refused',this)">❌ Refusé</button>
+      <div class="search-box" style="margin-left:auto">
+        <span style="opacity:.4">🔍</span>
+        <input type="text" id="searchInput" placeholder="Rechercher..." oninput="renderCards()">
       </div>
-      <div class="filter-sep"></div>
-      <button class="filter-btn f-all active" onclick="setFilter('all',this)"><span class="dot"
-          style="background:var(--or)"></span>Tous</button>
-      <button class="filter-btn f-todo" onclick="setFilter('todo',this)"><span class="dot"
-          style="background:var(--or)"></span>À contacter</button>
-      <button class="filter-btn f-done" onclick="setFilter('done',this)"><span class="dot"
-          style="background:var(--vert)"></span>Contactés</button>
-      <button class="filter-btn f-waiting" onclick="setFilter('waiting',this)"><span class="dot"
-          style="background:var(--bleu)"></span>En attente</button>
-      <button class="filter-btn f-stage" onclick="setFilter('stage',this)"><span class="dot"
-          style="background:var(--violet)"></span>En stage</button>
-      <button class="filter-btn f-refused" onclick="setFilter('refused',this)"><span class="dot"
-          style="background:var(--rouge)"></span>Refusés</button>
     </div>
-    <div class="cat-filter-row" id="cat-filter-row"></div>
-    <div class="cards-grid" id="cards-container"></div>
+    <div class="cat-row" id="cat-row"></div>
+    <div id="cards-container" class="fade-in"></div>
   </div>
 
-  <!-- TAB KANBAN -->
-  <div id="tab-kanban" class="section">
-    <div class="section-header">
-      <div class="section-title">Vue <span>Kanban</span></div>
-      <p class="section-desc">Aperçu visuel de tes candidatures par statut</p>
-    </div>
-    <div class="kanban" id="kanban-container"></div>
+  <!-- KANBAN -->
+  <div class="page" id="page-kanban">
+    <div class="section-title">📊 Vue Kanban <span class="sub">Aperçu par statut</span></div>
+    <div class="kanban-board" id="kanban-board"></div>
   </div>
 
-  <!-- TAB MEMBRES -->
-  <div id="tab-membres" class="section">
-    <div class="section-header">
-      <div class="section-title">L'<span>Équipe</span></div>
-      <p class="section-desc">Membres enregistrés sur le projet · Géré depuis le panel admin</p>
-    </div>
-    <div class="membres-grid" id="membres-container"></div>
-  </div>
-
-  <!-- TAB CHECKLIST -->
-  <div id="tab-suivi" class="section">
-    <div class="section-header">
-      <div class="section-title">Ma <span>Checklist</span></div>
-      <p class="section-desc">Toutes les étapes pour décrocher ton stage</p>
-    </div>
-    <div class="progress-section">
-      <div class="progress-title">Progression globale</div>
-      <div class="progress-bar-wrap">
-        <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
-      </div>
-      <div class="progress-info"><span id="progress-text">0 étapes complétées</span><span id="progress-pct">0%</span>
-      </div>
-    </div>
-    <div class="checklist-wrap" id="checklist-container"></div>
-  </div>
-
-  <!-- TAB NOTES -->
-  <div id="tab-notes" class="section">
-    <div class="section-header">
-      <div class="section-title">Mes <span>Notes</span></div>
-      <p class="section-desc">Impressions, noms des responsables, dates de rappel…</p>
-    </div>
-    <div class="info-box"><span class="i-ico">💾</span>
-      <div>Tes notes sont <strong>sauvegardées automatiquement</strong> dans ton navigateur et synchronisées sur
-        Firebase.</div>
-    </div>
-    <textarea class="notes-area" id="notesArea"
-      placeholder="Ex :&#10;Les Canonniers — Demander M. Martin, rappeler jeudi matin 10h&#10;Ô Saveurs — Stage juillet possible, préfèrent CV papier&#10;..."></textarea>
-    <div class="save-ind" id="saveInd">✓ Sauvegardé</div>
-  </div>
-
-  <!-- TAB CONSEILS -->
-  <div id="tab-conseils" class="section">
-    <div class="section-header">
-      <div class="section-title">Conseils <span>Stage</span></div>
-      <p class="section-desc">Astuces pour maximiser tes chances d'obtenir un stage</p>
-    </div>
-    <div class="conseils-grid">
-      <div class="conseil-card" style="border-left:3px solid var(--or)">
-        <div class="conseil-ico">📄</div>
-        <div class="conseil-title">Prépare ton CV</div>
-        <div class="conseil-body">Photo pro obligatoire. Mets en avant tes formations culinaires et toute expérience en
-          restauration. Une page max. Imprime en couleur sur du beau papier épais.</div>
-      </div>
-      <div class="conseil-card" style="border-left:3px solid var(--vert)">
-        <div class="conseil-ico">🚶</div>
-        <div class="conseil-title">Se présenter en personne</div>
-        <div class="conseil-body">Passe directement au restaurant hors service : 14h30–17h est idéal. Demande le chef ou
-          le responsable. Sois souriant, propre, professionnel.</div>
-      </div>
-      <div class="conseil-card" style="border-left:3px solid var(--bleu)">
-        <div class="conseil-ico">📞</div>
-        <div class="conseil-title">La relance (J+5)</div>
-        <div class="conseil-body">Pas de réponse après 5–7 jours ? Rappelle ! Dis : "Bonjour, je suis [Prénom], j'ai
-          déposé mon CV pour un stage, je voulais savoir si vous avez pu le consulter."</div>
-      </div>
-      <div class="conseil-card" style="border-left:3px solid var(--violet)">
-        <div class="conseil-ico">✉️</div>
-        <div class="conseil-title">Lettre de motivation</div>
-        <div class="conseil-body">Personnalise pour chaque lieu. Cite le nom de l'établissement. Explique pourquoi CE
-          restaurant t'attire. Montre ta motivation et ce que tu veux apprendre.</div>
-      </div>
-      <div class="conseil-card" style="border-left:3px solid var(--rouge)">
-        <div class="conseil-ico">⏰</div>
-        <div class="conseil-title">Meilleur timing</div>
-        <div class="conseil-body">Évite les services : 12h–14h et 19h–22h. Idéal : 10h–11h30 ou 15h–17h. Jamais un
-          samedi soir ou un dimanche en cuisine !</div>
-      </div>
-      <div class="conseil-card" style="border-left:3px solid var(--or)">
-        <div class="conseil-ico">🤝</div>
-        <div class="conseil-title">L'entretien</div>
-        <div class="conseil-body">Prépare 3 questions : "Quelle brigade ? Quels postes ? Quel rythme ?" Connais
-          l'établissement avant d'arriver. Arrive 5 min en avance.</div>
-      </div>
-      <div class="conseil-card" style="border-left:3px solid var(--vert)">
-        <div class="conseil-ico">📋</div>
-        <div class="conseil-title">Convention de stage</div>
-        <div class="conseil-body">N'oublie pas de faire signer ta convention par ton école AVANT de commencer. Vérifie
-          les dates, le nom du tuteur et le poste mentionné.</div>
-      </div>
-      <div class="conseil-card" style="border-left:3px solid var(--bleu)">
-        <div class="conseil-ico">🌟</div>
-        <div class="conseil-title">Pendant le stage</div>
-        <div class="conseil-body">Arrive toujours en avance, pose des questions, montre de l'initiative. Un bon
-          comportement peut déboucher sur un emploi ou une recommandation précieuse.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════ ADMIN OVERLAY ═══════════════ -->
-  <div id="admin-overlay">
-    <div id="admin-login">
-      <div class="login-box">
-        <div class="login-logo">🍲</div>
-        <div class="login-title">PANEL ADMIN</div>
-        <div class="login-sub">Recherche de stage · Accès sécurisé</div>
-        <input class="login-field" id="loginInput" type="password" placeholder="••••••••"
-          onkeydown="if(event.key==='Enter')tryLogin()">
-        <button class="login-btn" onclick="tryLogin()">ACCÉDER →</button>
-        <div class="login-err" id="loginErr">Mot de passe incorrect</div>
-        <div style="margin-top:14px;font-size:11px;color:var(--gris);">Mot de passe par défaut : <span
-            style="color:var(--or)">celine2024</span></div>
-        <button
-          style="margin-top:18px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--gris);font-size:12px;padding:7px 18px;cursor:pointer;"
-          onclick="closeAdmin()">✕ Annuler</button>
-      </div>
-    </div>
-
-    <div id="admin-panel">
-      <div class="admin-topbar">
-        <div class="admin-topbar-title">⚙️ PANEL ADMIN — Recherche de stage</div>
-        <button class="admin-fb-sync" onclick="syncAllToFirebase()">☁️ Sync Firebase</button>
-        <button class="admin-topbar-close" onclick="closeAdmin()">✕ Fermer</button>
-      </div>
-      <div class="admin-body">
-        <div class="admin-sidebar">
-          <button class="admin-nav-btn active" onclick="adminPage('etab',this)">🍽️ Établissements</button>
-          <button class="admin-nav-btn" onclick="adminPage('statuts',this)">📊 Statuts</button>
-          <button class="admin-nav-btn" onclick="adminPage('ajouter',this)">➕ Ajouter un lieu</button>
-          <div class="admin-nav-sep"></div>
-          <button class="admin-nav-btn" onclick="adminPage('categories',this)">🏷️ Catégories</button>
-          <button class="admin-nav-btn" onclick="adminPage('membres',this)">👥 Membres</button>
-          <div class="admin-nav-sep"></div>
-          <button class="admin-nav-btn" onclick="adminPage('siteinfo',this)">🖊️ Infos du site</button>
-          <button class="admin-nav-btn" onclick="adminPage('checklist',this)">✅ Checklist</button>
-          <button class="admin-nav-btn" onclick="adminPage('export',this)">📤 Export</button>
-          <div class="admin-nav-sep"></div>
-          <button class="admin-nav-btn" onclick="adminPage('logs',this)">📋 Logs d'activité</button>
-          <button class="admin-nav-btn" onclick="adminPage('password',this)">🔑 Mot de passe</button>
-          <button class="admin-nav-btn" onclick="adminPage('firebase',this)">🔥 Firebase</button>
+  <!-- CHECKLIST -->
+  <div class="page" id="page-checklist">
+    <div class="section-title">✅ Ma Checklist</div>
+    <div class="checklist-wrap">
+      <div class="progress-info">
+        <div class="progress-pct" id="check-pct">0%</div>
+        <div class="progress-bar-outer">
+          <div class="progress-bar-inner" id="check-bar" style="width:0%"></div>
         </div>
-        <div class="admin-content">
+        <div style="font-size:12px;color:var(--txt2)" id="check-count">0/0</div>
+      </div>
+      <div id="checklist-list" style="margin-top:18px"></div>
+      <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-gold" onclick="openModal('addStepModal')">➕ Ajouter une étape</button>
+        <button class="btn btn-outline" onclick="resetChecklist()">🔄 Réinitialiser</button>
+      </div>
+    </div>
+  </div>
 
-          <!-- PAGE: ÉTABLISSEMENTS -->
-          <div class="admin-page active" id="ap-etab">
-            <div class="admin-page-title">Gérer les <span>Établissements</span></div>
-            <div class="admin-page-desc">Modifier, supprimer ou réorganiser tous les lieux enregistrés.</div>
-            <div class="admin-table-wrap">
-              <table class="admin-table" id="admin-etab-table">
-                <thead>
-                  <tr>
-                    <th>Nom</th>
-                    <th>Type</th>
-                    <th>Catégories</th>
-                    <th>Priorité</th>
-                    <th>Note</th>
-                    <th>Statut</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-etab-tbody"></tbody>
-              </table>
-            </div>
-          </div>
+  <!-- OBJECTIFS -->
+  <div class="page" id="page-objectifs">
+    <div class="section-title">🎯 Mes Objectifs</div>
+    <div id="objectifs-list"></div>
+    <button class="btn btn-gold" onclick="openModal('addObjModal')">➕ Nouvel objectif</button>
+  </div>
 
-          <!-- PAGE: STATUTS -->
-          <div class="admin-page" id="ap-statuts">
-            <div class="admin-page-title">Gestion des <span>Statuts</span></div>
-            <div class="admin-page-desc">Change le statut de chaque établissement rapidement.</div>
-            <div class="admin-table-wrap">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Établissement</th>
-                    <th>Statut actuel</th>
-                    <th>Changer</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-statuts-tbody"></tbody>
-              </table>
-            </div>
-          </div>
+  <!-- RAPPELS -->
+  <div class="page" id="page-rappels">
+    <div class="section-title">⏰ Mes Rappels</div>
+    <div id="rappels-list"></div>
+    <button class="btn btn-gold" onclick="openRappelModal()">➕ Nouveau rappel</button>
+  </div>
 
-          <!-- PAGE: AJOUTER -->
-          <div class="admin-page" id="ap-ajouter">
-            <div class="admin-page-title">Ajouter un <span>Établissement</span></div>
-            <div class="admin-page-desc">Remplis le formulaire pour ajouter un nouveau lieu.</div>
-            <div class="admin-form-box">
-              <div class="admin-form-box-title">Nouveau lieu</div>
-              <div class="admin-form-grid">
-                <div class="form-group"><label class="form-label">Nom *</label><input class="form-input" id="new-nom"
-                    placeholder="Ex: Le Bistrot des Arts"></div>
-                <div class="form-group"><label class="form-label">Type *</label><input class="form-input" id="new-type"
-                    placeholder="Ex: Restaurant / Brasserie"></div>
-                <div class="form-group admin-form-full"><label class="form-label">Adresse *</label><input
-                    class="form-input" id="new-adresse" placeholder="Ex: 12 Rue de la Paix, 59300 Valenciennes"></div>
-                <div class="form-group"><label class="form-label">Téléphone</label><input class="form-input"
-                    id="new-tel" placeholder="Ex: 03 27 00 00 00"></div>
-                <div class="form-group"><label class="form-label">Note Google (ex: 4.5)</label><input class="form-input"
-                    id="new-note" type="number" min="0" max="5" step="0.1" placeholder="4.5"></div>
-                <div class="form-group"><label class="form-label">Priorité</label>
-                  <select class="form-select" id="new-priorite">
-                    <option value="moyenne">Moyenne</option>
-                    <option value="haute">⚡ Haute</option>
-                    <option value="basse">Basse</option>
-                  </select>
-                </div>
-                <div class="form-group"><label class="form-label">Catégories</label>
-                  <div id="new-cats-check" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;"></div>
-                </div>
-                <div class="form-group admin-form-full"><label class="form-label">Lien Google Maps</label><input
-                    class="form-input" id="new-maps" placeholder="https://maps.google.com/..."></div>
-                <div class="form-group admin-form-full"><label class="form-label">Lien Site Web</label><input
-                    class="form-input" id="new-website" placeholder="https://www.restaurantexemple.fr"></div>
-                <div class="form-group admin-form-full"><label class="form-label">Lien Réseaux sociaux</label><input
-                    class="form-input" id="new-social" placeholder="https://www.instagram.com/..."></div>
-              </div>
-              <div class="admin-form-box-title" style="margin-top:24px;font-size:18px;">Horaires</div>
-              <div id="new-horaires-rows">
-                <div class="horaires-admin-row"><span class="horaires-admin-day">Lun</span><input class="form-input"
-                    data-jour="Lun" placeholder="Ex: 12h–14h / 19h–22h ou Fermé"></div>
-                <div class="horaires-admin-row"><span class="horaires-admin-day">Mar</span><input class="form-input"
-                    data-jour="Mar" placeholder="Fermé"></div>
-                <div class="horaires-admin-row"><span class="horaires-admin-day">Mer</span><input class="form-input"
-                    data-jour="Mer" placeholder="12h–14h / 19h–22h"></div>
-                <div class="horaires-admin-row"><span class="horaires-admin-day">Jeu</span><input class="form-input"
-                    data-jour="Jeu" placeholder="12h–14h / 19h–22h"></div>
-                <div class="horaires-admin-row"><span class="horaires-admin-day">Ven</span><input class="form-input"
-                    data-jour="Ven" placeholder="12h–14h / 19h–22h"></div>
-                <div class="horaires-admin-row"><span class="horaires-admin-day">Sam</span><input class="form-input"
-                    data-jour="Sam" placeholder="12h–14h30 / 19h–22h30"></div>
-                <div class="horaires-admin-row"><span class="horaires-admin-day">Dim</span><input class="form-input"
-                    data-jour="Dim" placeholder="Fermé"></div>
-              </div>
-              <div class="admin-btn-row">
-                <button class="admin-btn admin-btn-primary" onclick="addEtab()">➕ Ajouter cet établissement</button>
-                <button class="admin-btn admin-btn-ghost" onclick="clearAddForm()">↺ Réinitialiser</button>
-              </div>
-            </div>
-          </div>
+  <!-- JOURNAL -->
+  <div class="page" id="page-logs">
+    <div class="section-title">📋 Journal d'activité</div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+      <button class="filter-tab active" onclick="setLogFilter('all',this)">Tous</button>
+      <button class="filter-tab" onclick="setLogFilter('statut',this)">Statuts</button>
+      <button class="filter-tab" onclick="setLogFilter('note',this)">Notes</button>
+      <button class="filter-tab" onclick="setLogFilter('etab',this)">Établissements</button>
+      <button class="btn btn-outline" style="margin-left:auto;padding:6px 14px;font-size:12px" onclick="clearLogs()">🗑️
+        Vider</button>
+    </div>
+    <div id="logs-list"
+      style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden"></div>
+  </div>
 
-          <!-- PAGE: CATÉGORIES -->
-          <div class="admin-page" id="ap-categories">
-            <div class="admin-page-title">Gérer les <span>Catégories</span></div>
-            <div class="admin-page-desc">Crée des catégories pour organiser tes établissements. Elles apparaîtront comme
-              filtres sur la liste.</div>
-            <div class="admin-form-box">
-              <div class="admin-form-box-title">Nouvelle catégorie</div>
-              <div class="admin-form-grid">
-                <div class="form-group"><label class="form-label">Nom *</label><input class="form-input"
-                    id="new-cat-nom" placeholder="Ex: Gastronomique"></div>
-                <div class="form-group"><label class="form-label">Emoji</label><input class="form-input"
-                    id="new-cat-emoji" placeholder="Ex: ⭐" maxlength="4"></div>
-                <div class="form-group"><label class="form-label">Couleur</label><input type="color" id="new-cat-color"
-                    value="#c9a84c"
-                    style="width:100%;height:44px;border-radius:8px;border:1px solid var(--border-light);background:none;cursor:pointer;padding:4px;">
-                </div>
-              </div>
-              <div class="admin-btn-row"><button class="admin-btn admin-btn-primary" onclick="addCategorie()">➕ Ajouter
-                  la catégorie</button></div>
-            </div>
-            <div class="cats-grid" id="cats-admin-grid"></div>
-          </div>
-
-          <!-- PAGE: MEMBRES -->
-          <div class="admin-page" id="ap-membres">
-            <div class="admin-page-title">Gérer les <span>Membres</span></div>
-            <div class="admin-page-desc">Ajoute les membres de ton équipe ou responsables de suivi.</div>
-            <div class="admin-form-box">
-              <div class="admin-form-box-title">Nouveau membre</div>
-              <div class="admin-form-grid">
-                <div class="form-group"><label class="form-label">Prénom *</label><input class="form-input"
-                    id="new-m-prenom" placeholder="Ex: Céline"></div>
-                <div class="form-group"><label class="form-label">Nom *</label><input class="form-input" id="new-m-nom"
-                    placeholder="Ex: Dupont"></div>
-                <div class="form-group"><label class="form-label">Rôle</label><input class="form-input" id="new-m-role"
-                    placeholder="Ex: Chef de partie, Stagiaire"></div>
-                <div class="form-group"><label class="form-label">Statut</label>
-                  <select class="form-select" id="new-m-statut">
-                    <option value="actif">Actif</option>
-                    <option value="inactif">Inactif</option>
-                    <option value="chef">👑 Chef</option>
-                  </select>
-                </div>
-                <div class="form-group"><label class="form-label">Email</label><input class="form-input"
-                    id="new-m-email" type="email" placeholder="celine@example.fr"></div>
-                <div class="form-group"><label class="form-label">Téléphone</label><input class="form-input"
-                    id="new-m-tel" placeholder="06 00 00 00 00"></div>
-                <div class="form-group admin-form-full"><label class="form-label">Emoji / Avatar</label><input
-                    class="form-input" id="new-m-emoji" placeholder="Ex: 👩‍🍳" maxlength="4"></div>
-              </div>
-              <div class="admin-btn-row"><button class="admin-btn admin-btn-primary" onclick="addMembre()">➕ Ajouter le
-                  membre</button></div>
-            </div>
-            <div class="admin-table-wrap">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Avatar</th>
-                    <th>Nom</th>
-                    <th>Rôle</th>
-                    <th>Contact</th>
-                    <th>Statut</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-membres-tbody"></tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- PAGE: SITE INFO -->
-          <div class="admin-page" id="ap-siteinfo">
-            <div class="admin-page-title">Infos du <span>Site</span></div>
-            <div class="admin-page-desc">Modifie le titre, sous-titre et les infos générales affichés sur le site.</div>
-            <div class="admin-form-box">
-              <div class="admin-form-grid">
-                <div class="form-group"><label class="form-label">Nom principal</label><input class="form-input"
-                    id="si-nom" value="Recherche de stage"></div>
-                <div class="form-group"><label class="form-label">Sous-titre</label><input class="form-input"
-                    id="si-sub" value="Restaurants & Bars · Valenciennes"></div>
-                <div class="form-group admin-form-full"><label class="form-label">Ligne 1 H1</label><input
-                    class="form-input" id="si-h1a" value="RECHERCHE DE STAGE"></div>
-                <div class="form-group admin-form-full"><label class="form-label">Ligne 2 H1</label><input
-                    class="form-input" id="si-h1b" value="DE CÉLINE"></div>
-              </div>
-              <div class="admin-btn-row"><button class="admin-btn admin-btn-primary" onclick="saveSiteInfo()">💾
-                  Sauvegarder</button></div>
-            </div>
-          </div>
-
-          <!-- PAGE: CHECKLIST ADMIN -->
-          <div class="admin-page" id="ap-checklist">
-            <div class="admin-page-title">Gérer la <span>Checklist</span></div>
-            <div class="admin-page-desc">Ajouter, modifier ou supprimer des étapes de la checklist.</div>
-            <div class="admin-form-box">
-              <div class="admin-form-box-title">Ajouter une étape</div>
-              <div style="display:flex;gap:10px;">
-                <input class="form-input" id="new-step" placeholder="Ex: Appeler Le Bistrot des Arts" style="flex:1">
-                <button class="admin-btn admin-btn-primary" onclick="addStep()">Ajouter</button>
-              </div>
-            </div>
-            <div class="admin-table-wrap">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Étape</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-steps-tbody"></tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- PAGE: EXPORT -->
-          <div class="admin-page" id="ap-export">
-            <div class="admin-page-title">Export <span>Données</span></div>
-            <div class="admin-page-desc">Exporte toutes tes données dans différents formats.</div>
-            <div class="admin-form-box">
-              <div class="admin-form-box-title">Export CSV</div>
-              <p style="color:var(--gris);font-size:13px;margin-bottom:20px;">Exporte la liste complète des
-                établissements avec leurs statuts, notes et informations de contact.</p>
-              <div class="export-row">
-                <button class="admin-btn admin-btn-primary" onclick="exportCSV()">📊 Exporter en CSV</button>
-                <button class="admin-btn admin-btn-ghost" onclick="exportJSON()">📄 Exporter en JSON</button>
-                <button class="admin-btn admin-btn-ghost" onclick="printReport()">🖨️ Rapport imprimable</button>
-              </div>
-            </div>
-            <div class="admin-form-box">
-              <div class="admin-form-box-title">Résumé des statuts</div>
-              <div id="export-summary" style="font-size:13px;color:var(--gris);line-height:2;"></div>
-            </div>
-          </div>
-
-          <!-- PAGE: LOGS -->
-          <div class="admin-page" id="ap-logs">
-            <div class="admin-page-title">Logs <span>d'Activité</span></div>
-            <div class="admin-page-desc">Historique complet des connexions et modifications. Mis à jour en temps réel.
-            </div>
-            <div class="log-stats-row" id="log-stats-row">
-              <div class="log-stat-box">
-                <div class="log-stat-num c-bleu" id="ls-connexions">0</div>
-                <div class="log-stat-label">Connexions</div>
-              </div>
-              <div class="log-stat-box">
-                <div class="log-stat-num c-vert" id="ls-statuts">0</div>
-                <div class="log-stat-label">Statuts changés</div>
-              </div>
-              <div class="log-stat-box">
-                <div class="log-stat-num c-or" id="ls-admin">0</div>
-                <div class="log-stat-label">Accès admin</div>
-              </div>
-              <div class="log-stat-box">
-                <div class="log-stat-num c-rouge" id="ls-suppression">0</div>
-                <div class="log-stat-label">Suppressions</div>
-              </div>
-            </div>
-            <div class="log-filters">
-              <button class="log-filter-btn active" onclick="setLogFilter('all',this)">Tous</button>
-              <button class="log-filter-btn" onclick="setLogFilter('connexion',this)">Connexions</button>
-              <button class="log-filter-btn" onclick="setLogFilter('statut',this)">Statuts</button>
-              <button class="log-filter-btn" onclick="setLogFilter('admin',this)">Admin</button>
-              <button class="log-filter-btn" onclick="setLogFilter('modif',this)">Modifications</button>
-              <button class="log-filter-btn" onclick="setLogFilter('suppression',this)">Suppressions</button>
-              <button class="log-filter-btn" style="margin-left:auto;color:var(--rouge)" onclick="clearLogs()">🗑️ Vider
-                les logs</button>
-            </div>
-            <div class="log-list" id="log-list"></div>
-          </div>
-
-          <!-- PAGE: MOT DE PASSE -->
-          <div class="admin-page" id="ap-password">
-            <div class="admin-page-title">Changer le <span>Mot de Passe</span></div>
-            <div class="admin-page-desc">Modifie le mot de passe d'accès au panel admin.</div>
-            <div class="admin-form-box">
-              <div class="pwd-current">Mot de passe actuel : <strong id="pwd-display">celine2024</strong></div>
-              <div class="admin-form-grid">
-                <div class="form-group"><label class="form-label">Nouveau mot de passe</label><input class="form-input"
-                    id="new-pwd" type="password" placeholder="Nouveau mot de passe"></div>
-                <div class="form-group"><label class="form-label">Confirmer</label><input class="form-input"
-                    id="confirm-pwd" type="password" placeholder="Confirmer"></div>
-              </div>
-              <div class="admin-btn-row"><button class="admin-btn admin-btn-primary" onclick="changePwd()">🔑 Changer le
-                  mot de passe</button></div>
-            </div>
-          </div>
-
-          <!-- PAGE: FIREBASE -->
-          <div class="admin-page" id="ap-firebase">
-            <div class="admin-page-title">Connexion <span>Firebase</span></div>
-            <div class="admin-page-desc">Statut de la connexion en temps réel avec Realtime Database.</div>
-            <div class="admin-form-box">
-              <div class="admin-form-box-title">Statut</div>
-              <div id="fb-admin-status"
-                style="font-size:14px;color:var(--gris);padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;margin-bottom:20px;">
-                Vérification en cours…</div>
-              <div class="admin-btn-row">
-                <button class="admin-btn admin-btn-primary" onclick="syncAllToFirebase()">☁️ Forcer la
-                  synchronisation</button>
-                <button class="admin-btn admin-btn-ghost" onclick="checkFbStatus()">🔄 Vérifier le statut</button>
-              </div>
-            </div>
-            <div class="admin-form-box">
-              <div class="admin-form-box-title">Configuration Firebase</div>
-              <div style="font-size:12px;color:var(--gris);line-height:1.8;">
-                <div>Project ID : <span style="color:var(--or)">recherche-de-stage-valencienne</span></div>
-                <div>Database URL : <span style="color:var(--or)">europe-west1.firebasedatabase.app</span></div>
-                <div>App ID : <span style="color:var(--or)">1:916351919741:web:4d4e4233ee9b228c187314</span></div>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /admin-content -->
-      </div><!-- /admin-body -->
-    </div><!-- /admin-panel -->
-  </div><!-- /admin-overlay -->
-
-  <!-- MODAL EDIT -->
-  <div id="modal-overlay" onclick="if(event.target===this)closeModal()">
-    <div id="modal-box">
-      <div class="modal-title">Modifier <span id="modal-etab-name">l'Établissement</span></div>
-      <div class="admin-form-grid">
-        <div class="form-group"><label class="form-label">Nom</label><input class="form-input" id="edit-nom"></div>
-        <div class="form-group"><label class="form-label">Type</label><input class="form-input" id="edit-type"></div>
-        <div class="form-group admin-form-full"><label class="form-label">Adresse</label><input class="form-input"
-            id="edit-adresse"></div>
-        <div class="form-group"><label class="form-label">Téléphone</label><input class="form-input" id="edit-tel">
-        </div>
-        <div class="form-group"><label class="form-label">Note (0–5)</label><input class="form-input" id="edit-note"
-            type="number" min="0" max="5" step="0.1"></div>
-        <div class="form-group"><label class="form-label">Priorité</label>
-          <select class="form-select" id="edit-priorite">
-            <option value="moyenne">Moyenne</option>
+  <!-- ══ MODALS ══ -->
+  <!-- ADD/EDIT -->
+  <div class="overlay" id="addModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('addModal')">✕</button>
+      <div class="modal-title" id="addModal-title">➕ Ajouter un établissement</div>
+      <div class="fields-row">
+        <div class="field-group"><label class="field-label">Nom *</label><input class="field-input" id="f-nom"
+            placeholder="Nom du restaurant..."></div>
+        <div class="field-group"><label class="field-label">Type *</label><input class="field-input" id="f-type"
+            placeholder="Restaurant, Brasserie..."></div>
+      </div>
+      <div class="field-group"><label class="field-label">Adresse</label><input class="field-input" id="f-adresse"
+          placeholder="Adresse complète..."></div>
+      <div class="fields-row">
+        <div class="field-group"><label class="field-label">Téléphone</label><input class="field-input" id="f-tel"
+            placeholder="03 27 ..."></div>
+        <div class="field-group"><label class="field-label">Note Google (/5)</label><input class="field-input"
+            type="number" id="f-note" min="1" max="5" step="0.1" placeholder="4.8"></div>
+      </div>
+      <div class="fields-row">
+        <div class="field-group"><label class="field-label">Priorité</label>
+          <select class="field-select" id="f-priorite">
             <option value="haute">⚡ Haute</option>
+            <option value="moyenne" selected>Moyenne</option>
             <option value="basse">Basse</option>
           </select>
         </div>
-        <div class="form-group admin-form-full"><label class="form-label">Catégories</label>
-          <div id="edit-cats-check" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;"></div>
+        <div class="field-group"><label class="field-label">Statut</label>
+          <select class="field-select" id="f-statut">
+            <option value="todo">📋 À contacter</option>
+            <option value="done">✅ Contacté</option>
+            <option value="waiting">⏳ En attente</option>
+            <option value="rdv">📅 RDV pris</option>
+            <option value="stage">🏆 En stage</option>
+            <option value="refused">❌ Refusé</option>
+          </select>
         </div>
-        <div class="form-group admin-form-full"><label class="form-label">Lien Google Maps</label><input
-            class="form-input" id="edit-maps"></div>
-        <div class="form-group admin-form-full"><label class="form-label">Lien Site Web</label><input class="form-input"
-            id="edit-website"></div>
-        <div class="form-group admin-form-full"><label class="form-label">Lien Réseaux sociaux</label><input
-            class="form-input" id="edit-social"></div>
       </div>
-      <div
-        style="margin-top:20px;margin-bottom:8px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gris);">
-        Horaires</div>
-      <div id="edit-horaires-rows"></div>
-      <div class="admin-btn-row">
-        <button class="admin-btn admin-btn-primary" onclick="saveEdit()">💾 Sauvegarder</button>
-        <button class="admin-btn admin-btn-ghost" onclick="closeModal()">Annuler</button>
+      <div class="field-group"><label class="field-label">Lien Google Maps</label><input class="field-input" id="f-maps"
+          placeholder="https://maps.google.com/?q=..."></div>
+      <div class="fields-row">
+        <div class="field-group"><label class="field-label">Site web</label><input class="field-input" id="f-website"
+            placeholder="https://..."></div>
+        <div class="field-group"><label class="field-label">Réseaux sociaux</label><input class="field-input"
+            id="f-social" placeholder="https://instagram.com/..."></div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Catégories</label>
+        <div id="f-cats-checkboxes" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"></div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Horaires</label>
+        <div class="horaires-editor" id="f-horaires"></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
+        <button class="btn btn-gold" onclick="saveEtab()">💾 Enregistrer</button>
+        <button class="btn btn-outline" onclick="closeModal('addModal')">Annuler</button>
       </div>
     </div>
   </div>
 
+  <!-- RAPPEL -->
+  <div class="overlay" id="rappelModal">
+    <div class="modal" style="max-width:400px">
+      <button class="modal-close" onclick="closeModal('rappelModal')">✕</button>
+      <div class="modal-title">⏰ Nouveau rappel</div>
+      <div class="field-group"><label class="field-label">Établissement</label>
+        <select class="field-select" id="r-etab">
+          <option value="">— Choisir —</option>
+        </select>
+      </div>
+      <div class="field-group"><label class="field-label">Date du rappel</label><input class="field-input" type="date"
+          id="r-date"></div>
+      <div class="field-group"><label class="field-label">Note</label><textarea class="field-ta" id="r-note"
+          placeholder="Motif du rappel..."></textarea></div>
+      <button class="btn btn-gold" onclick="saveRappel()">💾 Enregistrer</button>
+    </div>
+  </div>
+
+  <!-- ADD STEP -->
+  <div class="overlay" id="addStepModal">
+    <div class="modal" style="max-width:400px">
+      <button class="modal-close" onclick="closeModal('addStepModal')">✕</button>
+      <div class="modal-title">➕ Nouvelle étape</div>
+      <div class="field-group"><label class="field-label">Description</label><input class="field-input"
+          id="new-step-txt" placeholder="Décrivez l'étape..."></div>
+      <button class="btn btn-gold" onclick="addStepModal()">💾 Ajouter</button>
+    </div>
+  </div>
+
+  <!-- ADD OBJ -->
+  <div class="overlay" id="addObjModal">
+    <div class="modal" style="max-width:400px">
+      <button class="modal-close" onclick="closeModal('addObjModal')">✕</button>
+      <div class="modal-title">🎯 Nouvel objectif</div>
+      <div class="field-group"><label class="field-label">Titre</label><input class="field-input" id="obj-titre"
+          placeholder="Ex: Contacter 10 restaurants"></div>
+      <div class="fields-row">
+        <div class="field-group"><label class="field-label">Cible</label><input class="field-input" type="number"
+            id="obj-cible" value="10" min="1"></div>
+        <div class="field-group"><label class="field-label">Actuel</label><input class="field-input" type="number"
+            id="obj-actuel" value="0" min="0"></div>
+      </div>
+      <div class="field-group"><label class="field-label">Couleur</label><input class="field-input" type="color"
+          id="obj-color" value="#e8b84b" style="height:42px;padding:4px"></div>
+      <button class="btn btn-gold" onclick="saveObj()">💾 Enregistrer</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getDatabase, ref, set, update, remove, push, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+    import { getDatabase, ref, update, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCzlfk8_XYGSbIEHYttRLxSidS_mL_kqeI",
@@ -2553,168 +1942,10 @@
       storageBucket: "recherche-de-stage-valencienne.firebasestorage.app",
       messagingSenderId: "916351919741",
       appId: "1:916351919741:web:4d4e4233ee9b228c187314",
-      measurementId: "G-67ZRNQJZT9",
       databaseURL: "https://recherche-de-stage-valencienne-default-rtdb.europe-west1.firebasedatabase.app"
     };
-
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-
-    function setFbStatus(cls, msg) {
-      const el = document.getElementById('fb-status');
-      el.className = cls; el.textContent = msg;
-      const adm = document.getElementById('fb-admin-status');
-      if (adm) adm.textContent = msg;
-    }
-
-    // ── WRITE HELPERS ──
-    window.fbWrite = (path, data) => set(ref(db, path), data).catch(e => console.warn('fbWrite', e));
-    window.fbUpdate = (path, data) => update(ref(db, path), data).catch(e => console.warn('fbUpdate', e));
-    window.fbRemove = (path) => remove(ref(db, path)).catch(e => console.warn('fbRemove', e));
-    window.fbPush = (path, data) => push(ref(db, path), data).catch(e => console.warn('fbPush', e));
-
-    // ── SYNC STATUS ──
-    window.fbSyncStatus = (id, status) =>
-      window.fbUpdate('statuts/' + id, { statut: status, ts: Date.now() });
-
-    // ── SYNC ETAB ──
-    window.fbSyncEtab = (etab) =>
-      window.fbWrite('etablissements/' + etab.id, etab);
-
-    // ── DELETE ETAB ──
-    window.fbDeleteEtab = (id) => {
-      window.fbRemove('etablissements/' + id);
-      window.fbRemove('statuts/' + id);
-    };
-
-    // ── SYNC ALL ──
-    window.fbSyncAll = async () => {
-      setFbStatus('connecting', '⬆ Synchronisation…');
-      try {
-        for (const e of window.ETABLISSEMENTS) await window.fbWrite('etablissements/' + e.id, e);
-        for (const [id, st] of Object.entries(window.statuses)) await window.fbWrite('statuts/' + id, { statut: st, ts: Date.now() });
-        await window.fbWrite('config/checklist', { steps: window.STEPS });
-        for (const c of window.CATEGORIES) await window.fbWrite('categories/' + c.id, c);
-        for (const m of window.MEMBRES) await window.fbWrite('membres/' + m.id, m);
-        setFbStatus('connected', '✓ Firebase synchronisé');
-        window.toast('☁️ Tout synchronisé sur Firebase !');
-      } catch (e) { setFbStatus('error', '✗ Erreur sync'); }
-    };
-
-    window.fbSyncNotes = (text) => window.fbWrite('config/notes', { text });
-    window.fbSyncSiteInfo = (data) => window.fbWrite('config/siteinfo', data);
-    window.fbSyncCategories = (cats) => { cats.forEach(c => window.fbWrite('categories/' + c.id, c)); };
-    window.fbSyncMembres = (members) => { members.forEach(m => window.fbWrite('membres/' + m.id, m)); };
-    window.fbDeleteMembre = (id) => window.fbRemove('membres/' + id);
-    window.fbDeleteCategorie = (id) => window.fbRemove('categories/' + id);
-
-    // ── ADD LOG ──
-    window.addLog = (type, message) => {
-      const entry = { type, message, ts: Date.now(), date: new Date().toLocaleString('fr-FR') };
-      window.LOGS.unshift(entry);
-      if (window.LOGS.length > 200) window.LOGS = window.LOGS.slice(0, 200);
-      lsSet('stage_logs_v4', window.LOGS);
-      window.fbPush('logs', entry).catch(() => { });
-      window.renderLogsAdmin && window.renderLogsAdmin();
-    };
-
-    // ── LOAD FROM FIREBASE ──
-    async function loadAll() {
-      setFbStatus('connecting', '⚡ Connexion Firebase…');
-      try {
-        const snap = await get(ref(db, '/'));
-        if (snap.exists()) {
-          const d = snap.val();
-
-          if (d.etablissements) {
-            const loaded = Object.values(d.etablissements);
-            loaded.sort((a, b) => (a.ordre || a.id) - (b.ordre || b.id));
-            window.ETABLISSEMENTS = loaded;
-            lsSet('stage_etab_v4', loaded);
-          } else {
-            for (const e of window.ETABLISSEMENTS) await window.fbWrite('etablissements/' + e.id, e);
-          }
-
-          if (d.statuts) {
-            Object.entries(d.statuts).forEach(([id, v]) => { window.statuses[id] = v.statut || 'todo'; });
-            lsSet('stage_statuses_v4', window.statuses);
-          }
-
-          if (d.config?.checklist?.steps) {
-            window.STEPS = d.config.checklist.steps;
-            lsSet('stage_steps_v4', window.STEPS);
-          }
-
-          if (d.config?.siteinfo) {
-            const s = d.config.siteinfo;
-            if (s.h1a) document.querySelector('h1').innerHTML = `${s.h1a}<br><span class="gold">DE</span> <span class="dim">${s.dim || 'CÉLINE'}</span>`;
-            if (s.subtitle) document.querySelector('.subtitle').textContent = s.subtitle;
-          }
-
-          if (d.config?.notes?.text) {
-            document.getElementById('notesArea').value = d.config.notes.text;
-          }
-
-          if (d.categories) {
-            window.CATEGORIES = Object.values(d.categories);
-            lsSet('stage_cats_v4', window.CATEGORIES);
-          }
-
-          if (d.membres) {
-            window.MEMBRES = Object.values(d.membres);
-            lsSet('stage_membres_v4', window.MEMBRES);
-          }
-
-          if (d.logs) {
-            const fbLogs = Object.values(d.logs).sort((a, b) => b.ts - a.ts);
-            window.LOGS = fbLogs.slice(0, 200);
-          }
-        } else {
-          for (const e of window.ETABLISSEMENTS) await window.fbWrite('etablissements/' + e.id, e);
-        }
-
-        setFbStatus('connected', '✓ Firebase connecté');
-
-        // Real-time statuses listener
-        onValue(ref(db, 'statuts'), (snap) => {
-          if (snap.exists()) {
-            Object.entries(snap.val()).forEach(([id, v]) => { window.statuses[id] = v.statut || 'todo'; });
-            window.renderCards();
-            window.renderKanban && window.renderKanban();
-          }
-        });
-
-        // Real-time membres listener
-        onValue(ref(db, 'membres'), (snap) => {
-          if (snap.exists()) {
-            window.MEMBRES = Object.values(snap.val());
-            lsSet('stage_membres_v4', window.MEMBRES);
-            window.renderMembres && window.renderMembres();
-            updateStats();
-          }
-        });
-
-      } catch (err) {
-        console.error('Firebase error:', err);
-        setFbStatus('error', '✗ Mode local — Firebase indisponible');
-      }
-
-      window.ETABLISSEMENTS.forEach(e => { if (!window.statuses[e.id]) window.statuses[e.id] = 'todo'; });
-      window.renderCards();
-      window.renderChecklist();
-      window.renderMembres && window.renderMembres();
-      updateStats();
-      window.addLog('connexion', '🌐 Nouvelle visite du site');
-    }
-
-    window.checkFbStatus = () => {
-      get(ref(db, 'config/notes')).then(() => setFbStatus('connected', '✓ Firebase connecté et opérationnel')).catch(e => setFbStatus('error', '✗ ' + e.message));
-    };
-
-    loadAll();
-  </script>
-
-  <script>
     const DAYS = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 
     window.ETABLISSEMENTS = [
@@ -2734,675 +1965,486 @@
       { id: 14, nom: "Le Bistrot D'en Face", adresse: "5 Av. d'Amsterdam, 59300 Valenciennes", tel: "06 83 06 93 08", type: "Restaurant / Brasserie", note: 4.4, priorite: "moyenne", categories: [], maps: "https://maps.google.com/?q=Le+Bistrot+Den+Face+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "12h–14h / 19h–22h" }, { j: "Mar", h: "12h–14h / 19h–22h" }, { j: "Mer", h: "12h–14h / 19h–22h" }, { j: "Jeu", h: "12h–14h / 19h–22h" }, { j: "Ven", h: "12h–14h30 / 19h–22h30" }, { j: "Sam", h: "12h–14h30 / 19h–22h30" }, { j: "Dim", h: "12h–14h30 / 19h–22h" }] },
     ];
 
+    const savedEtabs = ls('stage_etabs_extra', []);
+    savedEtabs.forEach(e => { if (!window.ETABLISSEMENTS.find(x => x.id === e.id)) window.ETABLISSEMENTS.push(e); });
+
     const STATUS_DEF = {
-      todo: { label: "À contacter", badge: "badge-todo", btn: "btn-todo", emoji: "📋", color: "var(--or)" },
-      done: { label: "Contacté", badge: "badge-done", btn: "btn-done", emoji: "✅", color: "var(--vert)" },
-      waiting: { label: "En attente", badge: "badge-waiting", btn: "btn-waiting", emoji: "⏳", color: "var(--bleu)" },
-      stage: { label: "En stage", badge: "badge-stage", btn: "btn-stage", emoji: "🏆", color: "var(--violet)" },
-      refused: { label: "Refusé", badge: "badge-refused", btn: "btn-refused", emoji: "❌", color: "var(--rouge)" },
+      todo: { label: "À contacter", badge: "badge-todo", btn: "todo", emoji: "📋", color: "var(--gold)" },
+      done: { label: "Contacté", badge: "badge-done", btn: "done", emoji: "✅", color: "var(--green)" },
+      waiting: { label: "En attente", badge: "badge-waiting", btn: "waiting", emoji: "⏳", color: "var(--blue)" },
+      rdv: { label: "RDV pris", badge: "badge-rdv", btn: "rdv", emoji: "📅", color: "var(--orange)" },
+      stage: { label: "En stage", badge: "badge-stage", btn: "stage", emoji: "🏆", color: "var(--violet)" },
+      refused: { label: "Refusé", badge: "badge-refused", btn: "refused", emoji: "❌", color: "var(--red)" },
     };
-    const STATUS_ORDER = ['todo', 'done', 'waiting', 'stage', 'refused'];
+    const STATUS_ORDER = ['todo', 'done', 'waiting', 'rdv', 'stage', 'refused'];
 
     function ls(key, def = null) { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch (e) { return def; } }
     window.lsSet = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { } };
 
-    window.statuses = ls('stage_statuses_v4', {});
+    window.statuses = ls('stage_statuses_v5', {});
     const cardNotes = ls('stage_card_notes_v4', {});
-    const checks = ls('stage_checks_v4', {});
-    window.STEPS = ls('stage_steps_v4', [
-      "Préparer mon CV (photo, formation, expériences)",
-      "Rédiger ma lettre de motivation personnalisée",
-      "Imprimer 15 exemplaires CV + lettre en couleur",
-      "Définir mes dates de stage souhaitées",
-      "Visiter Les Canonniers (14h30–17h, hors service)",
-      "Visiter Ô Saveurs en personne",
-      "Visiter Le Beaulieu en personne",
-      "Visiter Les Trois Gourmets en personne",
-      "Visiter L'Instant Gourmand en personne",
-      "Contacter Café Brasserie L'Univers (Denain)",
-      "Contacter Le 8 Restaurant (Denain)",
-      "Contacter La Bande à Nana", "Contacter O Divine' Bar",
-      "Contacter La Galerie / Royal Hainaut", "Contacter Le Bistrot D'en Face", "Contacter Chez Nous",
-      "Faire les relances téléphoniques à J+5",
-      "Préparer mes questions pour l'entretien",
-      "Confirmer convention de stage avec mon école",
-      "Confirmer dates et poste définitif",
-    ]);
-
-    window.CATEGORIES = ls('stage_cats_v4', [
-      { id: 'cat1', nom: 'Restaurant', emoji: '🍽️', couleur: '#c9a84c' },
-      { id: 'cat2', nom: 'Brasserie', emoji: '🍺', couleur: '#e67e22' },
-      { id: 'cat3', nom: 'Bar', emoji: '🍸', couleur: '#8e44ad' },
-      { id: 'cat4', nom: 'Gastronomique', emoji: '⭐', couleur: '#c0392b' },
-    ]);
-
-    window.MEMBRES = ls('stage_membres_v4', []);
-    window.LOGS = ls('stage_logs_v4', []);
-
-    let ADMIN_PASSWORD = ls('stage_admin_pwd_v4', 'celine2024');
-    let curFilter = 'all';
-    let curCatFilter = null;
-    let curLogFilter = 'all';
-    let editingId = null;
+    const checks = ls('stage_checks_v5', {});
+    window.STEPS = ls('stage_steps_v4', ["Préparer mon CV (photo, formation, expériences)", "Rédiger ma lettre de motivation personnalisée", "Imprimer 15 exemplaires CV + lettre en couleur", "Définir mes dates de stage souhaitées", "Visiter Les Canonniers (14h30–17h, hors service)", "Visiter Ô Saveurs en personne", "Visiter Le Beaulieu en personne", "Visiter Les Trois Gourmets en personne", "Visiter L'Instant Gourmand en personne", "Contacter Café Brasserie L'Univers (Denain)", "Contacter Le 8 Restaurant (Denain)", "Contacter La Bande à Nana", "Contacter O Divine' Bar", "Contacter La Galerie / Royal Hainaut", "Contacter Le Bistrot D'en Face", "Contacter Chez Nous", "Faire les relances téléphoniques à J+5", "Préparer mes questions pour l'entretien", "Confirmer convention de stage avec mon école", "Confirmer dates et poste définitif"]);
+    window.CATEGORIES = ls('stage_cats_v4', [{ id: 'cat1', nom: 'Restaurant', emoji: '🍽️', couleur: '#e8b84b' }, { id: 'cat2', nom: 'Brasserie', emoji: '🍺', couleur: '#e67e22' }, { id: 'cat3', nom: 'Bar', emoji: '🍸', couleur: '#8e44ad' }, { id: 'cat4', nom: 'Gastronomique', emoji: '⭐', couleur: '#c0392b' }]);
+    window.LOGS = ls('stage_logs_v5', []);
+    window.RAPPELS = ls('stage_rappels_v4', []);
+    window.OBJECTIFS = ls('stage_objectifs_v4', [{ id: 'obj1', titre: 'Contacter 10 restaurants', cible: 10, actuel: 0, couleur: 'var(--gold)' }, { id: 'obj2', titre: 'Obtenir 3 réponses positives', cible: 3, actuel: 0, couleur: 'var(--green)' }, { id: 'obj3', titre: 'Décrocher un stage', cible: 1, actuel: 0, couleur: 'var(--violet)' }]);
+    window.PARAMS = ls('stage_params_v4', { tri: 'default' });
 
     window.STEPS.forEach((_, i) => { if (checks[i] === undefined) checks[i] = false; });
 
-    // ── HELPERS ──
+    let curFilter = 'all', curCatFilter = null, curLogFilter = 'all', editingId = null, lastSyncTime = null;
+    const noteTimers = {};
+
     function stars(n) { if (!n) return ''; const f = Math.round(n); return '★'.repeat(f) + '☆'.repeat(5 - f); }
-    window.toast = (msg) => {
+
+    window.toast = (msg, type = '') => {
       const t = document.getElementById('toast');
-      t.textContent = msg; t.classList.add('show');
-      clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2200);
+      t.textContent = msg;
+      t.style.borderColor = type === 'success' ? 'var(--green)' : type === 'error' ? 'var(--red)' : 'var(--gold)';
+      t.classList.add('show');
+      clearTimeout(t._t);
+      t._t = setTimeout(() => t.classList.remove('show'), 2800);
     };
 
     function getCatById(id) { return window.CATEGORIES.find(c => c.id === id); }
+    function uid() { return 'id' + Date.now() + Math.random().toString(36).slice(2, 7); }
+    function now() { return new Date().toLocaleString('fr-FR'); }
 
-    // ── CATEGORY FILTER ROW ──
-    function renderCatFilterRow() {
-      const row = document.getElementById('cat-filter-row');
-      if (!window.CATEGORIES.length) { row.innerHTML = ''; return; }
-      row.innerHTML = `<button class="cat-pill${!curCatFilter ? ' active' : ''}" onclick="setCatFilter(null,this)" style="${!curCatFilter ? 'border-color:var(--or);color:var(--or)' : ''}">Toutes catégories</button>` +
-        window.CATEGORIES.map(c => `<button class="cat-pill${curCatFilter === c.id ? ' active' : ''}" onclick="setCatFilter('${c.id}',this)" style="${curCatFilter === c.id ? `border-color:${c.couleur};color:${c.couleur};background:${c.couleur}22` : ''}">${c.emoji} ${c.nom}</button>`).join('');
+    // FB INDICATOR
+    function setFbState(state, txt) {
+      const pill = document.getElementById('fbPill');
+      if (pill) { pill.className = 'fb-pill ' + state; }
+      const el = document.getElementById('fbTxt');
+      if (el) el.textContent = txt;
     }
 
-    window.setCatFilter = (id, btn) => {
-      curCatFilter = id;
-      renderCatFilterRow();
-      renderCards();
+    // SYNC OVERLAY
+    window.showSyncOverlay = function (state, data = {}) {
+      const overlay = document.getElementById('syncOverlay');
+      const card = document.getElementById('syncCard');
+      if (state === 'loading') {
+        card.innerHTML = `<div class="sync-spinner"></div><div class="sync-title loading">Synchronisation…</div><div class="sync-sub">Connexion à Firebase en cours,<br>veuillez patienter.</div>`;
+      } else if (state === 'success') {
+        const n = data.count || window.ETABLISSEMENTS.length;
+        const notes = data.notes || Object.keys(cardNotes).filter(k => cardNotes[k]).length;
+        const t = new Date().toLocaleString('fr-FR');
+        card.innerHTML = `<div class="sync-icon success">✅</div><div class="sync-title success">Synchronisé !</div><div class="sync-sub">Toutes les données sont à jour sur Firebase.</div><div class="sync-stats"><div class="sync-stat"><div class="sync-stat-num">${n}</div><div style="font-size:11px;color:var(--txt2)">Étab.</div></div><div class="sync-stat"><div class="sync-stat-num">${notes}</div><div style="font-size:11px;color:var(--txt2)">Notes</div></div><div class="sync-stat"><div class="sync-stat-num" style="font-size:13px">${t.split(' ')[1]}</div><div style="font-size:11px;color:var(--txt2)">Heure</div></div></div><button class="sync-close" onclick="closeSyncOverlay()">Fermer</button>`;
+        lastSyncTime = t;
+      } else if (state === 'error') {
+        const msg = data.msg || 'Erreur de connexion';
+        card.innerHTML = `<div class="sync-icon error" style="font-size:34px">⚠️</div><div class="sync-title error">Erreur de Synchronisation</div><div class="sync-sub">${msg}</div><div class="sync-contact"><strong>Un problème ? Contactez Nolan :</strong><br>📞 <a href="tel:0667463553">06 67 46 35 53</a><br>✉️ <a href="mailto:peronnenolan5o@gmail.com">peronnenolan5o@gmail.com</a></div><div style="display:flex;gap:10px;justify-content:center;margin-top:20px"><button class="sync-close" onclick="triggerSync()">🔄 Réessayer</button><button class="sync-close" onclick="closeSyncOverlay()">Fermer</button></div>`;
+      }
+      overlay.classList.add('open');
+    };
+    window.closeSyncOverlay = () => document.getElementById('syncOverlay').classList.remove('open');
+
+    window.triggerSync = async function () {
+      const btn = document.getElementById('syncBtn');
+      if (btn) btn.classList.add('spinning');
+      setFbState('syncing', 'Sync...');
+      showSyncOverlay('loading');
+      try {
+        const promises = window.ETABLISSEMENTS.map(e => update(ref(db, 'stages/' + e.id), { nom: e.nom, adresse: e.adresse, tel: e.tel, type: e.type, statut: STATUS_DEF[window.statuses[e.id] || 'todo']?.label, notes: cardNotes[e.id] || '' }));
+        await Promise.all(promises);
+        setFbState('synced', 'Synchronisé');
+        setTimeout(() => showSyncOverlay('success', { count: window.ETABLISSEMENTS.length, notes: Object.keys(cardNotes).filter(k => cardNotes[k]).length }), 600);
+      } catch (err) {
+        setFbState('error', 'Erreur');
+        showSyncOverlay('error', { msg: 'Impossible de joindre Firebase.<br><small>(' + (err.message || 'Erreur réseau') + ')</small>' });
+      } finally {
+        if (btn) btn.classList.remove('spinning');
+      }
     };
 
-    // ── CARDS ──
+    window.fbSyncStatus = (id, status) => {
+      update(ref(db, 'stages/' + id), { statut: STATUS_DEF[status]?.label || status }).then(() => setFbState('synced', 'Synchronisé')).catch(() => setFbState('error', 'Erreur sync'));
+    };
+    window.fbSyncNote = (id, val) => {
+      update(ref(db, 'stages/' + id), { notes: val }).then(() => {
+        setFbState('synced', 'Note sync');
+        const ind = document.getElementById('note-ind-' + id);
+        if (ind) { ind.textContent = '✓ sync'; ind.className = 'note-ind show ok'; setTimeout(() => { ind.className = 'note-ind'; }, 2000); }
+        const ta = document.getElementById('note-ta-' + id);
+        if (ta) { ta.className = 'note-ta synced'; setTimeout(() => ta.className = 'note-ta', 1500); }
+      }).catch(() => setFbState('error', 'Erreur note'));
+    };
+
+    // Real-time
+    onValue(ref(db, 'stages/'), (snapshot) => {
+      const data = snapshot.val();
+      if (!data) return;
+      setFbState('synced', 'Connecté');
+      const labelToKey = { "À contacter": "todo", "Contacté": "done", "En attente": "waiting", "RDV pris": "rdv", "En stage": "stage", "Refusé": "refused" };
+      let changed = false;
+      for (let id in data) {
+        const item = data[id];
+        const numId = parseInt(id);
+        if (!window.ETABLISSEMENTS.find(e => e.id === numId)) continue;
+        if (item.statut && labelToKey[item.statut]) {
+          if (window.statuses[numId] !== labelToKey[item.statut]) { window.statuses[numId] = labelToKey[item.statut]; changed = true; }
+        }
+        if (item.notes !== undefined) {
+          cardNotes[numId] = item.notes;
+          lsSet('stage_card_notes_v4', cardNotes);
+          const ta = document.getElementById('note-ta-' + numId);
+          if (ta && document.activeElement !== ta) ta.value = item.notes;
+        }
+      }
+      if (changed) { lsSet('stage_statuses_v5', window.statuses); renderCards(); }
+    }, (error) => setFbState('error', 'Hors ligne'));
+
+    window.ETABLISSEMENTS.forEach(e => update(ref(db, 'stages/' + e.id), { nom: e.nom, adresse: e.adresse, tel: e.tel, type: e.type, statut: STATUS_DEF[window.statuses[e.id] || 'todo']?.label, notes: cardNotes[e.id] || '' }));
+
+    // TABS
+    window.showTab = (tab, btn) => {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+      const p = document.getElementById('page-' + tab);
+      if (p) p.classList.add('active');
+      if (btn) btn.classList.add('active');
+      if (tab === 'kanban') renderKanban();
+      if (tab === 'checklist') renderChecklist();
+      if (tab === 'objectifs') renderObjectifs();
+      if (tab === 'rappels') renderRappels();
+      if (tab === 'logs') renderLogs();
+    };
+
+    // CAT FILTER ROW
+    function renderCatRow() {
+      const row = document.getElementById('cat-row');
+      if (!window.CATEGORIES.length) { row.innerHTML = ''; return; }
+      row.innerHTML = `<button class="cat-chip${!curCatFilter ? ' active' : ''}" onclick="setCatFilter(null)">Toutes</button>` +
+        window.CATEGORIES.map(c => `<button class="cat-chip${curCatFilter === c.id ? ' active' : ''}" onclick="setCatFilter('${c.id}')" style="${curCatFilter === c.id ? `border-color:${c.couleur};color:${c.couleur}` : ''}">${c.emoji} ${c.nom}</button>`).join('');
+    }
+    window.setCatFilter = (id) => { curCatFilter = id; renderCatRow(); renderCards(); };
+
+    // RENDER CARDS
     window.renderCards = function () {
-      renderCatFilterRow();
+      renderCatRow();
       const q = (document.getElementById('searchInput').value || '').toLowerCase();
+      window.ETABLISSEMENTS.forEach(e => { if (!window.statuses[e.id]) window.statuses[e.id] = 'todo'; });
       let list = [...window.ETABLISSEMENTS];
-      if (!window.statuses) window.statuses = {};
-      list.forEach(e => { if (!window.statuses[e.id]) window.statuses[e.id] = 'todo'; });
-      if (curFilter !== 'all') list = list.filter(e => window.statuses[e.id] === curFilter);
+      const tri = window.PARAMS?.tri || 'default';
+      if (tri === 'nom') list.sort((a, b) => a.nom.localeCompare(b.nom));
+      else if (tri === 'note') list.sort((a, b) => (b.note || 0) - (a.note || 0));
+      else if (tri === 'priorite') { const po = { haute: 0, moyenne: 1, basse: 2 }; list.sort((a, b) => (po[a.priorite] || 1) - (po[b.priorite] || 1)); }
       if (curCatFilter) list = list.filter(e => (e.categories || []).includes(curCatFilter));
       if (q) list = list.filter(e => e.nom.toLowerCase().includes(q) || e.adresse.toLowerCase().includes(q) || e.type.toLowerCase().includes(q));
-
       const c = document.getElementById('cards-container');
-      if (!list.length) { c.innerHTML = `<div class="empty-state"><div class="big">🔍</div><p>Aucun établissement trouvé</p></div>`; updateStats(); return; }
-
-      c.innerHTML = list.map(e => {
-        const st = window.statuses[e.id] || 'todo', def = STATUS_DEF[st], note = cardNotes[e.id] || '';
-        const catTags = (e.categories || []).map(cid => {
-          const cat = getCatById(cid); if (!cat) return '';
-          return `<span class="card-cat-tag" style="background:${cat.couleur}22;color:${cat.couleur}">${cat.emoji} ${cat.nom}</span>`;
-        }).join('');
-        const prioHtml = e.priorite === 'haute' ? `<span class="priority-badge p-haute">⚡ Haute priorité</span>` : e.priorite === 'basse' ? `<span class="priority-badge p-basse">Basse priorité</span>` : '';
-        let hoH = '';
-        if (e.horaires && e.horaires.length) {
-          const days = e.horaires.map(h => {
-            const cl = h.h === 'Fermé';
-            return `<div class="h-day"><div class="h-day-name">${h.j}</div><div class="h-day-dot ${cl ? 'closed' : 'open'}"></div><div class="h-day-time">${cl ? '–' : h.h.replace(/\//g, '<br>')}</div></div>`;
-          }).join('');
-          hoH = `<div class="horaires-section"><div class="horaires-label">Horaires d'ouverture</div><div class="horaires-grid">${days}</div></div>`;
-        }
-        const btns = STATUS_ORDER.map(s => {
-          const d = STATUS_DEF[s];
-          return `<button class="action-btn ${d.btn}${st === s ? ' active-btn' : ''}" onclick="setStatus(${e.id},'${s}',event)"><span class="btn-ico">${d.emoji}</span>${d.label}</button>`;
-        }).join('');
-        const extraLinks = (e.website ? `<div class="info-row"><span class="ico">🌐</span><a href="${e.website}" target="_blank">Site web →</a></div>` : '') + (e.social ? `<div class="info-row"><span class="ico">📱</span><a href="${e.social}" target="_blank">Réseaux sociaux →</a></div>` : '');
-        return `<div class="card" data-status="${st}" id="card-${e.id}">
-        <div class="card-body">
-          <div class="card-top"><div class="card-name">${e.nom}</div><span class="card-badge ${def.badge}">${def.emoji} ${def.label}</span></div>
-          ${prioHtml ? `<div style="margin-bottom:8px">${prioHtml}</div>` : ''}
-          <div class="card-info">
-            <div class="info-row"><span class="ico">📍</span><span>${e.adresse}</span></div>
-            ${e.tel ? `<div class="info-row"><span class="ico">📞</span><a href="tel:${e.tel}" onclick="event.stopPropagation()">${e.tel}</a></div>` : ''}
-            ${e.note ? `<div class="rating-row"><span class="stars">${stars(e.note)}</span><span class="rating-num">${e.note}/5</span></div>` : ''}
-            <div><span class="card-type-tag">🏷️ ${e.type}</span></div>
-            ${catTags ? `<div class="card-cats">${catTags}</div>` : ''}
-            ${e.maps ? `<div class="info-row"><span class="ico">🗺️</span><a href="${e.maps}" target="_blank" onclick="event.stopPropagation()">Voir sur Maps →</a></div>` : ''}
-            ${extraLinks}
-          </div>
-        </div>
-        ${hoH}
-        <div class="card-actions">${btns}</div>
-        <div class="card-note-wrap"><textarea class="card-note-input" placeholder="💬 Notes perso (responsable, impression, rappel…)" oninput="saveCardNote(${e.id},this.value)">${note}</textarea></div>
-      </div>`;
+      if (curFilter !== 'all') {
+        const filtered = list.filter(e => (window.statuses[e.id] || 'todo') === curFilter);
+        if (!filtered.length) { c.innerHTML = `<div class="cards-grid"><div class="empty"><div class="big">🔍</div><p>Aucun établissement dans cette catégorie</p></div></div>`; updateStats(); return; }
+        c.innerHTML = `<div class="cards-grid fade-in">${filtered.map(e => buildCard(e)).join('')}</div>`;
+        updateStats(); return;
+      }
+      const groups = STATUS_ORDER.map(s => ({ status: s, items: list.filter(e => (window.statuses[e.id] || 'todo') === s) })).filter(g => g.items.length > 0);
+      if (!groups.length) { c.innerHTML = `<div class="cards-grid"><div class="empty"><div class="big">🔍</div><p>Aucun établissement trouvé</p></div></div>`; updateStats(); return; }
+      c.innerHTML = groups.map(g => {
+        const def = STATUS_DEF[g.status];
+        const isMain = g.status === 'todo';
+        const collapsed = !isMain;
+        return `<div class="status-block" id="section-${g.status}">
+      <div class="status-block-header">
+        <div class="status-dot" style="background:${def.color};box-shadow:0 0 6px ${def.color}44"></div>
+        <div class="status-block-title" style="color:${def.color}">${def.emoji} ${def.label}</div>
+        <div class="status-block-count" style="background:${def.color}18;color:${def.color}">${g.items.length}</div>
+        <button class="collapse-btn" onclick="toggleSection('${g.status}',this)">${collapsed ? '▼ Afficher' : '▲ Masquer'}</button>
+      </div>
+      <div class="cards-grid sc-${g.status}" style="${collapsed ? 'display:none' : ''}">
+        ${g.items.map(e => buildCard(e)).join('')}
+      </div>
+    </div>`;
       }).join('');
       updateStats();
     };
 
+    window.toggleSection = (status, btn) => {
+      const grid = document.querySelector(`.sc-${status}`);
+      if (!grid) return;
+      const hidden = grid.style.display === 'none';
+      grid.style.display = hidden ? '' : 'none';
+      btn.textContent = hidden ? '▲ Masquer' : '▼ Afficher';
+    };
+
+    function buildCard(e) {
+      const st = window.statuses[e.id] || 'todo', def = STATUS_DEF[st], note = cardNotes[e.id] || '';
+      const catTags = (e.categories || []).map(cid => { const cat = getCatById(cid); if (!cat) return ''; return `<span class="cat-tag" style="background:${cat.couleur}20;color:${cat.couleur}">${cat.emoji} ${cat.nom}</span>`; }).join('');
+      const prioHtml = e.priorite === 'haute' ? `<span class="prio-badge prio-haute">⚡ Haute priorité</span>` : e.priorite === 'basse' ? `<span class="prio-badge prio-basse">Basse priorité</span>` : '';
+      const rappelForEtab = window.RAPPELS.find(r => r.etabId == e.id && !r.fait);
+      const rappelHtml = rappelForEtab ? `<div class="info-row"><span>⏰</span><span style="color:var(--gold)">Rappel le ${rappelForEtab.date}</span></div>` : '';
+      let hoH = '';
+      if (e.horaires && e.horaires.length) {
+        const days = e.horaires.map(h => { const cl = h.h === 'Fermé' || h.h === '-' || !h.h; return `<div class="h-col"><div class="h-day-name">${h.j}</div><div class="h-dot ${cl ? 'closed' : 'open'}"></div><div class="h-time">${cl ? '–' : h.h.replace(/\//g, '<br>')}</div></div>`; }).join('');
+        hoH = `<div class="horaires-panel"><div class="horaires-lbl">Horaires d'ouverture</div><div class="horaires-grid">${days}</div></div>`;
+      }
+      const btns = STATUS_ORDER.map(s => { const d = STATUS_DEF[s]; return `<button class="act-btn${st === s ? ' active-' + s : ''}" onclick="setStatus(${e.id},'${s}',event)">${d.emoji} ${d.label}</button>`; }).join('');
+      const extraLinks = (e.website ? `<div class="info-row"><span>🌐</span><a href="${e.website}" target="_blank">Site web →</a></div>` : '') + (e.social ? `<div class="info-row"><span>📱</span><a href="${e.social}" target="_blank">Réseaux →</a></div>` : '');
+      return `<div class="card" id="card-${e.id}">
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-name">${e.nom}</div>
+        <span class="card-badge ${def.badge}">${def.emoji} ${def.label}</span>
+      </div>
+      ${prioHtml ? `<div style="margin-bottom:10px">${prioHtml}</div>` : ''}
+      <div class="card-info">
+        <div class="info-row"><span>📍</span><span>${e.adresse}</span></div>
+        ${e.tel ? `<div class="info-row"><span>📞</span><a href="tel:${e.tel}" onclick="event.stopPropagation()">${e.tel}</a></div>` : ''}
+        ${e.note ? `<div class="info-row"><span class="stars">${stars(e.note)}</span><span class="rating-txt">${e.note}/5</span></div>` : ''}
+        <div><span class="card-type">🏷️ ${e.type}</span></div>
+        ${catTags ? `<div class="cats-row">${catTags}</div>` : ''}
+        ${e.maps ? `<div class="info-row"><span>🗺️</span><a href="${e.maps}" target="_blank" onclick="event.stopPropagation()">Voir sur Maps →</a></div>` : ''}
+        ${extraLinks}${rappelHtml}
+      </div>
+    </div>
+    ${hoH}
+    <div class="card-actions">${btns}</div>
+    <div class="note-wrap">
+      <textarea class="note-ta" id="note-ta-${e.id}" placeholder="💬 Notes perso (responsable, impression, rappel…)" oninput="saveCardNote(${e.id},this.value)">${note}</textarea>
+      <div class="note-ind" id="note-ind-${e.id}">⟳ sync</div>
+    </div>
+  </div>`;
+    }
+
     window.setStatus = (id, s, ev) => {
       if (ev) ev.stopPropagation();
       const old = window.statuses[id] || 'todo';
-      window.statuses[id] = s; lsSet('stage_statuses_v4', window.statuses);
+      window.statuses[id] = s; lsSet('stage_statuses_v5', window.statuses);
       renderCards(); renderKanban();
-      window.fbSyncStatus && window.fbSyncStatus(id, s);
+      window.fbSyncStatus(id, s);
       const nom = window.ETABLISSEMENTS.find(e => e.id === id)?.nom || '';
-      toast(`${STATUS_DEF[s].emoji} ${nom} → ${STATUS_DEF[s].label}`);
-      window.addLog && window.addLog('statut', `${STATUS_DEF[s].emoji} Statut "${nom}" : ${STATUS_DEF[old].label} → ${STATUS_DEF[s].label}`);
+      toast(`${STATUS_DEF[s].emoji} ${nom} → ${STATUS_DEF[s].label}`, 'success');
+      addLog('statut', `${STATUS_DEF[s].emoji} Statut "${nom}" : ${STATUS_DEF[old].label} → ${STATUS_DEF[s].label}`);
+      syncObjectifsAuto();
     };
 
-    function saveCardNote(id, val) { cardNotes[id] = val; lsSet('stage_card_notes_v4', cardNotes); }
-    function setFilter(f, btn) { curFilter = f; document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderCards(); }
+    window.saveCardNote = function (id, val) {
+      cardNotes[id] = val; lsSet('stage_card_notes_v4', cardNotes);
+      const ind = document.getElementById('note-ind-' + id);
+      const ta = document.getElementById('note-ta-' + id);
+      if (ind) { ind.textContent = '⟳ sync'; ind.className = 'note-ind show saving'; }
+      if (ta) ta.className = 'note-ta syncing';
+      setFbState('syncing', 'Note...');
+      clearTimeout(noteTimers[id]);
+      noteTimers[id] = setTimeout(() => window.fbSyncNote(id, val), 900);
+    };
+
+    window.setFilter = (f, btn) => { curFilter = f; document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderCards(); };
 
     function updateStats() {
       const all = window.ETABLISSEMENTS;
       document.getElementById('s-total').textContent = all.length;
+      document.getElementById('nb-etabs').textContent = all.length;
       document.getElementById('s-todo').textContent = all.filter(e => (window.statuses[e.id] || 'todo') === 'todo').length;
       document.getElementById('s-done').textContent = all.filter(e => window.statuses[e.id] === 'done').length;
       document.getElementById('s-waiting').textContent = all.filter(e => window.statuses[e.id] === 'waiting').length;
+      document.getElementById('s-rdv').textContent = all.filter(e => window.statuses[e.id] === 'rdv').length;
       document.getElementById('s-stage').textContent = all.filter(e => window.statuses[e.id] === 'stage').length;
       document.getElementById('s-refused').textContent = all.filter(e => window.statuses[e.id] === 'refused').length;
-      document.getElementById('s-membres').textContent = window.MEMBRES.length;
     }
 
-    // ── KANBAN ──
+    // KANBAN
     window.renderKanban = function () {
-      document.getElementById('kanban-container').innerHTML = STATUS_ORDER.map(s => {
+      const board = document.getElementById('kanban-board');
+      if (!board) return;
+      board.innerHTML = STATUS_ORDER.map(s => {
         const def = STATUS_DEF[s];
         const items = window.ETABLISSEMENTS.filter(e => (window.statuses[e.id] || 'todo') === s);
-        return `<div class="kanban-col"><div class="kanban-col-title"><div class="k-dot" style="background:${def.color}"></div>${def.emoji} ${def.label}<span class="k-count" style="color:${def.color}">${items.length}</span></div>${items.length ? items.map(e => `<div class="kanban-item" onclick="gotoCard(${e.id})">${e.nom}</div>`).join('') : '<div class="kanban-empty">Aucun</div>'}</div>`;
+        return `<div class="kanban-col">
+      <div class="kanban-col-title" style="color:${def.color}">${def.emoji} ${def.label} <span class="kanban-count">${items.length}</span></div>
+      ${items.map(e => `<div class="kanban-item" onclick="openEditModal(${e.id})">${e.nom}<div class="kanban-item-sub">📍 ${e.adresse.split(',')[1]?.trim() || e.adresse}</div>${e.note ? `<div class="kanban-item-sub">★ ${e.note}/5</div>` : ''}</div>`).join('') || `<div style="color:var(--txt2);font-size:12px;text-align:center;padding:12px">Vide</div>`}
+    </div>`;
       }).join('');
     };
 
-    function gotoCard(id) {
-      showTab('liste', document.querySelector('.tab-btn'));
-      setTimeout(() => { const el = document.getElementById('card-' + id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 120);
-    }
-
-    // ── MEMBRES ──
-    window.renderMembres = function () {
-      const c = document.getElementById('membres-container');
-      if (!c) return;
-      if (!window.MEMBRES.length) {
-        c.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="big">👥</div><p>Aucun membre enregistré</p><p style="font-size:12px;margin-top:8px;">Ajoute des membres depuis le panel admin (Ctrl+Shift+A)</p></div>`;
-        return;
-      }
-      const statusLabels = { actif: 'Actif', inactif: 'Inactif', chef: '👑 Chef' };
-      const statusCls = { actif: 'ms-actif', inactif: 'ms-inactif', chef: 'ms-chef' };
-      c.innerHTML = window.MEMBRES.map(m => `
-      <div class="membre-card">
-        <div class="membre-avatar" style="background:rgba(201,168,76,.12)">${m.emoji || '👤'}</div>
-        <div class="membre-info">
-          <div class="membre-name">${m.prenom} ${m.nom}</div>
-          <div class="membre-role">${m.role || 'Membre'}</div>
-          <div class="membre-contacts">
-            ${m.email ? `<div class="membre-contact">📧 <a href="mailto:${m.email}">${m.email}</a></div>` : ''}
-            ${m.tel ? `<div class="membre-contact">📞 <a href="tel:${m.tel}">${m.tel}</a></div>` : ''}
-          </div>
-          <span class="membre-status-badge ${statusCls[m.statut] || 'ms-actif'}">${statusLabels[m.statut] || 'Actif'}</span>
-        </div>
-      </div>`).join('');
-    };
-
-    // ── CHECKLIST ──
+    // CHECKLIST
     window.renderChecklist = function () {
-      window.STEPS.forEach((_, i) => { if (checks[i] === undefined) checks[i] = false; });
-      document.getElementById('checklist-container').innerHTML = window.STEPS.map((s, i) => `
-      <div class="checklist-item" onclick="toggleCheck(${i})">
-        <div class="check-box ${checks[i] ? 'checked' : ''}">${checks[i] ? '✓' : ''}</div>
-        <span class="check-label ${checks[i] ? 'done' : ''}">${s}</span>
-      </div>`).join('');
-      const total = window.STEPS.length, done = Object.values(checks).filter(Boolean).length, pct = Math.round(done / total * 100);
-      document.getElementById('progress-fill').style.width = pct + '%';
-      document.getElementById('progress-text').textContent = `${done} / ${total} étapes complétées`;
-      document.getElementById('progress-pct').textContent = pct + '%';
+      const list = document.getElementById('checklist-list');
+      const done = window.STEPS.filter((_, i) => checks[i]).length;
+      const pct = window.STEPS.length ? Math.round(done / window.STEPS.length * 100) : 0;
+      document.getElementById('check-pct').textContent = `${pct}%`;
+      document.getElementById('check-bar').style.width = pct + '%';
+      document.getElementById('check-count').textContent = `${done}/${window.STEPS.length}`;
+      list.innerHTML = window.STEPS.map((_, i) => `<div class="checklist-item${checks[i] ? ' done' : ''}" onclick="toggleCheck(${i})"><div class="check-box">${checks[i] ? '✓' : ''}</div><span class="step-text">${window.STEPS[i]}</span><button class="del-step" onclick="deleteStep(${i},event)">✕</button></div>`).join('');
     };
+    window.toggleCheck = (i) => { checks[i] = !checks[i]; lsSet('stage_checks_v5', checks); renderChecklist(); addLog('note', `${checks[i] ? '✅' : '↩️'} Étape "${window.STEPS[i]}" ${checks[i] ? 'cochée' : 'décochée'}`); };
+    window.deleteStep = (i, ev) => { ev.stopPropagation(); window.STEPS.splice(i, 1); lsSet('stage_steps_v4', window.STEPS); renderChecklist(); };
+    window.resetChecklist = () => { Object.keys(checks).forEach(k => checks[k] = false); lsSet('stage_checks_v5', checks); renderChecklist(); toast('🔄 Checklist réinitialisée'); };
+    window.addStepModal = () => { const v = document.getElementById('new-step-txt').value.trim(); if (!v) return; window.STEPS.push(v); lsSet('stage_steps_v4', window.STEPS); document.getElementById('new-step-txt').value = ''; closeModal('addStepModal'); renderChecklist(); toast('✅ Étape ajoutée', 'success'); };
 
-    function toggleCheck(i) { checks[i] = !checks[i]; lsSet('stage_checks_v4', checks); renderChecklist(); toast(checks[i] ? '✅ Étape validée !' : '↩️ Étape décochée'); }
-
-    // ── NOTES ──
-    const notesArea = document.getElementById('notesArea');
-    const saveInd = document.getElementById('saveInd');
-    const mainNotes = ls('stage_main_notes_v4', {});
-    notesArea.value = mainNotes.text || '';
-    let saveT;
-    notesArea.addEventListener('input', () => {
-      clearTimeout(saveT); saveInd.classList.remove('show');
-      saveT = setTimeout(() => {
-        lsSet('stage_main_notes_v4', { text: notesArea.value });
-        window.fbSyncNotes && window.fbSyncNotes(notesArea.value);
-        saveInd.classList.add('show');
-        setTimeout(() => saveInd.classList.remove('show'), 2500);
-      }, 600);
-    });
-
-    // ── TABS ──
-    window.showTab = (tab, btn) => {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('tab-' + tab).classList.add('active');
-      if (btn) btn.classList.add('active');
-      if (tab === 'kanban') renderKanban();
-      if (tab === 'membres') renderMembres();
+    // OBJECTIFS
+    window.syncObjectifsAuto = () => {
+      const contacted = window.ETABLISSEMENTS.filter(e => ['done', 'waiting', 'rdv', 'stage'].includes(window.statuses[e.id])).length;
+      const positive = window.ETABLISSEMENTS.filter(e => ['waiting', 'rdv', 'stage'].includes(window.statuses[e.id])).length;
+      const instage = window.ETABLISSEMENTS.filter(e => window.statuses[e.id] === 'stage').length;
+      window.OBJECTIFS.forEach(o => { if (o.id === 'obj1') o.actuel = contacted; if (o.id === 'obj2') o.actuel = positive; if (o.id === 'obj3') o.actuel = instage; });
+      lsSet('stage_objectifs_v4', window.OBJECTIFS);
+      renderObjectifs();
     };
-
-    // ── ADMIN ──
-    window.openAdmin = function () {
-      document.getElementById('admin-overlay').classList.add('open');
-      document.getElementById('admin-login').style.display = 'flex';
-      document.getElementById('admin-panel').classList.remove('open');
-      document.getElementById('loginInput').value = '';
-      document.getElementById('loginErr').classList.remove('show');
+    window.renderObjectifs = function () {
+      const list = document.getElementById('objectifs-list');
+      if (!list) return;
+      list.innerHTML = window.OBJECTIFS.map(o => {
+        const pct = Math.min(100, Math.round(o.actuel / o.cible * 100));
+        return `<div class="obj-card"><div class="obj-header"><div class="obj-title">${o.titre}</div><div class="obj-nums" style="color:${o.couleur}">${o.actuel}/${o.cible}</div><button onclick="deleteObj('${o.id}')" style="background:none;border:none;color:var(--txt2);cursor:pointer;font-size:14px;margin-left:8px">🗑️</button></div><div class="obj-bar-outer"><div class="obj-bar-inner" style="width:${pct}%;background:${o.couleur}"></div></div><div class="obj-sub">${pct}% complété</div></div>`;
+      }).join('') || '<p style="color:var(--txt2)">Aucun objectif défini.</p>';
     };
+    window.saveObj = () => {
+      const titre = document.getElementById('obj-titre').value.trim();
+      const cible = parseInt(document.getElementById('obj-cible').value) || 10;
+      const actuel = parseInt(document.getElementById('obj-actuel').value) || 0;
+      const couleur = document.getElementById('obj-color').value;
+      if (!titre) return;
+      window.OBJECTIFS.push({ id: uid(), titre, cible, actuel, couleur }); lsSet('stage_objectifs_v4', window.OBJECTIFS);
+      closeModal('addObjModal'); renderObjectifs();
+      document.getElementById('obj-titre').value = '';
+      toast('✅ Objectif ajouté', 'success');
+    };
+    window.deleteObj = (id) => { window.OBJECTIFS = window.OBJECTIFS.filter(o => o.id !== id); lsSet('stage_objectifs_v4', window.OBJECTIFS); renderObjectifs(); toast('🗑️ Objectif supprimé'); };
 
-    window.closeAdmin = () => document.getElementById('admin-overlay').classList.remove('open');
+    // RAPPELS
+    window.renderRappels = function () {
+      const list = document.getElementById('rappels-list');
+      if (!list) return;
+      if (!window.RAPPELS.length) { list.innerHTML = '<p style="color:var(--txt2)">Aucun rappel défini.</p>'; return; }
+      list.innerHTML = window.RAPPELS.map((r, i) => {
+        const etab = window.ETABLISSEMENTS.find(e => e.id == r.etabId);
+        return `<div class="rappel-card${r.fait ? ' fait' : ''}"><span style="font-size:22px">${r.fait ? '✅' : '⏰'}</span><div style="flex:1"><div class="rappel-name">${etab?.nom || '?'}</div><div class="rappel-date">📅 ${r.date}${r.note ? ` — ${r.note}` : ''}</div></div><div style="display:flex;gap:6px">${!r.fait ? `<button class="btn btn-outline" style="font-size:11px;padding:5px 10px" onclick="doneRappel(${i})">✔ Fait</button>` : ''}<button class="btn btn-outline" style="font-size:11px;padding:5px 10px;color:var(--red);border-color:rgba(248,113,113,.3)" onclick="deleteRappel(${i})">🗑️</button></div></div>`;
+      }).join('');
+    };
+    window.openRappelModal = () => {
+      const sel = document.getElementById('r-etab');
+      sel.innerHTML = '<option value="">— Choisir —</option>' + window.ETABLISSEMENTS.map(e => `<option value="${e.id}">${e.nom}</option>`).join('');
+      document.getElementById('r-date').value = '';
+      document.getElementById('r-note').value = '';
+      openModal('rappelModal');
+    };
+    window.saveRappel = () => {
+      const etabId = document.getElementById('r-etab').value;
+      const date = document.getElementById('r-date').value;
+      const note = document.getElementById('r-note').value;
+      if (!etabId || !date) { toast('❌ Remplissez tous les champs', 'error'); return; }
+      window.RAPPELS.push({ etabId, date, note, fait: false }); lsSet('stage_rappels_v4', window.RAPPELS);
+      closeModal('rappelModal'); renderRappels(); renderCards();
+      toast('✅ Rappel enregistré', 'success');
+    };
+    window.doneRappel = (i) => { window.RAPPELS[i].fait = true; lsSet('stage_rappels_v4', window.RAPPELS); renderRappels(); renderCards(); toast('✅ Rappel marqué fait', 'success'); };
+    window.deleteRappel = (i) => { window.RAPPELS.splice(i, 1); lsSet('stage_rappels_v4', window.RAPPELS); renderRappels(); renderCards(); toast('🗑️ Rappel supprimé'); };
 
-    window.tryLogin = () => {
-      const val = document.getElementById('loginInput').value;
-      if (val === ADMIN_PASSWORD) {
-        document.getElementById('admin-login').style.display = 'none';
-        document.getElementById('admin-panel').classList.add('open');
-        renderAdminTables();
-        renderAdminMembres();
-        renderCatsAdmin();
-        updateExportSummary();
-        document.getElementById('pwd-display').textContent = ADMIN_PASSWORD;
-        window.addLog && window.addLog('admin', '🔑 Connexion au panel admin');
-      } else {
-        document.getElementById('loginErr').classList.add('show');
-        document.getElementById('loginInput').value = '';
-        window.addLog && window.addLog('admin', '⚠️ Tentative de connexion admin échouée');
-        setTimeout(() => document.getElementById('loginErr').classList.remove('show'), 2000);
+    // LOGS
+    function addLog(type, msg) { window.LOGS.unshift({ type, msg, time: now() }); if (window.LOGS.length > 200) window.LOGS.pop(); lsSet('stage_logs_v5', window.LOGS); renderLogs(); }
+    window.addLog = addLog;
+    window.setLogFilter = (f, btn) => { curLogFilter = f; document.querySelectorAll('#page-logs .filter-tab').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderLogs(); };
+    window.renderLogs = function () {
+      const list = document.getElementById('logs-list');
+      if (!list) return;
+      const filtered = curLogFilter === 'all' ? window.LOGS : window.LOGS.filter(l => l.type === curLogFilter);
+      if (!filtered.length) { list.innerHTML = '<div style="padding:30px;text-align:center;color:var(--txt2)">Aucune activité</div>'; return; }
+      const colors = { statut: 'var(--gold)', note: 'var(--blue)', etab: 'var(--green)' };
+      list.innerHTML = filtered.map(l => `<div class="log-entry"><span class="log-time">${l.time}</span><span class="log-type" style="background:${colors[l.type] || 'var(--border)'}20;color:${colors[l.type] || 'var(--txt2)'}">${l.type}</span><span class="log-msg">${l.msg}</span></div>`).join('');
+    };
+    window.clearLogs = () => { window.LOGS = []; lsSet('stage_logs_v5', window.LOGS); renderLogs(); toast('🗑️ Journal vidé'); };
+
+    // ADD / EDIT ETABLISSEMENT
+    function buildHorairesEditor(horaires) {
+      return DAYS.map(d => { const existing = horaires.find(h => h.j === d); return `<div class="horaire-row"><label>${d}</label><input type="text" placeholder="Fermé" value="${existing?.h || ''}" data-day="${d}"></div>`; }).join('');
+    }
+    window.openModal = (id) => {
+      if (id === 'addModal') {
+        editingId = null;
+        document.getElementById('addModal-title').textContent = '➕ Ajouter un établissement';
+        ['nom', 'type', 'adresse', 'tel', 'maps', 'website', 'social'].forEach(f => { const el = document.getElementById('f-' + f); if (el) el.value = ''; });
+        document.getElementById('f-note').value = '';
+        document.getElementById('f-priorite').value = 'moyenne';
+        document.getElementById('f-statut').value = 'todo';
+        document.getElementById('f-horaires').innerHTML = buildHorairesEditor([]);
+        renderCatCheckboxes([]);
       }
+      document.getElementById(id).classList.add('open');
     };
-
-    window.adminPage = (page, btn) => {
-      document.querySelectorAll('.admin-page').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('ap-' + page).classList.add('active');
-      if (btn) btn.classList.add('active');
-      if (page === 'etab' || page === 'statuts') renderAdminTables();
-      if (page === 'checklist') renderAdminSteps();
-      if (page === 'firebase') checkFbStatus();
-      if (page === 'membres') renderAdminMembres();
-      if (page === 'categories') renderCatsAdmin();
-      if (page === 'logs') renderLogsAdmin();
-      if (page === 'export') updateExportSummary();
-      if (page === 'ajouter') renderNewCatsCheck();
-    };
-
-    window.renderAdminTables = function () {
-      const tb = document.getElementById('admin-etab-tbody');
-      if (tb) tb.innerHTML = window.ETABLISSEMENTS.map(e => {
-        const st = window.statuses[e.id] || 'todo', def = STATUS_DEF[st];
-        const catBadges = (e.categories || []).map(cid => { const c = getCatById(cid); return c ? `<span style="font-size:9px;background:${c.couleur}22;color:${c.couleur};padding:1px 6px;border-radius:8px;margin-right:2px">${c.emoji} ${c.nom}</span>` : '' }).join('');
-        const prioBadge = e.priorite === 'haute' ? '<span style="font-size:9px;color:var(--rouge)">⚡ Haute</span>' : e.priorite === 'basse' ? '<span style="font-size:9px;color:var(--gris)">Basse</span>' : '<span style="font-size:9px;color:var(--gris)">Moyenne</span>';
-        return `<tr>
-        <td class="td-nom">${e.nom}</td>
-        <td style="color:var(--gris);font-size:12px">${e.type}</td>
-        <td>${catBadges || '<span style="color:var(--gris);font-size:11px">—</span>'}</td>
-        <td>${prioBadge}</td>
-        <td style="color:var(--or)">${e.note || '—'}</td>
-        <td><span class="td-badge badge-${st}">${def.emoji} ${def.label}</span></td>
-        <td><button class="tbl-btn edit" onclick="openEditModal(${e.id})">✏️ Modifier</button><button class="tbl-btn del" onclick="deleteEtab(${e.id})">🗑️</button></td>
-      </tr>`;
-      }).join('');
-
-      const sb = document.getElementById('admin-statuts-tbody');
-      if (sb) sb.innerHTML = window.ETABLISSEMENTS.map(e => {
-        const st = window.statuses[e.id] || 'todo';
-        const opts = STATUS_ORDER.map(s => `<option value="${s}"${s === st ? ' selected' : ''}>${STATUS_DEF[s].emoji} ${STATUS_DEF[s].label}</option>`).join('');
-        return `<tr><td class="td-nom">${e.nom}</td><td><span class="td-badge badge-${st}">${STATUS_DEF[st].emoji} ${STATUS_DEF[st].label}</span></td><td><select class="status-select" onchange="quickStatus(${e.id},this.value)">${opts}</select></td></tr>`;
-      }).join('');
-    };
-
-    window.quickStatus = (id, s) => {
-      window.statuses[id] = s; lsSet('stage_statuses_v4', window.statuses);
-      window.fbSyncStatus && window.fbSyncStatus(id, s);
-      renderCards(); renderKanban(); renderAdminTables();
-      const nom = window.ETABLISSEMENTS.find(e => e.id === id)?.nom || '';
-      toast(`${STATUS_DEF[s].emoji} Statut mis à jour`);
-      window.addLog && window.addLog('statut', `${STATUS_DEF[s].emoji} Statut "${nom}" → ${STATUS_DEF[s].label} (admin)`);
-    };
-
-    // ── CATÉGORIES ──
-    window.addCategorie = () => {
-      const nom = document.getElementById('new-cat-nom').value.trim();
-      const emoji = document.getElementById('new-cat-emoji').value.trim() || '🏷️';
-      const couleur = document.getElementById('new-cat-color').value;
-      if (!nom) { toast('⚠️ Saisis un nom de catégorie'); return; }
-      const cat = { id: 'cat' + Date.now(), nom, emoji, couleur };
-      window.CATEGORIES.push(cat);
-      lsSet('stage_cats_v4', window.CATEGORIES);
-      window.fbWrite && window.fbWrite('categories/' + cat.id, cat);
-      document.getElementById('new-cat-nom').value = '';
-      document.getElementById('new-cat-emoji').value = '';
-      renderCatsAdmin(); renderCards(); renderCatFilterRow();
-      toast(`🏷️ Catégorie "${nom}" ajoutée !`);
-      window.addLog && window.addLog('modif', `🏷️ Catégorie créée : "${nom}"`);
-    };
-
-    function renderCatsAdmin() {
-      const g = document.getElementById('cats-admin-grid');
-      if (!g) return;
-      g.innerHTML = window.CATEGORIES.map(c => `
-      <div class="cat-admin-card">
-        <div class="cat-admin-swatch" style="background:${c.couleur}"></div>
-        <span style="font-size:18px">${c.emoji}</span>
-        <span class="cat-admin-name">${c.nom}</span>
-        <button class="tbl-btn del" onclick="deleteCategorie('${c.id}')" style="margin-left:auto">🗑️</button>
-      </div>`).join('') || '<p style="color:var(--gris);font-size:13px">Aucune catégorie créée.</p>';
-    }
-
-    window.deleteCategorie = (id) => {
-      const cat = window.CATEGORIES.find(c => c.id === id);
-      window.CATEGORIES = window.CATEGORIES.filter(c => c.id !== id);
-      window.ETABLISSEMENTS.forEach(e => { if (e.categories) e.categories = e.categories.filter(cid => cid !== id); });
-      lsSet('stage_cats_v4', window.CATEGORIES);
-      lsSet('stage_etab_v4', window.ETABLISSEMENTS);
-      window.fbDeleteCategorie && window.fbDeleteCategorie(id);
-      renderCatsAdmin(); renderCards(); renderCatFilterRow();
-      toast(`🗑️ Catégorie supprimée`);
-      window.addLog && window.addLog('suppression', `🗑️ Catégorie supprimée : "${cat?.nom || id}"`);
-    };
-
-    function renderCatsCheckboxes(containerId, selectedCats = []) {
-      const div = document.getElementById(containerId);
-      if (!div) return;
-      div.innerHTML = window.CATEGORIES.map(c => `
-      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;padding:4px 10px;border-radius:6px;border:1px solid ${selectedCats.includes(c.id) ? c.couleur : ' var(--border)'};background:${selectedCats.includes(c.id) ? c.couleur + '22' : 'rgba(255,255,255,.02)'};color:${selectedCats.includes(c.id) ? c.couleur : 'var(--gris)'}">
-        <input type="checkbox" ${selectedCats.includes(c.id) ? 'checked' : ''} value="${c.id}" onchange="updateCatCheck('${containerId}')" style="display:none">
-        ${c.emoji} ${c.nom}
-      </label>`).join('') || '<span style="font-size:12px;color:var(--gris)">Aucune catégorie disponible — créez-en depuis le menu Catégories</span>';
-    }
-
-    window.updateCatCheck = (containerId) => { };
-
-    function getCheckedCats(containerId) {
-      const div = document.getElementById(containerId);
-      if (!div) return [];
-      return [...div.querySelectorAll('input[type=checkbox]:checked')].map(i => i.value);
-    }
-
-    function renderNewCatsCheck() { renderCatsCheckboxes('new-cats-check', []); }
-
-    // ── MEMBRES ADMIN ──
-    window.addMembre = () => {
-      const prenom = document.getElementById('new-m-prenom').value.trim();
-      const nom = document.getElementById('new-m-nom').value.trim();
-      if (!prenom || !nom) { toast('⚠️ Remplis prénom et nom'); return; }
-      const membre = {
-        id: 'mb' + Date.now(), prenom, nom,
-        role: document.getElementById('new-m-role').value.trim(),
-        statut: document.getElementById('new-m-statut').value,
-        email: document.getElementById('new-m-email').value.trim(),
-        tel: document.getElementById('new-m-tel').value.trim(),
-        emoji: document.getElementById('new-m-emoji').value.trim() || '👤',
-        dateAjout: new Date().toLocaleString('fr-FR')
-      };
-      window.MEMBRES.push(membre);
-      lsSet('stage_membres_v4', window.MEMBRES);
-      window.fbWrite && window.fbWrite('membres/' + membre.id, membre);
-      ['new-m-prenom', 'new-m-nom', 'new-m-role', 'new-m-email', 'new-m-tel', 'new-m-emoji'].forEach(id => document.getElementById(id).value = '');
-      renderAdminMembres(); renderMembres(); updateStats();
-      toast(`👥 ${prenom} ${nom} ajouté(e) !`);
-      window.addLog && window.addLog('modif', `👥 Nouveau membre : ${prenom} ${nom} (${membre.role || 'Membre'})`);
-    };
-
-    window.renderAdminMembres = function () {
-      const tb = document.getElementById('admin-membres-tbody');
-      if (!tb) return;
-      const statusCls = { actif: 'ms-actif', inactif: 'ms-inactif', chef: 'ms-chef' };
-      const statusLabels = { actif: 'Actif', inactif: 'Inactif', chef: '👑 Chef' };
-      tb.innerHTML = window.MEMBRES.map(m => `
-      <tr>
-        <td style="font-size:20px">${m.emoji || '👤'}</td>
-        <td class="td-nom">${m.prenom} ${m.nom}</td>
-        <td style="font-size:12px;color:var(--gris)">${m.role || '—'}</td>
-        <td style="font-size:12px">${m.email ? `<a href="mailto:${m.email}" style="color:var(--or)">${m.email}</a>` : ''} ${m.tel ? `<br><span style="color:var(--gris)">${m.tel}</span>` : ''}</td>
-        <td><span class="membre-status-badge ${statusCls[m.statut] || 'ms-actif'}">${statusLabels[m.statut] || 'Actif'}</span></td>
-        <td><button class="tbl-btn del" onclick="deleteMembre('${m.id}')">🗑️</button></td>
-      </tr>`).join('') || '<tr><td colspan="6" style="text-align:center;color:var(--gris);padding:24px">Aucun membre</td></tr>';
-    };
-
-    window.deleteMembre = (id) => {
-      const m = window.MEMBRES.find(x => x.id === id);
-      if (!confirm(`Supprimer "${m?.prenom} ${m?.nom}" ?`)) return;
-      window.MEMBRES = window.MEMBRES.filter(x => x.id !== id);
-      lsSet('stage_membres_v4', window.MEMBRES);
-      window.fbDeleteMembre && window.fbDeleteMembre(id);
-      renderAdminMembres(); renderMembres(); updateStats();
-      toast('🗑️ Membre supprimé');
-      window.addLog && window.addLog('suppression', `🗑️ Membre supprimé : ${m?.prenom} ${m?.nom}`);
-    };
-
-    // ── EDIT MODAL ──
+    window.closeModal = (id) => document.getElementById(id).classList.remove('open');
     window.openEditModal = (id) => {
-      const e = window.ETABLISSEMENTS.find(x => x.id === id); if (!e) return;
       editingId = id;
-      document.getElementById('modal-etab-name').textContent = e.nom;
-      document.getElementById('edit-nom').value = e.nom;
-      document.getElementById('edit-type').value = e.type;
-      document.getElementById('edit-adresse').value = e.adresse;
-      document.getElementById('edit-tel').value = e.tel || '';
-      document.getElementById('edit-note').value = e.note || '';
-      document.getElementById('edit-priorite').value = e.priorite || 'moyenne';
-      document.getElementById('edit-maps').value = e.maps || '';
-      document.getElementById('edit-website').value = e.website || '';
-      document.getElementById('edit-social').value = e.social || '';
-      const hr = document.getElementById('edit-horaires-rows');
-      hr.innerHTML = DAYS.map(j => {
-        const found = e.horaires && e.horaires.find(h => h.j === j);
-        return `<div class="horaires-admin-row"><span class="horaires-admin-day">${j}</span><input class="form-input" data-jour="${j}" value="${found ? found.h : ''}" placeholder="Fermé"></div>`;
-      }).join('');
-      renderCatsCheckboxes('edit-cats-check', e.categories || []);
-      document.getElementById('modal-overlay').classList.add('open');
+      const e = window.ETABLISSEMENTS.find(x => x.id === id);
+      if (!e) return;
+      document.getElementById('addModal-title').textContent = "✏️ Modifier l'établissement";
+      document.getElementById('f-nom').value = e.nom || '';
+      document.getElementById('f-type').value = e.type || '';
+      document.getElementById('f-adresse').value = e.adresse || '';
+      document.getElementById('f-tel').value = e.tel || '';
+      document.getElementById('f-note').value = e.note || '';
+      document.getElementById('f-priorite').value = e.priorite || 'moyenne';
+      document.getElementById('f-statut').value = window.statuses[e.id] || 'todo';
+      document.getElementById('f-maps').value = e.maps || '';
+      document.getElementById('f-website').value = e.website || '';
+      document.getElementById('f-social').value = e.social || '';
+      document.getElementById('f-horaires').innerHTML = buildHorairesEditor(e.horaires || []);
+      renderCatCheckboxes(e.categories || []);
+      openModal('addModal');
     };
-
-    window.closeModal = () => { document.getElementById('modal-overlay').classList.remove('open'); editingId = null; };
-
-    window.saveEdit = () => {
-      if (!editingId) return;
-      const idx = window.ETABLISSEMENTS.findIndex(e => e.id === editingId); if (idx === -1) return;
-      const e = window.ETABLISSEMENTS[idx];
-      e.nom = document.getElementById('edit-nom').value.trim() || e.nom;
-      e.type = document.getElementById('edit-type').value.trim() || e.type;
-      e.adresse = document.getElementById('edit-adresse').value.trim() || e.adresse;
-      e.tel = document.getElementById('edit-tel').value.trim();
-      e.note = parseFloat(document.getElementById('edit-note').value) || null;
-      e.priorite = document.getElementById('edit-priorite').value;
-      e.maps = document.getElementById('edit-maps').value.trim();
-      e.website = document.getElementById('edit-website').value.trim();
-      e.social = document.getElementById('edit-social').value.trim();
-      e.categories = getCheckedCats('edit-cats-check');
-      e.horaires = DAYS.map(j => { const inp = document.querySelector(`#edit-horaires-rows [data-jour="${j}"]`); return { j, h: inp ? inp.value.trim() : 'Fermé' }; }).filter(h => h.h);
-      lsSet('stage_etab_v4', window.ETABLISSEMENTS);
-      window.fbSyncEtab && window.fbSyncEtab(e);
-      closeModal(); renderCards(); renderKanban(); renderAdminTables();
-      toast('✏️ Modifications sauvegardées !');
-      window.addLog && window.addLog('modif', `✏️ Établissement modifié : "${e.nom}"`);
+    function renderCatCheckboxes(selected) {
+      const wrap = document.getElementById('f-cats-checkboxes');
+      wrap.innerHTML = window.CATEGORIES.map(c => `<label style="display:flex;align-items:center;gap:6px;cursor:pointer;background:${selected.includes(c.id) ? c.couleur + '22' : 'var(--bg3)'};border:1px solid ${selected.includes(c.id) ? c.couleur : 'var(--border2)'};padding:6px 11px;border-radius:9px;font-size:12px;font-weight:600;transition:all .15s" id="cat-lbl-${c.id}"><input type="checkbox" value="${c.id}" ${selected.includes(c.id) ? 'checked' : ''} onchange="updateCatLabel('${c.id}','${c.couleur}',this.checked)" style="display:none">${c.emoji} ${c.nom}</label>`).join('');
+    }
+    window.updateCatLabel = (id, couleur, checked) => { const lbl = document.getElementById('cat-lbl-' + id); if (lbl) { lbl.style.background = checked ? couleur + '22' : 'var(--bg3)'; lbl.style.borderColor = checked ? couleur : 'var(--border2)'; } };
+    window.saveEtab = () => {
+      const nom = document.getElementById('f-nom').value.trim();
+      const type = document.getElementById('f-type').value.trim();
+      if (!nom || !type) { toast('❌ Nom et type requis', 'error'); return; }
+      const horaires = DAYS.map(d => { const inp = document.querySelector(`#f-horaires [data-day="${d}"]`); const h = inp ? inp.value.trim() : ''; return h ? { j: d, h } : null; }).filter(Boolean);
+      const selectedCats = Array.from(document.querySelectorAll('#f-cats-checkboxes input:checked')).map(i => i.value);
+      const data = { nom, type, adresse: document.getElementById('f-adresse').value.trim(), tel: document.getElementById('f-tel').value.trim(), note: parseFloat(document.getElementById('f-note').value) || null, priorite: document.getElementById('f-priorite').value, maps: document.getElementById('f-maps').value.trim(), website: document.getElementById('f-website').value.trim(), social: document.getElementById('f-social').value.trim(), horaires, categories: selectedCats };
+      const newStatus = document.getElementById('f-statut').value;
+      if (editingId) {
+        const idx = window.ETABLISSEMENTS.findIndex(e => e.id === editingId);
+        if (idx > -1) window.ETABLISSEMENTS[idx] = { ...window.ETABLISSEMENTS[idx], ...data };
+        window.statuses[editingId] = newStatus;
+        addLog('etab', `✏️ Établissement modifié : ${nom}`);
+        toast('✅ Établissement modifié', 'success');
+      } else {
+        const newId = Date.now();
+        window.ETABLISSEMENTS.push({ id: newId, ...data });
+        window.statuses[newId] = newStatus;
+        update(ref(db, 'stages/' + newId), { nom, adresse: data.adresse, tel: data.tel, type: data.type, statut: STATUS_DEF[newStatus]?.label, notes: '' });
+        addLog('etab', `➕ Établissement ajouté : ${nom}`);
+        toast('✅ Établissement ajouté', 'success');
+      }
+      lsSet('stage_statuses_v5', window.statuses);
+      const extra = window.ETABLISSEMENTS.filter(e => e.id > 14);
+      lsSet('stage_etabs_extra', extra);
+      closeModal('addModal'); renderCards(); syncObjectifsAuto();
     };
-
-    // ── DELETE ETAB ──
     window.deleteEtab = (id) => {
-      const e = window.ETABLISSEMENTS.find(x => x.id === id); if (!e) return;
-      if (!confirm(`Supprimer "${e.nom}" ?`)) return;
-      window.ETABLISSEMENTS = window.ETABLISSEMENTS.filter(x => x.id !== id);
+      const e = window.ETABLISSEMENTS.find(x => x.id === id);
+      if (!confirm(`Supprimer "${e?.nom}" ?`)) return;
+      const idx = window.ETABLISSEMENTS.findIndex(x => x.id === id);
+      if (idx > -1) window.ETABLISSEMENTS.splice(idx, 1);
       delete window.statuses[id];
-      lsSet('stage_etab_v4', window.ETABLISSEMENTS); lsSet('stage_statuses_v4', window.statuses);
-      window.fbDeleteEtab && window.fbDeleteEtab(id);
-      renderCards(); renderKanban(); renderAdminTables();
+      remove(ref(db, 'stages/' + id));
+      const extra = window.ETABLISSEMENTS.filter(e => e.id > 14);
+      lsSet('stage_etabs_extra', extra);
+      lsSet('stage_statuses_v5', window.statuses);
+      addLog('etab', `🗑️ Établissement supprimé : ${e?.nom}`);
+      renderCards(); syncObjectifsAuto();
       toast('🗑️ Établissement supprimé');
-      window.addLog && window.addLog('suppression', `🗑️ Établissement supprimé : "${e.nom}"`);
     };
 
-    // ── ADD ETAB ──
-    window.addEtab = () => {
-      const nom = document.getElementById('new-nom').value.trim();
-      const type = document.getElementById('new-type').value.trim();
-      const adresse = document.getElementById('new-adresse').value.trim();
-      if (!nom || !type || !adresse) { toast('⚠️ Remplis au moins le nom, type et adresse'); return; }
-      const newId = Date.now();
-      const horaires = DAYS.map(j => { const inp = document.querySelector(`#new-horaires-rows [data-jour="${j}"]`); return { j, h: inp ? inp.value.trim() : 'Fermé' }; }).filter(h => h.h);
-      const etab = {
-        id: newId, nom, type, adresse,
-        tel: document.getElementById('new-tel').value.trim(),
-        note: parseFloat(document.getElementById('new-note').value) || null,
-        priorite: document.getElementById('new-priorite').value || 'moyenne',
-        categories: getCheckedCats('new-cats-check'),
-        maps: document.getElementById('new-maps').value.trim(),
-        website: document.getElementById('new-website').value.trim(),
-        social: document.getElementById('new-social').value.trim(),
-        horaires
-      };
-      window.ETABLISSEMENTS.push(etab);
-      window.statuses[newId] = 'todo';
-      lsSet('stage_etab_v4', window.ETABLISSEMENTS); lsSet('stage_statuses_v4', window.statuses);
-      window.fbSyncEtab && window.fbSyncEtab(etab);
-      window.fbSyncStatus && window.fbSyncStatus(newId, 'todo');
-      clearAddForm(); renderCards(); renderKanban(); renderAdminTables();
-      toast(`➕ "${nom}" ajouté !`);
-      window.addLog && window.addLog('modif', `➕ Nouveau lieu ajouté : "${nom}"`);
-    };
-
-    window.clearAddForm = () => {
-      ['new-nom', 'new-type', 'new-adresse', 'new-tel', 'new-note', 'new-maps', 'new-website', 'new-social'].forEach(id => { document.getElementById(id).value = ''; });
-      document.querySelectorAll('#new-horaires-rows input').forEach(i => i.value = '');
-    };
-
-    // ── CHECKLIST ADMIN ──
-    window.renderAdminSteps = () => {
-      const tb = document.getElementById('admin-steps-tbody'); if (!tb) return;
-      tb.innerHTML = window.STEPS.map((s, i) => `
-      <tr>
-        <td style="color:var(--gris)">${i + 1}</td>
-        <td><input class="form-input" value="${s}" oninput="editStep(${i},this.value)" style="font-size:13px;padding:6px 10px"></td>
-        <td><button class="tbl-btn del" onclick="deleteStep(${i})">🗑️</button></td>
-      </tr>`).join('');
-    };
-
-    window.addStep = () => {
-      const v = document.getElementById('new-step').value.trim(); if (!v) return;
-      window.STEPS.push(v);
-      window.STEPS.forEach((_, i) => { if (checks[i] === undefined) checks[i] = false; });
-      lsSet('stage_steps_v4', window.STEPS);
-      document.getElementById('new-step').value = '';
-      renderAdminSteps(); renderChecklist(); toast('✅ Étape ajoutée');
-    };
-
-    window.editStep = (i, val) => { window.STEPS[i] = val; lsSet('stage_steps_v4', window.STEPS); renderChecklist(); };
-    window.deleteStep = (i) => { window.STEPS.splice(i, 1); lsSet('stage_steps_v4', window.STEPS); renderAdminSteps(); renderChecklist(); toast('🗑️ Étape supprimée'); };
-
-    // ── SITE INFO ──
-    window.saveSiteInfo = () => {
-      const data = { h1a: document.getElementById('si-h1a').value, dim: document.getElementById('si-h1b').value.replace('DE ', ''), subtitle: document.getElementById('si-sub').value };
-      document.querySelector('h1').innerHTML = `${data.h1a}<br><span class="gold">DE</span> <span class="dim">${data.dim}</span>`;
-      document.querySelector('.subtitle').textContent = data.subtitle;
-      window.fbSyncSiteInfo && window.fbSyncSiteInfo(data);
-      toast('💾 Infos du site mises à jour');
-      window.addLog && window.addLog('modif', '🖊️ Infos du site mises à jour');
-    };
-
-    // ── PASSWORD ──
-    window.changePwd = () => {
-      const np = document.getElementById('new-pwd').value;
-      const cp = document.getElementById('confirm-pwd').value;
-      if (!np) { toast('⚠️ Saisis un nouveau mot de passe'); return; }
-      if (np !== cp) { toast('⚠️ Les mots de passe ne correspondent pas'); return; }
-      ADMIN_PASSWORD = np; lsSet('stage_admin_pwd_v4', np);
-      document.getElementById('pwd-display').textContent = np;
-      document.getElementById('new-pwd').value = ''; document.getElementById('confirm-pwd').value = '';
-      toast('🔑 Mot de passe modifié !');
-      window.addLog && window.addLog('admin', '🔑 Mot de passe admin modifié');
-    };
-
-    // ── LOGS ──
-    window.addLog = (type, message) => {
-      const entry = { type, message, ts: Date.now(), date: new Date().toLocaleString('fr-FR') };
-      window.LOGS.unshift(entry);
-      if (window.LOGS.length > 200) window.LOGS = window.LOGS.slice(0, 200);
-      lsSet('stage_logs_v4', window.LOGS);
-      window.fbPush && window.fbPush('logs', entry).catch(() => { });
-      renderLogsAdmin();
-    };
-
-    const LOG_ICONS = { connexion: '🌐', statut: '📊', admin: '🔑', modif: '✏️', suppression: '🗑️' };
-    const LOG_CLS = { connexion: 'lt-connexion', statut: 'lt-statut', admin: 'lt-admin', modif: 'lt-modif', suppression: 'lt-suppression' };
-    const LOG_LABELS = { connexion: 'Connexion', statut: 'Statut', admin: 'Admin', modif: 'Modification', suppression: 'Suppression' };
-
-    window.renderLogsAdmin = function () {
-      const ll = document.getElementById('log-list'); if (!ll) return;
-      let logs = window.LOGS;
-      if (curLogFilter !== 'all') logs = logs.filter(l => l.type === curLogFilter);
-      if (!logs.length) { ll.innerHTML = '<div style="text-align:center;padding:40px;color:var(--gris);font-size:13px">📋 Aucune activité enregistrée</div>'; updateLogStats(); return; }
-      ll.innerHTML = logs.slice(0, 100).map(l => `
-      <div class="log-item">
-        <span class="log-ico">${LOG_ICONS[l.type] || '📌'}</span>
-        <div class="log-content">
-          <div class="log-msg">${l.message}</div>
-          <div class="log-meta">🕐 ${l.date}</div>
-        </div>
-        <span class="log-type-badge ${LOG_CLS[l.type] || 'lt-modif'}">${LOG_LABELS[l.type] || l.type}</span>
-      </div>`).join('');
-      updateLogStats();
-    };
-
-    function updateLogStats() {
-      const c = window.LOGS;
-      document.getElementById('ls-connexions').textContent = c.filter(l => l.type === 'connexion').length;
-      document.getElementById('ls-statuts').textContent = c.filter(l => l.type === 'statut').length;
-      document.getElementById('ls-admin').textContent = c.filter(l => l.type === 'admin').length;
-      document.getElementById('ls-suppression').textContent = c.filter(l => l.type === 'suppression').length;
-    }
-
-    window.setLogFilter = (f, btn) => {
-      curLogFilter = f;
-      document.querySelectorAll('.log-filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderLogsAdmin();
-    };
-
-    window.clearLogs = () => {
-      if (!confirm('Vider tous les logs ?')) return;
-      window.LOGS = []; lsSet('stage_logs_v4', []);
-      window.fbRemove && window.fbRemove('logs');
-      renderLogsAdmin(); toast('🗑️ Logs vidés');
-    };
-
-    // ── EXPORT ──
-    function updateExportSummary() {
-      const el = document.getElementById('export-summary'); if (!el) return;
-      const all = window.ETABLISSEMENTS;
-      el.innerHTML = STATUS_ORDER.map(s => `<div>${STATUS_DEF[s].emoji} <strong style="color:var(--creme)">${STATUS_DEF[s].label}</strong> : ${all.filter(e => (window.statuses[e.id] || 'todo') === s).length} établissement(s)</div>`).join('') + `<div style="margin-top:8px;color:var(--or)">📊 Total : ${all.length} établissements · ${window.MEMBRES.length} membres · ${window.CATEGORIES.length} catégories</div>`;
-    }
-
-    window.exportCSV = () => {
-      const rows = [['Nom', 'Type', 'Catégories', 'Priorité', 'Note', 'Statut', 'Téléphone', 'Adresse']];
-      window.ETABLISSEMENTS.forEach(e => {
-        const cats = (e.categories || []).map(cid => getCatById(cid)?.nom || '').filter(Boolean).join(';');
-        rows.push([e.nom, e.type, cats, e.priorite || 'moyenne', e.note || '', STATUS_DEF[window.statuses[e.id] || 'todo'].label, e.tel || '', e.adresse]);
-      });
-      const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
-      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
-      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'recherche-stage.csv'; a.click();
-      toast('📊 Export CSV téléchargé !');
-      window.addLog && window.addLog('admin', '📤 Export CSV effectué');
-    };
-
-    window.exportJSON = () => {
-      const data = { etablissements: window.ETABLISSEMENTS, statuts: window.statuses, categories: window.CATEGORIES, membres: window.MEMBRES, exportDate: new Date().toISOString() };
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'recherche-stage.json'; a.click();
-      toast('📄 Export JSON téléchargé !');
-      window.addLog && window.addLog('admin', '📤 Export JSON effectué');
-    };
-
-    window.printReport = () => {
-      window.print();
-      window.addLog && window.addLog('admin', '🖨️ Rapport imprimé');
-    };
-
-    // ── SYNC / FIREBASE ──
-    window.syncAllToFirebase = () => window.fbSyncAll && window.fbSyncAll();
-    window.checkFbStatus = () => window.fbCheckStatus && window.fbCheckStatus();
-
-    // ── SECRET ADMIN SHORTCUT ──
-    document.addEventListener('keydown', e => {
-      if (e.ctrlKey && e.shiftKey && e.key === 'A') { e.preventDefault(); openAdmin(); }
+    // INIT
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCards();
+      syncObjectifsAuto();
+      setFbState('syncing', 'Connexion...');
+      const today = new Date().toISOString().slice(0, 10);
+      const pending = window.RAPPELS.filter(r => !r.fait && r.date <= today);
+      if (pending.length) toast(`⏰ ${pending.length} rappel(s) en attente !`);
     });
 
-    // ── INIT ──
-    renderCards();
-    renderChecklist();
-    renderMembres();
-    renderCatFilterRow();
+    document.getElementById('syncOverlay').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('syncOverlay')) {
+        const card = document.getElementById('syncCard');
+        if (!card.innerHTML.includes('sync-spinner')) closeSyncOverlay();
+      }
+    });
   </script>
 </body>
 
