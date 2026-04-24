@@ -51,14 +51,12 @@
             content: '';
             position: fixed;
             inset: 0;
-            background:
-                radial-gradient(ellipse 60% 50% at 0% 0%, rgba(232, 184, 75, .07) 0%, transparent 55%),
-                radial-gradient(ellipse 40% 40% at 100% 100%, rgba(167, 139, 250, .05) 0%, transparent 55%);
+            background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(232, 184, 75, .07) 0%, transparent 55%), radial-gradient(ellipse 40% 40% at 100% 100%, rgba(167, 139, 250, .05) 0%, transparent 55%);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* ── LOCK SCREEN ── */
+        /* LOCK SCREEN */
         .lock-screen {
             position: fixed;
             inset: 0;
@@ -138,6 +136,26 @@
             border-color: rgba(232, 184, 75, .5);
         }
 
+        .lock-input.shake {
+            animation: shake .35s ease;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0)
+            }
+
+            25% {
+                transform: translateX(-6px)
+            }
+
+            75% {
+                transform: translateX(6px)
+            }
+        }
+
         .lock-btn {
             width: 100%;
             padding: 14px;
@@ -176,7 +194,7 @@
             min-height: 18px;
         }
 
-        /* ── SIDEBAR ── */
+        /* SIDEBAR */
         .sidebar {
             width: var(--sidebar-w);
             background: var(--bg2);
@@ -266,7 +284,6 @@
             }
         }
 
-        /* NAV */
         .sidebar-nav {
             padding: 16px 12px;
             flex: 1;
@@ -345,7 +362,6 @@
             color: var(--green);
         }
 
-        /* SIDEBAR FOOTER */
         .sidebar-footer {
             padding: 16px 22px;
             border-top: 1px solid var(--border);
@@ -394,7 +410,7 @@
             background: rgba(248, 113, 113, .15);
         }
 
-        /* ── MAIN ── */
+        /* MAIN */
         .main {
             margin-left: var(--sidebar-w);
             flex: 1;
@@ -403,7 +419,6 @@
             z-index: 1;
         }
 
-        /* TOPBAR */
         .topbar {
             position: sticky;
             top: 0;
@@ -501,7 +516,6 @@
             }
         }
 
-        /* PANEL HEADER */
         .panel-header {
             display: flex;
             align-items: center;
@@ -596,6 +610,7 @@
             border-radius: 14px;
             padding: 18px 20px;
             transition: all .2s;
+            cursor: pointer;
         }
 
         .dash-stat:hover {
@@ -619,14 +634,13 @@
             font-weight: 600;
         }
 
-        /* ACTIVITY GRAPH */
         .activity-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 14px;
         }
 
-        /* FIREBASE STATUS */
+        /* FIREBASE */
         .firebase-box {
             background: linear-gradient(135deg, rgba(245, 130, 13, .08), rgba(255, 167, 0, .05));
             border: 1px solid rgba(245, 130, 13, .22);
@@ -816,6 +830,16 @@
             border-radius: 8px;
         }
 
+        .btn-blue {
+            background: rgba(96, 165, 250, .1);
+            color: var(--blue);
+            border: 1px solid rgba(96, 165, 250, .25);
+        }
+
+        .btn-blue:hover {
+            background: rgba(96, 165, 250, .2);
+        }
+
         /* FORMS */
         .field-group {
             margin-bottom: 14px;
@@ -904,7 +928,7 @@
             border-color: var(--gold);
         }
 
-        /* CATEGORY CHIPS */
+        /* CAT PILLS */
         .cat-pill {
             display: inline-flex;
             align-items: center;
@@ -929,23 +953,6 @@
 
         .cat-pill button:hover {
             opacity: 1;
-        }
-
-        /* ADMIN ITEM ROW */
-        .admin-item-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            margin-bottom: 7px;
-            font-size: 13px;
-            transition: border-color .2s;
-        }
-
-        .admin-item-row:hover {
-            border-color: var(--border2);
         }
 
         /* LOGS */
@@ -989,7 +996,38 @@
             flex: 1;
         }
 
-        /* SECURITY */
+        .log-filter-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .log-filter-btn {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border2);
+            background: transparent;
+            color: var(--txt2);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .log-filter-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .log-filter-btn.active {
+            background: rgba(232, 184, 75, .12);
+            color: var(--gold);
+            border-color: rgba(232, 184, 75, .3);
+        }
+
+        /* DANGER ZONE */
         .danger-zone {
             background: rgba(248, 113, 113, .05);
             border: 1px solid rgba(248, 113, 113, .15);
@@ -1008,29 +1046,234 @@
             font-size: 15px;
         }
 
-        /* TOAST */
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: var(--bg2);
-            border: 1px solid var(--gold);
-            color: var(--txt);
-            padding: 12px 22px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            z-index: 999;
-            transform: translateY(80px);
-            opacity: 0;
-            transition: all .3s cubic-bezier(.4, 0, .2, 1);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, .5);
-            max-width: 290px;
+        /* PROGRESS */
+        .progress-wrap {
+            background: var(--bg3);
+            border-radius: 99px;
+            height: 7px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            flex: 1;
         }
 
-        .toast.show {
-            transform: none;
-            opacity: 1;
+        .progress-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold2));
+            border-radius: 99px;
+            transition: width .5s;
+        }
+
+        /* TOGGLE */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toggle-row:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .toggle-sub {
+            font-size: 12px;
+            color: var(--txt2);
+            margin-top: 2px;
+        }
+
+        .toggle {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: var(--bg3);
+            border: 1px solid var(--border2);
+            border-radius: 99px;
+            cursor: pointer;
+            transition: all .2s;
+            flex-shrink: 0;
+        }
+
+        .toggle.on {
+            background: rgba(232, 184, 75, .25);
+            border-color: rgba(232, 184, 75, .5);
+        }
+
+        .toggle-knob {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 16px;
+            height: 16px;
+            background: var(--txt2);
+            border-radius: 50%;
+            transition: all .2s;
+        }
+
+        .toggle.on .toggle-knob {
+            left: 23px;
+            background: var(--gold);
+            box-shadow: 0 0 8px rgba(232, 184, 75, .5);
+        }
+
+        /* CHECKLIST */
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .check-item:last-child {
+            border-bottom: none;
+        }
+
+        .check-box {
+            width: 18px;
+            height: 18px;
+            border-radius: 5px;
+            border: 2px solid var(--border2);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+
+        .check-item.done .check-box {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #000;
+        }
+
+        .check-item.done .check-text {
+            text-decoration: line-through;
+            color: var(--txt2);
+        }
+
+        .check-text {
+            flex: 1;
+            font-size: 13px;
+        }
+
+        /* OBJ MINI */
+        .obj-mini {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .obj-mini:last-child {
+            border-bottom: none;
+        }
+
+        .obj-mini-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            min-width: 48px;
+            text-align: right;
+        }
+
+        /* ★ NEW: NOTES GLOBAL VIEW ★ */
+        .note-preview-card {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            padding: 14px;
+            margin-bottom: 10px;
+        }
+
+        .note-preview-name {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .note-preview-text {
+            font-size: 12px;
+            color: var(--txt3);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* ★ NEW: ACTIVITY CHART ★ */
+        .chart-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .chart-bar-label {
+            font-size: 11px;
+            color: var(--txt2);
+            min-width: 80px;
+        }
+
+        .chart-bar-outer {
+            flex: 1;
+            height: 8px;
+            background: var(--bg3);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .chart-bar-inner {
+            height: 100%;
+            border-radius: 99px;
+            transition: width .7s;
+        }
+
+        .chart-bar-val {
+            font-size: 11px;
+            font-family: 'JetBrains Mono', monospace;
+            min-width: 24px;
+            text-align: right;
+        }
+
+        /* ★ NEW: SEARCH IN ETAB TABLE ★ */
+        .table-search {
+            width: 100%;
+            background: var(--bg3);
+            border: 1px solid var(--border2);
+            border-radius: 10px;
+            color: var(--txt);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            padding: 9px 14px 9px 38px;
+            outline: none;
+            transition: border-color .2s;
+            margin-bottom: 16px;
+        }
+
+        .table-search:focus {
+            border-color: rgba(232, 184, 75, .4);
+        }
+
+        .table-search-wrap {
+            position: relative;
+        }
+
+        .table-search-wrap::before {
+            content: '🔍';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 13px;
+            pointer-events: none;
         }
 
         /* MODAL */
@@ -1258,33 +1501,29 @@
             color: var(--gold);
         }
 
-        .sync-contact {
-            margin-top: 20px;
-            padding: 16px;
-            background: rgba(248, 113, 113, .06);
-            border: 1px solid rgba(248, 113, 113, .18);
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--bg2);
+            border: 1px solid var(--gold);
+            color: var(--txt);
+            padding: 12px 22px;
             border-radius: 12px;
             font-size: 13px;
-            color: var(--txt2);
-            line-height: 1.7;
-        }
-
-        .sync-contact a {
-            color: var(--gold);
-            text-decoration: none;
             font-weight: 600;
+            z-index: 999;
+            transform: translateY(80px);
+            opacity: 0;
+            transition: all .3s cubic-bezier(.4, 0, .2, 1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .5);
+            max-width: 290px;
         }
 
-        /* EMPTY */
-        .empty {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--txt2);
-        }
-
-        .empty .big {
-            font-size: 40px;
-            margin-bottom: 12px;
+        .toast.show {
+            transform: none;
+            opacity: 1;
         }
 
         /* DIVIDER */
@@ -1313,7 +1552,6 @@
             background: var(--gold);
         }
 
-        /* RESPONSIVE */
         @media(max-width:900px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -1336,175 +1574,6 @@
         .mobile-menu {
             display: none;
         }
-
-        /* LOG FILTER TABS */
-        .log-filter-row {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-
-        .log-filter-btn {
-            padding: 6px 14px;
-            border-radius: 8px;
-            border: 1px solid var(--border2);
-            background: transparent;
-            color: var(--txt2);
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all .2s;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .log-filter-btn:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        .log-filter-btn.active {
-            background: rgba(232, 184, 75, .12);
-            color: var(--gold);
-            border-color: rgba(232, 184, 75, .3);
-        }
-
-        /* PROGRESS BAR */
-        .progress-wrap {
-            background: var(--bg3);
-            border-radius: 99px;
-            height: 7px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            flex: 1;
-        }
-
-        .progress-inner {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold), var(--gold2));
-            border-radius: 99px;
-            transition: width .5s;
-        }
-
-        /* TOGGLE SWITCH */
-        .toggle-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .toggle-row:last-child {
-            border-bottom: none;
-        }
-
-        .toggle-label {
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .toggle-sub {
-            font-size: 12px;
-            color: var(--txt2);
-            margin-top: 2px;
-        }
-
-        .toggle {
-            position: relative;
-            width: 44px;
-            height: 24px;
-            background: var(--bg3);
-            border: 1px solid var(--border2);
-            border-radius: 99px;
-            cursor: pointer;
-            transition: all .2s;
-            flex-shrink: 0;
-        }
-
-        .toggle.on {
-            background: rgba(232, 184, 75, .25);
-            border-color: rgba(232, 184, 75, .5);
-        }
-
-        .toggle-knob {
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 16px;
-            height: 16px;
-            background: var(--txt2);
-            border-radius: 50%;
-            transition: all .2s;
-        }
-
-        .toggle.on .toggle-knob {
-            left: 23px;
-            background: var(--gold);
-            box-shadow: 0 0 8px rgba(232, 184, 75, .5);
-        }
-
-        /* CHECKLIST IN ADMIN */
-        .check-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .check-item:last-child {
-            border-bottom: none;
-        }
-
-        .check-box {
-            width: 18px;
-            height: 18px;
-            border-radius: 5px;
-            border: 2px solid var(--border2);
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-        }
-
-        .check-item.done .check-box {
-            background: var(--gold);
-            border-color: var(--gold);
-            color: #000;
-        }
-
-        .check-item.done .check-text {
-            text-decoration: line-through;
-            color: var(--txt2);
-        }
-
-        .check-text {
-            flex: 1;
-            font-size: 13px;
-        }
-
-        /* OBJ MINI */
-        .obj-mini {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .obj-mini:last-child {
-            border-bottom: none;
-        }
-
-        .obj-mini-num {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            font-weight: 600;
-            min-width: 48px;
-            text-align: right;
-        }
     </style>
 </head>
 
@@ -1526,9 +1595,8 @@
             <button class="lock-btn" onclick="tryLogin()">🔓 Accéder au Panel</button>
             <div class="lock-hint">Mot de passe : <span id="pwdHintLock">celine2024</span></div>
             <div class="lock-error" id="lockError"></div>
-            <div style="margin-top:20px">
-                <a href="index.html" style="color:var(--txt2);font-size:13px;text-decoration:none">← Retour au site</a>
-            </div>
+            <div style="margin-top:20px"><a href="index.html"
+                    style="color:var(--txt2);font-size:13px;text-decoration:none">← Retour au site</a></div>
         </div>
     </div>
 
@@ -1543,80 +1611,57 @@
                 </div>
             </div>
             <div class="admin-badge">
-                <div class="admin-badge-dot"></div>
-                Session active
+                <div class="admin-badge-dot"></div>Session active
             </div>
         </div>
-
         <nav class="sidebar-nav">
             <div class="nav-section-label">Tableau de bord</div>
-            <button class="nav-item active" onclick="showPanel('dashboard',this)">
-                <span class="nav-item-icon">📊</span> Dashboard
-            </button>
-
+            <button class="nav-item active" onclick="showPanel('dashboard',this)"><span class="nav-item-icon">📊</span>
+                Dashboard</button>
             <div class="nav-section-label">Gestion</div>
-            <button class="nav-item" onclick="showPanel('etablissements',this)">
-                <span class="nav-item-icon">🏢</span> Établissements
-                <span class="nav-badge" id="nav-badge-etabs">14</span>
-            </button>
-            <button class="nav-item" onclick="showPanel('categories',this)">
-                <span class="nav-item-icon">🏷️</span> Catégories
-                <span class="nav-badge" id="nav-badge-cats">4</span>
-            </button>
-            <button class="nav-item" onclick="showPanel('checklist',this)">
-                <span class="nav-item-icon">✅</span> Checklist
-                <span class="nav-badge" id="nav-badge-steps">20</span>
-            </button>
-            <button class="nav-item" onclick="showPanel('objectifs',this)">
-                <span class="nav-item-icon">🎯</span> Objectifs
-                <span class="nav-badge" id="nav-badge-obj">3</span>
-            </button>
-            <button class="nav-item" onclick="showPanel('rappels',this)">
-                <span class="nav-item-icon">⏰</span> Rappels
-                <span class="nav-badge red" id="nav-badge-rappels">0</span>
-            </button>
-
+            <button class="nav-item" onclick="showPanel('etablissements',this)"><span class="nav-item-icon">🏢</span>
+                Établissements<span class="nav-badge" id="nav-badge-etabs">14</span></button>
+            <button class="nav-item" onclick="showPanel('categories',this)"><span class="nav-item-icon">🏷️</span>
+                Catégories<span class="nav-badge" id="nav-badge-cats">4</span></button>
+            <button class="nav-item" onclick="showPanel('checklist',this)"><span class="nav-item-icon">✅</span>
+                Checklist<span class="nav-badge" id="nav-badge-steps">20</span></button>
+            <button class="nav-item" onclick="showPanel('objectifs',this)"><span class="nav-item-icon">🎯</span>
+                Objectifs<span class="nav-badge" id="nav-badge-obj">3</span></button>
+            <button class="nav-item" onclick="showPanel('rappels',this)"><span class="nav-item-icon">⏰</span>
+                Rappels<span class="nav-badge red" id="nav-badge-rappels">0</span></button>
+            <button class="nav-item" onclick="showPanel('notes',this)"><span class="nav-item-icon">📝</span> Notes
+                globales<span class="nav-badge green" id="nav-badge-notes">0</span></button>
             <div class="nav-section-label">Monitoring</div>
-            <button class="nav-item" onclick="showPanel('logs',this)">
-                <span class="nav-item-icon">📋</span> Journal / Logs
-                <span class="nav-badge green" id="nav-badge-logs">0</span>
-            </button>
-            <button class="nav-item" onclick="showPanel('firebase',this)">
-                <span class="nav-item-icon">🔥</span> Firebase
-            </button>
-
+            <button class="nav-item" onclick="showPanel('logs',this)"><span class="nav-item-icon">📋</span> Journal /
+                Logs<span class="nav-badge green" id="nav-badge-logs">0</span></button>
+            <button class="nav-item" onclick="showPanel('firebase',this)"><span class="nav-item-icon">🔥</span>
+                Firebase</button>
             <div class="nav-section-label">Configuration</div>
-            <button class="nav-item" onclick="showPanel('parametres',this)">
-                <span class="nav-item-icon">⚙️</span> Paramètres
-            </button>
-            <button class="nav-item" onclick="showPanel('securite',this)">
-                <span class="nav-item-icon">🔑</span> Sécurité
-            </button>
-            <button class="nav-item" onclick="showPanel('importexport',this)">
-                <span class="nav-item-icon">📦</span> Import / Export
-            </button>
+            <button class="nav-item" onclick="showPanel('parametres',this)"><span class="nav-item-icon">⚙️</span>
+                Paramètres</button>
+            <button class="nav-item" onclick="showPanel('securite',this)"><span class="nav-item-icon">🔑</span>
+                Sécurité</button>
+            <button class="nav-item" onclick="showPanel('importexport',this)"><span class="nav-item-icon">📦</span>
+                Import / Export</button>
         </nav>
-
         <div class="sidebar-footer">
-            <a class="back-link" href="index.html" target="_blank">🌐 Voir le site</a>
+            <a class="back-link" href="index.html">🌐 Voir le site</a>
             <button class="logout-btn" onclick="logout()">🚪 Déconnexion</button>
         </div>
     </div>
 
     <!-- MAIN -->
     <div class="main">
-        <!-- TOPBAR -->
         <div class="topbar">
             <div class="topbar-title">Panel Admin — <span id="current-panel-name">Dashboard</span></div>
             <div class="fb-pill" id="fbPill">
                 <div class="fb-dot"></div><span id="fbTxt">Firebase</span>
             </div>
-            <button class="btn btn-sync" onclick="triggerSync()" id="syncBtn">
-                <span class="sync-ico" id="syncIco">🔄</span> Sync Firebase
-            </button>
+            <button class="btn btn-sync" onclick="triggerSync()" id="syncBtn"><span class="sync-ico"
+                    id="syncIco">🔄</span> Sync Firebase</button>
         </div>
 
-        <!-- ── DASHBOARD ── -->
+        <!-- DASHBOARD -->
         <div class="panel active" id="panel-dashboard">
             <div class="panel-header">
                 <div class="panel-icon">📊</div>
@@ -1624,13 +1669,15 @@
                     <h2>Dashboard</h2>
                     <p>Vue d'ensemble de votre recherche de stage</p>
                 </div>
+                <div class="panel-actions">
+                    <button class="btn btn-outline btn-sm" onclick="exportCSV()">📊 Export CSV</button>
+                    <button class="btn btn-gold btn-sm" onclick="triggerSync()">🔄 Sync</button>
+                </div>
             </div>
-
             <div class="dash-stats" id="dash-stats"></div>
-
             <div class="activity-grid">
                 <div class="section-card">
-                    <div class="section-card-title">📈 Progression</div>
+                    <div class="section-card-title">📈 Progression objectifs</div>
                     <div id="dash-progression"></div>
                 </div>
                 <div class="section-card">
@@ -1638,14 +1685,17 @@
                     <div id="dash-rappels-pending"></div>
                 </div>
             </div>
-
+            <div class="section-card" style="margin-top:18px">
+                <div class="section-card-title">📊 Répartition par statut</div>
+                <div id="dash-chart"></div>
+            </div>
             <div class="section-card" style="margin-top:18px">
                 <div class="section-card-title">📋 Dernières activités</div>
                 <div id="dash-recent-logs"></div>
             </div>
         </div>
 
-        <!-- ── ÉTABLISSEMENTS ── -->
+        <!-- ÉTABLISSEMENTS -->
         <div class="panel" id="panel-etablissements">
             <div class="panel-header">
                 <div class="panel-icon">🏢</div>
@@ -1654,12 +1704,17 @@
                     <p>Gérez tous les restaurants et établissements</p>
                 </div>
                 <div class="panel-actions">
+                    <button class="btn btn-outline" onclick="exportCSV()">📊 CSV</button>
                     <button class="btn btn-gold" onclick="openModal('addModal')">➕ Ajouter</button>
                 </div>
             </div>
+            <div class="table-search-wrap">
+                <input class="table-search" id="etab-search" placeholder="Rechercher dans le tableau..."
+                    oninput="renderEtabTable()">
+            </div>
             <div class="section-card" style="padding:0;overflow:hidden">
                 <div style="overflow-x:auto">
-                    <table class="data-table" id="etab-table">
+                    <table class="data-table">
                         <thead>
                             <tr>
                                 <th>Nom</th>
@@ -1667,6 +1722,7 @@
                                 <th>Priorité</th>
                                 <th>Note</th>
                                 <th>Statut</th>
+                                <th>Note texte</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -1676,7 +1732,7 @@
             </div>
         </div>
 
-        <!-- ── CATEGORIES ── -->
+        <!-- CATÉGORIES -->
         <div class="panel" id="panel-categories">
             <div class="panel-header">
                 <div class="panel-icon">🏷️</div>
@@ -1691,25 +1747,18 @@
                 <div class="divider"></div>
                 <div class="section-card-title" style="margin-top:20px">➕ Nouvelle catégorie</div>
                 <div class="fields-row-3">
-                    <div class="field-group">
-                        <label class="field-label">Nom</label>
-                        <input class="field-input" id="new-cat-name" placeholder="Gastronomique...">
-                    </div>
-                    <div class="field-group">
-                        <label class="field-label">Emoji</label>
-                        <input class="field-input" id="new-cat-emoji" placeholder="🍽️">
-                    </div>
-                    <div class="field-group">
-                        <label class="field-label">Couleur</label>
-                        <input class="field-input" type="color" id="new-cat-color" value="#e8b84b"
-                            style="padding:4px;height:45px">
-                    </div>
+                    <div class="field-group"><label class="field-label">Nom</label><input class="field-input"
+                            id="new-cat-name" placeholder="Gastronomique..."></div>
+                    <div class="field-group"><label class="field-label">Emoji</label><input class="field-input"
+                            id="new-cat-emoji" placeholder="🍽️"></div>
+                    <div class="field-group"><label class="field-label">Couleur</label><input class="field-input"
+                            type="color" id="new-cat-color" value="#e8b84b" style="padding:4px;height:45px"></div>
                 </div>
                 <button class="btn btn-gold" onclick="addCategory()">➕ Ajouter la catégorie</button>
             </div>
         </div>
 
-        <!-- ── CHECKLIST ── -->
+        <!-- CHECKLIST -->
         <div class="panel" id="panel-checklist">
             <div class="panel-header">
                 <div class="panel-icon">✅</div>
@@ -1735,7 +1784,7 @@
             </div>
         </div>
 
-        <!-- ── OBJECTIFS ── -->
+        <!-- OBJECTIFS -->
         <div class="panel" id="panel-objectifs">
             <div class="panel-header">
                 <div class="panel-icon">🎯</div>
@@ -1743,14 +1792,13 @@
                     <h2>Objectifs</h2>
                     <p>Suivez vos objectifs de recherche</p>
                 </div>
-                <div class="panel-actions">
-                    <button class="btn btn-gold" onclick="openModal('addObjModal')">➕ Nouvel objectif</button>
-                </div>
+                <div class="panel-actions"><button class="btn btn-gold" onclick="openModal('addObjModal')">➕ Nouvel
+                        objectif</button></div>
             </div>
             <div id="adm-objectifs"></div>
         </div>
 
-        <!-- ── RAPPELS ── -->
+        <!-- RAPPELS -->
         <div class="panel" id="panel-rappels">
             <div class="panel-header">
                 <div class="panel-icon">⏰</div>
@@ -1758,14 +1806,27 @@
                     <h2>Rappels</h2>
                     <p>Gérez vos rappels de suivi</p>
                 </div>
-                <div class="panel-actions">
-                    <button class="btn btn-gold" onclick="openRappelModal()">➕ Nouveau rappel</button>
-                </div>
+                <div class="panel-actions"><button class="btn btn-gold" onclick="openRappelModal()">➕ Nouveau
+                        rappel</button></div>
             </div>
             <div id="adm-rappels"></div>
         </div>
 
-        <!-- ── JOURNAL / LOGS ── -->
+        <!-- ★ NEW: NOTES GLOBALES ★ -->
+        <div class="panel" id="panel-notes">
+            <div class="panel-header">
+                <div class="panel-icon">📝</div>
+                <div class="panel-title-wrap">
+                    <h2>Notes globales</h2>
+                    <p>Toutes les notes saisies sur les établissements</p>
+                </div>
+                <div class="panel-actions"><button class="btn btn-outline" onclick="exportNotes()">📤 Exporter
+                        notes</button></div>
+            </div>
+            <div id="notes-global-list"></div>
+        </div>
+
+        <!-- LOGS -->
         <div class="panel" id="panel-logs">
             <div class="panel-header">
                 <div class="panel-icon">📋</div>
@@ -1773,9 +1834,8 @@
                     <h2>Journal d'activité</h2>
                     <p>Historique complet de toutes les actions</p>
                 </div>
-                <div class="panel-actions">
-                    <button class="btn btn-danger" onclick="clearLogs()">🗑️ Vider le journal</button>
-                </div>
+                <div class="panel-actions"><button class="btn btn-danger" onclick="clearLogs()">🗑️ Vider le
+                        journal</button></div>
             </div>
             <div class="log-filter-row">
                 <button class="log-filter-btn active" onclick="setLogFilter('all',this)">Tous</button>
@@ -1788,7 +1848,7 @@
             </div>
         </div>
 
-        <!-- ── FIREBASE ── -->
+        <!-- FIREBASE -->
         <div class="panel" id="panel-firebase">
             <div class="panel-header">
                 <div class="panel-icon">🔥</div>
@@ -1807,7 +1867,7 @@
                     </div>
                     <button class="btn btn-sync" onclick="triggerSync()">🔄 Synchroniser maintenant</button>
                 </div>
-                <div class="firebase-stats" id="firebase-stats">
+                <div class="firebase-stats">
                     <div class="fb-stat">
                         <div class="fb-stat-num" id="fb-etabs">—</div>
                         <div class="fb-stat-label">Établissements sync</div>
@@ -1822,16 +1882,13 @@
                     </div>
                 </div>
             </div>
-
             <div class="section-card">
                 <div class="section-card-title">📊 Données sur Firebase</div>
-                <p style="color:var(--txt2);font-size:13px;margin-bottom:12px">Aperçu des données synchronisées. La
-                    synchronisation Firebase est automatique à chaque changement de statut.</p>
                 <div id="firebase-data-preview"></div>
             </div>
         </div>
 
-        <!-- ── PARAMÈTRES ── -->
+        <!-- PARAMÈTRES -->
         <div class="panel" id="panel-parametres">
             <div class="panel-header">
                 <div class="panel-icon">⚙️</div>
@@ -1854,7 +1911,7 @@
                 <div class="toggle-row">
                     <div>
                         <div class="toggle-label">Sections réduites par défaut</div>
-                        <div class="toggle-sub">Afficher les groupes de statut fermés au chargement</div>
+                        <div class="toggle-sub">Afficher les groupes fermés au chargement</div>
                     </div>
                     <div class="toggle" id="toggle-collapsed" onclick="toggleParam('collapsed',this)">
                         <div class="toggle-knob"></div>
@@ -1863,7 +1920,7 @@
             </div>
         </div>
 
-        <!-- ── SÉCURITÉ ── -->
+        <!-- SÉCURITÉ -->
         <div class="panel" id="panel-securite">
             <div class="panel-header">
                 <div class="panel-icon">🔑</div>
@@ -1875,25 +1932,20 @@
             <div class="section-card">
                 <div class="section-card-title">🔒 Changer le mot de passe</div>
                 <div class="fields-row" style="max-width:500px">
-                    <div class="field-group">
-                        <label class="field-label">Nouveau mot de passe</label>
-                        <input class="field-input" type="password" id="new-pwd" placeholder="Nouveau mot de passe...">
+                    <div class="field-group"><label class="field-label">Nouveau mot de passe</label><input
+                            class="field-input" type="password" id="new-pwd" placeholder="Nouveau mot de passe...">
                     </div>
-                    <div class="field-group">
-                        <label class="field-label">Confirmer</label>
-                        <input class="field-input" type="password" id="new-pwd2" placeholder="Confirmer...">
-                    </div>
+                    <div class="field-group"><label class="field-label">Confirmer</label><input class="field-input"
+                            type="password" id="new-pwd2" placeholder="Confirmer..."></div>
                 </div>
                 <button class="btn btn-gold" onclick="changePwd()">💾 Changer le mot de passe</button>
-                <div style="margin-top:12px;font-size:12px;color:var(--txt2);font-family:'JetBrains Mono',monospace">
-                    Mot de passe actuel stocké localement : <span id="pwd-display" style="color:var(--gold)">—</span>
-                </div>
+                <div style="margin-top:12px;font-size:12px;color:var(--txt2);font-family:'JetBrains Mono',monospace">Mot
+                    de passe actuel : <span id="pwd-display" style="color:var(--gold)">—</span></div>
             </div>
-
             <div class="danger-zone">
                 <div class="danger-zone-title">⚠️ Zone de danger</div>
                 <p style="font-size:13px;color:var(--txt2);margin-bottom:16px;line-height:1.6">Les actions suivantes
-                    sont irréversibles. Procédez avec précaution.</p>
+                    sont irréversibles.</p>
                 <div style="display:flex;gap:10px;flex-wrap:wrap">
                     <button class="btn btn-danger" onclick="resetStatuses()">🔄 Réinitialiser les statuts</button>
                     <button class="btn btn-danger" onclick="resetAll()">⚠️ Réinitialiser TOUTES les données</button>
@@ -1901,7 +1953,7 @@
             </div>
         </div>
 
-        <!-- ── IMPORT / EXPORT ── -->
+        <!-- IMPORT / EXPORT -->
         <div class="panel" id="panel-importexport">
             <div class="panel-header">
                 <div class="panel-icon">📦</div>
@@ -1912,30 +1964,24 @@
             </div>
             <div class="section-card">
                 <div class="section-card-title">📤 Exporter les données</div>
-                <p style="color:var(--txt2);font-size:13px;margin-bottom:16px;line-height:1.6">Téléchargez une copie
-                    complète de toutes vos données (établissements, statuts, catégories, objectifs, étapes, logs).</p>
                 <div style="display:flex;gap:10px;flex-wrap:wrap">
                     <button class="btn btn-gold" onclick="exportData('full')">📤 Export complet (JSON)</button>
-                    <button class="btn btn-outline" onclick="exportData('etabs')">🏢 Export établissements</button>
-                    <button class="btn btn-outline" onclick="exportData('logs')">📋 Export journal</button>
+                    <button class="btn btn-outline" onclick="exportData('etabs')">🏢 Établissements</button>
+                    <button class="btn btn-outline" onclick="exportCSV()">📊 Export CSV</button>
+                    <button class="btn btn-outline" onclick="exportData('logs')">📋 Journal</button>
                 </div>
             </div>
             <div class="section-card">
                 <div class="section-card-title">📥 Importer des données</div>
-                <p style="color:var(--txt2);font-size:13px;margin-bottom:16px;line-height:1.6">Restaurez vos données
-                    depuis un fichier JSON. ⚠️ Ceci remplacera les données existantes.</p>
-                <label class="btn btn-gold" style="cursor:pointer">
-                    📥 Choisir un fichier JSON
-                    <input type="file" accept=".json" style="display:none" onchange="importData(event)">
-                </label>
+                <p style="color:var(--txt2);font-size:13px;margin-bottom:16px;line-height:1.6">Restaurez depuis un
+                    fichier JSON. ⚠️ Remplace les données existantes.</p>
+                <label class="btn btn-gold" style="cursor:pointer">📥 Choisir un fichier JSON<input type="file"
+                        accept=".json" style="display:none" onchange="importData(event)"></label>
             </div>
         </div>
-
     </div><!-- end .main -->
 
-    <!-- ══ MODALS ══ -->
-
-    <!-- ADD/EDIT ETABLISSEMENT -->
+    <!-- MODALS -->
     <div class="overlay" id="addModal">
         <div class="modal">
             <button class="modal-close" onclick="closeModal('addModal')">✕</button>
@@ -1981,31 +2027,26 @@
                 <div class="field-group"><label class="field-label">Réseaux sociaux</label><input class="field-input"
                         id="f-social" placeholder="https://instagram.com/..."></div>
             </div>
-            <div class="field-group">
-                <label class="field-label">Catégories</label>
-                <div id="f-cats-checkboxes" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"></div>
-            </div>
-            <div class="field-group">
-                <label class="field-label">Horaires</label>
+            <div class="field-group"><label class="field-label">Horaires</label>
                 <div class="horaires-editor" id="f-horaires"></div>
             </div>
             <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
                 <button class="btn btn-gold" onclick="saveEtab()">💾 Enregistrer</button>
                 <button class="btn btn-outline" onclick="closeModal('addModal')">Annuler</button>
+                <button class="btn btn-danger" id="deleteEtabBtn" style="display:none"
+                    onclick="deleteCurrentEtabFromModal()">🗑️ Supprimer</button>
             </div>
         </div>
     </div>
 
-    <!-- RAPPEL MODAL -->
     <div class="overlay" id="rappelModal">
         <div class="modal" style="max-width:420px">
             <button class="modal-close" onclick="closeModal('rappelModal')">✕</button>
             <div class="modal-title">⏰ Nouveau rappel</div>
-            <div class="field-group"><label class="field-label">Établissement</label>
-                <select class="field-select" id="r-etab">
+            <div class="field-group"><label class="field-label">Établissement</label><select class="field-select"
+                    id="r-etab">
                     <option value="">— Choisir —</option>
-                </select>
-            </div>
+                </select></div>
             <div class="field-group"><label class="field-label">Date</label><input class="field-input" type="date"
                     id="r-date"></div>
             <div class="field-group"><label class="field-label">Note</label><textarea class="field-ta" id="r-note"
@@ -2014,7 +2055,6 @@
         </div>
     </div>
 
-    <!-- ADD STEP -->
     <div class="overlay" id="addStepModal">
         <div class="modal" style="max-width:400px">
             <button class="modal-close" onclick="closeModal('addStepModal')">✕</button>
@@ -2025,7 +2065,6 @@
         </div>
     </div>
 
-    <!-- ADD OBJ -->
     <div class="overlay" id="addObjModal">
         <div class="modal" style="max-width:400px">
             <button class="modal-close" onclick="closeModal('addObjModal')">✕</button>
@@ -2111,97 +2150,65 @@
         let curLogFilter = 'all', editingId = null, lastSyncTime = null;
 
         function uid() { return 'id' + Date.now() + Math.random().toString(36).slice(2, 7); }
-        function now() { return new Date().toLocaleString('fr-FR'); }
+        function nowStr() { return new Date().toLocaleString('fr-FR'); }
 
         window.toast = (msg, type = '') => {
             const t = document.getElementById('toast');
             t.textContent = msg;
             t.style.borderColor = type === 'success' ? 'var(--green)' : type === 'error' ? 'var(--red)' : 'var(--gold)';
-            t.classList.add('show');
-            clearTimeout(t._t);
+            t.classList.add('show'); clearTimeout(t._t);
             t._t = setTimeout(() => t.classList.remove('show'), 2800);
         };
 
-        // FB INDICATOR
         function setFbState(state, txt) {
-            const pill = document.getElementById('fbPill');
-            if (pill) pill.className = 'fb-pill ' + state;
-            const el = document.getElementById('fbTxt');
-            if (el) el.textContent = txt;
+            const pill = document.getElementById('fbPill'); if (pill) pill.className = 'fb-pill ' + state;
+            const el = document.getElementById('fbTxt'); if (el) el.textContent = txt;
         }
 
         // SYNC OVERLAY
-        window.showSyncOverlay = function (state, data = {}) {
-            const overlay = document.getElementById('syncOverlay');
-            const card = document.getElementById('syncCard');
-            if (state === 'loading') {
-                card.innerHTML = `<div class="sync-spinner"></div><div class="sync-title loading">Synchronisation…</div><div class="sync-sub">Connexion à Firebase en cours,<br>veuillez patienter.</div>`;
-            } else if (state === 'success') {
-                const n = data.count || window.ETABLISSEMENTS.length;
-                const notes = data.notes || Object.keys(cardNotes).filter(k => cardNotes[k]).length;
-                const t = new Date().toLocaleString('fr-FR');
+        window.showSyncOverlay = (state, data = {}) => {
+            const overlay = document.getElementById('syncOverlay'), card = document.getElementById('syncCard');
+            if (state === 'loading') { card.innerHTML = `<div class="sync-spinner"></div><div class="sync-title loading">Synchronisation…</div><div class="sync-sub">Connexion à Firebase en cours.</div>`; }
+            else if (state === 'success') {
+                const n = data.count || window.ETABLISSEMENTS.length, notes = data.notes || 0, t = new Date().toLocaleString('fr-FR');
                 card.innerHTML = `<div class="sync-icon success">✅</div><div class="sync-title success">Synchronisé !</div><div class="sync-sub">Toutes les données sont à jour sur Firebase.</div><div class="sync-stats"><div class="sync-stat"><div class="sync-stat-num">${n}</div><div style="font-size:11px;color:var(--txt2)">Étab.</div></div><div class="sync-stat"><div class="sync-stat-num">${notes}</div><div style="font-size:11px;color:var(--txt2)">Notes</div></div><div class="sync-stat"><div class="sync-stat-num" style="font-size:13px">${t.split(' ')[1]}</div><div style="font-size:11px;color:var(--txt2)">Heure</div></div></div><button class="sync-close" onclick="closeSyncOverlay()">Fermer</button>`;
                 lastSyncTime = t;
-                const el1 = document.getElementById('fb-etabs');
-                const el2 = document.getElementById('fb-notes');
-                const el3 = document.getElementById('fb-last');
-                if (el1) el1.textContent = n;
-                if (el2) el2.textContent = notes;
-                if (el3) el3.textContent = t.split(' ')[1];
+                const el1 = document.getElementById('fb-etabs'), el2 = document.getElementById('fb-notes'), el3 = document.getElementById('fb-last');
+                if (el1) el1.textContent = n; if (el2) el2.textContent = notes; if (el3) el3.textContent = t.split(' ')[1];
             } else if (state === 'error') {
                 const msg = data.msg || 'Erreur de connexion';
-                card.innerHTML = `<div class="sync-icon error">⚠️</div><div class="sync-title error">Erreur de Synchronisation</div><div class="sync-sub">${msg}</div><div class="sync-contact"><strong>Un problème ? Contactez Nolan :</strong><br>📞 <a href="tel:0667463553">06 67 46 35 53</a><br>✉️ <a href="mailto:peronnenolan5o@gmail.com">peronnenolan5o@gmail.com</a></div><div style="display:flex;gap:10px;justify-content:center;margin-top:20px"><button class="sync-close" onclick="triggerSync()">🔄 Réessayer</button><button class="sync-close" onclick="closeSyncOverlay()">Fermer</button></div>`;
+                card.innerHTML = `<div class="sync-icon error">⚠️</div><div class="sync-title error">Erreur</div><div class="sync-sub">${msg}</div><div style="margin-top:16px;padding:14px;background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.18);border-radius:12px;font-size:13px;color:var(--txt2);line-height:1.7">📞 <a href="tel:0667463553" style="color:var(--gold);text-decoration:none;font-weight:600">06 67 46 35 53</a><br>✉️ <a href="mailto:peronnenolan5o@gmail.com" style="color:var(--gold);text-decoration:none;font-weight:600">peronnenolan5o@gmail.com</a></div><div style="display:flex;gap:10px;justify-content:center;margin-top:20px"><button class="sync-close" onclick="triggerSync()">🔄 Réessayer</button><button class="sync-close" onclick="closeSyncOverlay()">Fermer</button></div>`;
             }
             overlay.classList.add('open');
         };
         window.closeSyncOverlay = () => document.getElementById('syncOverlay').classList.remove('open');
 
-        window.triggerSync = async function () {
-            const btn = document.getElementById('syncBtn');
-            if (btn) btn.classList.add('spinning');
-            setFbState('syncing', 'Sync...');
-            showSyncOverlay('loading');
+        window.triggerSync = async () => {
+            const btn = document.getElementById('syncBtn'); if (btn) btn.classList.add('spinning');
+            setFbState('syncing', 'Sync...'); showSyncOverlay('loading');
             try {
-                const promises = window.ETABLISSEMENTS.map(e => update(ref(db, 'stages/' + e.id), { nom: e.nom, adresse: e.adresse, tel: e.tel, type: e.type, statut: STATUS_DEF[window.statuses[e.id] || 'todo']?.label, notes: cardNotes[e.id] || '' }));
-                await Promise.all(promises);
+                await Promise.all(window.ETABLISSEMENTS.map(e => update(ref(db, 'stages/' + e.id), { nom: e.nom, adresse: e.adresse, tel: e.tel, type: e.type, statut: STATUS_DEF[window.statuses[e.id] || 'todo']?.label, notes: cardNotes[e.id] || '' })));
                 setFbState('synced', 'Synchronisé');
                 setTimeout(() => showSyncOverlay('success', { count: window.ETABLISSEMENTS.length, notes: Object.keys(cardNotes).filter(k => cardNotes[k]).length }), 600);
             } catch (err) {
                 setFbState('error', 'Erreur');
                 showSyncOverlay('error', { msg: 'Impossible de joindre Firebase.<br><small>(' + (err.message || 'Erreur réseau') + ')</small>' });
-            } finally {
-                if (btn) btn.classList.remove('spinning');
-            }
+            } finally { if (btn) btn.classList.remove('spinning'); }
         };
 
-        window.fbSyncStatus = (id, status) => {
-            update(ref(db, 'stages/' + id), { statut: STATUS_DEF[status]?.label || status }).then(() => setFbState('synced', 'Synchronisé')).catch(() => setFbState('error', 'Erreur sync'));
-        };
+        window.fbSyncStatus = (id, status) => update(ref(db, 'stages/' + id), { statut: STATUS_DEF[status]?.label || status }).then(() => setFbState('synced', 'Synchronisé')).catch(() => setFbState('error', 'Erreur'));
 
-        // Real-time
         onValue(ref(db, 'stages/'), (snapshot) => {
-            const data = snapshot.val();
-            if (!data) return;
-            setFbState('synced', 'Connecté');
-            renderFirebasePreview(data);
+            const data = snapshot.val(); if (!data) return;
+            setFbState('synced', 'Connecté'); renderFirebasePreview(data);
         }, (error) => setFbState('error', 'Hors ligne'));
 
         window.ETABLISSEMENTS.forEach(e => update(ref(db, 'stages/' + e.id), { nom: e.nom, adresse: e.adresse, tel: e.tel, type: e.type, statut: STATUS_DEF[window.statuses[e.id] || 'todo']?.label, notes: cardNotes[e.id] || '' }));
 
         function renderFirebasePreview(data) {
-            const el = document.getElementById('firebase-data-preview');
-            if (!el) return;
+            const el = document.getElementById('firebase-data-preview'); if (!el) return;
             if (!data) { el.innerHTML = '<p style="color:var(--txt2)">Aucune donnée.</p>'; return; }
-            const rows = Object.entries(data).slice(0, 8).map(([id, item]) => {
-                const e = window.ETABLISSEMENTS.find(x => x.id === parseInt(id));
-                return `<div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px">
-      <span style="font-family:'JetBrains Mono',monospace;color:var(--txt2);min-width:30px">#${id}</span>
-      <span style="font-weight:600;flex:1">${item.nom || '—'}</span>
-      <span style="color:var(--txt2)">${item.statut || '—'}</span>
-      <span style="color:var(--green);font-size:10px">${item.notes ? '📝 note' : ''}</span>
-    </div>`;
-            }).join('');
-            el.innerHTML = rows + `<div style="color:var(--txt2);font-size:12px;margin-top:8px">... et ${Math.max(0, Object.keys(data).length - 8)} autres entrées</div>`;
+            el.innerHTML = Object.entries(data).slice(0, 8).map(([id, item]) => `<div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px"><span style="font-family:'JetBrains Mono',monospace;color:var(--txt2);min-width:30px">#${id}</span><span style="font-weight:600;flex:1">${item.nom || '—'}</span><span style="color:var(--txt2)">${item.statut || '—'}</span><span style="color:var(--green);font-size:10px">${item.notes ? '📝' : ''}</span></div>`).join('') + `<div style="color:var(--txt2);font-size:12px;margin-top:8px">... et ${Math.max(0, Object.keys(data).length - 8)} autres entrées</div>`;
         }
 
         // LOGIN
@@ -2210,13 +2217,12 @@
             const err = document.getElementById('lockError');
             if (v === ADMIN_PASSWORD) {
                 document.getElementById('lockScreen').style.display = 'none';
-                renderAll();
-                toast('✅ Bienvenue dans le panel admin !', 'success');
+                renderAll(); toast('✅ Bienvenue !', 'success');
             } else {
                 err.textContent = '❌ Mot de passe incorrect';
-                document.getElementById('lockPwd').value = '';
-                document.getElementById('lockPwd').classList.add('error-shake');
-                setTimeout(() => document.getElementById('lockPwd').classList.remove('error-shake'), 400);
+                const inp = document.getElementById('lockPwd');
+                inp.classList.add('shake'); inp.value = '';
+                setTimeout(() => inp.classList.remove('shake'), 400);
             }
         };
         document.getElementById('lockPwd').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
@@ -2231,12 +2237,10 @@
         window.showPanel = (id, btn) => {
             document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-            const p = document.getElementById('panel-' + id);
-            if (p) p.classList.add('active');
+            const p = document.getElementById('panel-' + id); if (p) p.classList.add('active');
             if (btn) btn.classList.add('active');
-            const names = { dashboard: 'Dashboard', etablissements: 'Établissements', categories: 'Catégories', checklist: 'Checklist', objectifs: 'Objectifs', rappels: 'Rappels', logs: 'Journal / Logs', firebase: 'Firebase', parametres: 'Paramètres', securite: 'Sécurité', importexport: 'Import / Export' };
-            const tn = document.getElementById('current-panel-name');
-            if (tn) tn.textContent = names[id] || id;
+            const names = { dashboard: 'Dashboard', etablissements: 'Établissements', categories: 'Catégories', checklist: 'Checklist', objectifs: 'Objectifs', rappels: 'Rappels', notes: 'Notes globales', logs: 'Journal / Logs', firebase: 'Firebase', parametres: 'Paramètres', securite: 'Sécurité', importexport: 'Import / Export' };
+            const tn = document.getElementById('current-panel-name'); if (tn) tn.textContent = names[id] || id;
             renderPanel(id);
         };
 
@@ -2247,33 +2251,31 @@
             if (id === 'checklist') renderChecklistAdmin();
             if (id === 'objectifs') renderObjectifsAdmin();
             if (id === 'rappels') renderRappelsAdmin();
+            if (id === 'notes') renderNotesGlobal();
             if (id === 'logs') renderLogs();
             if (id === 'firebase') { const d = document.getElementById('firebase-data-preview'); if (d) d.innerHTML = '<p style="color:var(--txt2);font-size:13px">En attente de données Firebase...</p>'; }
             if (id === 'parametres') renderParams();
             if (id === 'securite') renderSecurity();
         }
 
-        function renderAll() {
-            updateNavBadges();
-            renderDashboard();
-        }
+        function renderAll() { updateNavBadges(); renderDashboard(); }
 
         function updateNavBadges() {
             const b1 = document.getElementById('nav-badge-etabs'); if (b1) b1.textContent = window.ETABLISSEMENTS.length;
             const b2 = document.getElementById('nav-badge-cats'); if (b2) b2.textContent = window.CATEGORIES.length;
             const b3 = document.getElementById('nav-badge-steps'); if (b3) b3.textContent = window.STEPS.length;
             const b4 = document.getElementById('nav-badge-obj'); if (b4) b4.textContent = window.OBJECTIFS.length;
-            const b5 = document.getElementById('nav-badge-rappels');
             const today = new Date().toISOString().slice(0, 10);
             const pending = window.RAPPELS.filter(r => !r.fait && r.date <= today).length;
-            if (b5) { b5.textContent = pending; b5.style.display = pending ? '' : 'none'; }
+            const b5 = document.getElementById('nav-badge-rappels'); if (b5) { b5.textContent = pending; b5.style.display = pending ? '' : 'none'; }
             const b6 = document.getElementById('nav-badge-logs'); if (b6) b6.textContent = window.LOGS.length;
+            const notesCount = Object.keys(cardNotes).filter(k => cardNotes[k] && cardNotes[k].trim()).length;
+            const b7 = document.getElementById('nav-badge-notes'); if (b7) b7.textContent = notesCount;
         }
 
         // DASHBOARD
         function renderDashboard() {
             updateNavBadges();
-            // Stats
             const stats = [
                 { num: window.ETABLISSEMENTS.length, label: 'Établissements', color: 'var(--gold)' },
                 { num: window.ETABLISSEMENTS.filter(e => (window.statuses[e.id] || 'todo') === 'todo').length, label: 'À contacter', color: 'var(--gold)' },
@@ -2287,18 +2289,19 @@
             const ds = document.getElementById('dash-stats');
             if (ds) ds.innerHTML = stats.map(s => `<div class="dash-stat"><div class="dash-stat-num" style="color:${s.color}">${s.num}</div><div class="dash-stat-label">${s.label}</div></div>`).join('');
 
-            // Progression objectifs
+            // Chart par statut
+            const chart = document.getElementById('dash-chart');
+            const total = window.ETABLISSEMENTS.length;
+            if (chart) chart.innerHTML = STATUS_ORDER.map(s => {
+                const d = STATUS_DEF[s];
+                const count = window.ETABLISSEMENTS.filter(e => (window.statuses[e.id] || 'todo') === s).length;
+                const pct = total ? Math.round(count / total * 100) : 0;
+                return `<div class="chart-bar-row"><div class="chart-bar-label" style="color:${d.color}">${d.emoji} ${d.label}</div><div class="chart-bar-outer"><div class="chart-bar-inner" style="width:${pct}%;background:${d.color}"></div></div><div class="chart-bar-val" style="color:${d.color}">${count}</div></div>`;
+            }).join('');
+
+            // Objectifs
             const prog = document.getElementById('dash-progression');
-            if (prog) {
-                syncObjectifsAuto();
-                prog.innerHTML = window.OBJECTIFS.map(o => {
-                    const pct = Math.min(100, Math.round(o.actuel / o.cible * 100));
-                    return `<div class="obj-mini">
-        <div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:5px">${o.titre}</div>
-        <div style="display:flex;align-items:center;gap:10px"><div class="progress-wrap"><div class="progress-inner" style="width:${pct}%;background:${o.couleur}"></div></div><div class="obj-mini-num" style="color:${o.couleur}">${o.actuel}/${o.cible}</div></div></div>
-      </div>`;
-                }).join('') || '<p style="color:var(--txt2)">Aucun objectif.</p>';
-            }
+            if (prog) { syncObjectifsAuto(); prog.innerHTML = window.OBJECTIFS.map(o => { const pct = Math.min(100, Math.round(o.actuel / o.cible * 100)); return `<div class="obj-mini"><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:5px">${o.titre}</div><div style="display:flex;align-items:center;gap:10px"><div class="progress-wrap"><div class="progress-inner" style="width:${pct}%;background:${o.couleur}"></div></div><div class="obj-mini-num" style="color:${o.couleur}">${o.actuel}/${o.cible}</div></div></div></div>`; }).join('') || '<p style="color:var(--txt2)">Aucun objectif.</p>'; }
 
             // Rappels pending
             const today = new Date().toISOString().slice(0, 10);
@@ -2319,34 +2322,33 @@
             }
         }
 
-        // ETAB TABLE
-        function renderEtabTable() {
-            const tbody = document.getElementById('etab-tbody');
-            if (!tbody) return;
-            tbody.innerHTML = window.ETABLISSEMENTS.map(e => {
-                const st = window.statuses[e.id] || 'todo';
-                const def = STATUS_DEF[st];
+        // ETAB TABLE (with search + note column)
+        window.renderEtabTable = () => {
+            const tbody = document.getElementById('etab-tbody'); if (!tbody) return;
+            const q = (document.getElementById('etab-search')?.value || '').toLowerCase();
+            const list = window.ETABLISSEMENTS.filter(e => !q || e.nom.toLowerCase().includes(q) || e.type.toLowerCase().includes(q) || e.adresse.toLowerCase().includes(q));
+            tbody.innerHTML = list.map(e => {
+                const st = window.statuses[e.id] || 'todo', def = STATUS_DEF[st];
                 const prioColor = e.priorite === 'haute' ? 'var(--red)' : e.priorite === 'basse' ? 'var(--txt2)' : 'var(--gold)';
+                const noteText = cardNotes[e.id] ? cardNotes[e.id].substring(0, 40) + (cardNotes[e.id].length > 40 ? '...' : '') : '—';
                 return `<tr>
       <td style="font-weight:600;max-width:180px">${e.nom}</td>
       <td style="color:var(--txt2);font-size:12px">${e.type}</td>
       <td><span style="font-size:11px;font-weight:700;color:${prioColor}">${e.priorite || '—'}</span></td>
       <td style="font-family:'JetBrains Mono',monospace;font-size:12px">${e.note ? `★ ${e.note}` : '—'}</td>
       <td><span class="status-dot-inline" style="color:${def.color}">${def.emoji} ${def.label}</span></td>
-      <td>
-        <div style="display:flex;gap:6px">
-          <button class="btn btn-outline btn-sm" onclick="openEditModal(${e.id})">✏️ Modifier</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteEtab(${e.id})">🗑️</button>
-        </div>
-      </td>
+      <td style="color:var(--txt3);font-size:11px;max-width:150px;overflow:hidden">${noteText}</td>
+      <td><div style="display:flex;gap:6px">
+        <button class="btn btn-outline btn-sm" onclick="openEditModal(${e.id})">✏️</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteEtab(${e.id})">🗑️</button>
+      </div></td>
     </tr>`;
             }).join('');
-        }
+        };
 
-        // CATS ADMIN
+        // CATS
         function renderCatsAdmin() {
-            const el = document.getElementById('cats-display');
-            if (!el) return;
+            const el = document.getElementById('cats-display'); if (!el) return;
             if (!window.CATEGORIES.length) { el.innerHTML = '<p style="color:var(--txt2)">Aucune catégorie.</p>'; return; }
             el.innerHTML = window.CATEGORIES.map(c => `<span class="cat-pill" style="background:${c.couleur}20;border:1px solid ${c.couleur}">${c.emoji} ${c.nom}<button onclick="deleteCat('${c.id}')" style="color:${c.couleur}">✕</button></span>`).join('');
             updateNavBadges();
@@ -2360,29 +2362,16 @@
             document.getElementById('new-cat-name').value = '';
             renderCatsAdmin(); toast('✅ Catégorie ajoutée', 'success');
         };
-        window.deleteCat = (id) => {
-            window.CATEGORIES = window.CATEGORIES.filter(c => c.id !== id); lsSet('stage_cats_v4', window.CATEGORIES);
-            window.ETABLISSEMENTS.forEach(e => { e.categories = (e.categories || []).filter(c => c !== id); });
-            renderCatsAdmin(); toast('🗑️ Catégorie supprimée');
-        };
+        window.deleteCat = (id) => { window.CATEGORIES = window.CATEGORIES.filter(c => c.id !== id); lsSet('stage_cats_v4', window.CATEGORIES); renderCatsAdmin(); toast('🗑️ Catégorie supprimée'); };
 
-        // CHECKLIST ADMIN
+        // CHECKLIST
         function renderChecklistAdmin() {
             const done = window.STEPS.filter((_, i) => checks[i]).length;
             const pct = window.STEPS.length ? Math.round(done / window.STEPS.length * 100) : 0;
-            const pctEl = document.getElementById('adm-check-pct');
-            const barEl = document.getElementById('adm-check-bar');
-            const cntEl = document.getElementById('adm-check-count');
-            if (pctEl) pctEl.textContent = pct + '%';
-            if (barEl) barEl.style.width = pct + '%';
-            if (cntEl) cntEl.textContent = `${done}/${window.STEPS.length}`;
-            const list = document.getElementById('adm-checklist');
-            if (!list) return;
-            list.innerHTML = window.STEPS.map((_, i) => `<div class="check-item${checks[i] ? ' done' : ''}">
-    <div class="check-box" onclick="toggleCheck(${i})">${checks[i] ? '✓' : ''}</div>
-    <span class="check-text">${window.STEPS[i]}</span>
-    <button onclick="deleteStep(${i},event)" style="background:none;border:none;color:var(--txt2);cursor:pointer;font-size:13px;opacity:.5">✕</button>
-  </div>`).join('');
+            const pctEl = document.getElementById('adm-check-pct'), barEl = document.getElementById('adm-check-bar'), cntEl = document.getElementById('adm-check-count');
+            if (pctEl) pctEl.textContent = pct + '%'; if (barEl) barEl.style.width = pct + '%'; if (cntEl) cntEl.textContent = `${done}/${window.STEPS.length}`;
+            const list = document.getElementById('adm-checklist'); if (!list) return;
+            list.innerHTML = window.STEPS.map((_, i) => `<div class="check-item${checks[i] ? ' done' : ''}"><div class="check-box" onclick="toggleCheck(${i})">${checks[i] ? '✓' : ''}</div><span class="check-text">${window.STEPS[i]}</span><button onclick="deleteStep(${i},event)" style="background:none;border:none;color:var(--txt2);cursor:pointer;font-size:13px;opacity:.5">✕</button></div>`).join('');
             updateNavBadges();
         }
         window.toggleCheck = (i) => { checks[i] = !checks[i]; lsSet('stage_checks_v5', checks); renderChecklistAdmin(); addLog('note', `${checks[i] ? '✅' : '↩️'} Étape "${window.STEPS[i]}" ${checks[i] ? 'cochée' : 'décochée'}`); };
@@ -2390,24 +2379,13 @@
         window.resetChecklist = () => { Object.keys(checks).forEach(k => checks[k] = false); lsSet('stage_checks_v5', checks); renderChecklistAdmin(); toast('🔄 Checklist réinitialisée'); };
         window.addStepFromAdmin = () => { const v = document.getElementById('new-step-txt').value.trim(); if (!v) return; window.STEPS.push(v); lsSet('stage_steps_v4', window.STEPS); document.getElementById('new-step-txt').value = ''; closeModal('addStepModal'); renderChecklistAdmin(); toast('✅ Étape ajoutée', 'success'); };
 
-        // OBJECTIFS ADMIN
+        // OBJECTIFS
         function renderObjectifsAdmin() {
             syncObjectifsAuto();
-            const el = document.getElementById('adm-objectifs');
-            if (!el) return;
+            const el = document.getElementById('adm-objectifs'); if (!el) return;
             el.innerHTML = window.OBJECTIFS.map(o => {
                 const pct = Math.min(100, Math.round(o.actuel / o.cible * 100));
-                return `<div class="section-card">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
-        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;flex:1">${o.titre}</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:${o.couleur}">${o.actuel}/${o.cible}</div>
-        <button onclick="deleteObj('${o.id}')" class="btn btn-danger btn-sm">🗑️</button>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="progress-wrap"><div class="progress-inner" style="width:${pct}%;background:${o.couleur}"></div></div>
-        <div style="font-size:12px;color:var(--txt2);min-width:50px">${pct}%</div>
-      </div>
-    </div>`;
+                return `<div class="section-card"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;flex:1">${o.titre}</div><div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:${o.couleur}">${o.actuel}/${o.cible}</div><button onclick="deleteObj('${o.id}')" class="btn btn-danger btn-sm">🗑️</button></div><div style="display:flex;align-items:center;gap:12px"><div class="progress-wrap"><div class="progress-inner" style="width:${pct}%;background:${o.couleur}"></div></div><div style="font-size:12px;color:var(--txt2);min-width:50px">${pct}%</div></div></div>`;
             }).join('') || '<p style="color:var(--txt2)">Aucun objectif.</p>';
             updateNavBadges();
         }
@@ -2425,61 +2403,62 @@
             const couleur = document.getElementById('obj-color').value;
             if (!titre) return;
             window.OBJECTIFS.push({ id: uid(), titre, cible, actuel, couleur }); lsSet('stage_objectifs_v4', window.OBJECTIFS);
-            closeModal('addObjModal'); renderObjectifsAdmin();
-            document.getElementById('obj-titre').value = '';
+            closeModal('addObjModal'); renderObjectifsAdmin(); document.getElementById('obj-titre').value = '';
             toast('✅ Objectif ajouté', 'success');
         };
         window.deleteObj = (id) => { window.OBJECTIFS = window.OBJECTIFS.filter(o => o.id !== id); lsSet('stage_objectifs_v4', window.OBJECTIFS); renderObjectifsAdmin(); toast('🗑️ Objectif supprimé'); };
 
-        // RAPPELS ADMIN
+        // RAPPELS
         function renderRappelsAdmin() {
-            const el = document.getElementById('adm-rappels');
-            if (!el) return;
+            const el = document.getElementById('adm-rappels'); if (!el) return;
             if (!window.RAPPELS.length) { el.innerHTML = '<div class="section-card"><p style="color:var(--txt2)">Aucun rappel défini.</p></div>'; return; }
             const today = new Date().toISOString().slice(0, 10);
             el.innerHTML = window.RAPPELS.map((r, i) => {
-                const etab = window.ETABLISSEMENTS.find(e => e.id == r.etabId);
-                const late = !r.fait && r.date <= today;
-                return `<div class="section-card" style="padding:16px 20px;display:flex;align-items:center;gap:16px;${r.fait ? 'opacity:.55' : ''}">
-      <span style="font-size:24px">${r.fait ? '✅' : late ? '🔴' : '⏰'}</span>
-      <div style="flex:1">
-        <div style="font-weight:600;font-size:14px">${etab?.nom || '?'}</div>
-        <div style="font-size:12px;color:${late ? 'var(--red)' : 'var(--txt2)'};font-family:'JetBrains Mono',monospace;margin-top:2px">📅 ${r.date}${r.note ? ' — ' + r.note : ''}</div>
-      </div>
-      <div style="display:flex;gap:8px">
-        ${!r.fait ? `<button class="btn btn-success btn-sm" onclick="doneRappel(${i})">✔ Fait</button>` : ''}
-        <button class="btn btn-danger btn-sm" onclick="deleteRappel(${i})">🗑️</button>
-      </div>
-    </div>`;
+                const etab = window.ETABLISSEMENTS.find(e => e.id == r.etabId), late = !r.fait && r.date <= today;
+                return `<div class="section-card" style="padding:16px 20px;display:flex;align-items:center;gap:16px;${r.fait ? 'opacity:.55' : ''}"><span style="font-size:24px">${r.fait ? '✅' : late ? '🔴' : '⏰'}</span><div style="flex:1"><div style="font-weight:600;font-size:14px">${etab?.nom || '?'}</div><div style="font-size:12px;color:${late ? 'var(--red)' : 'var(--txt2)'};font-family:'JetBrains Mono',monospace;margin-top:2px">📅 ${r.date}${r.note ? ' — ' + r.note : ''}</div></div><div style="display:flex;gap:8px">${!r.fait ? `<button class="btn btn-success btn-sm" onclick="doneRappel(${i})">✔ Fait</button>` : ''}<button class="btn btn-danger btn-sm" onclick="deleteRappel(${i})">🗑️</button></div></div>`;
             }).join('');
             updateNavBadges();
         }
         window.openRappelModal = () => {
             const sel = document.getElementById('r-etab');
             sel.innerHTML = '<option value="">— Choisir —</option>' + window.ETABLISSEMENTS.map(e => `<option value="${e.id}">${e.nom}</option>`).join('');
-            document.getElementById('r-date').value = '';
-            document.getElementById('r-note').value = '';
+            document.getElementById('r-date').value = ''; document.getElementById('r-note').value = '';
             openModal('rappelModal');
         };
         window.saveRappel = () => {
-            const etabId = document.getElementById('r-etab').value;
-            const date = document.getElementById('r-date').value;
-            const note = document.getElementById('r-note').value;
+            const etabId = document.getElementById('r-etab').value, date = document.getElementById('r-date').value, note = document.getElementById('r-note').value;
             if (!etabId || !date) { toast('❌ Remplissez tous les champs', 'error'); return; }
             window.RAPPELS.push({ etabId, date, note, fait: false }); lsSet('stage_rappels_v4', window.RAPPELS);
-            closeModal('rappelModal'); renderRappelsAdmin();
-            toast('✅ Rappel enregistré', 'success');
+            closeModal('rappelModal'); renderRappelsAdmin(); toast('✅ Rappel enregistré', 'success');
         };
         window.doneRappel = (i) => { window.RAPPELS[i].fait = true; lsSet('stage_rappels_v4', window.RAPPELS); renderRappelsAdmin(); toast('✅ Rappel marqué fait', 'success'); };
         window.deleteRappel = (i) => { window.RAPPELS.splice(i, 1); lsSet('stage_rappels_v4', window.RAPPELS); renderRappelsAdmin(); toast('🗑️ Rappel supprimé'); };
 
+        // ★ NOTES GLOBALES (NEW)
+        function renderNotesGlobal() {
+            const el = document.getElementById('notes-global-list'); if (!el) return;
+            const withNotes = window.ETABLISSEMENTS.filter(e => cardNotes[e.id] && cardNotes[e.id].trim());
+            if (!withNotes.length) { el.innerHTML = '<div class="section-card"><p style="color:var(--txt2)">Aucune note saisie pour le moment.</p></div>'; return; }
+            el.innerHTML = withNotes.map(e => {
+                const st = window.statuses[e.id] || 'todo', def = STATUS_DEF[st];
+                return `<div class="note-preview-card"><div class="note-preview-name"><span style="color:${def.color}">${def.emoji}</span> ${e.nom} <span style="font-size:11px;color:var(--txt2);font-weight:400;font-family:'JetBrains Mono',monospace">${def.label}</span></div><div class="note-preview-text">${cardNotes[e.id]}</div></div>`;
+            }).join('');
+        }
+
+        window.exportNotes = () => {
+            const withNotes = window.ETABLISSEMENTS.filter(e => cardNotes[e.id] && cardNotes[e.id].trim());
+            const lines = withNotes.map(e => `=== ${e.nom} (${STATUS_DEF[window.statuses[e.id] || 'todo']?.label}) ===\n${cardNotes[e.id]}\n`);
+            const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'notes-etablissements.txt'; a.click();
+            toast('📤 Notes exportées', 'success');
+        };
+
         // LOGS
-        function addLog(type, msg) { window.LOGS.unshift({ type, msg, time: now() }); if (window.LOGS.length > 200) window.LOGS.pop(); lsSet('stage_logs_v5', window.LOGS); updateNavBadges(); }
+        function addLog(type, msg) { window.LOGS.unshift({ type, msg, time: nowStr() }); if (window.LOGS.length > 200) window.LOGS.pop(); lsSet('stage_logs_v5', window.LOGS); updateNavBadges(); }
         window.addLog = addLog;
         window.setLogFilter = (f, btn) => { curLogFilter = f; document.querySelectorAll('.log-filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderLogs(); };
-        window.renderLogs = function () {
-            const list = document.getElementById('logs-list');
-            if (!list) return;
+        window.renderLogs = () => {
+            const list = document.getElementById('logs-list'); if (!list) return;
             const filtered = curLogFilter === 'all' ? window.LOGS : window.LOGS.filter(l => l.type === curLogFilter);
             if (!filtered.length) { list.innerHTML = '<div style="padding:30px;text-align:center;color:var(--txt2)">Aucune activité enregistrée</div>'; return; }
             const colors = { statut: 'var(--gold)', note: 'var(--blue)', etab: 'var(--green)' };
@@ -2488,30 +2467,19 @@
         window.clearLogs = () => { window.LOGS = []; lsSet('stage_logs_v5', window.LOGS); renderLogs(); updateNavBadges(); toast('🗑️ Journal vidé'); };
 
         // PARAMS
-        function renderParams() {
-            const triSel = document.getElementById('param-tri');
-            if (triSel) triSel.value = window.PARAMS?.tri || 'default';
-        }
+        function renderParams() { const triSel = document.getElementById('param-tri'); if (triSel) triSel.value = window.PARAMS?.tri || 'default'; }
         window.saveParams = () => { window.PARAMS.tri = document.getElementById('param-tri').value; lsSet('stage_params_v4', window.PARAMS); toast('✅ Paramètres sauvegardés', 'success'); };
         window.toggleParam = (key, el) => { el.classList.toggle('on'); window.PARAMS[key] = el.classList.contains('on'); lsSet('stage_params_v4', window.PARAMS); toast('✅ Paramètre mis à jour', 'success'); };
 
         // SECURITY
-        function renderSecurity() {
-            const el = document.getElementById('pwd-display');
-            if (el) el.textContent = ADMIN_PASSWORD;
-        }
+        function renderSecurity() { const el = document.getElementById('pwd-display'); if (el) el.textContent = ADMIN_PASSWORD; }
         window.changePwd = () => {
-            const p1 = document.getElementById('new-pwd').value.trim();
-            const p2 = document.getElementById('new-pwd2').value.trim();
+            const p1 = document.getElementById('new-pwd').value.trim(), p2 = document.getElementById('new-pwd2').value.trim();
             if (!p1) { toast('❌ Champ vide', 'error'); return; }
             if (p1 !== p2) { toast('❌ Mots de passe différents', 'error'); return; }
             ADMIN_PASSWORD = p1; lsSet('stage_admin_pwd_v5', p1);
-            document.getElementById('new-pwd').value = '';
-            document.getElementById('new-pwd2').value = '';
-            renderSecurity();
-            const h = document.getElementById('pwdHintLock');
-            if (h) h.textContent = p1;
-            toast('✅ Mot de passe changé !', 'success');
+            document.getElementById('new-pwd').value = ''; document.getElementById('new-pwd2').value = '';
+            renderSecurity(); toast('✅ Mot de passe changé !', 'success');
         };
         window.resetStatuses = () => { if (!confirm('Réinitialiser tous les statuts ?')) return; window.statuses = {}; lsSet('stage_statuses_v5', window.statuses); renderAll(); toast('🔄 Statuts réinitialisés'); };
         window.resetAll = () => {
@@ -2521,18 +2489,25 @@
             renderAll(); toast('🔄 Données réinitialisées');
         };
 
+        // EXPORT CSV (★ NEW ★)
+        window.exportCSV = () => {
+            const rows = [['Nom', 'Type', 'Adresse', 'Téléphone', 'Note Google', 'Priorité', 'Statut', 'Note texte']];
+            window.ETABLISSEMENTS.forEach(e => {
+                const st = STATUS_DEF[window.statuses[e.id] || 'todo']?.label || '';
+                rows.push([e.nom, e.type, e.adresse, e.tel || '', e.note || '', e.priorite || '', st, (cardNotes[e.id] || '').replace(/\n/g, ' ')]);
+            });
+            const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+            const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'stage-etablissements.csv'; a.click();
+            toast('📊 Export CSV réussi', 'success');
+        };
+
         // IMPORT / EXPORT
         window.exportData = (type) => {
             let data, filename;
-            if (type === 'full') {
-                data = { etablissements: window.ETABLISSEMENTS, statuses: window.statuses, categories: window.CATEGORIES, objectifs: window.OBJECTIFS, steps: window.STEPS, logs: window.LOGS, rappels: window.RAPPELS };
-                filename = 'stage-backup-complet.json';
-            } else if (type === 'etabs') {
-                data = { etablissements: window.ETABLISSEMENTS, statuses: window.statuses };
-                filename = 'stage-etablissements.json';
-            } else {
-                data = { logs: window.LOGS }; filename = 'stage-journal.json';
-            }
+            if (type === 'full') { data = { etablissements: window.ETABLISSEMENTS, statuses: window.statuses, categories: window.CATEGORIES, objectifs: window.OBJECTIFS, steps: window.STEPS, logs: window.LOGS, rappels: window.RAPPELS, notes: cardNotes }; filename = 'stage-backup-complet.json'; }
+            else if (type === 'etabs') { data = { etablissements: window.ETABLISSEMENTS, statuses: window.statuses }; filename = 'stage-etablissements.json'; }
+            else { data = { logs: window.LOGS }; filename = 'stage-journal.json'; }
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; a.click();
             toast('📤 Export réussi', 'success');
@@ -2550,116 +2525,90 @@
                     if (data.steps) window.STEPS = data.steps;
                     if (data.logs) window.LOGS = data.logs;
                     if (data.rappels) window.RAPPELS = data.rappels;
+                    if (data.notes) Object.assign(cardNotes, data.notes);
                     lsSet('stage_etabs_extra', window.ETABLISSEMENTS.filter(e => e.id > 14));
-                    lsSet('stage_statuses_v5', window.statuses);
-                    lsSet('stage_cats_v4', window.CATEGORIES);
-                    lsSet('stage_objectifs_v4', window.OBJECTIFS);
-                    lsSet('stage_steps_v4', window.STEPS);
-                    lsSet('stage_logs_v5', window.LOGS);
-                    lsSet('stage_rappels_v4', window.RAPPELS);
+                    lsSet('stage_statuses_v5', window.statuses); lsSet('stage_cats_v4', window.CATEGORIES);
+                    lsSet('stage_objectifs_v4', window.OBJECTIFS); lsSet('stage_steps_v4', window.STEPS);
+                    lsSet('stage_logs_v5', window.LOGS); lsSet('stage_rappels_v4', window.RAPPELS);
+                    lsSet('stage_card_notes_v4', cardNotes);
                     renderAll(); toast('📥 Import réussi', 'success');
                 } catch (err) { toast('❌ Fichier invalide', 'error'); }
-            };
-            reader.readAsText(file);
+            }; reader.readAsText(file);
         };
 
-        // ADD / EDIT ETABLISSEMENT
-        function buildHorairesEditor(horaires) {
-            return DAYS.map(d => { const existing = horaires.find(h => h.j === d); return `<div class="horaire-row"><label>${d}</label><input type="text" placeholder="Fermé" value="${existing?.h || ''}" data-day="${d}"></div>`; }).join('');
-        }
+        // ADD / EDIT
+        function buildHorairesEditor(horaires) { return DAYS.map(d => { const existing = horaires.find(h => h.j === d); return `<div class="horaire-row"><label>${d}</label><input type="text" placeholder="Fermé" value="${existing?.h || ''}" data-day="${d}"></div>`; }).join(''); }
         window.openModal = (id) => {
             if (id === 'addModal') {
                 editingId = null;
                 document.getElementById('addModal-title').textContent = '➕ Ajouter un établissement';
                 ['nom', 'type', 'adresse', 'tel', 'maps', 'website', 'social'].forEach(f => { const el = document.getElementById('f-' + f); if (el) el.value = ''; });
-                document.getElementById('f-note').value = '';
-                document.getElementById('f-priorite').value = 'moyenne';
-                document.getElementById('f-statut').value = 'todo';
+                document.getElementById('f-note').value = ''; document.getElementById('f-priorite').value = 'moyenne'; document.getElementById('f-statut').value = 'todo';
                 document.getElementById('f-horaires').innerHTML = buildHorairesEditor([]);
-                renderCatCheckboxes([]);
+                const delBtn = document.getElementById('deleteEtabBtn'); if (delBtn) delBtn.style.display = 'none';
             }
             document.getElementById(id).classList.add('open');
         };
-        window.closeModal = (id) => document.getElementById(id).classList.remove('open');
+        window.closeModal = (id) => { document.getElementById(id).classList.remove('open'); };
         window.openEditModal = (id) => {
             editingId = id;
-            const e = window.ETABLISSEMENTS.find(x => x.id === id);
-            if (!e) return;
+            const e = window.ETABLISSEMENTS.find(x => x.id === id); if (!e) return;
             document.getElementById('addModal-title').textContent = "✏️ Modifier l'établissement";
-            document.getElementById('f-nom').value = e.nom || '';
-            document.getElementById('f-type').value = e.type || '';
-            document.getElementById('f-adresse').value = e.adresse || '';
-            document.getElementById('f-tel').value = e.tel || '';
-            document.getElementById('f-note').value = e.note || '';
-            document.getElementById('f-priorite').value = e.priorite || 'moyenne';
+            document.getElementById('f-nom').value = e.nom || ''; document.getElementById('f-type').value = e.type || '';
+            document.getElementById('f-adresse').value = e.adresse || ''; document.getElementById('f-tel').value = e.tel || '';
+            document.getElementById('f-note').value = e.note || ''; document.getElementById('f-priorite').value = e.priorite || 'moyenne';
             document.getElementById('f-statut').value = window.statuses[e.id] || 'todo';
-            document.getElementById('f-maps').value = e.maps || '';
-            document.getElementById('f-website').value = e.website || '';
-            document.getElementById('f-social').value = e.social || '';
+            document.getElementById('f-maps').value = e.maps || ''; document.getElementById('f-website').value = e.website || ''; document.getElementById('f-social').value = e.social || '';
             document.getElementById('f-horaires').innerHTML = buildHorairesEditor(e.horaires || []);
-            renderCatCheckboxes(e.categories || []);
+            const delBtn = document.getElementById('deleteEtabBtn'); if (delBtn) delBtn.style.display = '';
             openModal('addModal');
         };
-        function renderCatCheckboxes(selected) {
-            const wrap = document.getElementById('f-cats-checkboxes');
-            wrap.innerHTML = window.CATEGORIES.map(c => `<label style="display:flex;align-items:center;gap:6px;cursor:pointer;background:${selected.includes(c.id) ? c.couleur + '22' : 'var(--bg3)'};border:1px solid ${selected.includes(c.id) ? c.couleur : 'var(--border2)'};padding:6px 11px;border-radius:9px;font-size:12px;font-weight:600;transition:all .15s" id="cat-lbl-${c.id}"><input type="checkbox" value="${c.id}" ${selected.includes(c.id) ? 'checked' : ''} onchange="updateCatLabel('${c.id}','${c.couleur}',this.checked)" style="display:none">${c.emoji} ${c.nom}</label>`).join('');
-        }
-        window.updateCatLabel = (id, couleur, checked) => { const lbl = document.getElementById('cat-lbl-' + id); if (lbl) { lbl.style.background = checked ? couleur + '22' : 'var(--bg3)'; lbl.style.borderColor = checked ? couleur : 'var(--border2)'; } };
         window.saveEtab = () => {
-            const nom = document.getElementById('f-nom').value.trim();
-            const type = document.getElementById('f-type').value.trim();
+            const nom = document.getElementById('f-nom').value.trim(), type = document.getElementById('f-type').value.trim();
             if (!nom || !type) { toast('❌ Nom et type requis', 'error'); return; }
             const horaires = DAYS.map(d => { const inp = document.querySelector(`#f-horaires [data-day="${d}"]`); const h = inp ? inp.value.trim() : ''; return h ? { j: d, h } : null; }).filter(Boolean);
-            const selectedCats = Array.from(document.querySelectorAll('#f-cats-checkboxes input:checked')).map(i => i.value);
-            const data = { nom, type, adresse: document.getElementById('f-adresse').value.trim(), tel: document.getElementById('f-tel').value.trim(), note: parseFloat(document.getElementById('f-note').value) || null, priorite: document.getElementById('f-priorite').value, maps: document.getElementById('f-maps').value.trim(), website: document.getElementById('f-website').value.trim(), social: document.getElementById('f-social').value.trim(), horaires, categories: selectedCats };
+            const data = { nom, type, adresse: document.getElementById('f-adresse').value.trim(), tel: document.getElementById('f-tel').value.trim(), note: parseFloat(document.getElementById('f-note').value) || null, priorite: document.getElementById('f-priorite').value, maps: document.getElementById('f-maps').value.trim(), website: document.getElementById('f-website').value.trim(), social: document.getElementById('f-social').value.trim(), horaires, categories: [] };
             const newStatus = document.getElementById('f-statut').value;
             if (editingId) {
                 const idx = window.ETABLISSEMENTS.findIndex(e => e.id === editingId);
                 if (idx > -1) window.ETABLISSEMENTS[idx] = { ...window.ETABLISSEMENTS[idx], ...data };
                 window.statuses[editingId] = newStatus;
-                addLog('etab', `✏️ Établissement modifié : ${nom}`);
-                toast('✅ Établissement modifié', 'success');
+                addLog('etab', `✏️ Modifié : ${nom}`); toast('✅ Établissement modifié', 'success');
             } else {
-                const newId = Date.now();
-                window.ETABLISSEMENTS.push({ id: newId, ...data });
-                window.statuses[newId] = newStatus;
+                const newId = Date.now(); window.ETABLISSEMENTS.push({ id: newId, ...data }); window.statuses[newId] = newStatus;
                 update(ref(db, 'stages/' + newId), { nom, adresse: data.adresse, tel: data.tel, type: data.type, statut: STATUS_DEF[newStatus]?.label, notes: '' });
-                addLog('etab', `➕ Établissement ajouté : ${nom}`);
-                toast('✅ Établissement ajouté', 'success');
+                addLog('etab', `➕ Ajouté : ${nom}`); toast('✅ Établissement ajouté', 'success');
             }
-            lsSet('stage_statuses_v5', window.statuses);
-            lsSet('stage_etabs_extra', window.ETABLISSEMENTS.filter(e => e.id > 14));
+            lsSet('stage_statuses_v5', window.statuses); lsSet('stage_etabs_extra', window.ETABLISSEMENTS.filter(e => e.id > 14));
             closeModal('addModal'); renderEtabTable(); syncObjectifsAuto(); updateNavBadges(); renderDashboard();
+        };
+        window.deleteCurrentEtabFromModal = () => {
+            if (!editingId) return;
+            const e = window.ETABLISSEMENTS.find(x => x.id === editingId);
+            if (!confirm(`Supprimer "${e?.nom}" ?`)) return;
+            deleteEtabCore(editingId); closeModal('addModal');
         };
         window.deleteEtab = (id) => {
             const e = window.ETABLISSEMENTS.find(x => x.id === id);
             if (!confirm(`Supprimer "${e?.nom}" ?`)) return;
+            deleteEtabCore(id);
+        };
+        function deleteEtabCore(id) {
+            const e = window.ETABLISSEMENTS.find(x => x.id === id);
             const idx = window.ETABLISSEMENTS.findIndex(x => x.id === id);
             if (idx > -1) window.ETABLISSEMENTS.splice(idx, 1);
-            delete window.statuses[id];
-            remove(ref(db, 'stages/' + id));
-            lsSet('stage_etabs_extra', window.ETABLISSEMENTS.filter(e => e.id > 14));
-            lsSet('stage_statuses_v5', window.statuses);
-            addLog('etab', `🗑️ Établissement supprimé : ${e?.nom}`);
-            renderEtabTable(); syncObjectifsAuto(); updateNavBadges(); renderDashboard();
-            toast('🗑️ Établissement supprimé');
-        };
+            delete window.statuses[id]; remove(ref(db, 'stages/' + id));
+            lsSet('stage_etabs_extra', window.ETABLISSEMENTS.filter(e => e.id > 14)); lsSet('stage_statuses_v5', window.statuses);
+            addLog('etab', `🗑️ Supprimé : ${e?.nom}`); renderEtabTable(); syncObjectifsAuto(); updateNavBadges(); renderDashboard(); toast('🗑️ Supprimé');
+        }
 
         // INIT
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('pwdHintLock').textContent = ADMIN_PASSWORD;
             setFbState('syncing', 'Connexion...');
-            const today = new Date().toISOString().slice(0, 10);
-            const pending = window.RAPPELS.filter(r => !r.fait && r.date <= today);
-            if (pending.length && document.getElementById('lockScreen').style.display === 'none')
-                toast(`⏰ ${pending.length} rappel(s) en attente !`);
         });
-
         document.getElementById('syncOverlay').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('syncOverlay')) {
-                const card = document.getElementById('syncCard');
-                if (!card.innerHTML.includes('sync-spinner')) closeSyncOverlay();
-            }
+            if (e.target === document.getElementById('syncOverlay')) { const card = document.getElementById('syncCard'); if (!card.innerHTML.includes('sync-spinner')) closeSyncOverlay(); }
         });
     </script>
 </body>
