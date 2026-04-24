@@ -24,12 +24,14 @@
       --red: #ef4444;
       --orange: #f97316;
       --gold: #eab308;
+      --pink: #ec4899;
+      --cyan: #06b6d4;
       --txt: #f0f2ff;
       --txt2: #5a6080;
       --txt3: #8890b0;
       --card: #0e1018;
       --nav-h: 64px;
-      --mob-nav: 68px;
+      --mob-nav: 68px
     }
 
     *,
@@ -50,10 +52,9 @@
       color: var(--txt);
       min-height: 100vh;
       overflow-x: hidden;
-      padding-bottom: calc(var(--mob-nav) + 12px)
+      padding-bottom: calc(var(--mob-nav)+12px)
     }
 
-    /* BG */
     body::before {
       content: '';
       position: fixed;
@@ -63,7 +64,6 @@
       z-index: 0
     }
 
-    /* ── TOP BAR ── */
     .topbar {
       position: sticky;
       top: 0;
@@ -131,7 +131,8 @@
       font-family: 'DM Mono', monospace;
       font-size: 11px;
       color: var(--txt2);
-      transition: all .3s
+      transition: all .3s;
+      cursor: pointer
     }
 
     .fb-badge.ok {
@@ -180,7 +181,40 @@
       }
     }
 
-    /* BUTTONS */
+    /* NOTIF BADGE */
+    .notif-btn {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: var(--txt2);
+      transition: color .2s;
+      padding: 4px
+    }
+
+    .notif-btn:hover {
+      color: var(--txt)
+    }
+
+    .notif-count {
+      position: absolute;
+      top: -2px;
+      right: -4px;
+      background: var(--red);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      min-width: 16px;
+      height: 16px;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      padding: 0 3px
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -225,7 +259,6 @@
       border-radius: 7px
     }
 
-    /* ── MOBILE BOTTOM NAV ── */
     .mob-nav {
       position: fixed;
       bottom: 0;
@@ -285,7 +318,6 @@
       border-radius: 0 0 4px 4px
     }
 
-    /* ── PAGES ── */
     .page {
       display: none;
       padding: 20px;
@@ -310,7 +342,6 @@
       }
     }
 
-    /* ── SECTION TITLE ── */
     .sec-title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 32px;
@@ -326,7 +357,7 @@
       margin-bottom: 20px
     }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
       background: linear-gradient(135deg, rgba(255, 107, 53, .12) 0%, rgba(255, 107, 53, .04) 40%, transparent 100%);
       border: 1px solid rgba(255, 107, 53, .2);
@@ -363,7 +394,38 @@
       max-width: 380px
     }
 
-    /* ── STATS ── */
+    /* PROGRESS HERO */
+    .hero-prog {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .hero-prog-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255, 255, 255, .08);
+      border-radius: 99px;
+      overflow: hidden
+    }
+
+    .hero-prog-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 99px;
+      transition: width .6s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .hero-prog-txt {
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      color: var(--accent);
+      font-weight: 600;
+      white-space: nowrap
+    }
+
+    /* STATS */
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -382,7 +444,8 @@
       border: 1px solid var(--border);
       border-radius: 13px;
       padding: 14px;
-      transition: transform .2s, border-color .2s
+      transition: transform .2s, border-color .2s;
+      cursor: pointer
     }
 
     .stat:hover {
@@ -405,7 +468,56 @@
       margin-top: 2px
     }
 
-    /* ── FILTERS ── */
+    /* SORT + FILTERS */
+    .sort-filter-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap
+    }
+
+    .sort-sel {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 9px;
+      color: var(--txt);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 12px;
+      outline: none;
+      cursor: pointer;
+      transition: border-color .2s
+    }
+
+    .sort-sel:focus {
+      border-color: rgba(255, 107, 53, .4)
+    }
+
+    .fav-only-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 12px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--txt2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      white-space: nowrap
+    }
+
+    .fav-only-btn.active {
+      background: rgba(236, 72, 153, .1);
+      color: var(--pink);
+      border-color: rgba(236, 72, 153, .3)
+    }
+
     .filters {
       display: flex;
       gap: 6px;
@@ -477,7 +589,7 @@
       pointer-events: none
     }
 
-    /* ── STATUS SECTIONS ── */
+    /* STATUS SECTIONS */
     .status-sec {
       margin-bottom: 28px
     }
@@ -530,7 +642,6 @@
       color: var(--accent)
     }
 
-    /* ── CARDS GRID ── */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -543,7 +654,7 @@
       }
     }
 
-    /* ── CARD ── */
+    /* CARD */
     .card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -558,6 +669,10 @@
       border-color: rgba(255, 107, 53, .2);
       box-shadow: 0 10px 35px rgba(0, 0, 0, .4);
       transform: translateY(-2px)
+    }
+
+    .card.fav-card {
+      border-color: rgba(236, 72, 153, .25)
     }
 
     .card-body {
@@ -579,13 +694,19 @@
       line-height: 1.2
     }
 
+    .card-hdr-right {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      flex-shrink: 0
+    }
+
     .cbadge {
       font-size: 10px;
       font-weight: 700;
       padding: 3px 9px;
       border-radius: 20px;
       white-space: nowrap;
-      flex-shrink: 0;
       text-transform: uppercase;
       letter-spacing: .04em
     }
@@ -626,6 +747,63 @@
       border: 1px solid rgba(239, 68, 68, .2)
     }
 
+    /* FAV BUTTON */
+    .fav-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 3px;
+      transition: transform .2s;
+      line-height: 1
+    }
+
+    .fav-btn:hover {
+      transform: scale(1.3)
+    }
+
+    /* OPEN NOW BADGE */
+    .open-now {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-bottom: 6px
+    }
+
+    .open-now.open {
+      background: rgba(34, 197, 94, .1);
+      color: var(--green);
+      border: 1px solid rgba(34, 197, 94, .2)
+    }
+
+    .open-now.closed {
+      background: rgba(239, 68, 68, .08);
+      color: var(--red);
+      border: 1px solid rgba(239, 68, 68, .15)
+    }
+
+    .open-now.unknown {
+      background: rgba(90, 96, 128, .1);
+      color: var(--txt2);
+      border: 1px solid var(--border)
+    }
+
+    .open-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor
+    }
+
+    .open-now.open .open-dot {
+      animation: blink 1.5s infinite
+    }
+
+    /* PRIO */
     .prio-high {
       display: inline-flex;
       align-items: center;
@@ -681,6 +859,59 @@
       font-size: 12px
     }
 
+    /* QUICK CONTACT BTNS */
+    .quick-contact {
+      display: flex;
+      gap: 5px;
+      margin-top: 8px;
+      flex-wrap: wrap
+    }
+
+    .qc-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--txt2);
+      font-size: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .qc-btn:hover {
+      transform: translateY(-1px)
+    }
+
+    .qc-btn.call {
+      border-color: rgba(34, 197, 94, .25);
+      color: var(--green);
+      background: rgba(34, 197, 94, .06)
+    }
+
+    .qc-btn.sms {
+      border-color: rgba(59, 130, 246, .25);
+      color: var(--blue);
+      background: rgba(59, 130, 246, .06)
+    }
+
+    .qc-btn.whatsapp {
+      border-color: rgba(34, 197, 94, .25);
+      color: #25d366;
+      background: rgba(37, 211, 102, .06)
+    }
+
+    .qc-btn.maps {
+      border-color: rgba(249, 115, 22, .25);
+      color: var(--orange);
+      background: rgba(249, 115, 22, .06)
+    }
+
     /* HORAIRES */
     .hpanel {
       padding: 10px 16px;
@@ -729,6 +960,24 @@
 
     .hdot.closed {
       background: var(--border)
+    }
+
+    .hdot.today-open {
+      background: var(--accent);
+      box-shadow: 0 0 6px rgba(255, 107, 53, .6);
+      animation: pulse-dot 1.5s infinite
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.4)
+      }
     }
 
     .htime {
@@ -860,7 +1109,42 @@
       border-color: rgba(249, 115, 22, .25)
     }
 
-    /* ── KANBAN ── */
+    /* VISIT COUNTER */
+    .visit-counter {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-top: 1px solid var(--border);
+      background: rgba(255, 255, 255, .01);
+      font-size: 11px;
+      color: var(--txt2)
+    }
+
+    .visit-counter span {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px
+    }
+
+    .visit-add-btn {
+      margin-left: auto;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--txt2);
+      padding: 2px 8px;
+      cursor: pointer;
+      font-size: 11px;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .2s
+    }
+
+    .visit-add-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    /* KANBAN */
     .kanban {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -900,15 +1184,13 @@
       border-radius: 9px;
       padding: 10px 12px;
       margin-bottom: 7px;
-      cursor: pointer;
       transition: all .2s;
       font-size: 13px;
       font-weight: 600
     }
 
     .kitem:hover {
-      border-color: var(--accent);
-      transform: translateX(3px)
+      border-color: var(--accent)
     }
 
     .kitem-sub {
@@ -925,7 +1207,7 @@
       padding: 12px
     }
 
-    /* ── CHECKLIST ── */
+    /* CHECKLIST */
     .checklist-wrap {
       max-width: 660px
     }
@@ -1031,18 +1313,13 @@
       color: var(--red)
     }
 
-    /* ── OBJECTIFS ── */
+    /* OBJECTIFS */
     .obj-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 13px;
       padding: 18px;
-      margin-bottom: 10px;
-      transition: border-color .2s
-    }
-
-    .obj-card:hover {
-      border-color: var(--border2)
+      margin-bottom: 10px
     }
 
     .obj-hdr {
@@ -1084,7 +1361,7 @@
       color: var(--txt2)
     }
 
-    /* ── RAPPELS ── */
+    /* RAPPELS */
     .rp-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -1093,12 +1370,7 @@
       margin-bottom: 9px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      transition: border-color .2s
-    }
-
-    .rp-card:hover {
-      border-color: var(--border2)
+      gap: 12px
     }
 
     .rp-card.fait {
@@ -1117,44 +1389,159 @@
       margin-top: 2px
     }
 
-    /* ── LOGS ── */
-    .log-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-      transition: background .15s
+    /* STATS PAGE */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px
     }
 
-    .log-row:hover {
-      background: rgba(255, 255, 255, .02)
+    .detail-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px
     }
 
-    .log-t {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--txt2);
-      flex-shrink: 0;
-      min-width: 130px
-    }
-
-    .log-type {
-      font-size: 10px;
-      padding: 2px 7px;
-      border-radius: 5px;
-      flex-shrink: 0;
+    .detail-card-title {
+      font-size: 12px;
       font-weight: 700;
-      text-transform: uppercase
+      color: var(--txt2);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 14px
     }
 
-    .log-msg {
-      color: var(--txt);
-      line-height: 1.4
+    .detail-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px
     }
 
-    /* ── MODALS ── */
+    .detail-bar-label {
+      font-size: 12px;
+      min-width: 90px;
+      color: var(--txt3)
+    }
+
+    .detail-bar-outer {
+      flex: 1;
+      height: 6px;
+      background: var(--bg3);
+      border-radius: 99px;
+      overflow: hidden
+    }
+
+    .detail-bar-inner {
+      height: 100%;
+      border-radius: 99px;
+      transition: width .6s
+    }
+
+    .detail-bar-num {
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      min-width: 20px;
+      text-align: right
+    }
+
+    /* MAP PAGE */
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px
+    }
+
+    .map-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all .2s;
+      cursor: pointer
+    }
+
+    .map-card:hover {
+      border-color: var(--accent);
+      transform: translateX(4px)
+    }
+
+    .map-card-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(255, 107, 53, .2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0
+    }
+
+    /* TIPS PAGE */
+    .tip-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 12px
+    }
+
+    .tip-card-hdr {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px
+    }
+
+    .tip-card-ico {
+      font-size: 24px
+    }
+
+    .tip-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: .03em
+    }
+
+    .tip-list li {
+      font-size: 13px;
+      color: var(--txt3);
+      line-height: 1.7;
+      padding: 4px 0;
+      border-bottom: 1px solid var(--border);
+      list-style: none;
+      display: flex;
+      gap: 8px
+    }
+
+    .tip-list li:last-child {
+      border-bottom: none
+    }
+
+    /* LETTER GEN */
+    .letter-preview {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 13px;
+      color: var(--txt3);
+      line-height: 1.8;
+      margin-top: 12px;
+      white-space: pre-wrap;
+      font-family: Georgia, serif;
+      max-height: 300px;
+      overflow-y: auto
+    }
+
+    /* OVERLAY */
     .overlay {
       display: none;
       position: fixed;
@@ -1231,6 +1618,197 @@
       color: var(--red)
     }
 
+    /* ADMIN LOGIN */
+    .admin-login-modal {
+      max-width: 380px
+    }
+
+    .admin-login-logo {
+      font-size: 44px;
+      text-align: center;
+      margin-bottom: 12px
+    }
+
+    .admin-login-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: .04em;
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 4px
+    }
+
+    .admin-login-sub {
+      font-size: 12px;
+      color: var(--txt2);
+      text-align: center;
+      margin-bottom: 20px
+    }
+
+    .admin-login-input {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      color: var(--txt);
+      font-family: 'DM Mono', monospace;
+      font-size: 16px;
+      padding: 12px 16px;
+      outline: none;
+      text-align: center;
+      letter-spacing: .15em;
+      transition: border-color .2s;
+      margin-bottom: 12px
+    }
+
+    .admin-login-input:focus {
+      border-color: rgba(255, 107, 53, .4)
+    }
+
+    .admin-login-input.shake {
+      animation: shake .35s ease
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0)
+      }
+
+      25% {
+        transform: translateX(-6px)
+      }
+
+      75% {
+        transform: translateX(6px)
+      }
+    }
+
+    .admin-login-err {
+      text-align: center;
+      color: var(--red);
+      font-size: 12px;
+      min-height: 16px;
+      margin-bottom: 10px
+    }
+
+    .admin-login-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: .06em;
+      cursor: pointer;
+      transition: all .2s;
+      box-shadow: 0 4px 16px rgba(255, 107, 53, .3)
+    }
+
+    .admin-login-btn:hover {
+      background: var(--accent2);
+      transform: translateY(-1px)
+    }
+
+    /* FB INFO MODAL */
+    .fb-modal {
+      max-width: 420px
+    }
+
+    .fb-modal-logo {
+      font-size: 48px;
+      text-align: center;
+      margin-bottom: 16px
+    }
+
+    .fb-modal-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px
+    }
+
+    .fb-modal-status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green)
+    }
+
+    .fb-modal-status-txt {
+      font-size: 13px;
+      color: var(--green);
+      font-weight: 700;
+      font-family: 'DM Mono', monospace
+    }
+
+    .fb-modal-info {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px
+    }
+
+    .fb-modal-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px
+    }
+
+    .fb-modal-info-row:last-child {
+      border-bottom: none
+    }
+
+    .fb-modal-info-label {
+      color: var(--txt2)
+    }
+
+    .fb-modal-info-val {
+      color: var(--txt);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px
+    }
+
+    .fb-contact {
+      background: rgba(255, 107, 53, .06);
+      border: 1px solid rgba(255, 107, 53, .2);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center
+    }
+
+    .fb-contact h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px
+    }
+
+    .fb-contact-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 13px
+    }
+
+    .fb-contact a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    /* FORMS */
     .fg {
       margin-bottom: 13px
     }
@@ -1287,45 +1865,6 @@
       }
     }
 
-    .hor-ed {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
-      gap: 7px;
-      margin-top: 6px
-    }
-
-    .hor-row label {
-      font-size: 11px;
-      color: var(--txt2);
-      font-weight: 700;
-      display: block;
-      margin-bottom: 3px
-    }
-
-    .hor-row input {
-      width: 100%;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      color: var(--txt);
-      font-size: 12px;
-      padding: 5px 8px;
-      outline: none;
-      font-family: 'DM Sans', sans-serif;
-      transition: border-color .2s
-    }
-
-    .hor-row input:focus {
-      border-color: var(--accent)
-    }
-
-    .modal-acts {
-      display: flex;
-      gap: 8px;
-      margin-top: 18px;
-      flex-wrap: wrap
-    }
-
     /* SYNC OVERLAY */
     .sync-ov {
       display: none;
@@ -1371,7 +1910,7 @@
       }
     }
 
-    .sync-ico {
+    .sync-ico-box {
       width: 64px;
       height: 64px;
       border-radius: 50%;
@@ -1382,13 +1921,13 @@
       font-size: 30px
     }
 
-    .sync-ico.ok {
+    .sync-ico-box.ok {
       background: rgba(34, 197, 94, .1);
       border: 2px solid rgba(34, 197, 94, .3);
       animation: pop .5s cubic-bezier(.34, 1.56, .64, 1)
     }
 
-    .sync-ico.err {
+    .sync-ico-box.err {
       background: rgba(239, 68, 68, .1);
       border: 2px solid rgba(239, 68, 68, .3)
     }
@@ -1481,7 +2020,7 @@
     /* TOAST */
     .toast {
       position: fixed;
-      bottom: calc(var(--mob-nav) + 12px);
+      bottom: calc(var(--mob-nav)+12px);
       right: 16px;
       background: var(--bg2);
       border: 1px solid var(--accent);
@@ -1503,7 +2042,6 @@
       opacity: 1
     }
 
-    /* EMPTY */
     .empty {
       text-align: center;
       padding: 50px 20px;
@@ -1516,7 +2054,6 @@
       margin-bottom: 12px
     }
 
-    /* SCROLLBAR */
     ::-webkit-scrollbar {
       width: 4px;
       height: 4px
@@ -1534,6 +2071,157 @@
     ::-webkit-scrollbar-thumb:hover {
       background: var(--accent)
     }
+
+    .meteo-band {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(59, 130, 246, .06);
+      border: 1px solid rgba(59, 130, 246, .15);
+      border-radius: 11px;
+      padding: 10px 16px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      color: var(--txt3)
+    }
+
+    .meteo-band strong {
+      color: var(--blue);
+      font-family: 'DM Mono', monospace
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap
+    }
+
+    .qa-btn {
+      flex: 1;
+      min-width: 100px;
+      padding: 10px 14px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--txt3);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'DM Sans', sans-serif;
+      justify-content: center
+    }
+
+    .qa-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    /* LETTER MODAL */
+    .letter-select-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px
+    }
+
+    .letter-pick {
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--txt2);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s
+    }
+
+    .letter-pick.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-color: rgba(255, 107, 53, .3)
+    }
+
+    /* SCORE WIDGET */
+    .score-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      color: var(--txt2);
+      font-size: 10px;
+      padding: 3px 8px;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600
+    }
+
+    .score-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold)
+    }
+
+    /* CALENDAR MODAL */
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-top: 12px
+    }
+
+    .cal-day-hdr {
+      text-align: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--txt2);
+      text-transform: uppercase;
+      padding: 4px
+    }
+
+    .cal-day {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 6px 4px;
+      min-height: 50px;
+      font-size: 10px;
+      cursor: pointer;
+      transition: border-color .2s
+    }
+
+    .cal-day.today {
+      border-color: var(--accent)
+    }
+
+    .cal-day.has-event {
+      background: rgba(255, 107, 53, .06)
+    }
+
+    .cal-day-num {
+      font-weight: 700;
+      font-size: 11px;
+      margin-bottom: 3px;
+      color: var(--txt3)
+    }
+
+    .cal-event {
+      background: rgba(255, 107, 53, .15);
+      color: var(--accent);
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-size: 9px;
+      font-weight: 600;
+      margin-bottom: 2px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis
+    }
   </style>
 </head>
 
@@ -1544,200 +2232,98 @@
     <div class="sync-card" id="syncCard"></div>
   </div>
 
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <div class="logo">
-      <div class="logo-icon">🎓</div>
-      <div>
-        <div class="logo-name">STAGE VALENCIENNES</div>
-        <div class="logo-sub" id="nb-etabs-top">14 établissements</div>
+  <!-- FIREBASE INFO MODAL -->
+  <div class="overlay" id="fbInfoModal">
+    <div class="modal fb-modal">
+      <button class="modal-close" onclick="closeModal('fbInfoModal')">✕</button>
+      <div class="fb-modal-logo">🔥</div>
+      <div
+        style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;text-align:center;margin-bottom:8px">
+        Firebase Realtime DB</div>
+      <div class="fb-modal-status" id="fb-modal-status-row">
+        <div class="fb-modal-status-dot" id="fb-modal-dot"></div>
+        <div class="fb-modal-status-txt" id="fb-modal-status-txt">Connecté</div>
       </div>
-    </div>
-    <div class="topbar-right">
-      <div class="fb-badge" id="fbBadge">
-        <div class="fb-dot"></div><span id="fbTxt">Firebase</span>
+      <div class="fb-modal-info">
+        <div class="fb-modal-info-row"><span class="fb-modal-info-label">Projet</span><span
+            class="fb-modal-info-val">recherche-de-stage-valencienne</span></div>
+        <div class="fb-modal-info-row"><span class="fb-modal-info-label">Région</span><span
+            class="fb-modal-info-val">europe-west1</span></div>
+        <div class="fb-modal-info-row"><span class="fb-modal-info-label">Établissements</span><span
+            class="fb-modal-info-val" id="fb-modal-etabs">—</span></div>
+        <div class="fb-modal-info-row"><span class="fb-modal-info-label">Dernière sync</span><span
+            class="fb-modal-info-val" id="fb-modal-last">—</span></div>
       </div>
-      <button class="btn btn-accent btn-sm" onclick="triggerSync()" id="syncBtn"><span id="syncIco">🔄</span>
-        Sync</button>
-      <button class="btn btn-ghost btn-sm" onclick="openModal('addModal')" style="display:none"
-        id="addBtnDesktop">➕</button>
+      <div class="fb-contact">
+        <h4>⚠️ En cas de problème Firebase</h4>
+        <div style="font-size:13px;color:var(--txt3);margin-bottom:12px;line-height:1.6">Si vous rencontrez un problème
+          de connexion ou de synchronisation, contactez le développeur :</div>
+        <div class="fb-contact-row">📞 <a href="tel:0667463553">06 67 46 35 53</a></div>
+        <div class="fb-contact-row">✉️ <a href="mailto:peronnenolan5o@gmail.com">peronnenolan5o@gmail.com</a></div>
+        <div style="margin-top:10px;font-size:11px;color:var(--txt2)">Développé par <strong
+            style="color:var(--accent)">Nolan Peronne</strong></div>
+      </div>
     </div>
   </div>
 
-  <!-- PAGES -->
-
-  <!-- ÉTABLISSEMENTS -->
-  <div class="page active" id="page-etab">
-    <div class="hero">
-      <h1>Restaurants<br>& Établissements</h1>
-      <p>Suivi de recherche de stage à Valenciennes et Denain. Statuts, notes et rappels en temps réel.</p>
+  <!-- ADMIN LOGIN MODAL -->
+  <div class="overlay" id="adminLoginModal">
+    <div class="modal admin-login-modal">
+      <button class="modal-close" onclick="closeModal('adminLoginModal')">✕</button>
+      <div class="admin-login-logo">⚙️</div>
+      <div class="admin-login-title">Panel Admin</div>
+      <div class="admin-login-sub">Entrez le mot de passe pour accéder au panel</div>
+      <input class="admin-login-input" type="password" id="adminPwdInput" placeholder="••••••••"
+        onkeydown="if(event.key==='Enter')checkAdminPwd()">
+      <div class="admin-login-err" id="adminPwdErr"></div>
+      <button class="admin-login-btn" onclick="checkAdminPwd()">🔓 ACCÉDER AU PANEL</button>
+      <div style="margin-top:14px;font-size:11px;color:var(--txt2);text-align:center;font-family:'DM Mono',monospace">
+        Mot de passe : <span id="pwdHint" style="color:var(--accent)">celine2024</span></div>
     </div>
-    <div class="stats" id="stats-strip">
-      <div class="stat">
-        <div class="stat-n" id="s-total" style="color:var(--txt)">0</div>
-        <div class="stat-l">Total</div>
-      </div>
-      <div class="stat">
-        <div class="stat-n" id="s-todo" style="color:var(--gold)">0</div>
-        <div class="stat-l">À contacter</div>
-      </div>
-      <div class="stat">
-        <div class="stat-n" id="s-done" style="color:var(--green)">0</div>
-        <div class="stat-l">Contacté</div>
-      </div>
-      <div class="stat">
-        <div class="stat-n" id="s-waiting" style="color:var(--blue)">0</div>
-        <div class="stat-l">En attente</div>
-      </div>
-      <div class="stat">
-        <div class="stat-n" id="s-rdv" style="color:var(--orange)">0</div>
-        <div class="stat-l">RDV pris</div>
-      </div>
-      <div class="stat">
-        <div class="stat-n" id="s-stage" style="color:var(--violet)">0</div>
-        <div class="stat-l">En stage</div>
-      </div>
-      <div class="stat">
-        <div class="stat-n" id="s-refused" style="color:var(--red)">0</div>
-        <div class="stat-l">Refusé</div>
-      </div>
-      <div class="stat"><button class="btn btn-accent" onclick="openModal('addModal')"
-          style="width:100%;justify-content:center">➕ Ajouter</button></div>
-    </div>
-    <div class="filters" id="filter-tabs">
-      <button class="ftab active" onclick="setFilter('all',this)">Tous</button>
-      <button class="ftab" onclick="setFilter('todo',this)">📋 À contacter</button>
-      <button class="ftab" onclick="setFilter('done',this)">✅ Contacté</button>
-      <button class="ftab" onclick="setFilter('waiting',this)">⏳ En attente</button>
-      <button class="ftab" onclick="setFilter('rdv',this)">📅 RDV pris</button>
-      <button class="ftab" onclick="setFilter('stage',this)">🏆 Stage</button>
-      <button class="ftab" onclick="setFilter('refused',this)">❌ Refusé</button>
-    </div>
-    <div class="search-wrap"><input type="text" id="searchInput" placeholder="Rechercher un établissement..."
-        oninput="renderCards()"></div>
-    <div id="cards-container"></div>
   </div>
 
-  <!-- KANBAN -->
-  <div class="page" id="page-kanban">
-    <div class="sec-title">Kanban</div>
-    <div class="sec-sub">Vue d'ensemble par statut</div>
-    <div class="kanban" id="kanban-board"></div>
-  </div>
-
-  <!-- CHECKLIST -->
-  <div class="page" id="page-checklist">
-    <div class="sec-title">Checklist</div>
-    <div class="sec-sub">Vos étapes de recherche de stage</div>
-    <div class="checklist-wrap">
-      <div class="prog-row">
-        <div class="prog-pct" id="chk-pct">0%</div>
-        <div class="prog-outer">
-          <div class="prog-inner" id="chk-bar" style="width:0%"></div>
+  <!-- LETTER GENERATOR MODAL -->
+  <div class="overlay" id="letterModal">
+    <div class="modal" style="max-width:600px">
+      <button class="modal-close" onclick="closeModal('letterModal')">✕</button>
+      <div class="modal-title">✉️ Générateur de Lettre</div>
+      <div class="fg"><label>Votre prénom</label><input class="fi" id="l-prenom" placeholder="Ex: Céline" value="">
+      </div>
+      <div class="fg"><label>Établissement ciblé</label><select class="fs" id="l-etab">
+          <option value="">— Choisir —</option>
+        </select></div>
+      <div class="fg"><label>Type de lettre</label>
+        <div class="letter-select-row">
+          <button class="letter-pick active" onclick="setLetterType('candidature',this)">📋 Candidature</button>
+          <button class="letter-pick" onclick="setLetterType('relance',this)">🔄 Relance</button>
+          <button class="letter-pick" onclick="setLetterType('remerciement',this)">🙏 Remerciement</button>
         </div>
-        <div class="prog-info" id="chk-cnt">0/0</div>
       </div>
-      <div id="chk-list" style="margin-top:16px"></div>
-      <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
-        <button class="btn btn-accent" onclick="openModal('addStepModal')">➕ Ajouter étape</button>
-        <button class="btn btn-ghost" onclick="resetChecklist()">🔄 Réinitialiser</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- OBJECTIFS -->
-  <div class="page" id="page-objectifs">
-    <div class="sec-title">Objectifs</div>
-    <div class="sec-sub">Suivez votre progression</div>
-    <div id="obj-list"></div>
-    <button class="btn btn-accent" onclick="openModal('addObjModal')">➕ Nouvel objectif</button>
-  </div>
-
-  <!-- RAPPELS -->
-  <div class="page" id="page-rappels">
-    <div class="sec-title">Rappels</div>
-    <div class="sec-sub">Vos relances planifiées</div>
-    <div id="rp-list"></div>
-    <button class="btn btn-accent" onclick="openRappelModal()">➕ Nouveau rappel</button>
-  </div>
-
-  <!-- ── BOTTOM NAV (MOBILE & DESKTOP) ── -->
-  <nav class="mob-nav">
-    <button class="mob-nav-item active" onclick="showTab('etab',this)">
-      <span class="nav-ico">🏢</span>
-      <span>Établ.</span>
-    </button>
-    <button class="mob-nav-item" onclick="showTab('kanban',this)">
-      <span class="nav-ico">📊</span>
-      <span>Kanban</span>
-    </button>
-    <button class="mob-nav-item" onclick="showTab('checklist',this)">
-      <span class="nav-ico">✅</span>
-      <span>Checklist</span>
-    </button>
-    <button class="mob-nav-item" onclick="showTab('objectifs',this)">
-      <span class="nav-ico">🎯</span>
-      <span>Objectifs</span>
-    </button>
-    <button class="mob-nav-item" onclick="showTab('rappels',this)">
-      <span class="nav-ico">⏰</span>
-      <span>Rappels</span>
-    </button>
-    <button class="mob-nav-item" onclick="window.location.href='admin.html'">
-      <span class="nav-ico">⚙️</span>
-      <span>Admin</span>
-    </button>
-  </nav>
-
-  <!-- ── MODALS ── -->
-  <!-- ADD/EDIT -->
-  <div class="overlay" id="addModal">
-    <div class="modal">
-      <button class="modal-close" onclick="closeModal('addModal')">✕</button>
-      <div class="modal-title" id="addModal-title">Ajouter un établissement</div>
-      <div class="frow">
-        <div class="fg"><label>Nom *</label><input class="fi" id="f-nom" placeholder="Nom du restaurant..."></div>
-        <div class="fg"><label>Type *</label><input class="fi" id="f-type" placeholder="Restaurant, Brasserie..."></div>
-      </div>
-      <div class="fg"><label>Adresse</label><input class="fi" id="f-adresse" placeholder="Adresse complète..."></div>
-      <div class="frow">
-        <div class="fg"><label>Téléphone</label><input class="fi" id="f-tel" placeholder="03 27 ..."></div>
-        <div class="fg"><label>Note Google (/5)</label><input class="fi" type="number" id="f-note" min="1" max="5"
-            step="0.1" placeholder="4.8"></div>
-      </div>
-      <div class="frow">
-        <div class="fg"><label>Priorité</label><select class="fs" id="f-priorite">
-            <option value="haute">⚡ Haute</option>
-            <option value="moyenne" selected>Moyenne</option>
-            <option value="basse">Basse</option>
-          </select></div>
-        <div class="fg"><label>Statut</label><select class="fs" id="f-statut">
-            <option value="todo">📋 À contacter</option>
-            <option value="done">✅ Contacté</option>
-            <option value="waiting">⏳ En attente</option>
-            <option value="rdv">📅 RDV pris</option>
-            <option value="stage">🏆 En stage</option>
-            <option value="refused">❌ Refusé</option>
-          </select></div>
-      </div>
-      <div class="fg"><label>Lien Google Maps</label><input class="fi" id="f-maps"
-          placeholder="https://maps.google.com/?q=..."></div>
-      <div class="frow">
-        <div class="fg"><label>Site web</label><input class="fi" id="f-website" placeholder="https://..."></div>
-        <div class="fg"><label>Réseaux sociaux</label><input class="fi" id="f-social"
-            placeholder="https://instagram.com/..."></div>
-      </div>
-      <div class="fg"><label>Horaires</label>
-        <div class="hor-ed" id="f-horaires"></div>
-      </div>
-      <div class="modal-acts">
-        <button class="btn btn-accent" onclick="saveEtab()">💾 Enregistrer</button>
-        <button class="btn btn-ghost" onclick="closeModal('addModal')">Annuler</button>
+      <button class="btn btn-accent" onclick="generateLetter()">✨ Générer la lettre</button>
+      <div class="letter-preview" id="letter-preview" style="display:none"></div>
+      <div style="display:flex;gap:8px;margin-top:10px" id="letter-actions" style="display:none">
+        <button class="btn btn-ghost btn-sm" onclick="copyLetter()">📋 Copier</button>
       </div>
     </div>
   </div>
 
-  <!-- RAPPEL -->
+  <!-- CALENDAR MODAL -->
+  <div class="overlay" id="calendarModal">
+    <div class="modal" style="max-width:680px">
+      <button class="modal-close" onclick="closeModal('calendarModal')">✕</button>
+      <div class="modal-title">📅 Calendrier des Rappels</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <button class="btn btn-ghost btn-sm" onclick="changeMonth(-1)">◀</button>
+        <div id="cal-month-label" style="font-family:'Bebas Neue',sans-serif;font-size:20px;flex:1;text-align:center">
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="changeMonth(1)">▶</button>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <div id="cal-events-day" style="margin-top:16px"></div>
+    </div>
+  </div>
+
+  <!-- RAPPEL MODAL -->
   <div class="overlay" id="rappelModal">
     <div class="modal" style="max-width:380px">
       <button class="modal-close" onclick="closeModal('rappelModal')">✕</button>
@@ -1780,6 +2366,199 @@
     </div>
   </div>
 
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon">🎓</div>
+      <div>
+        <div class="logo-name">STAGE VAL.</div>
+        <div class="logo-sub" id="nb-etabs-top">14 établissements</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="notif-btn" onclick="showTab('rappels',document.querySelectorAll('.mob-nav-item')[4])"
+        title="Rappels">
+        🔔<span class="notif-count" id="notif-count" style="display:none">0</span>
+      </button>
+      <div class="fb-badge" id="fbBadge" onclick="openFbModal()">
+        <div class="fb-dot"></div><span id="fbTxt">Firebase</span>
+      </div>
+      <button class="btn btn-accent btn-sm" onclick="triggerSync()" id="syncBtn">🔄 Sync</button>
+    </div>
+  </div>
+
+  <!-- PAGES -->
+
+  <!-- ÉTABLISSEMENTS -->
+  <div class="page active" id="page-etab">
+    <div class="hero">
+      <h1>Restaurants<br>& Établissements</h1>
+      <p>Suivi de recherche de stage à Valenciennes et Denain. Statuts, notes et rappels en temps réel.</p>
+      <div class="hero-prog">
+        <div class="hero-prog-bar">
+          <div class="hero-prog-fill" id="hero-prog-fill" style="width:0%"></div>
+        </div>
+        <div class="hero-prog-txt" id="hero-prog-txt">0%</div>
+      </div>
+    </div>
+
+    <div class="meteo-band" id="meteo-band">
+      📅 <span id="date-now"></span> &nbsp;|&nbsp; 🕐 <strong id="time-now"></strong> &nbsp;|&nbsp; 📍 Valenciennes,
+      Nord
+    </div>
+
+    <div class="quick-actions">
+      <button class="qa-btn" onclick="exportCSV()">📊 Export CSV</button>
+      <button class="qa-btn" onclick="openLetterGenerator()">✉️ Lettre type</button>
+      <button class="qa-btn" onclick="openCalendarModal()">📅 Calendrier</button>
+      <button class="qa-btn" onclick="copyContactList()">📋 Contacts</button>
+      <button class="qa-btn" onclick="window.print()">🖨️ Imprimer</button>
+    </div>
+
+    <div class="stats" id="stats-strip">
+      <div class="stat" onclick="setFilterStat('all')">
+        <div class="stat-n" id="s-total" style="color:var(--txt)">0</div>
+        <div class="stat-l">Total</div>
+      </div>
+      <div class="stat" onclick="setFilterStat('todo')">
+        <div class="stat-n" id="s-todo" style="color:var(--gold)">0</div>
+        <div class="stat-l">À contacter</div>
+      </div>
+      <div class="stat" onclick="setFilterStat('done')">
+        <div class="stat-n" id="s-done" style="color:var(--green)">0</div>
+        <div class="stat-l">Contacté</div>
+      </div>
+      <div class="stat" onclick="setFilterStat('waiting')">
+        <div class="stat-n" id="s-waiting" style="color:var(--blue)">0</div>
+        <div class="stat-l">En attente</div>
+      </div>
+      <div class="stat" onclick="setFilterStat('rdv')">
+        <div class="stat-n" id="s-rdv" style="color:var(--orange)">0</div>
+        <div class="stat-l">RDV pris</div>
+      </div>
+      <div class="stat" onclick="setFilterStat('stage')">
+        <div class="stat-n" id="s-stage" style="color:var(--violet)">0</div>
+        <div class="stat-l">En stage</div>
+      </div>
+      <div class="stat" onclick="setFilterStat('refused')">
+        <div class="stat-n" id="s-refused" style="color:var(--red)">0</div>
+        <div class="stat-l">Refusé</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n" id="s-pct" style="color:var(--accent)">0%</div>
+        <div class="stat-l">Progression</div>
+      </div>
+    </div>
+
+    <div class="sort-filter-row">
+      <select class="sort-sel" id="sortSel" onchange="renderCards()">
+        <option value="default">Ordre par défaut</option>
+        <option value="nom">Nom A→Z</option>
+        <option value="note">Note ↓</option>
+        <option value="priorite">Priorité haute</option>
+        <option value="fav">❤️ Favoris d'abord</option>
+      </select>
+      <button class="fav-only-btn" id="favOnlyBtn" onclick="toggleFavOnly()">❤️ Favoris</button>
+    </div>
+
+    <div class="filters" id="filter-tabs">
+      <button class="ftab active" onclick="setFilter('all',this)">Tous</button>
+      <button class="ftab" onclick="setFilter('todo',this)">📋 À contacter</button>
+      <button class="ftab" onclick="setFilter('done',this)">✅ Contacté</button>
+      <button class="ftab" onclick="setFilter('waiting',this)">⏳ En attente</button>
+      <button class="ftab" onclick="setFilter('rdv',this)">📅 RDV pris</button>
+      <button class="ftab" onclick="setFilter('stage',this)">🏆 Stage</button>
+      <button class="ftab" onclick="setFilter('refused',this)">❌ Refusé</button>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="Rechercher un établissement, type, adresse..."
+        oninput="renderCards()">
+    </div>
+    <div id="cards-container"></div>
+  </div>
+
+  <!-- KANBAN -->
+  <div class="page" id="page-kanban">
+    <div class="sec-title">Kanban</div>
+    <div class="sec-sub">Vue d'ensemble par statut</div>
+    <div class="kanban" id="kanban-board"></div>
+  </div>
+
+  <!-- MAP -->
+  <div class="page" id="page-map">
+    <div class="sec-title">Carte des Lieux</div>
+    <div class="sec-sub">Tous les établissements à visiter</div>
+    <div
+      style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px">
+      <div style="font-size:12px;color:var(--txt2);margin-bottom:12px">Cliquez sur un établissement pour ouvrir Google
+        Maps</div>
+      <div class="map-grid" id="map-list"></div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="page" id="page-checklist">
+    <div class="sec-title">Checklist</div>
+    <div class="sec-sub">Vos étapes de recherche de stage</div>
+    <div class="checklist-wrap">
+      <div class="prog-row">
+        <div class="prog-pct" id="chk-pct">0%</div>
+        <div class="prog-outer">
+          <div class="prog-inner" id="chk-bar" style="width:0%"></div>
+        </div>
+        <div class="prog-info" id="chk-cnt">0/0</div>
+      </div>
+      <div id="chk-list" style="margin-top:16px"></div>
+      <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+        <button class="btn btn-accent" onclick="openModal('addStepModal')">➕ Ajouter étape</button>
+        <button class="btn btn-ghost" onclick="resetChecklist()">🔄 Réinitialiser</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- OBJECTIFS -->
+  <div class="page" id="page-objectifs">
+    <div class="sec-title">Objectifs</div>
+    <div class="sec-sub">Suivez votre progression</div>
+    <div id="obj-list"></div>
+    <button class="btn btn-accent" onclick="openModal('addObjModal')">➕ Nouvel objectif</button>
+  </div>
+
+  <!-- RAPPELS -->
+  <div class="page" id="page-rappels">
+    <div class="sec-title">Rappels</div>
+    <div class="sec-sub">Vos relances planifiées</div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+      <button class="btn btn-accent" onclick="openRappelModal()">➕ Nouveau rappel</button>
+      <button class="btn btn-ghost" onclick="openCalendarModal()">📅 Vue calendrier</button>
+    </div>
+    <div id="rp-list"></div>
+  </div>
+
+  <!-- STATS -->
+  <div class="page" id="page-stats">
+    <div class="sec-title">Statistiques</div>
+    <div class="sec-sub">Analyse de votre recherche de stage</div>
+    <div id="stats-detail"></div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="mob-nav">
+    <button class="mob-nav-item active" onclick="showTab('etab',this)"><span
+        class="nav-ico">🏢</span><span>Établ.</span></button>
+    <button class="mob-nav-item" onclick="showTab('kanban',this)"><span
+        class="nav-ico">📊</span><span>Kanban</span></button>
+    <button class="mob-nav-item" onclick="showTab('map',this)"><span
+        class="nav-ico">🗺️</span><span>Carte</span></button>
+    <button class="mob-nav-item" onclick="showTab('checklist',this)"><span
+        class="nav-ico">✅</span><span>Checklist</span></button>
+    <button class="mob-nav-item" onclick="showTab('rappels',this)"><span
+        class="nav-ico">⏰</span><span>Rappels</span></button>
+    <button class="mob-nav-item" onclick="showTab('stats',this)"><span
+        class="nav-ico">📈</span><span>Stats</span></button>
+    <button class="mob-nav-item" onclick="openAdminLogin()"><span class="nav-ico">⚙️</span><span>Admin</span></button>
+  </nav>
+
   <div id="toast" class="toast"></div>
 
   <script type="module">
@@ -1797,7 +2576,6 @@
     };
     const app = initializeApp(fbConfig);
     const db = getDatabase(app);
-
     const DAYS = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 
     window.ETABLISSEMENTS = [
@@ -1817,7 +2595,6 @@
       { id: 14, nom: "Le Bistrot D'en Face", adresse: "5 Av. d'Amsterdam, 59300 Valenciennes", tel: "06 83 06 93 08", type: "Restaurant / Brasserie", note: 4.4, priorite: "moyenne", maps: "https://maps.google.com/?q=Le+Bistrot+Den+Face+Valenciennes", website: "", social: "", horaires: [{ j: "Lun", h: "12h–14h / 19h–22h" }, { j: "Mar", h: "12h–14h / 19h–22h" }, { j: "Mer", h: "12h–14h / 19h–22h" }, { j: "Jeu", h: "12h–14h / 19h–22h" }, { j: "Ven", h: "12h–14h30 / 19h–22h30" }, { j: "Sam", h: "12h–14h30 / 19h–22h30" }, { j: "Dim", h: "12h–14h30 / 19h–22h" }] },
     ];
 
-    // Load extra saved
     const savedExtra = ls('stage_etabs_extra', []);
     savedExtra.forEach(e => { if (!window.ETABLISSEMENTS.find(x => x.id === e.id)) window.ETABLISSEMENTS.push(e); });
 
@@ -1837,54 +2614,171 @@
     window.statuses = ls('stage_statuses_v5', {});
     const cardNotes = ls('stage_card_notes_v4', {});
     const checks = ls('stage_checks_v5', {});
-    window.STEPS = ls('stage_steps_v4', ["Préparer mon CV (photo, formation, expériences)", "Rédiger ma lettre de motivation personnalisée", "Imprimer 15 exemplaires CV + lettre en couleur", "Définir mes dates de stage souhaitées", "Visiter Les Canonniers (14h30–17h, hors service)", "Visiter Ô Saveurs en personne", "Visiter Le Beaulieu en personne", "Visiter Les Trois Gourmets en personne", "Visiter L'Instant Gourmand en personne", "Contacter Café Brasserie L'Univers (Denain)", "Contacter Le 8 Restaurant (Denain)", "Contacter La Bande à Nana", "Contacter O Divine' Bar", "Contacter La Galerie / Royal Hainaut", "Contacter Le Bistrot D'en Face", "Contacter Chez Nous", "Faire les relances téléphoniques à J+5", "Préparer mes questions pour l'entretien", "Confirmer convention de stage avec mon école", "Confirmer dates et poste définitif"]);
+    window.STEPS = ls('stage_steps_v4', ["Préparer mon CV", "Rédiger ma lettre de motivation", "Imprimer 15 exemplaires CV + lettre", "Définir mes dates de stage", "Visiter Les Canonniers", "Visiter Ô Saveurs en personne", "Visiter Le Beaulieu en personne", "Visiter Les Trois Gourmets", "Visiter L'Instant Gourmand", "Contacter Café Brasserie L'Univers (Denain)", "Contacter Le 8 Restaurant (Denain)", "Contacter La Bande à Nana", "Contacter O Divine' Bar", "Contacter La Galerie / Royal Hainaut", "Contacter Le Bistrot D'en Face", "Contacter Chez Nous", "Faire les relances téléphoniques à J+5", "Préparer mes questions pour l'entretien", "Confirmer convention de stage avec mon école", "Confirmer dates et poste définitif"]);
     window.LOGS = ls('stage_logs_v5', []);
     window.RAPPELS = ls('stage_rappels_v4', []);
     window.OBJECTIFS = ls('stage_objectifs_v4', [{ id: 'obj1', titre: 'Contacter 10 restaurants', cible: 10, actuel: 0, couleur: 'var(--accent)' }, { id: 'obj2', titre: 'Obtenir 3 réponses positives', cible: 3, actuel: 0, couleur: 'var(--green)' }, { id: 'obj3', titre: 'Décrocher un stage', cible: 1, actuel: 0, couleur: 'var(--violet)' }]);
-
+    const FAVORITES = ls('stage_favorites_v1', {});
+    const VISITS = ls('stage_visits_v1', {});
+    let ADMIN_PASSWORD = ls('stage_admin_pwd_v5', 'celine2024');
     window.STEPS.forEach((_, i) => { if (checks[i] === undefined) checks[i] = false; });
 
-    let curFilter = 'all', curLogFilter = 'all', editingId = null;
+    let curFilter = 'all', favOnly = false, letterType = 'candidature';
     const noteTimers = {};
+    let lastSyncTime = null;
+    let calMonth = new Date().getMonth(), calYear = new Date().getFullYear();
 
     function stars(n) { if (!n) return ''; const f = Math.round(n); return '★'.repeat(f) + '☆'.repeat(5 - f) }
     function uid() { return 'id' + Date.now() + Math.random().toString(36).slice(2, 7) }
-    function now() { return new Date().toLocaleString('fr-FR') }
+    function nowStr() { return new Date().toLocaleString('fr-FR') }
+
+    // CLOCK
+    function updateClock() {
+      const now = new Date();
+      const d = document.getElementById('date-now'), t = document.getElementById('time-now');
+      if (d) d.textContent = now.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+      if (t) t.textContent = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+    setInterval(updateClock, 1000); updateClock();
+
+    // OPEN NOW DETECTION
+    function isOpenNow(horaires) {
+      if (!horaires || !horaires.length) return 'unknown';
+      const now = new Date();
+      const dayNames = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+      const today = dayNames[now.getDay()];
+      const h = horaires.find(x => x.j === today);
+      if (!h || !h.h || h.h === 'Fermé' || h.h === '-') return 'closed';
+      const slots = h.h.split('/');
+      const curMin = now.getHours() * 60 + now.getMinutes();
+      for (const slot of slots) {
+        const parts = slot.trim().split('–');
+        if (parts.length < 2) continue;
+        const parseT = s => { const c = s.trim().replace('h', ':').split(':'); return parseInt(c[0]) * 60 + (parseInt(c[1]) || 0); };
+        const st = parseT(parts[0]), end = parseT(parts[1]);
+        if (curMin >= st && curMin <= end) return 'open';
+      }
+      return 'closed';
+    }
+
+    // ADMIN LOGIN
+    window.openAdminLogin = () => {
+      const pwd = ls('stage_admin_pwd_v5', 'celine2024');
+      document.getElementById('pwdHint').textContent = pwd;
+      document.getElementById('adminPwdInput').value = '';
+      document.getElementById('adminPwdErr').textContent = '';
+      openModal('adminLoginModal');
+    };
+    window.checkAdminPwd = () => {
+      const pwd = ls('stage_admin_pwd_v5', 'celine2024');
+      const input = document.getElementById('adminPwdInput').value;
+      const err = document.getElementById('adminPwdErr');
+      if (input === pwd) { closeModal('adminLoginModal'); window.location.href = 'admin.html'; }
+      else {
+        err.textContent = '❌ Mot de passe incorrect';
+        const inp = document.getElementById('adminPwdInput');
+        inp.classList.add('shake'); inp.value = '';
+        setTimeout(() => inp.classList.remove('shake'), 400);
+      }
+    };
+
+    // EXPORT CSV
+    window.exportCSV = () => {
+      const rows = [['Nom', 'Type', 'Adresse', 'Téléphone', 'Note', 'Priorité', 'Statut', 'Favori', 'Visites']];
+      window.ETABLISSEMENTS.forEach(e => {
+        const st = ST[window.statuses[e.id] || 'todo']?.label || '';
+        rows.push([e.nom, e.type, e.adresse, e.tel || '', e.note || '', e.priorite || '', st, FAVORITES[e.id] ? 'Oui' : 'Non', VISITS[e.id] || 0]);
+      });
+      const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'stage-etablissements.csv'; a.click();
+      toast('📊 Export CSV réussi', 'success');
+    };
+
+    window.copyContactList = () => {
+      const lines = window.ETABLISSEMENTS.filter(e => e.tel).map(e => `${e.nom} : ${e.tel}`);
+      navigator.clipboard.writeText(lines.join('\n')).then(() => toast('📋 Contacts copiés !', 'success')).catch(() => toast('❌ Erreur copie', 'error'));
+    };
+
+    // FAVORITES
+    window.toggleFav = (id, ev) => {
+      if (ev) ev.stopPropagation();
+      FAVORITES[id] = !FAVORITES[id];
+      lsSet('stage_favorites_v1', FAVORITES);
+      renderCards();
+      toast(FAVORITES[id] ? '❤️ Ajouté aux favoris' : '💔 Retiré des favoris');
+    };
+    window.toggleFavOnly = () => {
+      favOnly = !favOnly;
+      document.getElementById('favOnlyBtn').classList.toggle('active', favOnly);
+      renderCards();
+    };
+
+    // VISITS
+    window.addVisit = (id, ev) => {
+      if (ev) ev.stopPropagation();
+      VISITS[id] = (VISITS[id] || 0) + 1;
+      lsSet('stage_visits_v1', VISITS);
+      const el = document.getElementById('visit-cnt-' + id);
+      if (el) el.textContent = VISITS[id];
+      addLog('note', `👣 Visite enregistrée : "${window.ETABLISSEMENTS.find(e => e.id === id)?.nom}"`);
+      toast('👣 Visite enregistrée !', 'success');
+    };
+
+    // FILTER
+    window.setFilterStat = (f) => {
+      curFilter = f;
+      document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+      const map = { all: 0, todo: 1, done: 2, waiting: 3, rdv: 4, stage: 5, refused: 6 };
+      const tabs = document.querySelectorAll('.ftab');
+      if (tabs[map[f]]) tabs[map[f]].classList.add('active');
+      renderCards();
+      showTab('etab', document.querySelector('.mob-nav-item'));
+    };
 
     // FB BADGE
     function setFb(state, txt) {
       const b = document.getElementById('fbBadge');
-      if (b) { b.className = 'fb-badge ' + state; }
+      if (b) b.className = 'fb-badge ' + state;
       const el = document.getElementById('fbTxt');
       if (el) el.textContent = txt;
     }
 
-    // SYNC OVERLAY
+    window.openFbModal = () => {
+      const el = document.getElementById('fb-modal-etabs'); if (el) el.textContent = window.ETABLISSEMENTS.length;
+      const lt = document.getElementById('fb-modal-last'); if (lt) lt.textContent = lastSyncTime || 'Jamais';
+      const badge = document.getElementById('fbBadge'), dot = document.getElementById('fb-modal-dot'), stxt = document.getElementById('fb-modal-status-txt');
+      if (badge && dot && stxt) {
+        if (badge.classList.contains('ok')) { dot.style.background = 'var(--green)'; dot.style.boxShadow = '0 0 8px var(--green)'; stxt.style.color = 'var(--green)'; stxt.textContent = 'Connecté ✓'; }
+        else if (badge.classList.contains('err')) { dot.style.background = 'var(--red)'; dot.style.boxShadow = '0 0 8px var(--red)'; stxt.style.color = 'var(--red)'; stxt.textContent = 'Hors ligne ✗'; }
+        else { dot.style.background = 'var(--orange)'; stxt.style.color = 'var(--orange)'; stxt.textContent = 'Synchronisation...'; }
+      }
+      openModal('fbInfoModal');
+    };
+
+    // SYNC
     window.showSyncOv = (state, data = {}) => {
       const ov = document.getElementById('syncOv'), card = document.getElementById('syncCard');
-      if (state === 'loading') {
-        card.innerHTML = `<div class="spin"></div><div class="sync-title" style="color:var(--accent)">Synchronisation…</div><div class="sync-sub">Connexion à Firebase en cours,<br>veuillez patienter.</div>`;
-      } else if (state === 'success') {
+      if (state === 'loading') { card.innerHTML = `<div class="spin"></div><div class="sync-title" style="color:var(--accent)">Synchronisation…</div><div class="sync-sub">Connexion à Firebase en cours.</div>`; }
+      else if (state === 'success') {
         const n = data.count || window.ETABLISSEMENTS.length, notes = data.notes || 0, t = new Date().toLocaleTimeString('fr-FR');
-        card.innerHTML = `<div class="sync-ico ok">✅</div><div class="sync-title" style="color:var(--green)">Synchronisé !</div><div class="sync-sub">Toutes les données sont à jour sur Firebase.</div><div class="sync-stats"><div class="sstat"><div class="sstat-n">${n}</div>Étab.</div><div class="sstat"><div class="sstat-n">${notes}</div>Notes</div><div class="sstat"><div class="sstat-n" style="font-size:13px">${t}</div>Heure</div></div><button class="sync-close" onclick="closeSyncOv()">Fermer</button>`;
+        lastSyncTime = t; const lastEl = document.getElementById('fb-modal-last'); if (lastEl) lastEl.textContent = t;
+        card.innerHTML = `<div class="sync-ico-box ok">✅</div><div class="sync-title" style="color:var(--green)">Synchronisé !</div><div class="sync-sub">Toutes les données sont à jour sur Firebase.</div><div class="sync-stats"><div class="sstat"><div class="sstat-n">${n}</div>Étab.</div><div class="sstat"><div class="sstat-n">${notes}</div>Notes</div><div class="sstat"><div class="sstat-n" style="font-size:13px">${t}</div>Heure</div></div><button class="sync-close" onclick="closeSyncOv()">Fermer</button>`;
       } else if (state === 'error') {
-        const msg = data.msg || 'Erreur de connexion';
-        card.innerHTML = `<div class="sync-ico err">⚠️</div><div class="sync-title" style="color:var(--red)">Erreur</div><div class="sync-sub">${msg}</div><div class="err-contact"><strong>Contactez Nolan :</strong><br>📞 <a href="tel:0667463553">06 67 46 35 53</a><br>✉️ <a href="mailto:peronnenolan5o@gmail.com">peronnenolan5o@gmail.com</a></div><div style="display:flex;gap:8px;justify-content:center;margin-top:16px"><button class="sync-close" onclick="triggerSync()">🔄 Réessayer</button><button class="sync-close" onclick="closeSyncOv()">Fermer</button></div>`;
+        card.innerHTML = `<div class="sync-ico-box err">⚠️</div><div class="sync-title" style="color:var(--red)">Erreur</div><div class="sync-sub">${data.msg || 'Erreur de connexion'}</div><div class="err-contact"><strong>⚠️ Contacter Nolan :</strong><br>📞 <a href="tel:0667463553">06 67 46 35 53</a><br>✉️ <a href="mailto:peronnenolan5o@gmail.com">peronnenolan5o@gmail.com</a></div><div style="display:flex;gap:8px;justify-content:center;margin-top:16px"><button class="sync-close" onclick="triggerSync()">🔄 Réessayer</button><button class="sync-close" onclick="closeSyncOv()">Fermer</button></div>`;
       }
       ov.classList.add('open');
     };
     window.closeSyncOv = () => document.getElementById('syncOv').classList.remove('open');
 
     window.triggerSync = async () => {
-      setFb('sync', 'Sync...');
-      window.showSyncOv('loading');
+      setFb('sync', 'Sync...'); window.showSyncOv('loading');
       try {
         await Promise.all(window.ETABLISSEMENTS.map(e => update(ref(db, 'stages/' + e.id), { nom: e.nom, adresse: e.adresse, tel: e.tel, type: e.type, statut: ST[window.statuses[e.id] || 'todo']?.label, notes: cardNotes[e.id] || '' })));
         setFb('ok', 'Synchronisé');
         setTimeout(() => window.showSyncOv('success', { count: window.ETABLISSEMENTS.length, notes: Object.keys(cardNotes).filter(k => cardNotes[k]).length }), 600);
       } catch (err) {
-        setFb('err', 'Erreur');
-        window.showSyncOv('error', { msg: 'Impossible de joindre Firebase.<br><small>(' + (err.message || 'Erreur réseau') + ')</small>' });
+        setFb('err', 'Erreur'); window.showSyncOv('error', { msg: 'Impossible de joindre Firebase.<br><small>(' + (err.message || 'Erreur réseau') + ')</small>' });
       }
     };
 
@@ -1901,8 +2795,7 @@
 
     // Real-time Firebase
     onValue(ref(db, 'stages/'), (snap) => {
-      const data = snap.val();
-      if (!data) return;
+      const data = snap.val(); if (!data) return;
       setFb('ok', 'Connecté');
       const lbl2k = { "À contacter": "todo", "Contacté": "done", "En attente": "waiting", "RDV pris": "rdv", "En stage": "stage", "Refusé": "refused" };
       let changed = false;
@@ -1911,8 +2804,7 @@
         if (!window.ETABLISSEMENTS.find(e => e.id === nid)) continue;
         if (item.statut && lbl2k[item.statut]) { if (window.statuses[nid] !== lbl2k[item.statut]) { window.statuses[nid] = lbl2k[item.statut]; changed = true; } }
         if (item.notes !== undefined) {
-          cardNotes[nid] = item.notes;
-          lsSet('stage_card_notes_v4', cardNotes);
+          cardNotes[nid] = item.notes; lsSet('stage_card_notes_v4', cardNotes);
           const ta = document.getElementById('note-ta-' + nid);
           if (ta && document.activeElement !== ta) ta.value = item.notes;
         }
@@ -1920,7 +2812,6 @@
       if (changed) { lsSet('stage_statuses_v5', window.statuses); renderCards(); }
     }, () => setFb('err', 'Hors ligne'));
 
-    // Push all to Firebase on load
     window.ETABLISSEMENTS.forEach(e => update(ref(db, 'stages/' + e.id), { nom: e.nom, adresse: e.adresse, tel: e.tel, type: e.type, statut: ST[window.statuses[e.id] || 'todo']?.label, notes: cardNotes[e.id] || '' }));
 
     // TOAST
@@ -1928,8 +2819,7 @@
       const t = document.getElementById('toast');
       t.textContent = msg;
       t.style.borderColor = type === 'success' ? 'var(--green)' : type === 'error' ? 'var(--red)' : 'var(--accent)';
-      t.classList.add('show');
-      clearTimeout(t._t);
+      t.classList.add('show'); clearTimeout(t._t);
       t._t = setTimeout(() => t.classList.remove('show'), 2800);
     };
 
@@ -1937,23 +2827,29 @@
     window.showTab = (tab, btn) => {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.mob-nav-item').forEach(b => b.classList.remove('active'));
-      const p = document.getElementById('page-' + tab);
-      if (p) p.classList.add('active');
+      const p = document.getElementById('page-' + tab); if (p) p.classList.add('active');
       if (btn) btn.classList.add('active');
       if (tab === 'kanban') renderKanban();
       if (tab === 'checklist') renderChecklist();
       if (tab === 'objectifs') renderObjectifs();
       if (tab === 'rappels') renderRappels();
-      if (tab === 'logs') renderLogs();
+      if (tab === 'stats') renderStats();
+      if (tab === 'map') renderMap();
     };
 
     // RENDER CARDS
     window.renderCards = () => {
       window.ETABLISSEMENTS.forEach(e => { if (!window.statuses[e.id]) window.statuses[e.id] = 'todo'; });
       const q = (document.getElementById('searchInput')?.value || '').toLowerCase();
+      const sort = document.getElementById('sortSel')?.value || 'default';
       let list = [...window.ETABLISSEMENTS];
       if (q) list = list.filter(e => e.nom.toLowerCase().includes(q) || e.adresse.toLowerCase().includes(q) || e.type.toLowerCase().includes(q));
-
+      if (favOnly) list = list.filter(e => FAVORITES[e.id]);
+      // SORT
+      if (sort === 'nom') list.sort((a, b) => a.nom.localeCompare(b.nom));
+      else if (sort === 'note') list.sort((a, b) => (b.note || 0) - (a.note || 0));
+      else if (sort === 'priorite') { const po = { haute: 0, moyenne: 1, basse: 2 }; list.sort((a, b) => (po[a.priorite] || 1) - (po[b.priorite] || 1)); }
+      else if (sort === 'fav') list.sort((a, b) => (FAVORITES[b.id] ? 1 : 0) - (FAVORITES[a.id] ? 1 : 0));
       const c = document.getElementById('cards-container');
       if (curFilter !== 'all') {
         const fil = list.filter(e => (window.statuses[e.id] || 'todo') === curFilter);
@@ -1987,35 +2883,55 @@
       const prioHtml = e.priorite === 'haute' ? `<div class="prio-high">⚡ Haute priorité</div>` : '';
       const rappel = window.RAPPELS.find(r => r.etabId == e.id && !r.fait);
       const rappelHtml = rappel ? `<div class="irow">⏰ <span style="color:var(--accent)">Rappel le ${rappel.date}</span></div>` : '';
+      const openStatus = isOpenNow(e.horaires);
+      const openHtml = openStatus === 'open' ? `<div class="open-now open"><div class="open-dot"></div>OUVERT MAINTENANT</div>` :
+        openStatus === 'closed' ? `<div class="open-now closed"><div class="open-dot"></div>FERMÉ</div>` :
+          `<div class="open-now unknown"><div class="open-dot"></div>HORAIRES NON RENSEIGNÉS</div>`;
+      const favIcon = FAVORITES[e.id] ? '❤️' : '🤍';
+      const visitCnt = VISITS[e.id] || 0;
       let hpanel = '';
       if (e.horaires && e.horaires.length) {
+        const now = new Date(), dayNames = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'], today = dayNames[now.getDay()];
         const days = e.horaires.map(h => {
-          const cl = h.h === 'Fermé' || h.h === '-' || !h.h;
-          return `<div class="hcol"><div class="hday">${h.j}</div><div class="hdot ${cl ? 'closed' : 'open'}"></div><div class="htime">${cl ? '–' : h.h.replace(/\//g, '<br>')}</div></div>`;
+          const cl = h.h === 'Fermé' || h.h === '-' || !h.h, isToday = h.j === today;
+          return `<div class="hcol"><div class="hday" style="${isToday ? 'color:var(--accent)' : ''}">${h.j}</div><div class="hdot ${cl ? 'closed' : isToday ? 'today-open' : 'open'}"></div><div class="htime">${cl ? '–' : h.h.replace(/\//g, '<br>')}</div></div>`;
         }).join('');
         hpanel = `<div class="hpanel"><div class="hlbl">Horaires</div><div class="hgrid">${days}</div></div>`;
       }
       const btns = ST_ORDER.map(s => { const dd = ST[s]; return `<button class="abt${st === s ? ' a-' + s : ''}" onclick="setStatus(${e.id},'${s}',event)">${dd.emoji} ${dd.label}</button>`; }).join('');
-      const extraLinks = (e.website ? `<div class="irow">🌐 <a href="${e.website}" target="_blank">Site web →</a></div>` : '') +
-        (e.social ? `<div class="irow">📱 <a href="${e.social}" target="_blank">Réseaux →</a></div>` : '');
-      return `<div class="card" id="card-${e.id}">
+      const extraLinks = (e.website ? `<div class="irow">🌐 <a href="${e.website}" target="_blank">Site web →</a></div>` : '') + (e.social ? `<div class="irow">📱 <a href="${e.social}" target="_blank">Réseaux →</a></div>` : '');
+      const qcBtns = e.tel ? `<div class="quick-contact">
+    <a class="qc-btn call" href="tel:${e.tel}">📞 Appeler</a>
+    <a class="qc-btn sms" href="sms:${e.tel}">💬 SMS</a>
+    <a class="qc-btn whatsapp" href="https://wa.me/${e.tel.replace(/\s/g, '')}" target="_blank">💚 WA</a>
+    ${e.maps ? `<a class="qc-btn maps" href="${e.maps}" target="_blank">🗺️ Maps</a>` : ''}
+  </div>`: '';
+      return `<div class="card${FAVORITES[e.id] ? ' fav-card' : ''}" id="card-${e.id}">
     <div class="card-body">
       <div class="card-hdr">
         <div class="card-name">${e.nom}</div>
-        <span class="cbadge ${d.badge}">${d.emoji} ${d.label}</span>
+        <div class="card-hdr-right">
+          <span class="cbadge ${d.badge}">${d.emoji} ${d.label}</span>
+          <button class="fav-btn" onclick="toggleFav(${e.id},event)" title="Favori">${favIcon}</button>
+        </div>
       </div>
+      ${openHtml}
       ${prioHtml}
       <div class="info">
         <div class="irow">📍 <span>${e.adresse}</span></div>
         ${e.tel ? `<div class="irow">📞 <a href="tel:${e.tel}" onclick="event.stopPropagation()">${e.tel}</a></div>` : ''}
         ${e.note ? `<div class="irow"><span class="stars">${stars(e.note)}</span><span style="font-size:11px;color:var(--txt2);font-family:'DM Mono',monospace">${e.note}/5</span></div>` : ''}
         <div><span class="type-tag">🏷️ ${e.type}</span></div>
-        ${e.maps ? `<div class="irow">🗺️ <a href="${e.maps}" target="_blank" onclick="event.stopPropagation()">Voir sur Maps →</a></div>` : ''}
         ${extraLinks}${rappelHtml}
       </div>
+      ${qcBtns}
     </div>
     ${hpanel}
     <div class="card-acts">${btns}</div>
+    <div class="visit-counter">
+      👣 <span id="visit-cnt-${e.id}">${visitCnt}</span> visite(s) enregistrée(s)
+      <button class="visit-add-btn" onclick="addVisit(${e.id},event)">+ Visite</button>
+    </div>
     <div class="note-wrap">
       <textarea class="note-ta" id="note-ta-${e.id}" placeholder="💬 Notes (responsable, impression, rappel…)" oninput="saveCardNote(${e.id},this.value)">${note}</textarea>
       <div class="note-ind" id="note-ind-${e.id}">⟳ sync</div>
@@ -2048,22 +2964,48 @@
 
     function updateStats() {
       const all = window.ETABLISSEMENTS;
-      document.getElementById('s-total').textContent = all.length;
-      document.getElementById('nb-etabs-top').textContent = all.length + ' établissements';
+      const total = all.length;
+      const contacted = all.filter(e => ['done', 'waiting', 'rdv', 'stage'].includes(window.statuses[e.id])).length;
+      const pct = total ? Math.round(contacted / total * 100) : 0;
+      document.getElementById('s-total').textContent = total;
+      document.getElementById('nb-etabs-top').textContent = total + ' établissements';
+      document.getElementById('s-pct').textContent = pct + '%';
+      const heroFill = document.getElementById('hero-prog-fill'), heroTxt = document.getElementById('hero-prog-txt');
+      if (heroFill) heroFill.style.width = pct + '%'; if (heroTxt) heroTxt.textContent = pct + '%';
       ['todo', 'done', 'waiting', 'rdv', 'stage', 'refused'].forEach(s => {
         document.getElementById('s-' + s).textContent = all.filter(e => (window.statuses[e.id] || 'todo') === s).length;
       });
+      // NOTIFICATION BADGE
+      const today = new Date().toISOString().slice(0, 10);
+      const pendingR = window.RAPPELS.filter(r => !r.fait && r.date <= today).length;
+      const nc = document.getElementById('notif-count');
+      if (nc) { nc.textContent = pendingR; nc.style.display = pendingR ? '' : 'none'; }
     }
 
     // KANBAN
     window.renderKanban = () => {
-      const board = document.getElementById('kanban-board');
-      if (!board) return;
+      const board = document.getElementById('kanban-board'); if (!board) return;
       board.innerHTML = ST_ORDER.map(s => {
         const d = ST[s], items = window.ETABLISSEMENTS.filter(e => (window.statuses[e.id] || 'todo') === s);
         return `<div class="kcol">
       <div class="khead" style="color:${d.color}">${d.emoji} ${d.label} <span class="kcnt">${items.length}</span></div>
-      ${items.map(e => `<div class="kitem" onclick="openEditModal(${e.id})">${e.nom}<div class="kitem-sub">📍 ${e.adresse.split(',')[1]?.trim() || e.adresse}</div>${e.note ? `<div class="kitem-sub">★ ${e.note}/5</div>` : ''}</div>`).join('') || `<div class="kempty">Vide</div>`}
+      ${items.map(e => `<div class="kitem">${e.nom}<div class="kitem-sub">📍 ${e.adresse.split(',')[1]?.trim() || e.adresse}</div>${e.note ? `<div class="kitem-sub">★ ${e.note}/5</div>` : ''}</div>`).join('') || `<div class="kempty">Vide</div>`}
+    </div>`;
+      }).join('');
+    };
+
+    // MAP
+    window.renderMap = () => {
+      const el = document.getElementById('map-list'); if (!el) return;
+      el.innerHTML = window.ETABLISSEMENTS.filter(e => e.maps).map(e => {
+        const st = window.statuses[e.id] || 'todo', d = ST[st];
+        return `<div class="map-card" onclick="window.open('${e.maps}','_blank')">
+      <div class="map-card-icon">${d.emoji}</div>
+      <div>
+        <div style="font-weight:700;font-size:13px">${e.nom}</div>
+        <div style="font-size:11px;color:var(--txt2);margin-top:2px">📍 ${e.adresse}</div>
+        <div style="font-size:10px;margin-top:4px"><span style="color:${d.color}">${d.label}</span>${e.note ? ` · <span style="color:var(--gold)">★ ${e.note}</span>` : ''}</div>
+      </div>
     </div>`;
       }).join('');
     };
@@ -2089,8 +3031,7 @@
       const positive = window.ETABLISSEMENTS.filter(e => ['waiting', 'rdv', 'stage'].includes(window.statuses[e.id])).length;
       const instage = window.ETABLISSEMENTS.filter(e => window.statuses[e.id] === 'stage').length;
       window.OBJECTIFS.forEach(o => { if (o.id === 'obj1') o.actuel = contacted; if (o.id === 'obj2') o.actuel = positive; if (o.id === 'obj3') o.actuel = instage; });
-      lsSet('stage_objectifs_v4', window.OBJECTIFS);
-      renderObjectifs();
+      lsSet('stage_objectifs_v4', window.OBJECTIFS); renderObjectifs();
     };
     window.renderObjectifs = () => {
       const list = document.getElementById('obj-list'); if (!list) return;
@@ -2115,9 +3056,18 @@
     window.renderRappels = () => {
       const list = document.getElementById('rp-list'); if (!list) return;
       if (!window.RAPPELS.length) { list.innerHTML = '<p style="color:var(--txt2)">Aucun rappel défini.</p>'; return; }
+      const today = new Date().toISOString().slice(0, 10);
       list.innerHTML = window.RAPPELS.map((r, i) => {
         const etab = window.ETABLISSEMENTS.find(e => e.id == r.etabId);
-        return `<div class="rp-card${r.fait ? ' fait' : ''}"><span style="font-size:22px">${r.fait ? '✅' : '⏰'}</span><div style="flex:1"><div class="rp-name">${etab?.nom || '?'}</div><div class="rp-date">📅 ${r.date}${r.note ? ' — ' + r.note : ''}</div></div><div style="display:flex;gap:6px">${!r.fait ? `<button class="btn btn-ghost btn-sm" onclick="doneRappel(${i})">✔ Fait</button>` : ''}<button class="btn btn-ghost btn-sm" style="color:var(--red)" onclick="delRappel(${i})">🗑️</button></div></div>`;
+        const late = !r.fait && r.date <= today;
+        return `<div class="rp-card${r.fait ? ' fait' : ''}">
+      <span style="font-size:22px">${r.fait ? '✅' : late ? '🔴' : '⏰'}</span>
+      <div style="flex:1"><div class="rp-name">${etab?.nom || '?'}</div><div class="rp-date" style="color:${late ? 'var(--red)' : ''}">📅 ${r.date}${r.note ? ' — ' + r.note : ''}</div></div>
+      <div style="display:flex;gap:6px">
+        ${!r.fait ? `<button class="btn btn-ghost btn-sm" onclick="doneRappel(${i})">✔ Fait</button>` : ''}
+        <button class="btn btn-ghost btn-sm" style="color:var(--red)" onclick="delRappel(${i})">🗑️</button>
+      </div>
+    </div>`;
       }).join('');
     };
     window.openRappelModal = () => {
@@ -2135,86 +3085,125 @@
     window.doneRappel = (i) => { window.RAPPELS[i].fait = true; lsSet('stage_rappels_v4', window.RAPPELS); renderRappels(); renderCards(); toast('✅ Rappel marqué fait', 'success'); };
     window.delRappel = (i) => { window.RAPPELS.splice(i, 1); lsSet('stage_rappels_v4', window.RAPPELS); renderRappels(); renderCards(); toast('🗑️ Rappel supprimé'); };
 
-    // LOGS
-    function addLog(type, msg) { window.LOGS.unshift({ type, msg, time: now() }); if (window.LOGS.length > 200) window.LOGS.pop(); lsSet('stage_logs_v5', window.LOGS); renderLogs(); }
-    window.addLog = addLog;
-    window.setLogFilter = (f, btn) => { curLogFilter = f; document.querySelectorAll('#page-logs .ftab').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderLogs(); };
-    window.renderLogs = () => {
-      const list = document.getElementById('logs-list'); if (!list) return;
-      const filtered = curLogFilter === 'all' ? window.LOGS : window.LOGS.filter(l => l.type === curLogFilter);
-      if (!filtered.length) { list.innerHTML = '<div style="padding:28px;text-align:center;color:var(--txt2)">Aucune activité</div>'; return; }
-      const colors = { statut: 'var(--accent)', note: 'var(--blue)', etab: 'var(--green)' };
-      list.innerHTML = filtered.map(l => `<div class="log-row"><span class="log-t">${l.time}</span><span class="log-type" style="background:${colors[l.type] || 'var(--border)'}20;color:${colors[l.type] || 'var(--txt2)'}">${l.type}</span><span class="log-msg">${l.msg}</span></div>`).join('');
-    };
-    window.clearLogs = () => { window.LOGS = []; lsSet('stage_logs_v5', window.LOGS); renderLogs(); toast('🗑️ Journal vidé'); };
-
-    // ADD / EDIT
-    function buildHorEd(horaires) {
-      return DAYS.map(d => { const ex = horaires.find(h => h.j === d); return `<div class="hor-row"><label>${d}</label><input type="text" placeholder="Fermé" value="${ex?.h || ''}" data-day="${d}"></div>`; }).join('');
+    // CALENDAR MODAL
+    window.openCalendarModal = () => { calMonth = new Date().getMonth(); calYear = new Date().getFullYear(); renderCalendar(); openModal('calendarModal'); };
+    window.changeMonth = (dir) => { calMonth += dir; if (calMonth > 11) { calMonth = 0; calYear++; } if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); };
+    function renderCalendar() {
+      const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+      document.getElementById('cal-month-label').textContent = months[calMonth] + ' ' + calYear;
+      const first = new Date(calYear, calMonth, 1).getDay();
+      const days = new Date(calYear, calMonth + 1, 0).getDate();
+      const today = new Date();
+      const grid = document.getElementById('cal-grid');
+      const hdrs = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+      let html = hdrs.map(d => `<div class="cal-day-hdr">${d}</div>`).join('');
+      const startOffset = (first + 6) % 7;
+      for (let i = 0; i < startOffset; i++)html += `<div></div>`;
+      for (let d = 1; d <= days; d++) {
+        const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const isToday = d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear();
+        const evts = window.RAPPELS.filter(r => r.date === dateStr && !r.fait);
+        const hasEvt = evts.length > 0;
+        html += `<div class="cal-day${isToday ? ' today' : ''}${hasEvt ? ' has-event' : ''}" onclick="showDayEvents('${dateStr}')">
+      <div class="cal-day-num">${d}</div>
+      ${evts.map(r => { const e = window.ETABLISSEMENTS.find(x => x.id == r.etabId); return `<div class="cal-event">${e?.nom || '?'}</div>`; }).join('')}
+    </div>`;
+      }
+      grid.innerHTML = html;
     }
-    window.openModal = (id) => {
-      if (id === 'addModal') {
-        editingId = null;
-        document.getElementById('addModal-title').textContent = 'Ajouter un établissement';
-        ['nom', 'type', 'adresse', 'tel', 'maps', 'website', 'social'].forEach(f => { const el = document.getElementById('f-' + f); if (el) el.value = ''; });
-        document.getElementById('f-note').value = '';
-        document.getElementById('f-priorite').value = 'moyenne';
-        document.getElementById('f-statut').value = 'todo';
-        document.getElementById('f-horaires').innerHTML = buildHorEd([]);
-      }
-      document.getElementById(id).classList.add('open');
+    window.showDayEvents = (dateStr) => {
+      const evts = window.RAPPELS.filter(r => r.date === dateStr);
+      const el = document.getElementById('cal-events-day');
+      if (!evts.length) { el.innerHTML = '<p style="color:var(--txt2);font-size:12px">Aucun rappel ce jour.</p>'; return; }
+      el.innerHTML = `<div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:8px">📅 ${dateStr}</div>` +
+        evts.map(r => { const e = window.ETABLISSEMENTS.find(x => x.id == r.etabId); return `<div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:6px;font-size:12px"><strong>${e?.nom || '?'}</strong>${r.note ? ` — ${r.note}` : ''}<span style="color:${r.fait ? 'var(--green)' : 'var(--orange)'};margin-left:8px">${r.fait ? '✅ Fait' : '⏰ En attente'}</span></div>`; }).join('');
     };
-    window.closeModal = (id) => document.getElementById(id).classList.remove('open');
-    window.openEditModal = (id) => {
-      editingId = id; const e = window.ETABLISSEMENTS.find(x => x.id === id); if (!e) return;
-      document.getElementById('addModal-title').textContent = "Modifier l'établissement";
-      document.getElementById('f-nom').value = e.nom || '';
-      document.getElementById('f-type').value = e.type || '';
-      document.getElementById('f-adresse').value = e.adresse || '';
-      document.getElementById('f-tel').value = e.tel || '';
-      document.getElementById('f-note').value = e.note || '';
-      document.getElementById('f-priorite').value = e.priorite || 'moyenne';
-      document.getElementById('f-statut').value = window.statuses[e.id] || 'todo';
-      document.getElementById('f-maps').value = e.maps || '';
-      document.getElementById('f-website').value = e.website || '';
-      document.getElementById('f-social').value = e.social || '';
-      document.getElementById('f-horaires').innerHTML = buildHorEd(e.horaires || []);
-      openModal('addModal');
+
+    // LETTER GENERATOR
+    window.openLetterGenerator = () => {
+      const sel = document.getElementById('l-etab');
+      sel.innerHTML = '<option value="">— Choisir —</option>' + window.ETABLISSEMENTS.map(e => `<option value="${e.id}">${e.nom}</option>`).join('');
+      letterType = 'candidature';
+      document.querySelectorAll('.letter-pick').forEach((b, i) => b.classList.toggle('active', i === 0));
+      document.getElementById('letter-preview').style.display = 'none';
+      openModal('letterModal');
     };
-    window.saveEtab = () => {
-      const nom = document.getElementById('f-nom').value.trim(), type = document.getElementById('f-type').value.trim();
-      if (!nom || !type) { toast('❌ Nom et type requis', 'error'); return; }
-      const horaires = DAYS.map(d => { const inp = document.querySelector(`#f-horaires [data-day="${d}"]`); const h = inp ? inp.value.trim() : ''; return h ? { j: d, h } : null; }).filter(Boolean);
-      const data = { nom, type, adresse: document.getElementById('f-adresse').value.trim(), tel: document.getElementById('f-tel').value.trim(), note: parseFloat(document.getElementById('f-note').value) || null, priorite: document.getElementById('f-priorite').value, maps: document.getElementById('f-maps').value.trim(), website: document.getElementById('f-website').value.trim(), social: document.getElementById('f-social').value.trim(), horaires };
-      const newStatus = document.getElementById('f-statut').value;
-      if (editingId) {
-        const idx = window.ETABLISSEMENTS.findIndex(e => e.id === editingId);
-        if (idx > -1) window.ETABLISSEMENTS[idx] = { ...window.ETABLISSEMENTS[idx], ...data };
-        window.statuses[editingId] = newStatus;
-        addLog('etab', `✏️ Modifié : ${nom}`); toast('✅ Établissement modifié', 'success');
-      } else {
-        const newId = Date.now();
-        window.ETABLISSEMENTS.push({ id: newId, ...data });
-        window.statuses[newId] = newStatus;
-        update(ref(db, 'stages/' + newId), { nom, adresse: data.adresse, tel: data.tel, type: data.type, statut: ST[newStatus]?.label, notes: '' });
-        addLog('etab', `➕ Ajouté : ${nom}`); toast('✅ Établissement ajouté', 'success');
-      }
-      lsSet('stage_statuses_v5', window.statuses);
-      const extra = window.ETABLISSEMENTS.filter(e => e.id > 14);
-      lsSet('stage_etabs_extra', extra);
-      closeModal('addModal'); renderCards(); syncObjectifsAuto();
+    window.setLetterType = (t, btn) => {
+      letterType = t;
+      document.querySelectorAll('.letter-pick').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
     };
-    window.deleteEtab = (id) => {
-      const e = window.ETABLISSEMENTS.find(x => x.id === id);
-      if (!confirm(`Supprimer "${e?.nom}" ?`)) return;
-      const idx = window.ETABLISSEMENTS.findIndex(x => x.id === id);
-      if (idx > -1) window.ETABLISSEMENTS.splice(idx, 1);
-      delete window.statuses[id];
-      remove(ref(db, 'stages/' + id));
-      const extra = window.ETABLISSEMENTS.filter(e => e.id > 14);
-      lsSet('stage_etabs_extra', extra); lsSet('stage_statuses_v5', window.statuses);
-      addLog('etab', `🗑️ Supprimé : ${e?.nom}`); renderCards(); syncObjectifsAuto(); toast('🗑️ Supprimé');
+    window.generateLetter = () => {
+      const prenom = document.getElementById('l-prenom').value.trim() || '[Votre prénom]';
+      const etabId = document.getElementById('l-etab').value;
+      const etab = window.ETABLISSEMENTS.find(e => e.id == etabId);
+      const etabNom = etab?.nom || '[Nom de l\'établissement]';
+      const today = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+      let text = '';
+      if (letterType === 'candidature') { text = `Valenciennes, le ${today}\n\nObjet : Demande de stage en salle / restauration\n\nMadame, Monsieur,\n\nActuellement en formation dans le domaine de la restauration, je me permets de vous adresser ma candidature pour un stage au sein de votre établissement "${etabNom}".\n\nPassionné(e) par le service en salle et la relation client, je suis à la recherche d'une expérience pratique qui me permettrait de mettre en application mes connaissances théoriques tout en apportant mon dynamisme et ma motivation à votre équipe.\n\nJe suis disponible pour un entretien à votre convenance et me tiens à votre disposition pour tout renseignement complémentaire.\n\nDans l'attente de votre réponse, je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées.\n\n${prenom}`; }
+      else if (letterType === 'relance') { text = `Valenciennes, le ${today}\n\nObjet : Relance — Demande de stage\n\nMadame, Monsieur,\n\nJe me permets de revenir vers vous suite à ma précédente candidature pour un stage au sein de "${etabNom}".\n\nToujours très motivé(e) à l'idée de rejoindre votre équipe, je souhaite confirmer mon intérêt pour cette opportunité. N'hésitez pas à me contacter si vous souhaitez davantage d'informations.\n\nCordialement,\n\n${prenom}`; }
+      else { text = `Valenciennes, le ${today}\n\nObjet : Remerciements suite à l'entretien\n\nMadame, Monsieur,\n\nJe vous remercie chaleureusement pour le temps que vous m'avez accordé lors de notre entretien concernant le poste de stagiaire au sein de "${etabNom}".\n\nCet échange a renforcé mon envie de rejoindre votre équipe. Je reste à votre disposition pour toute information complémentaire.\n\nCordialement,\n\n${prenom}`; }
+      const preview = document.getElementById('letter-preview');
+      preview.textContent = text; preview.style.display = 'block';
+      document.getElementById('letter-actions').style.display = 'flex';
     };
+    window.copyLetter = () => {
+      const txt = document.getElementById('letter-preview').textContent;
+      navigator.clipboard.writeText(txt).then(() => toast('📋 Lettre copiée !', 'success'));
+    };
+
+    // LOGS
+    function addLog(type, msg) { window.LOGS.unshift({ type, msg, time: nowStr() }); if (window.LOGS.length > 200) window.LOGS.pop(); lsSet('stage_logs_v5', window.LOGS); }
+    window.addLog = addLog;
+
+    // STATS PAGE
+    window.renderStats = () => {
+      const el = document.getElementById('stats-detail'); if (!el) return;
+      const total = window.ETABLISSEMENTS.length;
+      const byStatus = ST_ORDER.map(s => ({ s, label: ST[s].label, emoji: ST[s].emoji, color: ST[s].color, count: window.ETABLISSEMENTS.filter(e => (window.statuses[e.id] || 'todo') === s).length }));
+      const byPrio = ['haute', 'moyenne', 'basse'].map(p => ({ p, count: window.ETABLISSEMENTS.filter(e => e.priorite === p).length, color: p === 'haute' ? 'var(--red)' : p === 'moyenne' ? 'var(--gold)' : 'var(--txt2)' }));
+      const withNote = window.ETABLISSEMENTS.filter(e => e.note);
+      const avgNote = withNote.length ? (withNote.reduce((a, b) => a + b.note, 0) / withNote.length).toFixed(1) : '—';
+      const checksDone = window.STEPS.filter((_, i) => checks[i]).length;
+      const checkPct = window.STEPS.length ? Math.round(checksDone / window.STEPS.length * 100) : 0;
+      const rappelsPending = window.RAPPELS.filter(r => !r.fait).length;
+      const favCount = Object.values(FAVORITES).filter(Boolean).length;
+      const visitTotal = Object.values(VISITS).reduce((a, b) => a + b, 0);
+      el.innerHTML = `
+    <div class="detail-grid">
+      <div class="detail-card">
+        <div class="detail-card-title">📊 Répartition par statut</div>
+        ${byStatus.map(s => `<div class="detail-bar"><div class="detail-bar-label" style="color:${s.color}">${s.emoji} ${s.label}</div><div class="detail-bar-outer"><div class="detail-bar-inner" style="width:${total ? (s.count / total * 100) : 0}%;background:${s.color}"></div></div><div class="detail-bar-num" style="color:${s.color}">${s.count}</div></div>`).join('')}
+      </div>
+      <div class="detail-card">
+        <div class="detail-card-title">⚡ Répartition par priorité</div>
+        ${byPrio.map(p => `<div class="detail-bar"><div class="detail-bar-label" style="color:${p.color}">${p.p.charAt(0).toUpperCase() + p.p.slice(1)}</div><div class="detail-bar-outer"><div class="detail-bar-inner" style="width:${total ? (p.count / total * 100) : 0}%;background:${p.color}"></div></div><div class="detail-bar-num" style="color:${p.color}">${p.count}</div></div>`).join('')}
+      </div>
+      <div class="detail-card">
+        <div class="detail-card-title">📈 Chiffres clés</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent)">${total}</div><div style="font-size:10px;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em">Établissements</div></div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold)">${avgNote}</div><div style="font-size:10px;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em">Note moy. Google</div></div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--green)">${checkPct}%</div><div style="font-size:10px;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em">Checklist</div></div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:${rappelsPending ? 'var(--orange)' : 'var(--green)'}">${rappelsPending}</div><div style="font-size:10px;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em">Rappels actifs</div></div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--pink)">${favCount}</div><div style="font-size:10px;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em">Favoris ❤️</div></div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--cyan)">${visitTotal}</div><div style="font-size:10px;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em">Visites 👣</div></div>
+        </div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card-title">🏆 Top établissements (par note)</div>
+        ${window.ETABLISSEMENTS.filter(e => e.note).sort((a, b) => b.note - a.note).slice(0, 5).map((e, i) => `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)"><div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--txt2);min-width:20px">${i + 1}</div><div style="flex:1;font-size:13px;font-weight:600">${e.nom}</div><div style="font-size:12px;color:var(--gold);font-family:'DM Mono',monospace">★ ${e.note}</div>${FAVORITES[e.id] ? '<span>❤️</span>' : ''}</div>`).join('')}
+      </div>
+      <div class="detail-card">
+        <div class="detail-card-title">📋 Journal d'activité (récent)</div>
+        ${window.LOGS.slice(0, 8).map(l => `<div style="padding:7px 0;border-bottom:1px solid var(--border);font-size:12px"><span style="color:var(--txt2);font-family:'DM Mono',monospace;font-size:10px">${l.time}</span><br>${l.msg}</div>`).join('') || '<p style="color:var(--txt2);font-size:12px">Aucune activité récente.</p>'}
+      </div>
+    </div>`;
+    };
+
+    // MODALS
+    window.openModal = (id) => { document.getElementById(id).classList.add('open'); };
+    window.closeModal = (id) => { document.getElementById(id).classList.remove('open'); };
 
     // INIT
     document.addEventListener('DOMContentLoaded', () => {
@@ -2224,10 +3213,7 @@
       if (pending.length) toast(`⏰ ${pending.length} rappel(s) en attente !`);
     });
     document.getElementById('syncOv').addEventListener('click', (e) => {
-      if (e.target === document.getElementById('syncOv')) {
-        const card = document.getElementById('syncCard');
-        if (!card.innerHTML.includes('spin')) closeSyncOv();
-      }
+      if (e.target === document.getElementById('syncOv')) { const card = document.getElementById('syncCard'); if (!card.innerHTML.includes('spin')) closeSyncOv(); }
     });
   </script>
 </body>
